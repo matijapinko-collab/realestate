@@ -23,7 +23,7 @@ export default async function AdminTestimonials() {
       <div className="space-y-3">
         {testimonials.length === 0 ? (
           <div className="bg-white border border-gray-200 p-12 text-center text-gray-400">Nema recenzija</div>
-        ) : testimonials.map((t) => (
+        ) : testimonials.map((t: any) => (
           <div key={t.id} className="bg-white border border-gray-200 p-4 flex justify-between items-start gap-4">
             <div>
               <div className="font-semibold text-sm">{t.authorName}</div>
