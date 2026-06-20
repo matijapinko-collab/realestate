@@ -15,7 +15,7 @@ const intlMiddleware = createIntlMiddleware({
   localePrefix: "always",
 });
 
-export default auth(async function middleware(request: NextRequest) {
+export const proxy = auth(async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const session = (request as any).auth;
 
