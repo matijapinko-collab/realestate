@@ -72,7 +72,7 @@ export default async function AdminProperties({
             {properties.length === 0 ? (
               <tr><td colSpan={5} className="text-center py-12 text-gray-400">Nema nekretnina</td></tr>
             ) : (
-              properties.map((p) => {
+              properties.map((p: any) => {
                 const hrTitle = p.translations.find((t) => t.locale === "HR")?.title || p.translations[0]?.title || "—";
                 return (
                   <tr key={p.id} className="hover:bg-gray-50">
