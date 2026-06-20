@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "home": "Naslovnica",
+    "about": "O meni",
+    "properties": "Nekretnine",
+    "blog": "Blog",
+    "howIWork": "Kako radim",
+    "contact": "Kontakt"
+  },
+  "home": {
+    "heroTitle": "Vaš pouzdani partner u nekretninama",
+    "heroSubtitle": "Zagreb, Velika Gorica, Pag i okolica",
+    "heroCta": "Pogledajte nekretnine",
+    "heroCtaSecondary": "Kontaktirajte me"
+  },
+  "properties": {
+    "title": "Nekretnine",
+    "subtitle": "Pronađite svoju idealnu nekretninu",
+    "search": "Pretraži nekretnine",
+    "filters": {
+      "location": "Lokacija",
+      "type": "Vrsta",
+      "transaction": "Prodaja / Najam",
+      "minPrice": "Min. cijena",
+      "maxPrice": "Maks. cijena",
+      "minArea": "Min. površina",
+      "maxArea": "Maks. površina",
+      "rooms": "Broj soba",
+      "reset": "Resetiraj filtere"
+    },
+    "transactionTypes": {
+      "SALE": "Prodaja",
+      "RENT": "Najam"
+    },
+    "propertyTypes": {
+      "APARTMENT": "Stan",
+      "HOUSE": "Kuća",
+      "LAND": "Zemljište",
+      "COMMERCIAL": "Poslovni prostor",
+      "LUXURY_VILLA": "Luksuzna villa",
+      "NEW_BUILD": "Novogradnja"
+    },
+    "statuses": {
+      "AVAILABLE": "Dostupno",
+      "RESERVED": "Rezervirano",
+      "SOLD": "Prodano",
+      "RENTED": "Iznajmljeno"
+    },
+    "noResults": "Nema pronađenih nekretnina.",
+    "loadMore": "Učitaj više",
+    "inquire": "Upit za nekretninu",
+    "rooms": "sobe",
+    "area": "m²",
+    "floor": "Kat",
+    "yearBuilt": "Godina gradnje",
+    "parking": "Parking",
+    "energy": "Energetski razred"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Savjeti, tržište i vodič kroz nekretnine",
+    "readMore": "Pročitaj više",
+    "readingTime": "min čitanja",
+    "by": "Autor",
+    "categories": "Kategorije",
+    "featured": "Istaknuto",
+    "relatedPosts": "Slični članci",
+    "noResults": "Nema objavljenih članaka."
+  },
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Javite mi se — odgovaram brzo i konkretno.",
+    "name": "Ime i prezime",
+    "email": "E-mail",
+    "phone": "Telefon",
+    "message": "Poruka",
+    "send": "Pošalji poruku",
+    "success": "Hvala! Javit ću vam se uskoro.",
+    "error": "Greška pri slanju. Pokušajte ponovo."
+  },
+  "forms": {
+    "required": "Obavezno polje",
+    "invalidEmail": "Nevažeća e-mail adresa",
+    "submit": "Pošalji",
+    "sending": "Šaljem...",
+    "success": "Uspješno poslano!",
+    "error": "Greška. Pokušajte ponovo."
+  },
+  "common": {
+    "loading": "Učitavam...",
+    "noResults": "Nema rezultata",
+    "backToList": "Natrag na listu",
+    "viewAll": "Pogledaj sve",
+    "featured": "Istaknuto",
+    "new": "Novo",
+    "currency": "EUR",
+    "perMonth": "/ mj.",
+    "switchLanguage": "EN"
+  },
+  "footer": {
+    "rights": "Sva prava pridržana.",
+    "privacy": "Pravila privatnosti",
+    "terms": "Uvjeti korištenja"
+  },
+  "cookie": {
+    "message": "Ova web stranica koristi kolačiće kako bi poboljšala vaše iskustvo.",
+    "accept": "Prihvati"
+  },
+  "whatsapp": {
+    "label": "WhatsApp"
+  }
+}

@@ -1,0 +1,317 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = []
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Locale {
+  HR
+  EN
+}
+
+enum PageStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum PageType {
+  HOME
+  ABOUT
+  PROPERTIES
+  BLOG
+  HOW_I_WORK
+  CONTACT
+  LOCATION_SEO
+  PRIVACY_POLICY
+  TERMS
+  CUSTOM
+}
+
+enum SectionType {
+  HERO
+  ABOUT_ME
+  PROPERTIES_GRID
+  HOW_I_WORK
+  RICH_TEXT
+  TESTIMONIALS
+  CTA
+  CONTACT_FORM
+  IMAGE_TEXT
+  GALLERY
+  FAQ
+  STATS
+  FEATURED_PROPERTIES
+  PROPERTY_SEARCH
+  SELLER_LEAD_FORM
+  BUYER_LEAD_FORM
+  VALUATION_LEAD_FORM
+  LOCATION_SEO_TEXT
+  BLOG_GRID
+  FEATURED_BLOG_POSTS
+  BLOG_CATEGORY_GRID
+  BLOG_CTA
+}
+
+enum PropertyStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+  RENTED
+  DRAFT
+}
+
+enum TransactionType {
+  SALE
+  RENT
+}
+
+enum PropertyType {
+  APARTMENT
+  HOUSE
+  LAND
+  COMMERCIAL
+  LUXURY_VILLA
+  NEW_BUILD
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  CLOSED
+  SPAM
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      UserRole @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteSettings {
+  id             String   @id @default(cuid())
+  locale         Locale
+  siteName       String   @default("Matija Pinko")
+  tagline        String?
+  phone          String?
+  email          String?
+  whatsapp       String?
+  address        String?
+  logoUrl        String?
+  faviconUrl     String?
+  defaultOgImage String?
+  facebookUrl    String?
+  instagramUrl   String?
+  linkedinUrl    String?
+  footerText     String?
+  companyInfo    String?
+  gdprText       String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([locale])
+}
+
+model Page {
+  id                 String        @id @default(cuid())
+  locale             Locale
+  title              String
+  slug               String
+  fullPath           String
+  pageType           PageType      @default(CUSTOM)
+  status             PageStatus    @default(DRAFT)
+  seoTitle           String?
+  seoDescription     String?
+  ogImage            String?
+  canonicalUrl       String?
+  noIndex            Boolean       @default(false)
+  translationGroupId String?
+  sections           PageSection[]
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  @@unique([locale, fullPath])
+}
+
+model PageSection {
+  id        String      @id @default(cuid())
+  pageId    String
+  page      Page        @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  type      SectionType
+  name      String
+  order     Int         @default(0)
+  visible   Boolean     @default(true)
+  content   Json        @default("{}")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model Property {
+  id              String                @id @default(cuid())
+  internalCode    String?               @unique
+  status          PropertyStatus        @default(DRAFT)
+  transactionType TransactionType
+  propertyType    PropertyType
+  price           Decimal?
+  currency        String                @default("EUR")
+  locationCity    String
+  locationArea    String?
+  address         String?
+  latitude        Float?
+  longitude       Float?
+  livingArea      Float?
+  landArea        Float?
+  rooms           Int?
+  bedrooms        Int?
+  bathrooms       Int?
+  floor           Int?
+  totalFloors     Int?
+  yearBuilt       Int?
+  parkingSpaces   Int?
+  energyClass     String?
+  featured        Boolean               @default(false)
+  published       Boolean               @default(false)
+  translations    PropertyTranslation[]
+  images          PropertyImage[]
+  features        PropertyFeature[]
+  inquiries       PropertyInquiry[]
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+}
+
+model PropertyTranslation {
+  id               String   @id @default(cuid())
+  propertyId       String
+  property         Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  locale           Locale
+  slug             String
+  title            String
+  shortDescription String?
+  description      Json?
+  metaTitle        String?
+  metaDescription  String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@unique([propertyId, locale])
+  @@unique([locale, slug])
+}
+
+model PropertyImage {
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  url        String
+  alt        String?
+  order      Int      @default(0)
+  isCover    Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model PropertyFeature {
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  key        String
+  value      String
+  icon       String?
+}
+
+model PropertyInquiry {
+  id                     String     @id @default(cuid())
+  propertyId             String?
+  property               Property?  @relation(fields: [propertyId], references: [id])
+  name                   String
+  email                  String
+  phone                  String?
+  preferredContactMethod String?
+  message                String?
+  transactionInterest    String?
+  propertyTypeInterest   String?
+  budgetMin              Decimal?
+  budgetMax              Decimal?
+  preferredLocation      String?
+  leadType               String     @default("INQUIRY")
+  source                 String?
+  status                 LeadStatus @default(NEW)
+  adminNote              String?
+  createdAt              DateTime   @default(now())
+  updatedAt              DateTime   @updatedAt
+}
+
+model BlogCategory {
+  id                 String     @id @default(cuid())
+  locale             Locale
+  name               String
+  slug               String
+  description        String?
+  seoTitle           String?
+  seoDescription     String?
+  translationGroupId String?
+  posts              BlogPost[]
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+
+  @@unique([locale, slug])
+}
+
+model BlogPost {
+  id                 String        @id @default(cuid())
+  locale             Locale
+  title              String
+  slug               String
+  excerpt            String?
+  content            Json?
+  coverImage         String?
+  coverImageAlt      String?
+  authorName         String        @default("Matija Pinko")
+  status             BlogStatus    @default(DRAFT)
+  featured           Boolean       @default(false)
+  categoryId         String?
+  category           BlogCategory? @relation(fields: [categoryId], references: [id])
+  seoTitle           String?
+  seoDescription     String?
+  ogImage            String?
+  canonicalUrl       String?
+  noIndex            Boolean       @default(false)
+  readingTime        Int?
+  publishedAt        DateTime?
+  translationGroupId String?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  @@unique([locale, slug])
+}
+
+model Testimonial {
+  id                 String   @id @default(cuid())
+  locale             Locale
+  authorName         String
+  authorTitle        String?
+  authorImage        String?
+  content            String
+  rating             Int?
+  visible            Boolean  @default(true)
+  order              Int      @default(0)
+  translationGroupId String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}

@@ -1,0 +1,80 @@
+import { Metadata } from "next";
+import Link from "next/link";
+import { prisma } from "@/lib/prisma";
+import PropertyCard from "@/components/properties/PropertyCard";
+
+export const metadata: Metadata = {
+  title: "Real Estate in Velika Gorica",
+  description: "Velika Gorica — one of the most attractive residential markets in the region.",
+};
+
+export default async function PropertiesVelikaGoricaPage() {
+  let properties: any[] = [];
+
+  try {
+    properties = await prisma.property.findMany({
+      where: {
+        published: true,
+        locationCity: { contains: "Velika Gorica", mode: "insensitive" },
+      },
+      include: {
+        translations: { where: { locale: "EN" } },
+        images: { orderBy: [{ isCover: "desc" }, { order: "asc" }] },
+      },
+      orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
+    });
+  } catch {
+    properties = [];
+  }
+
+  return (
+    <div className="pt-20 min-h-screen">
+      <div className="bg-[#1A1A1A] py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-[#D4AF37] text-sm font-semibold uppercase tracking-widest mb-4">Velika Gorica</p>
+          <h1 className="font-playfair text-5xl lg:text-6xl font-bold text-white leading-tight max-w-3xl">
+            Real Estate in Velika Gorica
+          </h1>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-3xl space-y-6 text-gray-600 text-lg leading-relaxed mb-16">
+          <p>
+            For years, Velika Gorica was viewed primarily as an alternative to Zagreb. Today, that perspective feels outdated. What attracts people to Velika Gorica is no longer just affordability. It&apos;s the combination of space, connectivity, infrastructure and quality of life that has transformed the city into one of the most attractive residential markets in the region.
+          </p>
+          <p>
+            As Zagreb has become increasingly expensive and competitive, many buyers have started asking a different question. Instead of asking how close they can get to the city center, they&apos;re asking where they can achieve a better overall lifestyle without sacrificing convenience.
+          </p>
+          <p>
+            Not every part of Velika Gorica performs equally. Certain neighborhoods attract young families. Others appeal to long-term investors. Understanding those differences is important because successful property decisions are rarely based on city-wide averages.
+          </p>
+        </div>
+
+        {properties.length > 0 ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {properties.map((property) => (
+              <PropertyCard key={property.id} property={property} locale="en" />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16 mb-16">
+            <p className="text-gray-500 text-lg mb-4">No properties currently available in Velika Gorica.</p>
+            <Link href="/en/contact" className="text-[#D4AF37] font-semibold hover:underline">
+              Get in touch to learn what&apos;s available
+            </Link>
+          </div>
+        )}
+
+        <div className="border-t border-gray-100 pt-12 text-center">
+          <Link
+            href="/en/contact"
+            className="inline-flex items-center px-8 py-4 bg-[#D4AF37] text-white font-semibold hover:bg-[#B8972E] transition-colors"
+          >
+            Let&apos;s Talk About Velika Gorica
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}

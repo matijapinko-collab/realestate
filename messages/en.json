@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Me",
+    "properties": "Properties",
+    "blog": "Blog",
+    "howIWork": "How I Work",
+    "contact": "Contact"
+  },
+  "home": {
+    "heroTitle": "Your Trusted Real Estate Partner",
+    "heroSubtitle": "Zagreb, Velika Gorica, Pag and surroundings",
+    "heroCta": "View Properties",
+    "heroCtaSecondary": "Get in Touch"
+  },
+  "properties": {
+    "title": "Properties",
+    "subtitle": "Find your ideal property",
+    "search": "Search properties",
+    "filters": {
+      "location": "Location",
+      "type": "Type",
+      "transaction": "Sale / Rent",
+      "minPrice": "Min price",
+      "maxPrice": "Max price",
+      "minArea": "Min area",
+      "maxArea": "Max area",
+      "rooms": "Rooms",
+      "reset": "Reset filters"
+    },
+    "transactionTypes": {
+      "SALE": "For Sale",
+      "RENT": "For Rent"
+    },
+    "propertyTypes": {
+      "APARTMENT": "Apartment",
+      "HOUSE": "House",
+      "LAND": "Land",
+      "COMMERCIAL": "Commercial",
+      "LUXURY_VILLA": "Luxury Villa",
+      "NEW_BUILD": "New Build"
+    },
+    "statuses": {
+      "AVAILABLE": "Available",
+      "RESERVED": "Reserved",
+      "SOLD": "Sold",
+      "RENTED": "Rented"
+    },
+    "noResults": "No properties found.",
+    "loadMore": "Load more",
+    "inquire": "Property Inquiry",
+    "rooms": "rooms",
+    "area": "m²",
+    "floor": "Floor",
+    "yearBuilt": "Year built",
+    "parking": "Parking",
+    "energy": "Energy class"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Tips, market updates and real estate guides",
+    "readMore": "Read more",
+    "readingTime": "min read",
+    "by": "By",
+    "categories": "Categories",
+    "featured": "Featured",
+    "relatedPosts": "Related Articles",
+    "noResults": "No published articles yet."
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get in touch — I respond quickly and concretely.",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "send": "Send message",
+    "success": "Thank you! I'll be in touch soon.",
+    "error": "Error sending. Please try again."
+  },
+  "forms": {
+    "required": "Required field",
+    "invalidEmail": "Invalid email address",
+    "submit": "Submit",
+    "sending": "Sending...",
+    "success": "Successfully sent!",
+    "error": "Error. Please try again."
+  },
+  "common": {
+    "loading": "Loading...",
+    "noResults": "No results",
+    "backToList": "Back to list",
+    "viewAll": "View all",
+    "featured": "Featured",
+    "new": "New",
+    "currency": "EUR",
+    "perMonth": "/ mo.",
+    "switchLanguage": "HR"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
+  },
+  "cookie": {
+    "message": "This website uses cookies to improve your experience.",
+    "accept": "Accept"
+  },
+  "whatsapp": {
+    "label": "WhatsApp"
+  }
+}
