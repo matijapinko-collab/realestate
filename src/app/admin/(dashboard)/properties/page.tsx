@@ -73,7 +73,7 @@ export default async function AdminProperties({
               <tr><td colSpan={5} className="text-center py-12 text-gray-400">Nema nekretnina</td></tr>
             ) : (
               properties.map((p: any) => {
-                const hrTitle = p.translations.find((t) => t.locale === "HR")?.title || p.translations[0]?.title || "—";
+                const hrTitle = p.translations.find((t: any) => t.locale === "HR")?.title || p.translations[0]?.title || "—";
                 return (
                   <tr key={p.id} className="hover:bg-gray-50">
                     <td className="px-4 py-3 text-sm font-medium text-[#1A1A1A]">{hrTitle}</td>

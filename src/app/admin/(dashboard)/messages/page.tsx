@@ -55,7 +55,7 @@ export default async function AdminMessages({
       <div className="space-y-3">
         {messages.length === 0 ? (
           <div className="bg-white border border-gray-200 p-12 text-center text-gray-400">Nema poruka</div>
-        ) : messages.map((msg) => (
+        ) : messages.map((msg: any) => (
           <div key={msg.id} className="bg-white border border-gray-200 p-5">
             <div className="flex justify-between items-start gap-4 mb-3">
               <div>

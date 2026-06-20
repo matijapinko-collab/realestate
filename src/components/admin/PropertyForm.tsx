@@ -70,8 +70,8 @@ export default function PropertyForm({ property }: PropertyFormProps) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
-  const hrTrans = property?.translations?.find((t) => t.locale === "HR");
-  const enTrans = property?.translations?.find((t) => t.locale === "EN");
+  const hrTrans = property?.translations?.find((t: any) => t.locale === "HR");
+  const enTrans = property?.translations?.find((t: any) => t.locale === "EN");
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema) as Resolver<FormData>,

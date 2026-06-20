@@ -64,7 +64,7 @@ export default async function AdminDashboard() {
             <p className="text-sm text-gray-400">Nema poruka</p>
           ) : (
             <div className="space-y-3">
-              {recentMessages.map((msg) => (
+              {recentMessages.map((msg: any) => (
                 <div key={msg.id} className="flex justify-between items-start text-sm border-b border-gray-100 pb-2">
                   <div>
                     <div className="font-medium">{msg.name}</div>
