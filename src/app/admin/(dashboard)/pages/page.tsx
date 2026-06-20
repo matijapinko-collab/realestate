@@ -2,13 +2,17 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { Edit, Eye } from "lucide-react";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Stranice" };
 
 export default async function AdminPages() {
-  const pages = await prisma.page.findMany({
-    orderBy: [{ locale: "asc" }, { pageType: "asc" }],
-    include: { _count: { select: { sections: true } } },
-  });
+  let pages: any[] = [];
+  try {
+    pages = await prisma.page.findMany({
+      orderBy: [{ locale: "asc" }, { pageType: "asc" }],
+      include: { _count: { select: { sections: true } } },
+    });
+  } catch {}
 
   return (
     <div>

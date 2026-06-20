@@ -2,20 +2,24 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { Home, BookOpen, MessageSquare } from "lucide-react";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Dashboard" };
 
 export default async function AdminDashboard() {
-  const [propertiesCount, blogCount, messagesCount, newMessages] = await Promise.all([
-    prisma.property.count({ where: { published: true } }),
-    prisma.blogPost.count({ where: { status: "PUBLISHED" } }),
-    prisma.propertyInquiry.count(),
-    prisma.propertyInquiry.count({ where: { status: "NEW" } }),
-  ]);
-
-  const recentMessages = await prisma.propertyInquiry.findMany({
-    orderBy: { createdAt: "desc" },
-    take: 5,
-  });
+  let propertiesCount = 0, blogCount = 0, messagesCount = 0, newMessages = 0;
+  let recentMessages: any[] = [];
+  try {
+    [propertiesCount, blogCount, messagesCount, newMessages] = await Promise.all([
+      prisma.property.count({ where: { published: true } }),
+      prisma.blogPost.count({ where: { status: "PUBLISHED" } }),
+      prisma.propertyInquiry.count(),
+      prisma.propertyInquiry.count({ where: { status: "NEW" } }),
+    ]);
+    recentMessages = await prisma.propertyInquiry.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 5,
+    });
+  } catch {}
 
   const stats = [
     { label: "Objavljene nekretnine", value: propertiesCount, icon: Home, href: "/admin/properties" },
@@ -28,7 +32,6 @@ export default async function AdminDashboard() {
     <div>
       <h1 className="font-playfair text-2xl font-bold text-[#1A1A1A] mb-8">Dashboard</h1>
 
-      {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {stats.map((stat) => (
           <Link key={stat.label} href={stat.href} className={`p-6 rounded-sm border transition-shadow hover:shadow-md ${stat.highlight ? "bg-[#D4AF37] text-white border-[#D4AF37]" : "bg-white border-gray-200"}`}>
@@ -42,7 +45,6 @@ export default async function AdminDashboard() {
         ))}
       </div>
 
-      {/* Quick actions */}
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="bg-white border border-gray-200 p-6">
           <h2 className="font-semibold mb-4">Brze akcije</h2>

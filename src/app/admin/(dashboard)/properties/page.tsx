@@ -4,6 +4,7 @@ import { formatPrice } from "@/lib/utils";
 import { Plus, Edit } from "lucide-react";
 import DeletePropertyButton from "@/components/admin/DeletePropertyButton";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Nekretnine" };
 
 export default async function AdminProperties({
@@ -22,14 +23,17 @@ export default async function AdminProperties({
   }
   if (sp.status) where.published = sp.status === "published";
 
-  const properties = await prisma.property.findMany({
-    where,
-    include: {
-      translations: true,
-      images: { where: { isCover: true }, take: 1 },
-    },
-    orderBy: { createdAt: "desc" },
-  });
+  let properties: any[] = [];
+  try {
+    properties = await prisma.property.findMany({
+      where,
+      include: {
+        translations: true,
+        images: { where: { isCover: true }, take: 1 },
+      },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch {}
 
   return (
     <div>

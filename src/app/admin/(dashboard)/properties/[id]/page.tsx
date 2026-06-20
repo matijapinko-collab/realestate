@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import PropertyForm from "@/components/admin/PropertyForm";
 import PropertyImageManager from "@/components/admin/PropertyImageManager";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Uredi nekretninu" };
 
 export default async function EditPropertyPage({ params }: { params: Promise<{ id: string }> }) {

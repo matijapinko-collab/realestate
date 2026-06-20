@@ -3,10 +3,14 @@ import Link from "next/link";
 import { Plus, Edit } from "lucide-react";
 import DeleteTestimonialButton from "@/components/admin/DeleteTestimonialButton";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Recenzije" };
 
 export default async function AdminTestimonials() {
-  const testimonials = await prisma.testimonial.findMany({ orderBy: { order: "asc" } });
+  let testimonials: any[] = [];
+  try {
+    testimonials = await prisma.testimonial.findMany({ orderBy: { order: "asc" } });
+  } catch {}
 
   return (
     <div>

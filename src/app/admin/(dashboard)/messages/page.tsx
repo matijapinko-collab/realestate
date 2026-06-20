@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { format } from "date-fns";
 import UpdateLeadStatusButton from "@/components/admin/UpdateLeadStatusButton";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Poruke i upiti" };
 
 export default async function AdminMessages({
@@ -14,11 +15,14 @@ export default async function AdminMessages({
   if (sp.status) where.status = sp.status;
   if (sp.type) where.leadType = sp.type;
 
-  const messages = await prisma.propertyInquiry.findMany({
-    where,
-    include: { property: { include: { translations: { where: { locale: "HR" } } } } },
-    orderBy: { createdAt: "desc" },
-  });
+  let messages: any[] = [];
+  try {
+    messages = await prisma.propertyInquiry.findMany({
+      where,
+      include: { property: { include: { translations: { where: { locale: "HR" } } } } },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch {}
 
   return (
     <div>

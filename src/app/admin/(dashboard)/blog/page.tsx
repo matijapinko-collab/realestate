@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Plus, Edit } from "lucide-react";
 import DeleteBlogButton from "@/components/admin/DeleteBlogButton";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Blog" };
 
 export default async function AdminBlog({
@@ -17,11 +18,14 @@ export default async function AdminBlog({
   if (sp.locale) where.locale = sp.locale.toUpperCase();
   if (sp.status) where.status = sp.status.toUpperCase();
 
-  const posts = await prisma.blogPost.findMany({
-    where,
-    include: { category: true },
-    orderBy: { createdAt: "desc" },
-  });
+  let posts: any[] = [];
+  try {
+    posts = await prisma.blogPost.findMany({
+      where,
+      include: { category: true },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch {}
 
   return (
     <div>
