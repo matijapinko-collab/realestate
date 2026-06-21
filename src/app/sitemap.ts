@@ -19,43 +19,40 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/en/contact`, priority: 0.7 },
   ];
 
-  const [properties, blogPosts, categories] = await Promise.all([
-    prisma.propertyTranslation.findMany({
-      where: { property: { published: true } },
-      select: { locale: true, slug: true, updatedAt: true },
-    }),
-    prisma.blogPost.findMany({
-      where: { status: "PUBLISHED" },
-      select: { locale: true, slug: true, updatedAt: true },
-    }),
-    prisma.blogCategory.findMany({
-      select: { locale: true, slug: true },
-    }),
-  ]);
+  let properties: any[] = [];
+  let blogPosts: any[] = [];
+  let categories: any[] = [];
 
-  const propertyUrls = properties.map((p) => ({
-    url:
-      p.locale === "HR"
-        ? `${BASE_URL}/hr/nekretnine/${p.slug}`
-        : `${BASE_URL}/en/properties/${p.slug}`,
+  try {
+    [properties, blogPosts, categories] = await Promise.all([
+      prisma.propertyTranslation.findMany({
+        where: { property: { published: true } },
+        select: { locale: true, slug: true, updatedAt: true },
+      }),
+      prisma.blogPost.findMany({
+        where: { status: "PUBLISHED" },
+        select: { locale: true, slug: true, updatedAt: true },
+      }),
+      prisma.blogCategory.findMany({
+        select: { locale: true, slug: true },
+      }),
+    ]);
+  } catch {}
+
+  const propertyUrls = properties.map((p: any) => ({
+    url: p.locale === "HR" ? `${BASE_URL}/hr/nekretnine/${p.slug}` : `${BASE_URL}/en/properties/${p.slug}`,
     lastModified: p.updatedAt,
     priority: 0.8,
   }));
 
-  const blogUrls = blogPosts.map((p) => ({
-    url:
-      p.locale === "HR"
-        ? `${BASE_URL}/hr/blog/${p.slug}`
-        : `${BASE_URL}/en/blog/${p.slug}`,
+  const blogUrls = blogPosts.map((p: any) => ({
+    url: p.locale === "HR" ? `${BASE_URL}/hr/blog/${p.slug}` : `${BASE_URL}/en/blog/${p.slug}`,
     lastModified: p.updatedAt,
     priority: 0.7,
   }));
 
-  const categoryUrls = categories.map((c) => ({
-    url:
-      c.locale === "HR"
-        ? `${BASE_URL}/hr/blog/kategorija/${c.slug}`
-        : `${BASE_URL}/en/blog/category/${c.slug}`,
+  const categoryUrls = categories.map((c: any) => ({
+    url: c.locale === "HR" ? `${BASE_URL}/hr/blog/kategorija/${c.slug}` : `${BASE_URL}/en/blog/category/${c.slug}`,
     priority: 0.6,
   }));
 
