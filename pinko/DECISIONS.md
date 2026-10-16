@@ -173,3 +173,21 @@ okvira koji i sami imaju skrol.
 **Zavjesa s brojačem** pokaže se jednom po sesiji, nikad pod smanjenim
 kretanjem, i sama odustane nakon sekunde i pol — preloader koji nadživi
 stranicu je kvar, ne ulaz.
+
+## Studio: sekcije po snimci (16. 10. 2026.)
+
+Matija je poslao snimku `konpo.studio` s uputom da svijetli način izgleda tako.
+Preuzeto je još:
+
+- **Izjava koja se pali po riječima** dok sekcija prolazi kroz zaslon
+  (`ScrollStatement.tsx`). Bez skripte i pod smanjenim kretanjem rečenica je
+  obična, čitljiva — efekt je samo boja.
+- **Divovska riječ iznad sekcije** s točkastom teksturom iza nje. Postoji samo
+  u svijetlom načinu; tamni ima svoj numerirani indeks.
+- **Usluge kao kartice** s okruglim crnim gumbom sa strelicom u kutu.
+  Gumb zadržava svoje riječi za čitače ekrana i gubi ih samo vizualno
+  (`font-size: 0` + strelica kroz `::after`).
+- **Točka koja klizi niz lijevi rail** prema napretku čitanja.
+
+Ono što **nije** preuzeto: njihov odjeljak s preporukama. Preporuka koju nitko
+nije dao ne smije se izmisliti, a pravih još nema. Vratit će se kad ih bude.

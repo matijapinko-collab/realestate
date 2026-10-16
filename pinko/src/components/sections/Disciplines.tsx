@@ -11,12 +11,13 @@ export function Disciplines() {
     <Section
       index="02"
       eyebrow="Usluge"
+      marker="Usluge"
       title="Tri područja. Jedan povezan plan."
       lead="Isti čovjek povezuje područja, a svaki angažman ima zaseban opseg. Ne morate uzeti sve."
     >
       <ul className="border-t border-rule">
         {disciplines.map((discipline) => (
-          <li key={discipline.slug} className="border-b border-rule">
+          <li key={discipline.slug} data-reveal className="discipline-item border-b border-rule">
             <Link
               href={discipline.href}
               className="group grid gap-5 py-9 transition-colors md:grid-cols-[auto_1fr_auto] md:items-start md:gap-10"
@@ -44,7 +45,7 @@ export function Disciplines() {
                 </ul>
               </div>
 
-              <span className="self-end text-sm font-semibold text-accent-ink md:self-start md:pt-3">
+              <span className="discipline-cta self-end text-sm font-semibold text-accent md:self-start md:pt-3">
                 {discipline.cta}{" "}
                 <span
                   aria-hidden="true"

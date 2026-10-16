@@ -12,7 +12,14 @@ const DISCIPLINES = ["Development", "Marketing", "Business Development"];
  * a single typed line — a decoration that can never cost a visitor the
  * content.
  */
-export function TypedDisciplines() {
+export function TypedDisciplines({
+  className,
+  compact = false,
+}: {
+  className?: string;
+  /** Under the portrait the line sits on one row, at body size. */
+  compact?: boolean;
+} = {}) {
   const [typed, setTyped] = useState<string | null>(null);
 
   useEffect(() => {
@@ -48,7 +55,7 @@ export function TypedDisciplines() {
 
   if (typed === null) {
     return (
-      <ul className="mt-5 space-y-3">
+      <ul className={compact ? `space-y-1 ${className ?? ""}` : "mt-5 space-y-3"}>
         {DISCIPLINES.map((discipline) => (
           <li
             key={discipline}
@@ -65,7 +72,13 @@ export function TypedDisciplines() {
   }
 
   return (
-    <p className="mt-5 flex min-h-[7.5rem] items-baseline gap-3 font-mono text-(length:--text-title) text-ink">
+    <p
+      className={
+        compact
+          ? `flex min-h-7 items-baseline justify-center gap-2 font-mono text-ink ${className ?? ""}`
+          : "mt-5 flex min-h-[7.5rem] items-baseline gap-3 font-mono text-(length:--text-title) text-ink"
+      }
+    >
       <span aria-hidden="true" className="text-accent">
         &gt;
       </span>

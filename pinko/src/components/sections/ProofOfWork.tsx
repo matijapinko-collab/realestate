@@ -22,6 +22,7 @@ export function ProofOfWork() {
     <Section
       index="01"
       eyebrow="Projekti"
+      marker="Projekti"
       title="Nekoliko konkretnih stvari na kojima radim."
       tone="surface"
     >

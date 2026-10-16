@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 export function Section({
   id,
   eyebrow,
+  marker,
   index,
   title,
   lead,
@@ -17,6 +18,8 @@ export function Section({
 }: {
   id?: string;
   eyebrow?: string;
+  /** Oversized word printed above the section. Light mode only. */
+  marker?: string;
   index?: string;
   title?: ReactNode;
   lead?: ReactNode;
@@ -38,6 +41,12 @@ export function Section({
     >
       <div className="wrap">
         {ruled ? <hr className="mb-12 border-0 hairline" /> : null}
+        {marker ? (
+          <div aria-hidden="true" className="section-marker">
+            <span className="dot-field" />
+            <span className="giant-title font-extrabold">{marker}</span>
+          </div>
+        ) : null}
         <div className="section-head">
         {(eyebrow || index) && (
           <p className="mono-label mb-5 flex items-baseline gap-3 font-semibold text-ink-soft">

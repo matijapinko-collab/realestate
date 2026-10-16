@@ -90,7 +90,12 @@ export function Hero() {
 
           <div className="hero-aside flex justify-center lg:justify-end">
             {site.portrait ? (
-              <PortraitBio />
+              <div className="flex w-full max-w-sm flex-col items-center">
+                <PortraitBio />
+                {/* The terminal line survives the arrival of the photograph;
+                    it moved from the card the portrait replaced. */}
+                <TypedDisciplines compact className="mt-16" />
+              </div>
             ) : (
               /* Placeholder while the photograph is not in the repository. */
               <div

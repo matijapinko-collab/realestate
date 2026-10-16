@@ -102,6 +102,7 @@ export default function RootLayout({
         <SmoothScroll />
         {/* Decorative rail down the left edge; light mode only. */}
         <div aria-hidden="true" className="side-rail" />
+        <div aria-hidden="true" className="rail-dot" />
         <Header />
         <main id="sadrzaj">{children}</main>
         <Footer />
