@@ -28,6 +28,8 @@ export type CvExperience = {
   highlight?: boolean;
 };
 
+import { site } from "@/config/site";
+
 export const cvProfile = {
   name: "Matija Pinko",
   title: "AI i LLM strateg · savjetnik za digitalne proizvode i rast",
@@ -35,11 +37,12 @@ export const cvProfile = {
     "Povezujem umjetnu inteligenciju, digitalne proizvode, marketing i prodaju u posao koji ima smisla — od ideje do svakodnevne izvedbe.",
   location: "Velika Gorica / Zagreb · Hrvatska i regija · rad na daljinu",
   /**
-   * The brief names this address for the CV. The site's own contact address
-   * is matija@pinko.hr, which is the mailbox the contact form sends through
-   * — see the note in LAUNCH-CHECKLIST.md.
+   * The CV shows the same address as the rest of the site, read from the
+   * config rather than written again here. The brief originally named a
+   * hotmail address; Matija decided on 16 October 2026 that everything uses
+   * matija@pinko.hr — the mailbox the contact form actually sends through.
    */
-  email: "matija.pinko@hotmail.com",
+  email: site.contact.email,
   linkedin: "https://www.linkedin.com/in/matijapinko/",
   web: "https://pinko.hr/",
 } as const;

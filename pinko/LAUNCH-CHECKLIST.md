@@ -106,11 +106,9 @@ aplikaciji i ne smije se dodati ni u sadržaj ni u konfiguraciju.
       rođenja, bez njemačkog dok se ne potvrdi
 - [x] Upwork: ostao je „Top Rated Plus", maknuta je tvrdnja o gornjem postotku
       jer brief traži provjerljiv profil prije nje
-- [ ] ⚠️ **Dvije različite email adrese.** Brief za CV traži
-      `matija.pinko@hotmail.com` i ta stoji na `/cv`. Ostatak weba koristi
-      `matija@pinko.hr`, koji je potvrđen i kroz koji forma stvarno šalje.
-      Odlučite koja ide gdje — CV s hotmail adresom uz web s vlastitom domenom
-      izgleda nedosljedno.
+- [x] **Jedna email adresa na cijelom webu:** `matija@pinko.hr` (odluka
+      Matije, 16. 10. 2026.). CV ju čita iz `site.contact.email`, pa se piše
+      na jednom mjestu. Hotmail adresa iz briefa se ne koristi.
 - [ ] **BISNEYS** je u CV-u na temelju LinkedIn podataka (lipanj 2025. —
       danas). Urednička napomena uz brief kaže da zapis nije bio razrađen jer
       kronologija nije bila određena; potvrdite opis.
