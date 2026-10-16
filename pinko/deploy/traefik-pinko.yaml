@@ -17,6 +17,12 @@
 # domene spojene s `||`. (U Docker oznakama isti zapis prolazi, pa je lako
 # pomisliti da radi i ovdje.)
 
+# Traefik uspoređuje SADRŽAJ datoteke, ne vrijeme izmjene. Ponovno kopiranje
+# identične datoteke NE pokreće reload — pa ni novi pokušaj izdavanja
+# certifikata. Ako treba natjerati Traefika da pokuša ponovno, promijeni
+# nešto u sadržaju; ova crta postoji upravo za to.
+# zadnja promjena: 16. 10. 2026. 16:02
+
 http:
   routers:
     pinko-wp-https:
