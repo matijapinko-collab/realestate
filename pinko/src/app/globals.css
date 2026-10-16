@@ -185,6 +185,124 @@
     text-transform: uppercase;
   }
 
+  /* ---------------------------------------------------------------- *
+   * Motion
+   *
+   * Everything below is opt-in twice over: the styles only bite once the
+   * script adds `.js-motion` to <html>, and the script never adds it when
+   * the visitor asked for reduced motion. Without JavaScript the page is
+   * simply the finished state — nothing is hidden behind an animation.
+   * ---------------------------------------------------------------- */
+
+  /* Blocks rise into place as they enter the viewport. */
+  .js-motion [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+
+  .js-motion [data-reveal] {
+    transition:
+      opacity 620ms var(--ease-out-soft),
+      transform 620ms var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  /* A card lights up from wherever the pointer is. The two custom
+     properties are written by the script on pointer move. */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 260ms var(--ease-out-soft);
+    background: radial-gradient(
+      16rem circle at var(--spot-x, 50%) var(--spot-y, 0%),
+      color-mix(in oklab, var(--color-accent) 16%, transparent),
+      transparent 70%
+    );
+  }
+
+  .spotlight:hover::before,
+  .spotlight:focus-within::before {
+    opacity: 1;
+  }
+
+  /* Reading progress, pinned under the header. */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    height: 2px;
+    width: 100%;
+    transform-origin: 0 50%;
+    transform: scaleX(var(--scroll-progress, 0));
+    background: linear-gradient(
+      to right,
+      var(--color-accent),
+      var(--color-accent-ink)
+    );
+  }
+
+  /* Endless strip. Duplicated content in the markup makes the loop seamless. */
+  .marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+  }
+
+  .marquee > * {
+    display: flex;
+    width: max-content;
+    animation: marquee 42s linear infinite;
+  }
+
+  .marquee:hover > * {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* The caret in the typed line. */
+  .caret::after {
+    content: "";
+    display: inline-block;
+    width: 0.6ch;
+    height: 1.1em;
+    translate: 0 0.18em;
+    background: var(--color-accent);
+    animation: caret 1.05s steps(2, start) infinite;
+  }
+
+  @keyframes caret {
+    50% {
+      opacity: 0;
+    }
+  }
+
   /* The portrait ring: a dashed accent arc around the photograph. */
   .portrait-ring {
     background:
@@ -242,7 +360,21 @@
     transform: none;
   }
 
-  .portrait-ring {
+  .portrait-ring,
+  .marquee > *,
+  .caret::after {
     animation: none;
+  }
+
+  /* A revealed-on-scroll block must never be left invisible. */
+  .js-motion [data-reveal],
+  .js-motion [data-reveal]:not([data-revealed]) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .scroll-progress {
+    display: none;
   }
 }

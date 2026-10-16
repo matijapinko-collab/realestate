@@ -4,6 +4,7 @@ import "./globals.css";
 import { site } from "@/config/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { MotionLayer } from "@/components/ui/MotionLayer";
 
 /**
  * Manrope, served from our own origin. Both files are variable (400–800) and
@@ -76,6 +77,7 @@ export default function RootLayout({
         >
           Preskoči na sadržaj
         </a>
+        <MotionLayer />
         <Header />
         <main id="sadrzaj">{children}</main>
         <Footer />

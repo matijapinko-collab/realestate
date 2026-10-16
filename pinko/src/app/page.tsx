@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
+import { CapabilityMarquee } from "@/components/sections/CapabilityMarquee";
 import { ProofOfWork } from "@/components/sections/ProofOfWork";
 import { Disciplines } from "@/components/sections/Disciplines";
 import { AboutMatija } from "@/components/sections/AboutMatija";
@@ -22,6 +23,7 @@ export default function HomePage() {
     <>
       <PersonJsonLd />
       <Hero />
+      <CapabilityMarquee />
       <ProofOfWork />
       <Disciplines />
       <AboutMatija />

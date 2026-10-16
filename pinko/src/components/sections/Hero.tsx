@@ -2,7 +2,9 @@ import Image from "next/image";
 import { ButtonLink } from "@/components/ui/Button";
 import { site } from "@/config/site";
 import { careerFacts } from "@/content/career";
+import { CountUp } from "@/components/ui/CountUp";
 import { ProblemPicker } from "./ProblemPicker";
+import { TypedDisciplines } from "./TypedDisciplines";
 
 /**
  * Homepage hero.
@@ -94,23 +96,12 @@ export function Hero() {
               </div>
             ) : (
               /* Placeholder while the photograph is not in the repository. */
-              <div className="w-full max-w-sm rounded-(--radius-card) border border-rule bg-surface p-7">
+              <div
+                data-reveal
+                className="spotlight w-full max-w-sm rounded-(--radius-card) border border-rule bg-surface p-7"
+              >
                 <p className="mono-label text-accent">~/pinko</p>
-                <ul className="mt-5 space-y-3">
-                  {["Development", "Marketing", "Business Development"].map(
-                    (discipline) => (
-                      <li
-                        key={discipline}
-                        className="flex items-baseline gap-3 font-mono text-ink"
-                      >
-                        <span aria-hidden="true" className="text-accent">
-                          &gt;
-                        </span>
-                        {discipline}
-                      </li>
-                    )
-                  )}
-                </ul>
+                <TypedDisciplines />
                 <p className="mt-6 border-t border-rule pt-5 text-sm text-ink-soft">
                   Jedna osoba, tri discipline. Bez prepucavanja između agencija.
                 </p>
@@ -120,17 +111,22 @@ export function Hero() {
         </div>
 
         <ul className="mt-14 grid gap-px overflow-hidden rounded-(--radius-card) border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
-          {careerFacts.map((fact) => (
-            <li key={fact.label} className="bg-surface p-6">
+          {careerFacts.map((fact, i) => (
+            <li
+              key={fact.label}
+              data-reveal
+              data-reveal-delay={i}
+              className="spotlight bg-surface p-6"
+            >
               <p className="font-mono text-4xl font-extrabold text-accent">
-                {fact.value}
+                <CountUp value={fact.value} />
               </p>
               <p className="mt-1.5 text-sm text-ink-soft">{fact.label}</p>
             </li>
           ))}
         </ul>
 
-        <div className="mt-14">
+        <div className="mt-14" data-reveal>
           <ProblemPicker />
         </div>
       </div>

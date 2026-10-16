@@ -16,9 +16,9 @@ import type { LiveScreen } from "@/content/projects";
 export function LiveScroll({ screens }: { screens: LiveScreen[] }) {
   return (
     <ul className="grid gap-8 lg:grid-cols-2">
-      {screens.map((screen) => (
-        <li key={screen.href + screen.label}>
-          <figure className="overflow-hidden rounded-(--radius-card) border border-rule bg-surface">
+      {screens.map((screen, i) => (
+        <li key={screen.href + screen.label} data-reveal data-reveal-delay={i}>
+          <figure className="spotlight overflow-hidden rounded-(--radius-card) border border-rule bg-surface transition-colors duration-300 hover:border-accent">
             {/* Browser chrome, purely decorative. */}
             <div className="flex items-center gap-3 border-b border-rule px-4 py-3">
               <span aria-hidden="true" className="flex gap-1.5">

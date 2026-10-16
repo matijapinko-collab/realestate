@@ -116,3 +116,27 @@ naslova ovisi o operativnom sustavu posjetitelja. Za ujednačen izgled treba
 vendorirati pravi monospace (npr. JetBrains Mono, OFL licenca) u
 `src/app/fonts/`, isto kako je Manrope vendoriran. To je jedna linija u
 `globals.css` nakon što datoteke budu u repozitoriju.
+
+## Pokret na webu (16. 10. 2026.)
+
+**Odluka:** dodani efekti iz reference — pojavljivanje blokova pri skrolu,
+brojanje brojki, tipkanje u heroju, svjetlo koje prati pokazivač po karticama,
+traka s pojmovima i crta napretka čitanja.
+
+**Bez biblioteke.** Sve drži jedna mala skripta (`MotionLayer.tsx`): jedan
+`IntersectionObserver`, jedan slušač skrola i jedan slušač pokazivača za cijelu
+stranicu, umjesto komponente po elementu. Naslovnica je bila izmjerena na
+Lighthouse 96 uz TBT od 70 ms i taj se budžet ne troši na ukrase.
+
+**Dva osigurača, oba provjerena:**
+
+1. **Bez JavaScripta** stranica je u završnom stanju. Stilovi koji skrivaju
+   blokove vrijede tek kad skripta doda `.js-motion` na `<html>`, pa se ne može
+   dogoditi da sadržaj ostane nevidljiv jer skripta nije stigla.
+2. **Uz `prefers-reduced-motion: reduce`** skripta se ne pokreće. Provjereno
+   kroz emulaciju u pregledniku: `js-motion` izostaje, nijedan od 18 blokova
+   nije proziran, traka stoji, crta napretka je skrivena, a hero prikazuje
+   običan popis umjesto tipkanja.
+
+Animirani tekst u heroju ponavlja ono što popis već kaže, pa je za čitače
+ekrana skriven — inače bi se čitao slovo po slovo.

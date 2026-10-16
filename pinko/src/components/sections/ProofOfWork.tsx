@@ -48,11 +48,11 @@ export function ProofOfWork() {
               projects.length >= 3 ? " lg:grid-cols-3" : ""
             }`}
           >
-            {projects.map((project) => (
-              <li key={project.slug}>
+            {projects.map((project, index) => (
+              <li key={project.slug} data-reveal data-reveal-delay={index}>
                 <Link
                   href={`/projekti/${project.slug}`}
-                  className="group flex h-full flex-col rounded-(--radius-card) border border-rule bg-paper p-6 transition-colors hover:border-ink"
+                  className={`spotlight group flex h-full flex-col rounded-(--radius-card) border border-rule bg-paper p-6 transition-[border-color,transform] duration-300 ease-[cubic-bezier(.22,.61,.36,1)] hover:-translate-y-1 hover:border-accent`}
                 >
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="rounded-(--radius-pill) bg-accent-wash px-2.5 py-1 text-xs font-semibold text-accent-ink">

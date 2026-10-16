@@ -45,12 +45,19 @@ export function Section({
           </p>
         )}
         {title ? (
-          <h2 className="max-w-[22ch] text-(length:--text-display) font-extrabold">
+          <h2
+            data-reveal
+            className="max-w-[22ch] text-(length:--text-display) font-extrabold"
+          >
             {title}
           </h2>
         ) : null}
         {lead ? (
-          <div className="measure-wide mt-5 text-(length:--text-lead) text-ink-soft">
+          <div
+            data-reveal
+            data-reveal-delay="1"
+            className="measure-wide mt-5 text-(length:--text-lead) text-ink-soft"
+          >
             {lead}
           </div>
         ) : null}
