@@ -140,9 +140,10 @@ export default function PrivacyPage() {
 
           <Article title="Koliko dugo čuvam podatke">
             <p>
-              Prepisku o upitu čuvam dok traje razgovor i razuman period nakon
-              toga. Točan rok čuvanja dopunjuje se prije javne objave — ne želim
-              ovdje napisati broj koji nije stvarno dogovoren.
+              Prepisku o upitu čuvam <strong>12 mjeseci</strong> od zadnje
+              komunikacije, a nakon toga je brišem. Ako iz upita nastane
+              suradnja, dokumentacija o poslu čuva se dok traje ugovorni odnos i
+              onoliko dugo koliko to nalažu računovodstveni i porezni propisi.
             </p>
           </Article>
 

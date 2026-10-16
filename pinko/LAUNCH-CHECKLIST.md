@@ -86,8 +86,9 @@ aplikaciji i ne smije se dodati ni u sadržaj ni u konfiguraciju.
 - [ ] Testno slanje na produkciji prošlo
 - [ ] Odluka o analitici — trenutačno nema nikakvog alata za praćenje
 - [x] Podaci o voditelju obrade u `/privatnost` — popunjeni iz configa
-- [ ] **Rok čuvanja podataka** — jedina preostala rupa na `/privatnost`;
-      recite koliko dugo čuvate prepisku o upitu i upisat ću ga
+- [x] **Rok čuvanja podataka** — 12 mjeseci od zadnje komunikacije, upisano na
+      `/privatnost` (uz napomenu da dokumentacija o sklopljenoj suradnji ostaje
+      onoliko dugo koliko nalažu računovodstveni i porezni propisi)
 
 Ako se uvede analitika: nazvati je u pravilima privatnosti, a sve što nije
 nužno stvarno blokirati do pristanka. Ukrasni cookie banner bez blokade nije

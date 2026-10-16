@@ -1,4 +1,5 @@
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import type { NextConfig } from "next";
 
 /**
@@ -7,7 +8,9 @@ import type { NextConfig } from "next";
  * the nearest lockfile, which would land on the parent repo and pull in its
  * files, so the root is pinned here explicitly.
  */
-const projectRoot = path.dirname(new URL(import.meta.url).pathname);
+// `fileURLToPath` decodes the URL; `new URL(...).pathname` would keep percent
+// escapes and break on any path containing a space.
+const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
   turbopack: {

@@ -148,6 +148,7 @@ Zapisano da ih ne lovimo ponovno.
 | Kontrast pao na WCAG provjeri | indeks sekcije na tamnoj podlozi bio `white/40` = 3,81:1 | podignuto na `white/55` = 6,03:1 |
 | Rubovi kontrola ispod 3:1 | predloženi `--color-rule` (#DCDDD7) ima 1,31:1 prema papiru | dodan `--color-control` (#8A8C7E, 3,27:1) samo za **interaktivne** rubove; svijetli rub ostaje za dekoraciju |
 | `.env.example` se nije commitao | korijenski `.gitignore` ima `.env*` | `!.env.example` u `pinko/.gitignore` |
+| `next build` pucao lokalno: `Invalid distDirRoot: ".next"` | `turbopack.root` se računao iz `new URL(import.meta.url).pathname`, što ostavlja `%20` u putu — lokalni repo je u mapi s razmakom („Real estate web"), u oblaku nije | `fileURLToPath(import.meta.url)` u `next.config.ts` |
 | Siva prazna ćelija u gridu usluga | 7 stavki u 2 stupca, zadnja ćelija pokazivala boju pozadine grida | filler `<li>` kad je broj neparan |
 
 ---
