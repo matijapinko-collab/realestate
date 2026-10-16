@@ -44,14 +44,13 @@ export const site = {
     phone: "098 137 8567" as MaybeConfirmed<string>,
     phoneHref: "+385981378567",
     /**
-     * Registered trade name, business address and OIB still to be confirmed
-     * verbatim from the court/craft register. They are legally required on a
-     * Croatian business site, so they must be exact — not transcribed from a
-     * directory URL.
+     * Registered details, as supplied by Matija from the craft register.
+     * The OIB check digit validates (ISO 7064 MOD 11,10).
      */
-    legalName: null as MaybeConfirmed<string>,
-    address: null as MaybeConfirmed<string>,
-    oib: null as MaybeConfirmed<string>,
+    legalName: "PINKO, obrt za informatičke usluge, vl. Matija Pinko" as MaybeConfirmed<string>,
+    address: "Zamlačka ulica 28 A, 10010 Velika Mlaka" as MaybeConfirmed<string>,
+    oib: "12438213362" as MaybeConfirmed<string>,
+    mbs: "97910945" as MaybeConfirmed<string>,
     bookingUrl: null as MaybeConfirmed<string>,
   },
 

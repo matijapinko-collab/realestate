@@ -11,14 +11,15 @@ Nigdje nema „TODO”, „Lorem ipsum”, lažnog kontakta ni prazne pravne str
 
 - [x] Email: `matija@pinko.hr` — objavljen u footeru i na `/kontakt`
 - [x] Telefon: `098 137 8567` — objavljen u footeru i na `/kontakt`
-- [ ] **Točan registrirani naziv obrta** — doslovno iz obrtnog registra
-- [ ] **Poslovna adresa** — doslovno
-- [ ] **OIB**
+- [x] Naziv: `PINKO, obrt za informatičke usluge, vl. Matija Pinko`
+- [x] Adresa: `Zamlačka ulica 28 A, 10010 Velika Mlaka`
+- [x] OIB: `12438213362` — kontrolna znamenka provjerena i ispravna
+- [x] MBS: `97910945`
+- [ ] **Posljednji pogled na footer** — provjerite da naziv i adresa stoje
+      točno onako kako ih vodi obrtni registar
 
-→ `src/config/site.ts`, `site.contact`. Naziv, adresu i OIB nisam prepisivao iz
-imenika jer su to podaci koji po zakonu stoje na poslovnom webu i moraju biti
-točni u znak. Dok su `null`, footer ih preskače, a `/privatnost` jasno kaže da
-podaci o voditelju obrade još nisu dopunjeni.
+→ `src/config/site.ts`, `site.contact`. Sad se prikazuju u footeru i popunjavaju
+stranicu `/privatnost`.
 
 ## 2. Domena
 
@@ -84,7 +85,9 @@ aplikaciji i ne smije se dodati ni u sadržaj ni u konfiguraciju.
 - [ ] Provjeren SPF/DKIM (cPanel → Email Deliverability), da mail ne ide u spam
 - [ ] Testno slanje na produkciji prošlo
 - [ ] Odluka o analitici — trenutačno nema nikakvog alata za praćenje
-- [ ] Dopunjen rok čuvanja podataka i podaci o voditelju obrade u `/privatnost`
+- [x] Podaci o voditelju obrade u `/privatnost` — popunjeni iz configa
+- [ ] **Rok čuvanja podataka** — jedina preostala rupa na `/privatnost`;
+      recite koliko dugo čuvate prepisku o upitu i upisat ću ga
 
 Ako se uvede analitika: nazvati je u pravilima privatnosti, a sve što nije
 nužno stvarno blokirati do pristanka. Ukrasni cookie banner bez blokade nije

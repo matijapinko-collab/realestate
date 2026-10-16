@@ -89,13 +89,23 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-rule pt-7 text-sm text-ink-soft sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} {site.person}
-            {site.contact.legalName ? ` · ${site.contact.legalName}` : ""}
-            {site.contact.oib ? ` · OIB ${site.contact.oib}` : ""}
-          </p>
-          <p>Sve cijene na webu su bez PDV-a.</p>
+        <div className="mt-14 flex flex-col gap-5 border-t border-rule pt-7 text-sm text-ink-soft lg:flex-row lg:justify-between">
+          <div className="space-y-1">
+            {site.contact.legalName ? (
+              <p className="font-medium text-ink">{site.contact.legalName}</p>
+            ) : null}
+            {site.contact.address ? <p>{site.contact.address}</p> : null}
+            <p className="flex flex-wrap gap-x-3 gap-y-1">
+              {site.contact.oib ? <span>OIB {site.contact.oib}</span> : null}
+              {site.contact.mbs ? <span>MBS {site.contact.mbs}</span> : null}
+            </p>
+          </div>
+          <div className="space-y-1 lg:text-right">
+            <p>Sve cijene na webu su bez PDV-a.</p>
+            <p>
+              © {year} {site.person}
+            </p>
+          </div>
         </div>
       </div>
     </footer>

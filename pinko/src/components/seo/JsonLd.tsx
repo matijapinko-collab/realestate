@@ -39,6 +39,22 @@ export function PersonJsonLd() {
 
   if (site.contact.email) person.email = site.contact.email;
   if (site.contact.phone) person.telephone = site.contact.phoneHref;
+  if (site.contact.address) {
+    person.address = {
+      "@type": "PostalAddress",
+      streetAddress: "Zamlačka ulica 28 A",
+      postalCode: "10010",
+      addressLocality: "Velika Mlaka",
+      addressCountry: "HR",
+    };
+  }
+  if (site.contact.legalName) {
+    person.worksFor = {
+      "@type": "Organization",
+      name: site.contact.legalName,
+      ...(site.contact.oib ? { taxID: site.contact.oib } : {}),
+    };
+  }
 
   return <JsonLd data={person} />;
 }
