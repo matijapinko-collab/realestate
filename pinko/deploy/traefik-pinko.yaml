@@ -11,11 +11,16 @@
 #
 # Provjereno 16. 10. 2026.: cPanel origin odgovara 200 i po HTTP-u i po
 # HTTPS-u kad mu se pošalje `Host: pinko.hr`, pa proxy na IP radi.
+#
+# ⚠️ Traefik v3 u datotečnom provideru NE prima `Host(`a`, `b`)` s dva
+# argumenta — odbije pravilo s „unexpected number of parameters". Zato su
+# domene spojene s `||`. (U Docker oznakama isti zapis prolazi, pa je lako
+# pomisliti da radi i ovdje.)
 
 http:
   routers:
     pinko-wp-https:
-      rule: "Host(`pinko.hr`, `www.pinko.hr`) && PathPrefix(`/rijetkebolesti`)"
+      rule: "(Host(`pinko.hr`) || Host(`www.pinko.hr`)) && PathPrefix(`/rijetkebolesti`)"
       entryPoints:
         - https
       priority: 1000
@@ -24,7 +29,7 @@ http:
         certResolver: letsencrypt
 
     pinko-wp-http:
-      rule: "Host(`pinko.hr`, `www.pinko.hr`) && PathPrefix(`/rijetkebolesti`)"
+      rule: "(Host(`pinko.hr`) || Host(`www.pinko.hr`)) && PathPrefix(`/rijetkebolesti`)"
       entryPoints:
         - http
       priority: 1000
