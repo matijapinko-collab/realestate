@@ -208,3 +208,31 @@ Ograničenja koja slijed poštuje: ne pokreće se pod `prefers-reduced-motion`,
 ide jednom po sesiji, `aria-hidden` je i stranica iza njega je cijelo vrijeme
 iscrtana, a prekida se klikom, tipkom ili sam od sebe nakon nešto više od tri
 sekunde.
+
+## Crvotočina i preimenovanje dimenzija (16. 10. 2026.)
+
+Prekidač više ne piše „Terminal / Studio" nego **„Dark / Light"**, na Matijin
+zahtjev. Gumbi nose i pune nazive za čitače ekrana: „Uključi tamnu dimenziju"
+i „Uključi svijetlu dimenziju".
+
+Prijelaz između svjetova više nije trenutan nego ide kroz **video tunel preko
+cijelog zaslona**, dva koja je Matija dostavio: jedan za put u svijetlo, drugi
+za put u tamno. **Tema se mijenja na polovici**, dok je zaslon prekriven, pa
+se sama promjena nikad ne vidi.
+
+Snimke traju po 10 s, a prijelaz smije trajati oko dvije. Zato se pušta samo
+dionica u kojoj se tunel stvarno formira (otprilike 1,5–6,6 s), ubrzana 2,7
+puta — što izlazi na ~1,9 s.
+
+Ograničenja: **samo desktop** (`min-width: 1024px` i `pointer: fine`), nikad
+pod `prefers-reduced-motion`, i nikad dva prijelaza istovremeno. Datoteke se
+ne dohvaćaju dok netko ne pređe mišem preko prekidača, pa posjetitelj koji
+nikad ne mijenja svijet ne plati ništa.
+
+Svaki neuspjeh završava isto: tema se primijeni, stranica se otključa. Video
+koji ne krene u 1,2 s, koji pukne ili čiji kodek preglednik ne zna — nijedan
+ne smije ostaviti posjetitelja zaglavljenog iza crnog pravokutnika.
+
+⚠️ **Datoteke su velike: 6,8 MB i 5,7 MB.** Nisu komprimirane jer na ovom
+računalu nema ffmpega. Prije objave ih treba stisnuti (ciljano ispod 1,5 MB
+svaka, i dodati WebM varijantu).

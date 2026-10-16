@@ -113,6 +113,16 @@ aplikaciji i ne smije se dodati ni u sadržaj ni u konfiguraciju.
       danas). Urednička napomena uz brief kaže da zapis nije bio razrađen jer
       kronologija nije bila određena; potvrdite opis.
 
+## 6.6. Crvotočina (prijelaz između dimenzija)
+
+- [x] Dva videa preko cijelog zaslona, po jedan za svaki smjer; tema se
+      mijenja na polovici, dok je zaslon prekriven
+- [x] Samo desktop, nikad pod `prefers-reduced-motion`, bez dvostrukog
+      pokretanja; svaki kvar završi primjenom teme i otključavanjem stranice
+- [ ] ⚠️ **Komprimirati videe prije objave.** Sada su 6,8 MB i 5,7 MB, bez
+      kompresije jer na računalu nema ffmpega. Cilj: ispod 1,5 MB svaki, plus
+      WebM varijanta za manje preglednike.
+
 ## 7. Slanje forme, analitika i privatnost
 
 - [x] Slanje ide SMTP-om kroz vlastiti cPanel sandučić, bez vanjskog servisa

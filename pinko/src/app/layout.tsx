@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { MotionLayer } from "@/components/ui/MotionLayer";
 import { Intro } from "@/components/ui/Intro";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
+import { Wormhole } from "@/components/ui/Wormhole";
 
 /**
  * Manrope, served from our own origin. Both files are variable (400–800) and
@@ -98,6 +99,7 @@ export default function RootLayout({
           Preskoči na sadržaj
         </a>
         <Intro />
+        <Wormhole />
         <MotionLayer />
         <SmoothScroll />
         {/* Decorative rail down the left edge; light mode only. */}
