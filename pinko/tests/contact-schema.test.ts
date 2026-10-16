@@ -1,6 +1,7 @@
 import { strict as assert } from "node:assert";
 import test from "node:test";
 import { parseContactForm } from "../src/lib/contact-schema.ts";
+import { site } from "../src/config/site.ts";
 
 const valid = {
   name: "Ana Anić",
@@ -110,4 +111,18 @@ test("the first error per field is reported, one message per field", () => {
   assert.ok(result.errors.name);
   assert.ok(result.errors.email);
   assert.ok(result.errors.message);
+});
+
+test("the published contact address is never empty", () => {
+  // An empty NEXT_PUBLIC_CONTACT_EMAIL once silently removed the address
+  // from every page. The config falls back on empty values now, and this
+  // keeps it that way.
+  assert.ok(
+    site.contact.email.includes("@"),
+    `contact email is not an address: "${site.contact.email}"`
+  );
+  assert.ok(
+    site.url.startsWith("http"),
+    `site url is not a url: "${site.url}"`
+  );
 });

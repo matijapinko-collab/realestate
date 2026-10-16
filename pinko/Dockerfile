@@ -20,6 +20,9 @@ COPY . .
 ARG NEXT_PUBLIC_SITE_URL
 ARG NEXT_PUBLIC_ALLOW_INDEXING
 ARG NEXT_PUBLIC_CONTACT_EMAIL
+# An argument that is not passed still produces a variable — an empty one.
+# The config reads these with `||` so an empty value falls back to the
+# default instead of winning; see the comment in src/config/site.ts.
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 ENV NEXT_PUBLIC_ALLOW_INDEXING=$NEXT_PUBLIC_ALLOW_INDEXING
 ENV NEXT_PUBLIC_CONTACT_EMAIL=$NEXT_PUBLIC_CONTACT_EMAIL

@@ -26,8 +26,12 @@ export function SplitLines({
 
   return (
     <Tag data-reveal data-split className={className}>
-      {lines.map((line) => (
+      {lines.map((line, lineIndex) => (
         <span key={line} className="split-line">
+          {/* A line break is visual only; without this space the heading's
+              text reads as one run-together word to a screen reader and to
+              a crawler — "korakzaslužuje" rather than "korak zaslužuje". */}
+          {lineIndex > 0 ? " " : null}
           {line.split(" ").map((word, wordIndex) => {
             const i = index++;
             return (

@@ -29,7 +29,15 @@ export const site = {
    * real DNS/HTTP behaviour and the canonical domain have to be confirmed
    * before launch. Nothing here assumes the existing site stays or goes.
    */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  /**
+   * `||`, not `??`, and the difference is not academic: a Docker build that
+   * declares `ENV NEXT_PUBLIC_X=$NEXT_PUBLIC_X` without passing the argument
+   * sets the variable to an EMPTY STRING. `??` only catches null and
+   * undefined, so the empty value wins and the fallback never runs. That is
+   * exactly how the contact address vanished from the live site on
+   * 16 October 2026 — present in the code, absent from every page.
+   */
+  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
 
   /** Set to true only once the canonical domain is confirmed and indexing is wanted. */
   allowIndexing: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true",
@@ -39,7 +47,7 @@ export const site = {
    * stays null and the UI omits it rather than inventing a value.
    */
   contact: {
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "matija@pinko.hr",
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "matija@pinko.hr",
     /** Display form; `phoneHref` is the dialable form. */
     phone: "098 137 8567" as MaybeConfirmed<string>,
     phoneHref: "+385981378567",
