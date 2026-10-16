@@ -117,6 +117,29 @@ export default async function ProjectPage({ params }: Props) {
       {/* A project with the long form written out reads as one column, with
           the lists gathered underneath. Without it, the old two-column pair
           of context and challenge still applies. */}
+      {project.metrics && project.metrics.length > 0 ? (
+        <Section tight>
+          {/* A figure is published only with the basis it was measured on.
+              The basis is not a footnote here; it sits under the number. */}
+          <ul className="grid gap-px overflow-hidden rounded-(--radius-card) border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+            {project.metrics.map((metric, i) => (
+              <li
+                key={metric.label}
+                data-reveal
+                data-reveal-delay={i}
+                className="spotlight bg-surface p-6"
+              >
+                <p className="font-mono text-(length:--text-display) font-extrabold text-accent">
+                  {metric.value}
+                </p>
+                <p className="mt-2 font-semibold">{metric.label}</p>
+                <p className="mt-2 text-sm text-ink-soft">{metric.basis}</p>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
+
       {project.story ? (
         <>
           <Section>

@@ -266,3 +266,22 @@ skrol, pa se kartice i dalje mogu pregledati.
 
 Kartica je usput izdvojena u `ProjectCard.tsx` i dijele je naslovnica i
 `/projekti`, da se dvije izvedbe ne raziđu.
+
+## Brojke smiju na web, ali nikad gole (16. 10. 2026.)
+
+Bolero/Temu je prvi projekt sa stvarnim postotcima. Dosad je test odbijao
+svaki broj u rezultatima, jer je pravilo bilo „bez izmišljenih brojki".
+
+Pravilo je sad preciznije: **broj se smije objaviti samo uz osnovu na kojoj je
+izmjeren** — koji izvještaj, koje razdoblje, koja metrika. Zato postoji
+zasebno polje `metrics` u kojem svaka brojka nosi `basis`, a `outcomes`
+ostaju bez brojeva. Test provjerava da nijedna brojka nema praznu osnovu.
+
+Na stranici osnova nije fusnota nego stoji odmah ispod broja. Čitatelj vidi
+„+433 %" i u istom dahu „usporedba dvaju punih tjedana, 17.–23. i 24.–30. 8.
+2026." — pa može sam procijeniti koliko to vrijedi.
+
+Iz uredničkih napomena doslovno je poštovano: **#1 je pozicija proizvoda**, ne
+tvrdnja o cijeloj trgovini; postotci su početno ubrzanje na maloj osnovici, ne
+trajna stopa rasta; apsolutni brojevi narudžbi i iznosi se ne objavljuju;
+„base price sales" nije dobit ni marža; o oglašavanju se ne tvrdi ništa.

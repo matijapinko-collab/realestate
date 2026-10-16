@@ -74,6 +74,13 @@ export type Project = {
   /** Functional or operational outcomes only — never invented revenue. */
   outcomes: string[];
   /**
+   * Measured figures. A number may be published only with the basis it was
+   * measured on — which report, which period, which metric — so the reader
+   * can judge it instead of taking it on faith. `outcomes` stays free of
+   * numbers; they live here, next to their source.
+   */
+  metrics?: { value: string; label: string; basis: string }[];
+  /**
    * Heading for the list above. Defaults to "Rezultat"; a project whose
    * outcome was never measured says "Moj doprinos" instead, rather than
    * dressing responsibilities up as results.
@@ -123,6 +130,110 @@ export const statusLabels: Record<ProjectStatus, string> = {
  * name was never verified); it is recoverable from git history.
  */
 export const projects: Project[] = [
+  {
+    slug: "bolero-temu",
+    projectName: "Bolero Adria — Temu",
+    tagline: "Klijent je postao #1 u kategoriji pića na Temu Hrvatska.",
+    relationshipType: "klijent",
+    role:
+      "Razvoj prodajnog kanala na Temuu: ponuda i podaci o artiklima, odnos cijene i promocije, analiza prodaje te operativa od narudžbe do dostave.",
+    status: "lansirano",
+    approvedForPublication: true,
+    summary:
+      "Novi prodajni kanal za Bolero na Temuu — od asortimana i cijena do narudžbi, skladišta i dostave. Proizvod je došao na prvo mjesto kategorije pića.",
+    context:
+      "Bolero je imao proizvod i širok izbor okusa. Trebalo je razviti prodaju na platformi na kojoj se za kupčevu pažnju natječe gotovo sve što ima cijenu i fotografiju. Otvoriti trgovinu bio je početak; posao je bio povezati asortiman s Temu prodajnim modelom, razumjeti uvjete platforme i organizirati sve iza kupnje.",
+    challenge:
+      "Kupac vidi proizvod i cijenu. Iza toga moraju raditi podaci o artiklu, pakiranje, raspoloživost, obrada narudžbe i put do kupčevih vrata. Drugim riječima, puno više od „stavili smo proizvode na internet”. To danas može i toster, ako ima dovoljno dobar Wi-Fi.",
+    story: [
+      {
+        heading: "Ponuda dovoljno široka da izbor ima smisla",
+        body: [
+          "U početnom izvještajnom razdoblju trgovina je imala 78 aktivnih Bolero artikala, uključujući Sticks, Classic i Ice Tea asortiman.",
+          "Rad na kanalu uključivao je ponudu i podatke potrebne za prodaju: proizvode, formate pakiranja, informacije o uporabi i njihovo predstavljanje u marketplace okruženju.",
+          "Kod instant napitaka kupac mora razumjeti što dobiva. Okus privlači pažnju, ali količina i format pakiranja moraju biti jednako jasni. Nitko ne želi naručiti osvježenje pa nakon otvaranja paketa upisati diplomski iz tumačenja listinga.",
+        ],
+      },
+      {
+        heading: "Cijena i Temu prodajni model",
+        body: [
+          "U razradi kanala bavio sam se odnosom osnovne cijene, promotivne ponude i uvjeta dostave.",
+          "Temu ima vlastitu logiku prikaza i formiranja ponude, pa je trebalo razlikovati osnovnu cijenu prodavatelja od cijene koju vidi kupac — i prema tome ispravno čitati rezultate.",
+          "Ponuda mora biti privlačna kupcu i imati smisla za trgovca. Sama činjenica da je nešto sniženo još nije poslovna strategija. Inače bi tipka „−20 %” već odavno imala vlastiti ured.",
+        ],
+      },
+      {
+        heading: "Analiza koja razlikuje pažnju od prodaje",
+        body: [
+          "Pratio sam jedinstvene posjetitelje, preglede proizvoda, konverziju, prosječnu vrijednost narudžbe i prodaju po osnovnoj cijeni.",
+          "Važna je razlika između ta dva: posjećenost i narudžbe su u promatranoj usporedbi rasli zajedno, dakle rast se vidio i u stvarnoj kupnji, ne samo u pažnji.",
+          "Graf je napokon počeo izgledati kao graf. A ne kao ravna crta koju liječnik u filmu zabrinuto pogleda.",
+        ],
+      },
+      {
+        heading: "Operativa: svaka narudžba mora dobiti svoj paket",
+        body: [
+          "Bolero je na Temuu prodavao iz vlastitog skladišta, što je značilo stvarnu obradu narudžbi i organizaciju slanja kupcima.",
+          "Rad je obuhvaćao pripremu podataka za otpremu, povezivanje naručenih artikala s paketima i rješavanje dostavnih pitanja. U operativi su korišteni BoxNow i GLS, uz rad na podršci za dodatne dostavne opcije i praćenje pošiljaka.",
+          "Tu e-commerce prestaje biti prezentacija i postaje posao. Netko mora pripremiti paket, provjeriti adresu i pobrinuti se da obećanje iz listinga dobije svoju dostavnu naljepnicu.",
+        ],
+      },
+      {
+        heading: "A onda je Bolero završio na prvom mjestu",
+        body: [
+          "Bolero proizvod zauzeo je prvo mjesto u kategoriji pića na Temu Hrvatska. Za klijenta je to bio vrijedan trenutak razvoja kanala: proizvod je dobio istaknuto mjesto u kategoriji u kojoj želi biti prepoznat.",
+          "A prvo mjesto zvuči dosta dobro. Pogotovo kad prodajete piće — tada uspjeh doslovno možete zaliti vlastitim proizvodom.",
+        ],
+      },
+    ],
+    metrics: [
+      {
+        value: "#1",
+        label: "proizvod u kategoriji pića na Temu Hrvatska",
+        basis: "Pozicija Bolero proizvoda u kategoriji, prema klijentovoj potvrdi.",
+      },
+      {
+        value: "+433\u00A0%",
+        label: "narudžbi",
+        basis: "Usporedba dvaju uzastopnih punih tjedana: 17.–23. i 24.–30. 8. 2026.",
+      },
+      {
+        value: "+274\u00A0%",
+        label: "jedinstvenih posjetitelja",
+        basis: "Ista tjedna usporedba, Temu izvještaj.",
+      },
+      {
+        value: "+396\u00A0%",
+        label: "prodaje po osnovnoj cijeni",
+        basis: "Ista tjedna usporedba, Temu metrika „Base price sales”. Nije dobit ni marža.",
+      },
+    ],
+    decisions: [
+      "Ponudu posložiti tako da kupcu budu jasni okus, količina i format pakiranja",
+      "Razlikovati osnovnu cijenu prodavatelja od cijene koju kupac vidi, i rezultate čitati prema tome",
+      "Posjećenost i narudžbe pratiti zajedno, da se pažnja ne pomiješa s prodajom",
+      "Prodaja iz vlastitog skladišta, uz BoxNow i GLS i praćenje pošiljaka",
+    ],
+    deliverables: [
+      "Razvoj kanala na Temuu: ponuda, podaci o artiklima i njihovo predstavljanje",
+      "Razrada odnosa osnovne cijene, promocije i uvjeta dostave",
+      "Praćenje posjećenosti, konverzije, prosječne vrijednosti narudžbe i prodaje",
+      "Operativa narudžbi: priprema otpreme, povezivanje artikala s paketima, dostavna pitanja",
+    ],
+    outcomes: [
+      "Proizvod je zauzeo prvo mjesto u kategoriji pića na Temu Hrvatska",
+      "U početnoj fazi kanala rast posjećenosti pratio je i rast narudžbi, ne samo pažnje",
+      "Kanal je dobio svakodnevnu operativu, od narudžbe do dostavne naljepnice",
+    ],
+    nextStep:
+      "Imate dobar proizvod, a novi prodajni kanal još je na popisu „budemo”?",
+    evidenceLinks: [{ label: "boleroadria.com", href: "https://boleroadria.com/" }],
+    images: [],
+    publishedAt: "2026-10-16",
+    contributionLabel: "Razvoj Temu prodajnog kanala",
+    internalNote:
+      "Tekst je Matijin, dostavljen 16. 10. 2026., prebačen iz množine u jedninu kao i Elektronim. VAŽNO iz uredničkih napomena: #1 je pozicija Bolero PROIZVODA u kategoriji, ne tvrdnja da je trgovina najveći prodavatelj pića; nema screenshota rang-liste ni dokaza o trajanju pozicije. Postotci su iz Temu izvještaja za 17.–23. i 24.–30. 8. 2026., osnovica je mala pa NISU trajna stopa rasta. Apsolutni brojevi narudžbi i financijski iznosi se NE objavljuju. Base price sales nije dobit ni marža. Nije potvrđeno oglašavanje, pa tekst ne tvrdi ni da je rast organski ni da je plaćen. WooCommerce mix builder, Odoo, Amazon i druga tržišta NISU pripisani ovom rezultatu. Poveznica na boleroadria.com je na brend, ne na Temu trgovinu — provjeriti želi li Matija radije poveznicu na Temu.",
+  },
   {
     slug: "elektronim-instalacije",
     projectName: "Elektronim Instalacije",

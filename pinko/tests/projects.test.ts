@@ -125,3 +125,20 @@ test("every published record links to something verifiable", () => {
     }
   }
 });
+
+test("a published figure always states what it was measured on", () => {
+  // The site may publish a number, but never a bare one: whoever reads it
+  // has to be able to see which report, period or metric it came from.
+  for (const project of projects) {
+    for (const metric of project.metrics ?? []) {
+      assert.ok(
+        metric.basis.trim().length > 15,
+        `${project.slug}: metric "${metric.value}" has no usable basis`
+      );
+      assert.ok(
+        metric.value.trim().length > 0 && metric.label.trim().length > 0,
+        `${project.slug}: metric is missing its value or label`
+      );
+    }
+  }
+});

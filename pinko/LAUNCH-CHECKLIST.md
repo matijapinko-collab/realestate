@@ -68,7 +68,11 @@ Objavljeni su zapisi s `approvedForPublication: true` u
 - [ ] ⚠️ **Potvrditi opseg posla na Elektronimu.** Opis je napisan iz onoga
       što web pokazuje; Matija nije rekao što je točno radio (dizajn, sadržaj,
       fotografije, održavanje). Sekcija se zato zove „Moj doprinos".
-- [ ] **Bolero Drinks** — čeka točan status, opseg doprinosa i odobrene screenshotove
+- [x] **Bolero Adria — Temu** — dodano 16. 10. 2026., tekst Matijin, brojke uz
+      navedenu osnovu. Poveznica vodi na `boleroadria.com` (brend), ne na Temu
+      trgovinu — provjeriti želi li radije Temu.
+- [ ] **Bolero Drinks** (prodajni web, zaseban od Temu kanala) — čeka točan
+      status, opseg doprinosa i odobrene screenshotove
 - [ ] **Virus.hr** — čeka potvrdu opisa uloge i prava objave tekstova
 - [ ] Zapis **Saveza za rijetke bolesti** parkiran na Matijin zahtjev
       (16. 10. 2026.) jer službeni naziv nikad nije provjeren. Tekst je u
