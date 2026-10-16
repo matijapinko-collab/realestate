@@ -47,7 +47,8 @@ Objavljeni su zapisi s `approvedForPublication: true` u
 `src/content/projects.ts`:
 
 - [x] **100% Smart Food** — odobreno 16. 10. 2026., status `lansirano`, dokaz
-      `https://100smartfood.hr/`. Screenshotovi još nisu dostavljeni.
+      `https://100smartfood.hr/`. Opširan opis rada i plana; dvije snimke
+      cijelih stranica (naslovnica i proizvod) kroz koje se može pomicati.
 - [x] **Varel** — odobreno 16. 10. 2026., vlastiti proizvod, status
       `lansirano`, dokaz `https://varel.io/`
 - [ ] **Bolero Drinks** — čeka točan status, opseg doprinosa i odobrene screenshotove
@@ -58,6 +59,8 @@ Objavljeni su zapisi s `approvedForPublication: true` u
 
 - [ ] Logotipi klijenata — prikazuju se tek kad su dostavljeni i odobreni
 - [ ] Nijedan rezultat nije brojka koja nije provjerena
+- [ ] Snimke stranica stare — osvježiti ih kad se web vidno promijeni
+      (postupak: `docs/snimke-zivih-stranica.md`)
 
 ## 4. Vizualni materijali
 

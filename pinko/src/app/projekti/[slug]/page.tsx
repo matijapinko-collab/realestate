@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { ClosingContact } from "@/components/sections/ClosingContact";
+import { LiveScroll } from "@/components/sections/LiveScroll";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import {
   getProjectBySlug,
@@ -79,6 +80,18 @@ export default async function ProjectPage({ params }: Props) {
         breadcrumbs={crumbs}
       />
 
+      {project.liveScreens && project.liveScreens.length > 0 ? (
+        <Section
+          tone="surface"
+          eyebrow="Uživo"
+          index="01"
+          title="Prošetajte se kroz web"
+          lead="Snimke cijelih stranica — pomičite ih unutar okvira. Nisu ugrađene kroz iframe jer web s dobrim razlogom ne dopušta da ga tuđa stranica uokviri."
+        >
+          <LiveScroll screens={project.liveScreens} />
+        </Section>
+      ) : null}
+
       <Section>
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <div className="space-y-10">
@@ -89,6 +102,9 @@ export default async function ProjectPage({ params }: Props) {
           <div className="space-y-10">
             <ListBlock title="Isporučeno" items={project.deliverables} />
             <ListBlock title="Rezultat" items={project.outcomes} />
+            {project.roadmap && project.roadmap.length > 0 ? (
+              <ListBlock title="U planu" items={project.roadmap} />
+            ) : null}
             {project.evidenceLinks.length > 0 ? (
               <div>
                 <h2 className="text-(length:--text-title) font-extrabold">
@@ -99,7 +115,7 @@ export default async function ProjectPage({ params }: Props) {
                     <li key={link.href}>
                       <a
                         href={link.href}
-                        className="font-medium text-accent-ink underline underline-offset-4"
+                        className="font-medium text-accent underline underline-offset-4"
                         rel="noopener noreferrer"
                         target="_blank"
                       >
