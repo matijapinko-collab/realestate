@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { ClosingContact } from "@/components/sections/ClosingContact";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
-import { ProjectCardMedia } from "@/components/sections/ProjectCardMedia";
-import {
-  getPublishedProjects,
-  relationshipLabels,
-  statusLabels,
-} from "@/content/projects";
+import { ProjectCard } from "@/components/sections/ProjectCard";
+import { getPublishedProjects } from "@/content/projects";
 
 const crumbs = [
   { name: "Naslovnica", path: "/" },
@@ -67,37 +62,7 @@ export default function ProjectsPage() {
           <ul className="grid gap-5 md:grid-cols-2">
             {projects.map((project, index) => (
               <li key={project.slug} data-reveal data-reveal-delay={index}>
-                <Link
-                  href={`/projekti/${project.slug}`}
-                  className={`spotlight group flex h-full flex-col rounded-(--radius-card) border border-rule bg-surface p-7 transition-[border-color,transform] duration-300 ease-[cubic-bezier(.22,.61,.36,1)] hover:-translate-y-1 hover:border-accent`}
-                >
-                  <ProjectCardMedia project={project} />
-
-                  <div className="mt-5 flex flex-wrap items-center gap-2">
-                    <span className="rounded-(--radius-pill) bg-accent-wash px-2.5 py-1 text-xs font-semibold text-accent-ink">
-                      {relationshipLabels[project.relationshipType]}
-                    </span>
-                    <span className="rounded-(--radius-pill) border border-rule px-2.5 py-1 text-xs font-semibold text-ink-soft">
-                      {statusLabels[project.status]}
-                    </span>
-                  </div>
-                  <h2 className="mt-5 text-(length:--text-title) font-extrabold group-hover:text-accent-ink">
-                    {project.projectName}
-                  </h2>
-                  <p className="mt-2 text-sm font-semibold text-ink-soft">
-                    {project.contributionLabel}
-                  </p>
-                  <p className="mt-4 text-ink-soft">{project.summary}</p>
-                  <span className="mt-auto pt-6 text-sm font-semibold text-accent-ink">
-                    Pogledajte projekt{" "}
-                    <span
-                      aria-hidden="true"
-                      className="inline-block transition-transform group-hover:translate-x-0.5"
-                    >
-                      →
-                    </span>
-                  </span>
-                </Link>
+                <ProjectCard project={project} tone="surface" />
               </li>
             ))}
           </ul>

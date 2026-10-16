@@ -718,6 +718,72 @@
     }
   }
 
+  /* ---------------------------------------------------------------- *
+   * Project carousel
+   *
+   * Pure CSS, in both schemes. The track holds several copies of the same
+   * list and slides left by exactly one copy, which makes the return to the
+   * start invisible.
+   * ---------------------------------------------------------------- */
+
+  .project-carousel {
+    /* Runs edge to edge, out past the page gutters. */
+    margin-inline: calc(50% - 50vw);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 6%,
+      #000 94%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 6%,
+      #000 94%,
+      transparent
+    );
+  }
+
+  .project-carousel-track {
+    display: flex;
+    width: max-content;
+    animation: project-carousel 64s linear infinite;
+  }
+
+  /* Slow enough to read a card as it goes by; a carousel nobody can read is
+     decoration pretending to be content. */
+  .project-carousel:hover .project-carousel-track,
+  .project-carousel:focus-within .project-carousel-track {
+    animation-play-state: paused;
+  }
+
+  .project-carousel-set {
+    display: flex;
+    flex-shrink: 0;
+    gap: 1.25rem;
+    padding-inline: 0.625rem;
+  }
+
+  .project-carousel-set > li {
+    width: 22rem;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 30rem) {
+    .project-carousel-set > li {
+      width: 17rem;
+    }
+  }
+
+  @keyframes project-carousel {
+    to {
+      /* One full copy, including the gap that follows it. */
+      transform: translateX(calc(-100% / var(--carousel-copies, 3)));
+    }
+  }
+
   /* Endless strip. Duplicated content in the markup makes the loop seamless. */
   .marquee {
     overflow: hidden;
@@ -829,8 +895,13 @@
 
   .portrait-ring,
   .marquee > *,
-  .caret::after {
+  .caret::after,
+  .project-carousel-track {
     animation: none;
+  }
+
+  .project-carousel {
+    overflow-x: auto;
   }
 
   .js-motion [data-split]:not([data-revealed]) .split-word,

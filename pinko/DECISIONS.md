@@ -246,3 +246,23 @@ preglednik koji nas zanima.
 **Izlazak iz tunela nije rez.** Zadnji kadar se gasi 700 ms, a u isto vrijeme
 stranica ulazi iz blage prozirnosti i 1,5 % većeg mjerila. Izmjereno usred
 prijelaza: stranica 0,60, tunel 0,40 — stvarno pretapanje, ne zamjena.
+
+## Projekti kao carousel (16. 10. 2026.)
+
+Kartice projekata na naslovnici više ne stoje u gridu nego **polako klize u
+krug**, u obje teme. Traje 64 sekunde po krugu — dovoljno sporo da se kartica
+stigne pročitati dok prolazi. Carousel koji nitko ne može pročitati je ukras
+koji glumi sadržaj.
+
+**Bez JavaScripta.** Popis je ispisan tri puta, traka se pomakne točno za
+jednu kopiju, pa je povratak na početak nevidljiv. Dodatne kopije su
+`aria-hidden`, tako da čitač ekrana vidi jedan običan popis poveznica.
+
+Staje kad je pokazivač iznad njega **i kad bilo što u njemu dobije fokus
+tipkovnicom** — inače se do kartice koja se miče ne bi moglo doći tabom.
+
+Pod `prefers-reduced-motion` traka stoji, a okvir postaje običan vodoravni
+skrol, pa se kartice i dalje mogu pregledati.
+
+Kartica je usput izdvojena u `ProjectCard.tsx` i dijele je naslovnica i
+`/projekti`, da se dvije izvedbe ne raziđu.
