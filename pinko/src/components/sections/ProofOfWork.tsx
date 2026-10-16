@@ -41,7 +41,13 @@ export function ProofOfWork() {
         </div>
       ) : (
         <>
-          <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {/* Two approved projects would leave a visibly empty third column,
+              so the third column only appears once there are three cards. */}
+          <ul
+            className={`grid gap-5 md:grid-cols-2${
+              projects.length >= 3 ? " lg:grid-cols-3" : ""
+            }`}
+          >
             {projects.map((project) => (
               <li key={project.slug}>
                 <Link

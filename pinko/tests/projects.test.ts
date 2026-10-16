@@ -39,7 +39,20 @@ test("the draft flag is ignored in a production build", () => {
   try {
     env.NODE_ENV = "production";
     env.NEXT_PUBLIC_SHOW_DRAFT_PROJECTS = "true";
-    assert.deepEqual(getPublishedProjects(), []);
+    // The flag may never widen the list: with it set, production still
+    // returns exactly the approved records and nothing else.
+    const published = getPublishedProjects();
+    assert.deepEqual(
+      published.map((p) => p.slug),
+      projects.filter((p) => p.approvedForPublication).map((p) => p.slug)
+    );
+    for (const pending of getPendingProjects()) {
+      assert.equal(
+        published.some((p) => p.slug === pending.slug),
+        false,
+        `${pending.slug} leaked into production under the draft flag`
+      );
+    }
   } finally {
     if (previousEnv === undefined) delete env.NODE_ENV;
     else env.NODE_ENV = previousEnv;
@@ -91,6 +104,23 @@ test("no record claims an unverified growth figure", () => {
         numericClaim.test(outcome),
         false,
         `${project.slug}: outcome looks like an unverified figure — "${outcome}"`
+      );
+    }
+  }
+});
+
+test("every published record links to something verifiable", () => {
+  // A published case study must be checkable by the reader. Without a link
+  // there is nothing to verify, which is exactly what this site avoids.
+  for (const project of getPublishedProjects()) {
+    assert.ok(
+      project.evidenceLinks.length > 0,
+      `${project.slug} is published without a single evidence link`
+    );
+    for (const link of project.evidenceLinks) {
+      assert.ok(
+        link.href.startsWith("https://"),
+        `${project.slug}: evidence link is not https — ${link.href}`
       );
     }
   }

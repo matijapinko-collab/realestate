@@ -74,10 +74,15 @@ export const statusLabels: Record<ProjectStatus, string> = {
 };
 
 /**
- * Candidate records from the brief (12). Every one is `approvedForPublication:
- * false` until Matija confirms the exact status, contribution and what may be
- * shown. That is the brief's rule, not a technical limitation — flipping a flag
- * is a business decision, so it is deliberately left to him.
+ * Records drafted from the brief (12). A record stays
+ * `approvedForPublication: false` until Matija confirms the exact status,
+ * contribution and what may be shown. That is the brief's rule, not a
+ * technical limitation — flipping the flag is a business decision, so it is
+ * deliberately left to him.
+ *
+ * Approved on 16 October 2026: `100-smart-food` and `varel`. The record for
+ * the rare-disease association was parked at Matija's request (its official
+ * name was never verified); it is recoverable from git history.
  */
 export const projects: Project[] = [
   {
@@ -86,8 +91,8 @@ export const projects: Project[] = [
     relationshipType: "interni-razvoj",
     role:
       "Razvoj Next.js e-commerce iskustva i povezanih funkcija, uz rad na katalogu i integracijama.",
-    status: "u-razvoju",
-    approvedForPublication: false,
+    status: "lansirano",
+    approvedForPublication: true,
     summary:
       "Next.js webshop s katalogom, filterima i varijacijama, građen oko stvarnih pravila kupnje.",
     context:
@@ -109,12 +114,12 @@ export const projects: Project[] = [
       "Manje ručnog prepisivanja podataka u administraciji",
     ],
     nextStep: "Imate sličan katalog koji se ne da složiti u gotovu temu?",
-    evidenceLinks: [],
+    evidenceLinks: [{ label: "100smartfood.hr", href: "https://100smartfood.hr/" }],
     images: [],
-    publishedAt: null,
+    publishedAt: "2026-10-16",
     contributionLabel: "Next.js e-commerce razvoj",
     internalNote:
-      "Prije objave potvrditi status svake funkcije i što se smije prikazati. Screenshotovi nisu dostavljeni.",
+      "Objavu odobrio Matija 16. 10. 2026. Screenshotovi još nisu dostavljeni, pa kartica ide bez slike.",
   },
   {
     slug: "bolero-drinks",
@@ -152,32 +157,40 @@ export const projects: Project[] = [
       "Potvrditi točan status i doprinos te odobrene screenshotove prije objave.",
   },
   {
-    slug: "savez-za-rijetke-bolesti",
-    projectName: "Savez za rijetke bolesti",
-    relationshipType: "klijent",
-    role: "Redizajn te tehničko i sadržajno unapređenje postojeće stranice.",
+    slug: "varel",
+    projectName: "Varel",
+    relationshipType: "interni-razvoj",
+    role:
+      "Vlastiti proizvod: arhitektura, razvoj, model podataka, administracija sadržaja i objava u produkciju.",
     status: "lansirano",
-    approvedForPublication: false,
+    approvedForPublication: true,
     summary:
-      "Redizajn i tehničko unapređenje postojeće stranice, uz jasniju strukturu sadržaja.",
+      "Višejezična platforma za pronalaženje i usporedbu alata za rad, s vlastitom administracijom sadržaja.",
     context:
-      "Postojeća stranica udruge kojoj je trebala jasnija struktura i tehničko unapređenje.",
+      "Vlastiti proizvod, a ne klijentski posao: mjesto na kojem se alati za rad mogu pronaći, usporediti i razumjeti bez prolaska kroz deset marketinških stranica.",
     challenge:
-      "Sadržaj je bio teško pronalaziv, a stranica tehnički zastarjela.",
+      "Katalog alata, usporedbe i urednički sadržaj moraju raditi na više jezika, a unos i uređivanje ne smiju ovisiti o programeru.",
     decisions: [
-      "Redizajn uz zadržavanje postojećeg sadržaja",
-      "Jasnija struktura i navigacija",
-      "Tehničko unapređenje postojeće izvedbe",
+      "Višejezičnost ugrađena u model podataka, ne nalijepljena naknadno",
+      "Vlastita administracija sadržaja umjesto gotovog CMS-a",
+      "Jedan izvor istine za alate, usporedbe i uredničke tekstove",
     ],
-    deliverables: ["Redizajn stranice", "Reorganizacija sadržaja", "Tehničke popravke"],
-    outcomes: ["Pregledniji sadržaj", "Tehnički ažurnija stranica"],
-    nextStep: "Imate stranicu koja treba redizajn bez gubitka sadržaja?",
-    evidenceLinks: [],
+    deliverables: [
+      "Katalog alata s usporedbama i vodičima",
+      "Administracija za unos i uređivanje sadržaja",
+      "Postavljanje u produkciju na vlastitoj domeni",
+    ],
+    outcomes: [
+      "Platforma je javno dostupna i radi na više jezika",
+      "Sadržaj se dodaje i mijenja bez izmjene koda",
+    ],
+    nextStep: "Treba vam proizvod koji sami možete puniti sadržajem?",
+    evidenceLinks: [{ label: "varel.io", href: "https://varel.io/" }],
     images: [],
-    publishedAt: null,
-    contributionLabel: "Redizajn i tehničko unapređenje",
+    publishedAt: "2026-10-16",
+    contributionLabel: "Vlastiti proizvod — arhitektura i razvoj",
     internalNote:
-      "VAŽNO: provjeriti točan službeni naziv organizacije prije objave. Naziv u ovom zapisu nije potvrđen.",
+      "Objavu odobrio Matija 16. 10. 2026. Vlastiti proizvod, pa nema klijenta od kojeg treba pribaviti prava objave.",
   },
   {
     slug: "virus-hr",

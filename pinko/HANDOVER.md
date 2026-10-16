@@ -116,22 +116,33 @@ CONTACT_TO_EMAIL=matija@pinko.hr
 
 Provjeriti i cPanel → **Email Deliverability** (SPF/DKIM), inače mail ide u spam.
 
-### 4.4. Redirect `pinko.hr` → `varel.io`
+### 4.4. Domena `pinko.hr`
 
-Matija ga mora maknuti u cPanelu: **Domains → pinko.hr → Manage → Redirects**.
-Nakon toga provjeri što domena stvarno radi i tek onda postavi
+**Riješeno 16. 10. 2026.:** Matija je maknuo redirect na `varel.io`. Provjereno:
+`pinko.hr` i `www.pinko.hr` vraćaju 200 na `https://pinko.hr/`.
+
+⚠️ Ostaje novo pitanje: na domeni sada stoji **stari WordPress web** („Matija
+Pinko — The Gamechanger”, Avada tema, engleski). Novi web ga mora zamijeniti —
+odlučiti ide li na isti hosting umjesto WordPressa ili drugdje pa se prebacuje
+DNS. Stari sadržaj arhivirati prije gašenja. Tek nakon toga postavi
 `NEXT_PUBLIC_SITE_URL` i `NEXT_PUBLIC_ALLOW_INDEXING=true`.
 
 **Ne diraj DNS ni MX zapise automatski** — na njima vise mailovi i drugi projekti.
 
 ### 4.5. Projekti
 
-Svi zapisi u `src/content/projects.ts` imaju `approvedForPublication: false`.
-Dok je tako, `/projekti` pošteno piše da priče čekaju potvrdu. Prije prebacivanja
-na `true` za svaki treba potvrda statusa, opsega doprinosa i prava objave.
+Stanje od 16. 10. 2026.: objavljena su dva zapisa iz `src/content/projects.ts` —
+**100% Smart Food** (`https://100smartfood.hr/`) i **Varel**
+(`https://varel.io/`). Oba su `lansirano` i imaju poveznicu kao dokaz.
 
-⚠️ Kod zapisa **Savez za rijetke bolesti** naziv organizacije **nije provjeren** —
-označeno je u `internalNote`. Provjeri točan službeni naziv prije objave.
+Čekaju i dalje: **Bolero Drinks** i **Virus.hr**. Zapis **Saveza za rijetke
+bolesti** je na Matijin zahtjev maknut iz datoteke (službeni naziv nikad nije
+provjeren); tekst je u git povijesti ako se vrati.
+
+Screenshotovi nisu dostavljeni ni za jedan projekt, pa kartice idu bez slike.
+
+Test `every published record links to something verifiable` pazi da objavljen
+zapis uvijek ima barem jednu https poveznicu.
 
 ---
 

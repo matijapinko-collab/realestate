@@ -23,10 +23,13 @@ stranicu `/privatnost`.
 
 ## 2. Domena
 
-- [ ] **Maknuti redirect `pinko.hr` → `varel.io`** u cPanelu (Domains →
-      pinko.hr → Redirects / "Manage Redirection"). To je zahvat na vašem
-      hostingu i radite ga vi — ja nemam pristup cPanelu.
-- [ ] Provjereno DNS/HTTP ponašanje `pinko.hr` nakon uklanjanja redirecta
+- [x] **Maknut redirect `pinko.hr` → `varel.io`** (Matija, 16. 10. 2026.)
+- [x] Provjereno HTTP ponašanje: `pinko.hr` i `www.pinko.hr` vraćaju 200 na
+      `https://pinko.hr/`, bez preusmjeravanja
+- [ ] ⚠️ **Na `pinko.hr` sada stoji stari WordPress web** („Matija Pinko — The
+      Gamechanger”, Avada tema, engleski). Novi web ga mora zamijeniti:
+      odlučiti ide li na isti hosting umjesto WordPressa ili drugdje pa se
+      prebacuje DNS. Stari sadržaj prije gašenja arhivirati.
 - [ ] Odlučen odnos s Varelom
 - [ ] Popis potrebnih preusmjerenja sa starih URL-ova
 - [ ] `NEXT_PUBLIC_SITE_URL` postavljen na kanonsku domenu
@@ -36,15 +39,18 @@ Vidi `DEPLOYMENT.md` → „Domena i DNS”.
 
 ## 3. Projekti
 
-Svi zapisi u `src/content/projects.ts` imaju `approvedForPublication: false`.
-Za svaki prije objave potvrdite:
+Objavljeni su zapisi s `approvedForPublication: true` u
+`src/content/projects.ts`:
 
-- [ ] **100% Smart Food** — status svake funkcije, što se smije prikazati, screenshotovi
-- [ ] **Bolero Drinks** — točan status i opseg doprinosa, odobreni screenshotovi
-- [ ] **Savez za rijetke bolesti** — ⚠️ **točan službeni naziv organizacije** (naziv u zapisu nije potvrđen), status i doprinos
-- [ ] **Virus.hr** — potvrda opisa uloge i prava objave tekstova
-
-Zatim postavite `approvedForPublication: true` na odobrene zapise.
+- [x] **100% Smart Food** — odobreno 16. 10. 2026., status `lansirano`, dokaz
+      `https://100smartfood.hr/`. Screenshotovi još nisu dostavljeni.
+- [x] **Varel** — odobreno 16. 10. 2026., vlastiti proizvod, status
+      `lansirano`, dokaz `https://varel.io/`
+- [ ] **Bolero Drinks** — čeka točan status, opseg doprinosa i odobrene screenshotove
+- [ ] **Virus.hr** — čeka potvrdu opisa uloge i prava objave tekstova
+- [ ] Zapis **Saveza za rijetke bolesti** parkiran na Matijin zahtjev
+      (16. 10. 2026.) jer službeni naziv nikad nije provjeren. Tekst je u
+      git povijesti ako se vrati.
 
 - [ ] Logotipi klijenata — prikazuju se tek kad su dostavljeni i odobreni
 - [ ] Nijedan rezultat nije brojka koja nije provjerena
