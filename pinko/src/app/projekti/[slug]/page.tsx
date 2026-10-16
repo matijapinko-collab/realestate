@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { ClosingContact } from "@/components/sections/ClosingContact";
+import Image from "next/image";
 import { LiveScroll } from "@/components/sections/LiveScroll";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import {
@@ -79,6 +80,22 @@ export default async function ProjectPage({ params }: Props) {
         }
         breadcrumbs={crumbs}
       />
+
+      {project.featuredImage ? (
+        <Section tight>
+          <figure data-reveal className="overflow-hidden rounded-(--radius-card) border border-rule bg-surface">
+            <Image
+              src={project.featuredImage.src}
+              alt={project.featuredImage.alt}
+              width={project.featuredImage.width}
+              height={project.featuredImage.height}
+              priority
+              sizes="(min-width: 1280px) 76rem, 100vw"
+              className="h-auto w-full"
+            />
+          </figure>
+        </Section>
+      ) : null}
 
       {project.liveScreens && project.liveScreens.length > 0 ? (
         <Section

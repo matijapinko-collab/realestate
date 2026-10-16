@@ -75,6 +75,11 @@ export type Project = {
   /** What is still ahead on the project. Omitted when nothing is planned. */
   roadmap?: string[];
   nextStep: string;
+  /**
+   * The picture that stands for the project: on its card and at the top of
+   * its page. A real screenshot of the real thing, never a mockup.
+   */
+  featuredImage?: ProjectImage;
   evidenceLinks: EvidenceLink[];
   images: ProjectImage[];
   /** Scrollable captures of the live site. */
@@ -148,6 +153,12 @@ export const projects: Project[] = [
     outcomesLabel: "Moj doprinos",
     nextStep:
       "Imate projekt kojem treba netko tko će povezati ljude, poslovanje i izvedbu?",
+    featuredImage: {
+      src: "/projekti/teladoc-health.webp",
+      alt: "Naslovnica Teladoc Healtha: majka i dijete na kauču, na mobitelu otvoren video poziv s liječnikom.",
+      width: 1900,
+      height: 702,
+    },
     evidenceLinks: [
       { label: "teladochealth.com", href: "https://www.teladochealth.com/" },
     ],
