@@ -220,6 +220,46 @@ DNS se uređuje kod **ns1/ns2.mydataknox.com**, dakle u zoni kod hostera.
 
 Tek kad je pošta razdvojena, mijenja se `A` za `pinko.hr` i `www`.
 
+### Varijanta: Cloudflare ispred svega
+
+Cloudflare je bolji put nego mijenjanje zone kod hostera, iz tri razloga:
+promjene su gotovo trenutne i vraćaju se jednako brzo, putanja
+`/rijetkebolesti` se može usmjeriti **na rubu** kroz Origin Rules (pa otpada
+Traefik datoteka i jedan skok), a isti obrazac već vrti `100smartfood.hr`.
+
+**Ono što Cloudflare NE rješava je pošta.** `MX` i dalje pokazuje na
+`pinko.hr`, a taj `A` zapis bi bio proxiran — dakle pokazivao bi na
+Cloudflareove IP-eve, koji ne primaju poštu. Bez razdvajanja bi bilo *gore*,
+ne bolje. Koraci 1–5 iz prethodnog odjeljka vrijede jednako.
+
+Zapisi u Cloudflareu:
+
+| Zapis | Vrijednost | Proxy |
+| --- | --- | --- |
+| `A pinko.hr` | 167.233.239.74 | **proxied** (narančasto) |
+| `A www` | 167.233.239.74 | proxied |
+| `A mail` | 185.62.75.97 | **DNS only** (sivo) |
+| `MX` | `mail.pinko.hr`, prioritet 0 | — |
+| `A webmail`, `A cpanel` | 185.62.75.97 | **DNS only** |
+| `TXT` SPF i DKIM | prepisati jedan u jedan | — |
+
+Poštanski zapisi **nikad ne smiju biti proxirani**. Proxiranje poštanskog
+imena je najčešći način da se pošta izgubi pri prelasku na Cloudflare.
+
+`/rijetkebolesti` kroz **Origin Rules**: uvjet `URI Path starts with
+/rijetkebolesti`, akcija *Origin → DNS record / Host* na `185.62.75.97`.
+Time Traefik datoteka nije potrebna, ali ostaje u repozitoriju kao zamjena
+ako se ide bez Cloudflarea.
+
+SSL postaviti na **Full (strict)** i zadržati Let's Encrypt na Traefiku, da
+veza između Cloudflarea i servera bude provjereno šifrirana.
+
+⚠️ **Posjetiteljev IP.** S Cloudflareom ispred, aplikacija prvo čita
+`cf-connecting-ip` jer to zaglavlje postavlja sam rub i ne propušta ga od
+posjetitelja. Ali server je i dalje dostupan po svom IP-u, pa tko zaobiđe
+Cloudflare može slati što hoće. Prije objave suziti Hetzner firewall `sf-web`
+tako da 80 i 443 primaju samo Cloudflareove rasponе.
+
 ### Što ostaje na WordPressu
 
 `https://pinko.hr/rijetkebolesti/` (uključujući `wp-admin`) mora i dalje

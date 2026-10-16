@@ -87,9 +87,16 @@ export async function submitContactForm(
 
   // Rate limit per client IP, read from the proxy headers (see DEPLOYMENT.md
   // for the trusted-proxy requirement).
+  //
+  // Behind Cloudflare, `cf-connecting-ip` is the one header the edge sets
+  // itself and will not pass through from a visitor, so it is preferred when
+  // present. `x-forwarded-for` is the fallback for a plain reverse proxy;
+  // its first entry is the client only because the proxy in front is
+  // required to rewrite the header rather than append to it.
   const headerList = await headers();
   const forwarded = headerList.get("x-forwarded-for");
   const ip =
+    headerList.get("cf-connecting-ip")?.trim() ||
     forwarded?.split(",")[0]?.trim() ||
     headerList.get("x-real-ip") ||
     "unknown";
