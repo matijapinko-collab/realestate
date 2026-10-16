@@ -5,6 +5,8 @@ import { site } from "@/config/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MotionLayer } from "@/components/ui/MotionLayer";
+import { Preloader } from "@/components/ui/Preloader";
+import { SmoothScroll } from "@/components/ui/SmoothScroll";
 
 /**
  * Manrope, served from our own origin. Both files are variable (400–800) and
@@ -59,9 +61,17 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fafaf7",
-  colorScheme: "light",
+  themeColor: "#0a0c11",
+  colorScheme: "dark light",
 };
+
+/**
+ * Applied before first paint, so a visitor who chose the light experience
+ * never sees the dark one flash past. Kept to one expression and inlined on
+ * purpose: a stylesheet cannot read localStorage, and a deferred script
+ * would arrive too late.
+ */
+const themeScript = `try{var t=localStorage.getItem("pinko-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}`;
 
 export default function RootLayout({
   children,
@@ -69,7 +79,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang={site.lang} className={manrope.variable}>
+    <html
+      lang={site.lang}
+      className={manrope.variable}
+      data-theme="dark"
+      // The inline script below rewrites this before React hydrates; that is
+      // the point of it, so the difference is expected rather than a bug.
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="font-sans">
         <a
           href="#sadrzaj"
@@ -77,7 +97,11 @@ export default function RootLayout({
         >
           Preskoči na sadržaj
         </a>
+        <Preloader />
         <MotionLayer />
+        <SmoothScroll />
+        {/* Decorative rail down the left edge; light mode only. */}
+        <div aria-hidden="true" className="side-rail" />
         <Header />
         <main id="sadrzaj">{children}</main>
         <Footer />

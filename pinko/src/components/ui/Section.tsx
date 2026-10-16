@@ -38,6 +38,7 @@ export function Section({
     >
       <div className="wrap">
         {ruled ? <hr className="mb-12 border-0 hairline" /> : null}
+        <div className="section-head">
         {(eyebrow || index) && (
           <p className="mono-label mb-5 flex items-baseline gap-3 font-semibold text-ink-soft">
             {index ? <span className="text-accent">{index}</span> : null}
@@ -61,6 +62,7 @@ export function Section({
             {lead}
           </div>
         ) : null}
+        </div>
         {children ? <div className={title || lead ? "mt-12" : ""}>{children}</div> : null}
       </div>
     </section>

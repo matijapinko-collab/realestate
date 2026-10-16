@@ -3,6 +3,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { site } from "@/config/site";
 import { careerFacts } from "@/content/career";
 import { CountUp } from "@/components/ui/CountUp";
+import { SplitLines } from "@/components/ui/SplitLines";
 import { ProblemPicker } from "./ProblemPicker";
 import { TypedDisciplines } from "./TypedDisciplines";
 
@@ -28,8 +29,8 @@ export function Hero() {
       />
 
       <div className="wrap relative pt-14 pb-16 md:pt-20 md:pb-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-          <div>
+        <div className="hero-grid grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <div className="hero-copy">
             <p className="mono-label flex flex-wrap items-center gap-x-2 gap-y-1 font-semibold text-ink-soft">
               <span className="text-ink">Matija Pinko</span>
               <span aria-hidden="true" className="text-control">
@@ -47,9 +48,20 @@ export function Hero() {
             </p>
 
             <h1 className="mt-6 text-(length:--text-hero) font-extrabold">
-              Vaš sljedeći veliki korak{" "}
-              <span className="text-accent">zaslužuje dobar razvoj.</span>
+              <SplitLines
+                lines={["Vaš sljedeći veliki korak", "zaslužuje dobar razvoj."]}
+              />
             </h1>
+
+            {/* The reference crosses out the word it is rejecting. Here the
+                rejected word is true: this is a one-person trade, not an
+                agency, and the page says so before anyone has to ask. */}
+            <p className="hero-strike mt-5 text-(length:--text-title) font-extrabold">
+              <SplitLines
+                lines={["Ne agencija.", "Jedan čovjek koji isporuči."]}
+                strike="agencija."
+              />
+            </p>
 
             <p className="measure-wide mt-7 text-(length:--text-lead) text-ink-soft">
               Razvijam Next.js webove, webshopove i aplikacije. Povezujem ih sa
@@ -76,7 +88,7 @@ export function Hero() {
             </p>
           </div>
 
-          <div className="flex justify-center lg:justify-end">
+          <div className="hero-aside flex justify-center lg:justify-end">
             {site.portrait ? (
               <div className="relative aspect-square w-full max-w-sm">
                 <div

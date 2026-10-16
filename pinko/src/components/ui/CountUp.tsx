@@ -34,6 +34,8 @@ export function CountUp({
     const [, prefix, digits, suffix] = match;
     const target = Number(digits);
     if (!Number.isFinite(target) || target === 0) return;
+    // A year is a label, not a quantity: counting 0→2018 reads as nonsense.
+    if (target >= 1900) return;
 
     const observer = new IntersectionObserver(
       (entries) => {

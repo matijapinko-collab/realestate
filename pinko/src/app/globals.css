@@ -63,9 +63,58 @@
  * Base
  * ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------ *
+ * Light mode — a different site, not a lighter one
+ *
+ * The dark scheme is the terminal look. Light mode is the second
+ * experience Matija asked for: near-white lavender paper, near-black ink,
+ * monochrome accents, dashed rules, and the quieter typography that goes
+ * with it. Same content, same routes, deliberately different feeling.
+ *
+ * Measured, as always: ink 16.43:1 on paper and 18.71:1 on a card, muted
+ * ink 6.26:1, white on a filled black control 18.71:1, control borders
+ * 3.47:1 on paper and 3.95:1 on a card. `--color-rule` stays decorative.
+ * ------------------------------------------------------------------ */
+
+:root[data-theme="light"] {
+  --color-paper: #eff0f4;
+  --color-surface: #ffffff;
+  --color-raised: #f7f7fa;
+  --color-ink: #121214;
+  --color-ink-soft: #55585f;
+  --color-rule: #d5d6dd;
+  --color-control: #7d8088;
+  /* Light mode is monochrome: the accent is ink, the way the reference
+     treats it. Colour comes from the work on show, not from the chrome. */
+  --color-accent: #121214;
+  --color-accent-ink: #000000;
+  --color-accent-wash: #e6e7ee;
+  --color-on-accent: #ffffff;
+}
+
 @layer base {
   :root {
     color-scheme: dark;
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  /* Light mode drops the monospace headline voice for a plain grotesque,
+     and lets the type run larger because it is no longer a terminal. */
+  :root[data-theme="light"] h1,
+  :root[data-theme="light"] h2,
+  :root[data-theme="light"] h3,
+  :root[data-theme="light"] h4 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.035em;
+  }
+
+  :root[data-theme="light"] {
+    --text-hero: clamp(2.5rem, 1.1rem + 6vw, 6rem);
+    --text-display: clamp(2rem, 1.1rem + 3.4vw, 4rem);
+    --text-title: clamp(1.375rem, 1.05rem + 1.3vw, 2rem);
   }
 
   html {
@@ -251,6 +300,172 @@
     );
   }
 
+  /* Light mode draws its rules dashed, the way the reference does. */
+  :root[data-theme="light"] .hairline,
+  :root[data-theme="light"] .rule-dashed {
+    border-style: dashed;
+  }
+
+  /* The dotted rail that runs down the left edge in light mode. */
+  .side-rail {
+    display: none;
+  }
+
+  :root[data-theme="light"] .side-rail {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 2.25rem;
+    z-index: 5;
+    display: block;
+    width: 1px;
+    background-image: linear-gradient(
+      to bottom,
+      var(--color-rule) 55%,
+      transparent 55%
+    );
+    background-size: 1px 9px;
+    pointer-events: none;
+  }
+
+  @media (max-width: 64rem) {
+    :root[data-theme="light"] .side-rail {
+      display: none;
+    }
+  }
+
+  /* Headline split into words, each arriving from below behind a mask. */
+  .split-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+  }
+
+  .split-word {
+    display: inline-block;
+  }
+
+  .js-motion [data-split]:not([data-revealed]) .split-word {
+    transform: translateY(110%);
+  }
+
+  .js-motion [data-split] .split-word {
+    transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--word-index, 0) * 55ms);
+  }
+
+  /* The word that gets struck through once the line has landed. */
+  .struck {
+    position: relative;
+    color: var(--color-ink-soft);
+  }
+
+  .struck::after {
+    content: "";
+    position: absolute;
+    top: 55%;
+    left: -0.04em;
+    height: max(2px, 0.045em);
+    width: calc(100% + 0.08em);
+    background: currentColor;
+    transform-origin: 0 50%;
+    transform: scaleX(1);
+  }
+
+  .js-motion [data-split]:not([data-revealed]) .struck::after {
+    transform: scaleX(0);
+  }
+
+  .js-motion .struck::after {
+    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1) 900ms;
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Light mode layout
+   *
+   * The same markup, arranged the way the reference arranges it: one
+   * centred column, the type doing the work, the terminal card gone.
+   * ---------------------------------------------------------------- */
+
+  :root[data-theme="light"] .hero-grid {
+    display: block;
+  }
+
+  :root[data-theme="light"] .hero-copy {
+    margin-inline: auto;
+    max-width: 60rem;
+    text-align: center;
+  }
+
+  :root[data-theme="light"] .hero-copy .measure-wide {
+    margin-inline: auto;
+  }
+
+  :root[data-theme="light"] .hero-copy > p {
+    justify-content: center;
+  }
+
+  :root[data-theme="light"] .hero-copy .mono-label {
+    justify-content: center;
+  }
+
+  :root[data-theme="light"] .hero-copy > div {
+    justify-content: center;
+  }
+
+  /* The terminal card belongs to the dark scheme only. */
+  :root[data-theme="light"] .hero-aside {
+    display: none;
+  }
+
+  /* The terminal scheme keeps its accent on the second line of the hero,
+     which is what it had before the headline was split into words. */
+  :root:not([data-theme="light"]) .hero-copy h1 .split-line:nth-child(2) {
+    color: var(--color-accent);
+  }
+
+  /* Dark mode keeps the claim out of the way; light mode leads with it. */
+  :root:not([data-theme="light"]) .hero-strike {
+    font-size: var(--text-lead);
+  }
+
+  /* The grid field is a terminal motif; light mode uses plain paper. */
+  :root[data-theme="light"] .grid-field {
+    display: none;
+  }
+
+  /* Section headings centre in light mode, as on the reference. */
+  :root[data-theme="light"] .section-head {
+    margin-inline: auto;
+    max-width: 48rem;
+    text-align: center;
+  }
+
+  :root[data-theme="light"] .section-head h2 {
+    max-width: none;
+  }
+
+  :root[data-theme="light"] .section-head .measure-wide {
+    margin-inline: auto;
+  }
+
+  /* Process cards pin one under the other while the section scrolls past.
+     Single column only: side by side there is nothing to stack. */
+  @media (min-width: 48rem) {
+    :root[data-theme="light"] .process-stack {
+      display: block;
+    }
+
+    :root[data-theme="light"] .process-stack > li {
+      position: sticky;
+      top: calc(5rem + var(--step) * 1.25rem);
+      margin-inline: auto;
+      max-width: 48rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 -1px 0 0 var(--color-rule);
+    }
+  }
+
   /* Endless strip. Duplicated content in the markup makes the loop seamless. */
   .marquee {
     overflow: hidden;
@@ -364,6 +579,16 @@
   .marquee > *,
   .caret::after {
     animation: none;
+  }
+
+  .js-motion [data-split]:not([data-revealed]) .split-word,
+  .js-motion [data-split] .split-word {
+    transform: none;
+    transition: none;
+  }
+
+  .js-motion [data-split]:not([data-revealed]) .struck::after {
+    transform: scaleX(1);
   }
 
   /* A revealed-on-scroll block must never be left invisible. */

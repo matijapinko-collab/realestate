@@ -10,11 +10,17 @@ export function Process() {
       title="Od prve kave do prve verzije. I dalje."
       lead="Kava je dobrodošla. Prezentacija od 87 slajdova nije obavezna."
     >
-      <ol className="grid gap-5 md:grid-cols-2">
-        {processSteps.map((step) => (
+      {/* The cards stack and pin as you scroll, each one coming to rest on
+          the one before it. Pure `position: sticky` — no scroll handler, so
+          it costs nothing and degrades to a plain list on older browsers. */}
+      <ol className="process-stack grid gap-5 md:grid-cols-2">
+        {processSteps.map((step, i) => (
           <li
             key={step.index}
-            className="flex flex-col rounded-(--radius-card) border border-rule bg-surface p-6"
+            data-reveal
+            data-reveal-delay={i}
+            style={{ "--step": i } as React.CSSProperties}
+            className="spotlight flex flex-col rounded-(--radius-card) border border-rule bg-surface p-6 transition-colors duration-300 hover:border-accent"
           >
             <span className="text-sm font-bold text-accent">{step.index}</span>
             <h3 className="mt-3 text-(length:--text-title) font-extrabold">

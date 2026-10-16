@@ -140,3 +140,36 @@ Lighthouse 96 uz TBT od 70 ms i taj se budžet ne troši na ukrase.
 
 Animirani tekst u heroju ponavlja ono što popis već kaže, pa je za čitače
 ekrana skriven — inače bi se čitao slovo po slovo.
+
+## Dva weba u jednom: „Terminal" i „Studio" (16. 10. 2026.)
+
+**Odluka je Matijina i izričita:** preuzeti koncept s `konpo.studio` i napraviti
+ga kao **svijetli način**, dok dosadašnji tamni ostaje kao drugi. Iznio sam
+primjedbe (kopija tuđeg dizajna, cijena u performansama, sadržaj koji još ne
+podnosi takav okvir); Matija ih je čuo i potvrdio zahtjev, pa je izvedeno u
+cijelosti.
+
+**Granica koja se poštuje:** preuzeti su **struktura i ponašanje** — raspored,
+tipografska skala, precrtana riječ, zavjesa s brojačem, glatko skrolanje,
+pinane kartice. **Nije preuzet njihov sadržaj**: nijedan njihov tekst, video,
+slika, ikona ni logotip nije u ovom repozitoriju. Sav sadržaj je Matijin.
+
+**Prekidač je u zaglavlju** („Terminal" / „Studio"). Izbor se pamti i primjenjuje
+**prije prvog iscrtavanja**, malom ugrađenom skriptom u `<head>`, pa se drugi
+izgled nikad ne pojavi u bljesku. Zato `<html>` nosi `suppressHydrationWarning`
+— razlika između poslužiteljskog i klijentskog `data-theme` je namjerna.
+
+**Svijetli način nije samo druge boje.** Mijenja i tipografiju (grotesk umjesto
+monospacea), raspored (heroj je centriran, terminalska kartica nestaje), rubove
+(iscrtkani umjesto punih), rail uz lijevi rub i pinane kartice procesa. Kontrast
+je izmjeren: tekst 16,43:1, prigušeni 6,26:1, bijelo na crnom gumbu 18,71:1,
+rubovi kontrola 3,47:1.
+
+**Glatko skrolanje je pisano ručno, bez Lenisa**, i isključuje se na dodir
+(mobiteli već dobro skrolaju) te pod `prefers-reduced-motion`. Ne presreće
+tipkovnicu, pa Page Down, Home i End rade normalno, a ne otima kotačić unutar
+okvira koji i sami imaju skrol.
+
+**Zavjesa s brojačem** pokaže se jednom po sesiji, nikad pod smanjenim
+kretanjem, i sama odustane nakon sekunde i pol — preloader koji nadživi
+stranicu je kvar, ne ulaz.
