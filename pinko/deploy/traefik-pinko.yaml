@@ -37,6 +37,26 @@ http:
         - pinko-wp-to-https
       service: pinko-wp
 
+    # Adresa za pregled prije nego DNS pokaže ovamo. `sslip.io` razrješava na
+    # IP iz vlastitog imena, pa Let's Encrypt prolazi bez ijedne promjene u
+    # zoni. Usmjerava na isti kontejner (`pinko@docker`). Kad domena proradi,
+    # ova dva routera se mogu obrisati — ili ostaviti, ne smetaju.
+    pinko-preview-https:
+      rule: "Host(`pinko.167.233.239.74.sslip.io`)"
+      entryPoints:
+        - https
+      service: "pinko@docker"
+      tls:
+        certResolver: letsencrypt
+
+    pinko-preview-http:
+      rule: "Host(`pinko.167.233.239.74.sslip.io`)"
+      entryPoints:
+        - http
+      middlewares:
+        - pinko-wp-to-https
+      service: "pinko@docker"
+
   middlewares:
     pinko-wp-to-https:
       redirectScheme:
