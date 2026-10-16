@@ -213,6 +213,12 @@ export const projects: Project[] = [
     ],
     nextStep:
       "Imate webshop koji je prerastao gotovu temu, ali ne smijete stati s prodajom?",
+    featuredImage: {
+      src: "/projekti/sf-featured.webp",
+      alt: "Naslovnica 100% Smart Fooda: akcijski banner s proizvodima i trake pogodnosti ispod njega.",
+      width: 1917,
+      height: 957,
+    },
     evidenceLinks: [{ label: "100smartfood.hr", href: "https://100smartfood.hr/" }],
     images: [],
     liveScreens: [
@@ -320,6 +326,12 @@ export const projects: Project[] = [
       "Mjerenje i afilijacijsko izvještavanje nad stvarnim prometom",
     ],
     nextStep: "Gradite proizvod koji morate sami moći puniti sadržajem?",
+    featuredImage: {
+      src: "/projekti/varel-featured.webp",
+      alt: "Naslovnica Varela: naslov, tražilica alata i prijedlozi pojmova ispod nje.",
+      width: 1905,
+      height: 671,
+    },
     evidenceLinks: [{ label: "varel.io", href: "https://varel.io/" }],
     images: [],
     publishedAt: "2026-10-16",
