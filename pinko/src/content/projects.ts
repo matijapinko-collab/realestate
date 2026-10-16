@@ -227,12 +227,20 @@ export const projects: Project[] = [
     ],
     nextStep:
       "Imate dobar proizvod, a novi prodajni kanal još je na popisu „budemo”?",
-    evidenceLinks: [{ label: "boleroadria.com", href: "https://boleroadria.com/" }],
+    featuredImage: {
+      src: "/projekti/bolero-temu-featured.webp",
+      alt: "Grafika: Temu logo i kutije s hrvatskom zastavom, zlatni pehar s oznakom #1, Bolero proizvodi i mobitel s Temu popisom na kojem Bolero vrećice nose oznaku najprodavanijeg.",
+      width: 1024,
+      height: 572,
+    },
+    evidenceLinks: [
+      { label: "bolerodrinks.com.hr", href: "https://bolerodrinks.com.hr/" },
+    ],
     images: [],
     publishedAt: "2026-10-16",
     contributionLabel: "Razvoj Temu prodajnog kanala",
     internalNote:
-      "Tekst je Matijin, dostavljen 16. 10. 2026., prebačen iz množine u jedninu kao i Elektronim. VAŽNO iz uredničkih napomena: #1 je pozicija Bolero PROIZVODA u kategoriji, ne tvrdnja da je trgovina najveći prodavatelj pića; nema screenshota rang-liste ni dokaza o trajanju pozicije. Postotci su iz Temu izvještaja za 17.–23. i 24.–30. 8. 2026., osnovica je mala pa NISU trajna stopa rasta. Apsolutni brojevi narudžbi i financijski iznosi se NE objavljuju. Base price sales nije dobit ni marža. Nije potvrđeno oglašavanje, pa tekst ne tvrdi ni da je rast organski ni da je plaćen. WooCommerce mix builder, Odoo, Amazon i druga tržišta NISU pripisani ovom rezultatu. Poveznica na boleroadria.com je na brend, ne na Temu trgovinu — provjeriti želi li Matija radije poveznicu na Temu.",
+      "Tekst je Matijin, dostavljen 16. 10. 2026., prebačen iz množine u jedninu kao i Elektronim. VAŽNO iz uredničkih napomena: #1 je pozicija Bolero PROIZVODA u kategoriji, ne tvrdnja da je trgovina najveći prodavatelj pića; nema screenshota rang-liste ni dokaza o trajanju pozicije. Postotci su iz Temu izvještaja za 17.–23. i 24.–30. 8. 2026., osnovica je mala pa NISU trajna stopa rasta. Apsolutni brojevi narudžbi i financijski iznosi se NE objavljuju. Base price sales nije dobit ni marža. Nije potvrđeno oglašavanje, pa tekst ne tvrdi ni da je rast organski ni da je plaćen. WooCommerce mix builder, Odoo, Amazon i druga tržišta NISU pripisani ovom rezultatu. Službeni web je bolerodrinks.com.hr (Matija potvrdio 16. 10. 2026.) — NE boleroadria.com. Naslovna slika je promotivna grafika koju je dostavio.",
   },
   {
     slug: "elektronim-instalacije",
