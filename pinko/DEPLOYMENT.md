@@ -69,6 +69,37 @@ kopiranje. Ako ispred stoji CDN, te mape može poslužiti i on.
 
 ## Self-hosting (Hetzner / Coolify / Docker)
 
+### Zatečeno stanje na Hetzneru (provjereno 16. 10. 2026.)
+
+U Hetzner konzoli postoje tri projekta, ali **samo jedan server**:
+
+| Projekt | Sadržaj |
+| --- | --- |
+| Varel | `varel-server` — CPX32, x86, 160 GB, Falkenstein, IP `167.233.239.74` |
+| Coolify Server Backups | samo bucket (object storage), bez servera |
+| 100smartfood.hr | prazan, bez servera |
+
+Na `varel-server` **portovi 80 i 443 su zauzeti** — na njima odgovara
+**Traefik** (certifikat `TRAEFIK DEFAULT CERT`), što je Coolifyjev proxy.
+Praktična posljedica: `caddy` servis iz `compose.yaml` se na tom serveru
+**neće podići** jer ne može zauzeti 80/443.
+
+Dvije ispravne opcije:
+
+1. **Kroz Coolify na postojećem serveru** — Coolify gradi iz `Dockerfile`,
+   Traefik radi TLS i rutiranje po domeni. Tada se `caddy` servis iz
+   `compose.yaml` ne koristi; `Dockerfile` ostaje isti. Najjeftinije, jer ne
+   treba novi server.
+2. **Zaseban server samo za Pinko** — `compose.yaml` radi kakav jest, Caddy
+   preuzima 80/443 i sam izdaje certifikat. Čisto odvojeno od Varela, ali je
+   dodatni trošak.
+
+⚠️ Ako ide kroz Traefik: Traefik po zadanom **prepisuje** `X-Forwarded-For`
+stvarnom adresom i ne vjeruje onome što je klijent poslao. To je ponašanje koje
+nam treba (vidi niže). Prije objave provjeriti da u Coolifyju nije uključen
+`forwardedHeaders.trustedIPs` koji bi to otpustio.
+
+
 Preporučena postava za prezentacijski web je **jedna instanca** iza reverse
 proxyja. Nema potrebe za multi-server arhitekturom.
 
