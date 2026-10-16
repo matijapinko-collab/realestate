@@ -66,6 +66,12 @@ export type Project = {
   deliverables: string[];
   /** Functional or operational outcomes only — never invented revenue. */
   outcomes: string[];
+  /**
+   * Heading for the list above. Defaults to "Rezultat"; a project whose
+   * outcome was never measured says "Moj doprinos" instead, rather than
+   * dressing responsibilities up as results.
+   */
+  outcomesLabel?: string;
   /** What is still ahead on the project. Omitted when nothing is planned. */
   roadmap?: string[];
   nextStep: string;
@@ -105,6 +111,52 @@ export const statusLabels: Record<ProjectStatus, string> = {
  * name was never verified); it is recoverable from git history.
  */
 export const projects: Project[] = [
+  {
+    slug: "teladoc-business-vision",
+    projectName: "Teladoc / Business Vision",
+    relationshipType: "profesionalna-uloga",
+    role:
+      "Chief Operating Officer Business Visiona; vođenje tima angažiranog na Teladoc projektu, uz odgovornost za operativu i povezivanje razvoja s poslovnim prioritetima.",
+    status: "lansirano",
+    approvedForPublication: true,
+    summary:
+      "Vođenje agencijskog tima iza telemedicinske platforme, uz operativu, razvoj proizvoda i usklađivanje prioriteta s dionicima.",
+    context:
+      "Teladoc je telemedicinska platforma na kojoj je Business Vision bio angažiran kao agencija. Nisam bio Teladocov dobavljač niti je Teladoc klijent Pinko obrta — bio sam COO tvrtke čiji je tim radio na projektu, u razdoblju siječanj 2023. – prosinac 2024.",
+    challenge:
+      "Razvoj digitalnog proizvoda traži puno više od dobrog koda. Poslovne ciljeve treba povezati s kapacitetom tima, razvoj s realnim prioritetima, a svakodnevne odluke s onim što se pokušava postići. Kod telemedicine se tome pridružuje i svrha proizvoda: tehnologija treba pomoći ljudima da lakše dođu do zdravstvene skrbi.",
+    decisions: [
+      "Vodstvo kao posao s ljudima, a ne s tablicama: mentoriranje, usklađivanje očekivanja i jasni ciljevi",
+      "Proces ima smisla samo ako ljudima olakšava rad — ako proizvodi još jedan sastanak, preispituje se",
+      "Jedna kontaktna točka prema partnerima, klijentima i investitorima, umjesto paralelnih kanala",
+      "Ambicija mora imati organizacijsku i financijsku podršku, pa su budžet i kapacitet dio razgovora o opsegu",
+    ],
+    deliverables: [
+      "Vođenje Business Vision tima angažiranog na Teladoc projektu",
+      "Koordinacija više timova i povezivanje njihova rada s poslovnim prioritetima",
+      "Svakodnevna operativa tvrtke i razvoj učinkovitijih procesa",
+      "Izravna uključenost u razvoj proizvoda, uz Travel Elysium",
+      "Komunikacija s partnerima, klijentima i investitorima",
+      "Suradnja s financijama na budžetima, resursima i održivosti poslovanja",
+    ],
+    outcomes: [
+      "Ljudi: iskustvo vođenja, zapošljavanja, mentoriranja i razvoja timova",
+      "Poslovanje: razumijevanje prioriteta, odnosa s dionicima, budžeta i resursa",
+      "Proizvod: izravna uključenost u razvoj i povezivanje poslovnih ciljeva s izvedbom",
+      "Podloga za sve to je HR uloga prije COO-a, u organizaciji koja je na vrhuncu imala više od 75 developera",
+    ],
+    outcomesLabel: "Moj doprinos",
+    nextStep:
+      "Imate projekt kojem treba netko tko će povezati ljude, poslovanje i izvedbu?",
+    evidenceLinks: [
+      { label: "teladochealth.com", href: "https://www.teladochealth.com/" },
+    ],
+    images: [],
+    publishedAt: "2026-10-16",
+    contributionLabel: "Vođenje tima i operativa",
+    internalNote:
+      "Objavu odobrio Matija 16. 10. 2026. VAŽNO: razdoblje je trajanje COO uloge, NE potvrđeno trajanje rada na Teladocu. 75+ developera odnosi se na cijeli Business Vision na vrhuncu, ne na Teladoc tim. Nema brojki o prihodu, pacijentima, SLA, certifikatima ni zdravstvenim funkcionalnostima — ništa od toga nije potvrđeno. Teladoc nije klijent Pinko obrta.",
+  },
   {
     slug: "100-smart-food",
     projectName: "100% Smart Food",

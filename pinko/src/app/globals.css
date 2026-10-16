@@ -841,3 +841,87 @@
     color: inherit;
   }
 }
+
+/* ------------------------------------------------------------------ *
+ * Print — the CV on paper
+ *
+ * Nothing on paper may be dark, cut off, or chrome: no navigation, no
+ * footer, no curtain, no rails, no decorative fields. Ink on white, pages
+ * that break between sections rather than through them.
+ * ------------------------------------------------------------------ */
+
+@media print {
+  :root,
+  :root[data-theme="light"] {
+    --color-paper: #ffffff;
+    --color-surface: #ffffff;
+    --color-raised: #ffffff;
+    --color-ink: #000000;
+    --color-ink-soft: #333333;
+    --color-rule: #b4b4b4;
+    --color-control: #777777;
+    --color-accent: #000000;
+    --color-accent-ink: #000000;
+    --color-accent-wash: #ffffff;
+    --color-on-accent: #ffffff;
+    color-scheme: light;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  header[class*="sticky"],
+  footer,
+  .side-rail,
+  .rail-dot,
+  .scroll-progress,
+  .intro,
+  .marquee,
+  .cv-print-hide,
+  dialog {
+    display: none !important;
+  }
+
+  .cv {
+    max-width: none;
+    padding: 0;
+  }
+
+  .cv h1 {
+    font-size: 22pt;
+  }
+
+  .cv .cv-head {
+    font-size: 13pt;
+    margin-top: 18pt;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* An entry never splits across two sheets. */
+  .cv-block,
+  .cv li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .cv a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  /* A printed link is useless without its address. */
+  .cv a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8.5pt;
+    color: #444;
+  }
+
+  @page {
+    margin: 14mm 14mm 16mm;
+  }
+}

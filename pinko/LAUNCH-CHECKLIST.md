@@ -51,6 +51,11 @@ Objavljeni su zapisi s `approvedForPublication: true` u
       cijelih stranica (naslovnica i proizvod) kroz koje se može pomicati.
 - [x] **Varel** — odobreno 16. 10. 2026., vlastiti proizvod, status
       `lansirano`, dokaz `https://varel.io/`
+- [x] **Teladoc / Business Vision** — odobreno 16. 10. 2026., profesionalna
+      uloga (ne klijent Pinko obrta). Razdoblje je trajanje COO uloge, **ne**
+      potvrđeno trajanje rada na Teladocu; 75+ developera odnosi se na cijeli
+      Business Vision na vrhuncu. Sekcija se zove „Moj doprinos", ne
+      „Rezultat", jer ishodi nisu mjereni.
 - [ ] **Bolero Drinks** — čeka točan status, opseg doprinosa i odobrene screenshotove
 - [ ] **Virus.hr** — čeka potvrdu opisa uloge i prava objave tekstova
 - [ ] Zapis **Saveza za rijetke bolesti** parkiran na Matijin zahtjev
@@ -90,6 +95,25 @@ Bez AI portreta koji se predstavlja kao stvarna fotografija i bez stock timova.
 
 Interna tablica pregovaračkih cijena (brief, odjeljak 8) namjerno nije u
 aplikaciji i ne smije se dodati ni u sadržaj ni u konfiguraciju.
+
+## 6.5. CV
+
+- [x] `/cv` izrađen iz jednog izvora (`src/content/cv.ts`), s print stilovima
+      bez navigacije, podnožja i tamnih podloga; poveznice u ispisu nose adresu
+- [x] Nema gumba „Preuzmi PDF" jer PDF datoteka ne postoji — stoji
+      „Ispišite ili spremite kao PDF"
+- [x] Obrazovanje bez pretpostavljene diplome, bez privatne adrese i datuma
+      rođenja, bez njemačkog dok se ne potvrdi
+- [x] Upwork: ostao je „Top Rated Plus", maknuta je tvrdnja o gornjem postotku
+      jer brief traži provjerljiv profil prije nje
+- [ ] ⚠️ **Dvije različite email adrese.** Brief za CV traži
+      `matija.pinko@hotmail.com` i ta stoji na `/cv`. Ostatak weba koristi
+      `matija@pinko.hr`, koji je potvrđen i kroz koji forma stvarno šalje.
+      Odlučite koja ide gdje — CV s hotmail adresom uz web s vlastitom domenom
+      izgleda nedosljedno.
+- [ ] **BISNEYS** je u CV-u na temelju LinkedIn podataka (lipanj 2025. —
+      danas). Urednička napomena uz brief kaže da zapis nije bio razrađen jer
+      kronologija nije bila određena; potvrdite opis.
 
 ## 7. Slanje forme, analitika i privatnost
 

@@ -98,6 +98,7 @@ export const nav = {
   ],
   secondary: [
     { href: "/kako-radim", label: "Kako radim" },
+    { href: "/cv", label: "CV" },
     { href: "/privatnost", label: "Privatnost" },
   ],
   cta: { href: "/kontakt", label: "Imate ideju?" },

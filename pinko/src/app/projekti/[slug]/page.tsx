@@ -101,7 +101,10 @@ export default async function ProjectPage({ params }: Props) {
           </div>
           <div className="space-y-10">
             <ListBlock title="Isporučeno" items={project.deliverables} />
-            <ListBlock title="Rezultat" items={project.outcomes} />
+            <ListBlock
+              title={project.outcomesLabel ?? "Rezultat"}
+              items={project.outcomes}
+            />
             {project.roadmap && project.roadmap.length > 0 ? (
               <ListBlock title="U planu" items={project.roadmap} />
             ) : null}
