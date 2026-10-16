@@ -285,3 +285,22 @@ Iz uredničkih napomena doslovno je poštovano: **#1 je pozicija proizvoda**, ne
 tvrdnja o cijeloj trgovini; postotci su početno ubrzanje na maloj osnovici, ne
 trajna stopa rasta; apsolutni brojevi narudžbi i iznosi se ne objavljuju;
 „base price sales" nije dobit ni marža; o oglašavanju se ne tvrdi ništa.
+
+## Rozo „o" u logotipu (16. 10. 2026.)
+
+Slovo „o" u riječi *pinko* je rozo, u obje teme. Točka iza ostaje u boji
+naglaska svoje teme.
+
+Jedna nijansa ne radi na oba papira, pa je token po temi:
+**#ff6bb3** na tamnoj (7,46:1) i **#c2185b** na svijetloj (5,16:1). Oboje je
+izmjereno, ne odabrano okom.
+
+Za čitače ekrana poveznica i dalje nosi jedno ime („Pinko — naslovnica"); samo
+je slovo obojano, riječ nije razbijena na dijelove koje bi čitač izgovarao
+odvojeno.
+
+**Usput popravljeno:** slika za dijeljenje (`opengraph-image.tsx`) još je
+bila u staroj svijetloj shemi s plavim naglaskom — nitko je nije osvježio kad
+je web postao taman. Sada je u tamnoj shemi, sa zelenom točkom i rozim „o".
+Te su vrijednosti ispisane ručno jer `ImageResponse` ne vidi stylesheet, pa
+ih treba držati u koraku s `globals.css`.

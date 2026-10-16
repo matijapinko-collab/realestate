@@ -31,6 +31,9 @@
   --color-accent-wash: #0e2318;
   /* Text and icons placed on a filled accent surface. */
   --color-on-accent: #04130a;
+  /* The "o" in the wordmark. Pink in both worlds, at two weights so it
+     stays readable on either paper: 7.46:1 here, 5.16:1 in light mode. */
+  --color-brand-pink: #ff6bb3;
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Arial, sans-serif;
@@ -90,6 +93,7 @@
   --color-accent-ink: #000000;
   --color-accent-wash: #e6e7ee;
   --color-on-accent: #ffffff;
+  --color-brand-pink: #c2185b;
 }
 
 @layer base {

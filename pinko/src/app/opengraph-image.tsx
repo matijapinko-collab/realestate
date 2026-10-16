@@ -6,9 +6,16 @@ export const contentType = "image/png";
 export const alt = "Pinko — Razvoj. Marketing. Posao koji ide dalje.";
 
 /**
- * Social share image, generated from the same brand tokens as the site.
- * ImageResponse supports only flexbox and a subset of CSS, so the layout here
- * is deliberately plain.
+ * Social share image.
+ *
+ * Painted in the dark scheme, which is what a first visitor sees, with the
+ * same pink "o" as the wordmark on the site. The values are written out
+ * rather than read from CSS because `ImageResponse` renders outside the
+ * document and never sees the stylesheet — so they have to be kept in step
+ * with `globals.css` by hand.
+ *
+ * ImageResponse supports only flexbox and a subset of CSS, so the layout
+ * here is deliberately plain.
  */
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -20,7 +27,7 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#FAFAF7",
+          backgroundColor: "#0A0C11",
           padding: "72px 80px",
           fontFamily: "sans-serif",
         }}
@@ -31,11 +38,12 @@ export default function OpengraphImage() {
             alignItems: "baseline",
             fontSize: 44,
             fontWeight: 800,
-            color: "#171A20",
+            color: "#E8ECF3",
           }}
         >
-          <span>pinko</span>
-          <span style={{ color: "#2457F5" }}>.</span>
+          <span>pink</span>
+          <span style={{ color: "#FF6BB3" }}>o</span>
+          <span style={{ color: "#36E27E" }}>.</span>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -43,19 +51,19 @@ export default function OpengraphImage() {
             style={{
               fontSize: 76,
               fontWeight: 800,
-              color: "#171A20",
+              color: "#E8ECF3",
               lineHeight: 1.1,
               letterSpacing: "-0.02em",
             }}
           >
             {site.tagline}
           </div>
-          <div style={{ marginTop: 28, fontSize: 30, color: "#535963" }}>
+          <div style={{ marginTop: 28, fontSize: 30, color: "#9AA5B4" }}>
             {`Next.js webovi, webshopovi i aplikacije · ${site.person}`}
           </div>
         </div>
 
-        <div style={{ display: "flex", height: 10, width: 220, backgroundColor: "#2457F5" }} />
+        <div style={{ display: "flex", height: 10, width: 220, backgroundColor: "#36E27E" }} />
       </div>
     ),
     size

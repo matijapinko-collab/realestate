@@ -10,7 +10,8 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>
             <span className="text-3xl font-extrabold tracking-tight">
-              pinko<span className="text-accent">.</span>
+              pink<span className="text-(--color-brand-pink)">o</span>
+              <span className="text-accent">.</span>
             </span>
             <p className="measure mt-4 text-ink-soft">{site.description}</p>
             <p className="mt-6 text-sm font-semibold">{site.promise}</p>
