@@ -22,19 +22,24 @@ import type { Theme } from "@/components/ui/ThemeToggle";
 
 type Passage = {
   src: string;
-  /** Seconds into the clip where the tunnel starts to form. */
-  from: number;
-  /** Seconds where it has fully taken the screen. */
-  to: number;
-  rate: number;
+  /** Length of the clip in milliseconds. */
+  span: number;
 };
 
+/**
+ * The clips are already cut to the stretch where the tunnel forms and sped
+ * up in the file itself, so they play from the start at normal rate — no
+ * seeking, no playbackRate, nothing to go wrong on a slow decoder.
+ */
 const PASSAGES: Record<Theme, Passage> = {
   // Switching TO light: the dark tunnel opens into white.
-  light: { src: "/wormhole/dark-to-light.mp4", from: 1.5, to: 6.6, rate: 2.7 },
+  light: { src: "/wormhole/dark-to-light.mp4", span: 1960 },
   // Switching TO dark: the bright room folds into the green tunnel.
-  dark: { src: "/wormhole/light-to-dark.mp4", from: 1.2, to: 6.4, rate: 2.7 },
+  dark: { src: "/wormhole/light-to-dark.mp4", span: 2000 },
 };
+
+/** How long the world takes to settle in after the tunnel. */
+const SETTLE = 700;
 
 export const WORMHOLE_EVENT = "pinko:wormhole";
 
@@ -85,10 +90,13 @@ export function Wormhole() {
     running.current = false;
     setLeaving(true);
     document.documentElement.style.overflow = "";
+    // The page does not snap back: it breathes in while the tunnel fades.
+    document.documentElement.classList.add("world-enter");
     window.setTimeout(() => {
       setPassage(null);
       setLeaving(false);
-    }, 320);
+      document.documentElement.classList.remove("world-enter");
+    }, SETTLE);
   }, []);
 
   useEffect(() => {
@@ -110,11 +118,7 @@ export function Wormhole() {
         const video = videoRef.current;
         if (!video) return settle(true);
 
-        const config = PASSAGES[next];
-        video.playbackRate = config.rate;
-        video.currentTime = config.from;
-
-        const span = ((config.to - config.from) / config.rate) * 1000;
+        const { span } = PASSAGES[next];
         // The theme changes while the tunnel covers the screen.
         timers.push(window.setTimeout(() => settle(false), span * 0.5));
         timers.push(window.setTimeout(end, span));
@@ -122,7 +126,7 @@ export function Wormhole() {
         // do not make anyone wait for it.
         timers.push(
           window.setTimeout(() => {
-            if (video.paused || video.currentTime < config.from) settle(true);
+            if (video.paused || video.currentTime === 0) settle(true);
           }, 1200)
         );
 
@@ -145,7 +149,7 @@ export function Wormhole() {
   return (
     <div
       aria-hidden="true"
-      className={`fixed inset-0 z-[100] bg-black transition-opacity duration-300 ${
+      className={`fixed inset-0 z-[100] bg-black transition-opacity duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${
         leaving ? "opacity-0" : "opacity-100"
       }`}
     >

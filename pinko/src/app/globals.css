@@ -699,6 +699,25 @@
     text-align: center;
   }
 
+  /* Coming out of the tunnel: the new world eases in rather than appearing
+     mid-sentence. Only the page's own regions move, never the overlay. */
+  .world-enter body > header,
+  .world-enter body > main,
+  .world-enter body > footer {
+    animation: world-enter 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes world-enter {
+    from {
+      opacity: 0;
+      transform: scale(1.015);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   /* Endless strip. Duplicated content in the markup makes the loop seamless. */
   .marquee {
     overflow: hidden;
@@ -835,6 +854,12 @@
   .scroll-progress,
   .rail-dot {
     display: none;
+  }
+
+  .world-enter body > header,
+  .world-enter body > main,
+  .world-enter body > footer {
+    animation: none;
   }
 
   .statement[data-lit="running"] .statement-word {

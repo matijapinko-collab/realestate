@@ -117,6 +117,70 @@ export const statusLabels: Record<ProjectStatus, string> = {
  */
 export const projects: Project[] = [
   {
+    slug: "elektronim-instalacije",
+    projectName: "Elektronim Instalacije",
+    relationshipType: "klijent",
+    role:
+      "Izrada i objava weba na WordPressu, uz postavljanje strukture stranica, sadržaja i kontakta.",
+    status: "lansirano",
+    approvedForPublication: true,
+    summary:
+      "Predstavljački web za tvrtku koja izvodi elektroinstalacije — jasna ponuda usluga i kontakt koji se nađe iz prvog pokušaja.",
+    context:
+      "Elektronim Instalacije d.o.o. izvodi elektroinstalacijske radove. Takvoj tvrtki web ne služi da objašnjava struku, nego da potencijalni naručitelj u par sekundi vidi što rade, u kojim industrijama i kako ih dobiti na telefon.",
+    challenge:
+      "Posao se ne prodaje tehničkim nabrajanjem. Trebalo je ponudu posložiti u nekoliko razumljivih cjelina, pokazati stvarne radove i staviti kontakt na mjesto gdje ga nitko ne mora tražiti.",
+    decisions: [
+      "WordPress, jer sadržaj mora ostati u rukama tvrtke i nakon isporuke",
+      "Struktura prema tome kako naručitelj razmišlja: usluge, industrije, projekti, kontakt",
+      "Telefon i email vidljivi već u prvom zaslonu, ne samo na stranici kontakta",
+      "Fotografije stvarnih radova umjesto generičnih stock prizora",
+    ],
+    deliverables: [
+      "Naslovnica s ponudom, industrijama i pozivom na kontakt",
+      "Stranice usluga i predstavljanja tvrtke",
+      "Pregled izvedenih projekata",
+      "Kontakt s telefonom, emailom i obrascem",
+    ],
+    outcomes: [
+      "Web je javno dostupan i tvrtka ga može sama dopunjavati",
+      "Ponuda je složena u cjeline koje naručitelj prepoznaje",
+      "Kontakt je dostupan iz svakog zaslona",
+    ],
+    outcomesLabel: "Moj doprinos",
+    nextStep: "Vodite obrt ili tvrtku kojoj web treba donositi upite, a ne komplimente?",
+    featuredImage: {
+      src: "/projekti/elektronim-featured.webp",
+      alt: "Naslovnica Elektronim Instalacija: naslov „Elektroinstalacije koje grade budućnost” i kontakt podaci.",
+      width: 1600,
+      height: 1000,
+    },
+    evidenceLinks: [
+      {
+        label: "elektronim-instalacije.hr",
+        href: "https://elektronim-instalacije.hr/",
+      },
+    ],
+    images: [],
+    liveScreens: [
+      {
+        label: "Naslovnica",
+        href: "https://elektronim-instalacije.hr/",
+        capturedOn: "16. 10. 2026.",
+        image: {
+          src: "/projekti/elektronim-naslovnica.webp",
+          alt: "Cijela naslovnica Elektronim Instalacija: hero, usluge, industrije, projekti i podnožje s kontaktom.",
+          width: 1280,
+          height: 7764,
+        },
+      },
+    ],
+    publishedAt: "2026-10-16",
+    contributionLabel: "Izrada weba na WordPressu",
+    internalNote:
+      "Dodano 16. 10. 2026. na Matijin zahtjev. OPREZ: opseg je opisan iz onoga što web pokazuje i iz toga što je autor sadržaja korisnik 'mpinko'. Matija nije potvrdio točan opseg posla (dizajn, sadržaj, fotografije, održavanje) — provjeriti prije nego se tekst dodatno jača.",
+  },
+  {
     slug: "teladoc-business-vision",
     projectName: "Teladoc / Business Vision",
     relationshipType: "profesionalna-uloga",

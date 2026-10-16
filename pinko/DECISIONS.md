@@ -233,6 +233,16 @@ Svaki neuspjeh završava isto: tema se primijeni, stranica se otključa. Video
 koji ne krene u 1,2 s, koji pukne ili čiji kodek preglednik ne zna — nijedan
 ne smije ostaviti posjetitelja zaglavljenog iza crnog pravokutnika.
 
-⚠️ **Datoteke su velike: 6,8 MB i 5,7 MB.** Nisu komprimirane jer na ovom
-računalu nema ffmpega. Prije objave ih treba stisnuti (ciljano ispod 1,5 MB
-svaka, i dodati WebM varijantu).
+**Datoteke su stisnute (16. 10. 2026.).** Umjesto da se u pregledniku premotava
+i ubrzava desetsekundarna snimka, **rez i ubrzanje su zapečeni u datoteku**:
+svaka traje točno dvije sekunde i pušta se od početka, normalnom brzinom. Nema
+premotavanja ni `playbackRate`, pa nema ni načina da to zakaže na sporijem
+dekoderu.
+
+6,8 MB → **1,0 MB** i 5,7 MB → **0,74 MB**. WebM je probno napravljen pa
+odbačen: kod ovih snimki je ispao **veći** od H.264, a H.264 razumije svaki
+preglednik koji nas zanima.
+
+**Izlazak iz tunela nije rez.** Zadnji kadar se gasi 700 ms, a u isto vrijeme
+stranica ulazi iz blage prozirnosti i 1,5 % većeg mjerila. Izmjereno usred
+prijelaza: stranica 0,60, tunel 0,40 — stvarno pretapanje, ne zamjena.

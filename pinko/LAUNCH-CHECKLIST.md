@@ -56,6 +56,11 @@ Objavljeni su zapisi s `approvedForPublication: true` u
       potvrđeno trajanje rada na Teladocu; 75+ developera odnosi se na cijeli
       Business Vision na vrhuncu. Sekcija se zove „Moj doprinos", ne
       „Rezultat", jer ishodi nisu mjereni.
+- [x] **Elektronim Instalacije** — dodano 16. 10. 2026., status `lansirano`,
+      dokaz `https://elektronim-instalacije.hr/`, uz snimku cijele naslovnice
+- [ ] ⚠️ **Potvrditi opseg posla na Elektronimu.** Opis je napisan iz onoga
+      što web pokazuje; Matija nije rekao što je točno radio (dizajn, sadržaj,
+      fotografije, održavanje). Sekcija se zato zove „Moj doprinos".
 - [ ] **Bolero Drinks** — čeka točan status, opseg doprinosa i odobrene screenshotove
 - [ ] **Virus.hr** — čeka potvrdu opisa uloge i prava objave tekstova
 - [ ] Zapis **Saveza za rijetke bolesti** parkiran na Matijin zahtjev
@@ -119,9 +124,11 @@ aplikaciji i ne smije se dodati ni u sadržaj ni u konfiguraciju.
       mijenja na polovici, dok je zaslon prekriven
 - [x] Samo desktop, nikad pod `prefers-reduced-motion`, bez dvostrukog
       pokretanja; svaki kvar završi primjenom teme i otključavanjem stranice
-- [ ] ⚠️ **Komprimirati videe prije objave.** Sada su 6,8 MB i 5,7 MB, bez
-      kompresije jer na računalu nema ffmpega. Cilj: ispod 1,5 MB svaki, plus
-      WebM varijanta za manje preglednike.
+- [x] **Videi stisnuti** (16. 10. 2026.): 1,0 MB i 0,74 MB, po dvije sekunde,
+      rez i ubrzanje zapečeni u datoteku. WebM odbačen jer je kod ovih snimki
+      ispao veći od H.264.
+- [x] **Izlazak iz tunela je pretapanje**, ne rez: tunel se gasi 700 ms dok
+      stranica ulazi iz prozirnosti
 
 ## 7. Slanje forme, analitika i privatnost
 
