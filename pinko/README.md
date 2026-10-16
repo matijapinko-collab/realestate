@@ -95,6 +95,7 @@ potvrđenoj produkcijskoj domeni, zajedno s `NEXT_PUBLIC_SITE_URL`.
 
 ## Dokumentacija
 
+- `HANDOVER.md` — **počni ovdje**: stanje, što je ostalo, na što paziti
 - `DEPLOYMENT.md` — objava, infrastruktura, rollback
 - `LAUNCH-CHECKLIST.md` — što Matija treba potvrditi prije javne objave
 - `DECISIONS.md` — odluke i pretpostavke pri izradi
