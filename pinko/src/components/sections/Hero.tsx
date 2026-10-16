@@ -1,12 +1,14 @@
+import Image from "next/image";
 import { ButtonLink } from "@/components/ui/Button";
+import { site } from "@/config/site";
 import { ProblemPicker } from "./ProblemPicker";
 
 /**
  * Homepage hero (brief 11.2).
  *
- * No photograph of Matija has been supplied yet, so the right-hand side is a
- * typographic composition rather than a stock person or an invented portrait.
- * When the real portrait arrives it replaces `HeroComposition`.
+ * The right-hand side shows Matija's portrait once `site.portrait` is set.
+ * Until then it is the problem picker alone — never a stock person or an
+ * AI-generated face standing in for a real one.
  */
 export function Hero() {
   return (
@@ -65,6 +67,17 @@ export function Hero() {
           </div>
 
           <div className="lg:pt-6">
+            {site.portrait ? (
+              <Image
+                src={site.portrait.src}
+                alt={site.portrait.alt}
+                width={site.portrait.width}
+                height={site.portrait.height}
+                priority
+                sizes="(min-width: 1024px) 38vw, 100vw"
+                className="mb-6 aspect-4/5 w-full rounded-(--radius-card) object-cover"
+              />
+            ) : null}
             <ProblemPicker />
           </div>
         </div>

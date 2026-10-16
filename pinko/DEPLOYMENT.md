@@ -11,16 +11,38 @@ Potpuni popis je u `.env.example`. Sažetak:
 | --- | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | da | build | Kanonski origin, bez kose crte na kraju |
 | `NEXT_PUBLIC_ALLOW_INDEXING` | da | build | Samo `"true"` dopušta indeksiranje |
-| `RESEND_API_KEY` | za formu | runtime | Tajna, samo na serveru |
+| `SMTP_HOST` | za formu | runtime | cPanel mail host, npr. `mail.pinko.hr` |
+| `SMTP_PORT` | ne | runtime | 465 (implicit TLS, zadano) ili 587 (STARTTLS) |
+| `SMTP_USER` | za formu | runtime | Puna adresa sandučića, npr. `matija@pinko.hr` |
+| `SMTP_PASSWORD` | za formu | runtime | **Tajna**, samo na serveru |
 | `CONTACT_TO_EMAIL` | za formu | runtime | Prima upite |
-| `CONTACT_FROM_EMAIL` | za formu | runtime | Mora biti verificirana domena kod Resenda |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | ne | build | Javno prikazana adresa; prazno = blok se ne prikazuje |
+| `CONTACT_FROM_EMAIL` | ne | runtime | Envelope pošiljatelj; prazno = `SMTP_USER` |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | ne | build | Javno prikazana adresa; zadano `matija@pinko.hr` |
 
 **Važno:** `NEXT_PUBLIC_*` varijable se ugrađuju u klijentski bundle pri
 `next build`. Promjena takve varijable zahtijeva novi build, ne samo restart.
 Varijable za formu čitaju se u runtimeu, pa je za njih dovoljan restart.
 
-Nijedna tajna ne smije dobiti `NEXT_PUBLIC_` prefiks.
+Nijedna tajna ne smije dobiti `NEXT_PUBLIC_` prefiks. `SMTP_PASSWORD` je
+lozinka pravog sandučića — drži se u tajnama okruženja, nikad u gitu ni u
+build argumentu.
+
+### Slanje emaila preko cPanela
+
+Forma šalje SMTP-om kroz sandučić na vlastitom hostingu, bez vanjskog servisa.
+Potrebno je samo:
+
+1. U cPanelu **Email Accounts** → postojeći ili novi sandučić na `pinko.hr`.
+2. **Connect Devices** uz taj sandučić pokazuje točan *Outgoing Server* i port —
+   to su `SMTP_HOST` i `SMTP_PORT`.
+3. Lozinka sandučića ide u `SMTP_PASSWORD`.
+
+Pošiljatelj mora biti sandučić na toj domeni, inače server odbija relay. Adresa
+posjetitelja postavlja se kao `Reply-To`, pa odgovor iz inboxa ide izravno
+njemu.
+
+Ako SPF/DKIM zapisi za domenu nisu uredni, mail može završiti u spamu. cPanel
+ima **Email Deliverability** koji to pokazuje i nudi popravak.
 
 ## Build
 

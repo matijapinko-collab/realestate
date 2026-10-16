@@ -42,16 +42,16 @@ Testovi ciljaju stvarni rizik, ne postojanje naslova.
 
 ## Kontaktna forma — ručno testirani scenariji
 
-Testirano u pregledniku protiv produkcijskog standalone builda. Za scenarije
-greške korišten je lokalni stub umjesto pravog providera, da testni podaci ne
-odu trećoj strani.
+Testirano u pregledniku protiv produkcijskog standalone builda. Slanje ide
+SMTP-om kroz cPanel sandučić; za testiranje je korišten **lokalni SMTP server**,
+da testni podaci ne odu na pravi sandučić ni trećoj strani.
 
 | Scenarij | Očekivano | Rezultat |
 | --- | --- | --- |
-| Ispravan upit, provider radi | potvrda + email isporučen | ✅ „Upit je stigao…”, stub primio `Upit s weba — Ana Anić` |
-| Provider nije konfiguriran | pošteno „nije postavljeno”, bez lažne potvrde | ✅ |
-| Provider vraća HTTP 500 | pošteno „slanje ne radi” | ✅ log: `Provider je odbio slanje. HTTP 500` |
-| Provider ne odgovara | timeout, pa pošteno „slanje ne radi” | ✅ log: `Slanje je isteklo prije odgovora providera` |
+| Ispravan upit, SMTP radi | potvrda + mail stvarno isporučen | ✅ server primio `to: matija@pinko.hr`, `from: Pinko web <matija@pinko.hr>`, `reply-to: ana@primjer.hr`, hrvatski znakovi u naslovu ispravno kodirani |
+| SMTP nije konfiguriran | pošteno „nije postavljeno”, bez lažne potvrde | ✅ |
+| Server odbija poruku | pošteno „slanje ne radi” | ✅ log: `Slanje nije uspjelo (EMESSAGE)` |
+| Server nedostupan | pošteno „slanje ne radi” | ✅ log: `SMTP veza nije uspjela (ESOCKET)` |
 | Neispravan email | greška uz polje | ✅ „Provjerite email adresu…” |
 | Prazna poruka | greška uz polje | ✅ „Napišite barem nekoliko rečenica…” |
 | Prekratka poruka | greška uz polje | ✅ |

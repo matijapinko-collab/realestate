@@ -77,10 +77,12 @@ Ta zastavica nema učinka u produkcijskom buildu.
 
 Server action (`src/lib/actions/contact.ts`) radi serversku validaciju (zod),
 ograničenje učestalosti po IP-u, honeypot i ograničenje veličine zahtjeva, pa
-šalje email preko Resend API-ja s timeoutom od 10 s.
+šalje email SMTP-om kroz sandučić na vlastitom cPanel hostingu, s timeoutom od
+10 s. Nema vanjskog servisa za slanje.
 
-Ako `RESEND_API_KEY`, `CONTACT_TO_EMAIL` ili `CONTACT_FROM_EMAIL` nedostaju,
-forma **ne** prikazuje lažnu potvrdu — jasno kaže da slanje nije postavljeno.
+Ako `SMTP_HOST`, `SMTP_USER`, `SMTP_PASSWORD` ili `CONTACT_TO_EMAIL`
+nedostaju, forma **ne** prikazuje lažnu potvrdu — jasno kaže da slanje nije
+postavljeno. Postavljanje je opisano u `DEPLOYMENT.md`.
 
 Newsletter privola je zasebna i dobrovoljna; slanje upita ne dodaje kontakt ni
 na kakvu listu.

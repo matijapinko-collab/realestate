@@ -34,12 +34,23 @@ export const site = {
   /** Set to true only once the canonical domain is confirmed and indexing is wanted. */
   allowIndexing: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true",
 
-  /** Contact details: supplied by Matija before launch. Do not invent these. */
+  /**
+   * Contact details. Confirmed items are filled in; anything still unconfirmed
+   * stays null and the UI omits it rather than inventing a value.
+   */
   contact: {
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? null,
-    phone: null as MaybeConfirmed<string>,
-    address: null as MaybeConfirmed<string>,
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "matija@pinko.hr",
+    /** Display form; `phoneHref` is the dialable form. */
+    phone: "098 137 8567" as MaybeConfirmed<string>,
+    phoneHref: "+385981378567",
+    /**
+     * Registered trade name, business address and OIB still to be confirmed
+     * verbatim from the court/craft register. They are legally required on a
+     * Croatian business site, so they must be exact — not transcribed from a
+     * directory URL.
+     */
     legalName: null as MaybeConfirmed<string>,
+    address: null as MaybeConfirmed<string>,
     oib: null as MaybeConfirmed<string>,
     bookingUrl: null as MaybeConfirmed<string>,
   },
@@ -52,6 +63,22 @@ export const site = {
     proposed: "pon–pet 9–17",
     confirmed: false,
   },
+
+  /**
+   * Matija's portrait. Null until the real photograph is in the repository —
+   * the hero falls back to a typographic composition rather than a stock
+   * person or an AI-generated face.
+   *
+   * To switch it on: put the file in `public/`, then set `src` to its path and
+   * `width`/`height` to its real pixel dimensions (needed so the layout does
+   * not shift while it loads).
+   */
+  portrait: null as MaybeConfirmed<{
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+  }>,
 
   vatRate: 0.25,
 } as const;

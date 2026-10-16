@@ -9,20 +9,23 @@ Nigdje nema „TODO”, „Lorem ipsum”, lažnog kontakta ni prazne pravne str
 
 ## 1. Poslovni i pravni podaci
 
-- [ ] Točan registrirani naziv obrta
-- [ ] Poslovna adresa
-- [ ] OIB
-- [ ] Poslovni kontakt (email koji ide u `NEXT_PUBLIC_CONTACT_EMAIL`)
-- [ ] Telefon — **samo ako** ga želite javno objaviti
+- [x] Email: `matija@pinko.hr` — objavljen u footeru i na `/kontakt`
+- [x] Telefon: `098 137 8567` — objavljen u footeru i na `/kontakt`
+- [ ] **Točan registrirani naziv obrta** — doslovno iz obrtnog registra
+- [ ] **Poslovna adresa** — doslovno
+- [ ] **OIB**
 
-→ `src/config/site.ts`, `site.contact`. Dok su `null`, footer i kontakt blok ih
-preskaču, a stranica `/privatnost` jasno kaže da podaci o voditelju obrade još
-nisu dopunjeni.
+→ `src/config/site.ts`, `site.contact`. Naziv, adresu i OIB nisam prepisivao iz
+imenika jer su to podaci koji po zakonu stoje na poslovnom webu i moraju biti
+točni u znak. Dok su `null`, footer ih preskače, a `/privatnost` jasno kaže da
+podaci o voditelju obrade još nisu dopunjeni.
 
 ## 2. Domena
 
-- [ ] Potvrđena kanonska domena za novi web
-- [ ] Provjereno stvarno DNS/HTTP ponašanje `pinko.hr` uživo
+- [ ] **Maknuti redirect `pinko.hr` → `varel.io`** u cPanelu (Domains →
+      pinko.hr → Redirects / "Manage Redirection"). To je zahvat na vašem
+      hostingu i radite ga vi — ja nemam pristup cPanelu.
+- [ ] Provjereno DNS/HTTP ponašanje `pinko.hr` nakon uklanjanja redirecta
 - [ ] Odlučen odnos s Varelom
 - [ ] Popis potrebnih preusmjerenja sa starih URL-ova
 - [ ] `NEXT_PUBLIC_SITE_URL` postavljen na kanonsku domenu
@@ -47,7 +50,11 @@ Zatim postavite `approvedForPublication: true` na odobrene zapise.
 
 ## 4. Vizualni materijali
 
-- [ ] Autentičan portret Matije (hero trenutačno koristi tipografsku kompoziciju)
+- [ ] **Portret u repozitorij.** Fotografija je poslana u razgovoru, ali nije
+      stigla kao datoteka u radno okruženje, pa je nisam mogao commitati.
+      Dodajte je u `pinko/public/` i upišite `site.portrait` u
+      `src/config/site.ts` (`src`, `width`, `height`, `alt`) — slot u heroju
+      je već spreman.
 - [ ] Odobreni screenshotovi projekata
 
 Bez AI portreta koji se predstavlja kao stvarna fotografija i bez stock timova.
@@ -71,8 +78,10 @@ aplikaciji i ne smije se dodati ni u sadržaj ni u konfiguraciju.
 
 ## 7. Slanje forme, analitika i privatnost
 
-- [ ] Odabran i postavljen servis za slanje emaila (`RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`)
-- [ ] Verificirana domena pošiljatelja kod providera
+- [x] Slanje ide SMTP-om kroz vlastiti cPanel sandučić, bez vanjskog servisa
+- [ ] **`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`** postavljeni na
+      produkciji (cPanel → Email Accounts → Connect Devices daje host i port)
+- [ ] Provjeren SPF/DKIM (cPanel → Email Deliverability), da mail ne ide u spam
 - [ ] Testno slanje na produkciji prošlo
 - [ ] Odluka o analitici — trenutačno nema nikakvog alata za praćenje
 - [ ] Dopunjen rok čuvanja podataka i podaci o voditelju obrade u `/privatnost`

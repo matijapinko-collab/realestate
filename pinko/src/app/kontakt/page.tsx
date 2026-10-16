@@ -76,16 +76,34 @@ export default function ContactPage() {
                 uključuje audit ili pisanu strategiju.
               </p>
 
-              {site.contact.email ? (
-                <p className="mt-5 text-sm">
-                  <span className="font-semibold">Radije email? </span>
-                  <a
-                    href={`mailto:${site.contact.email}`}
-                    className="text-accent-ink underline underline-offset-4"
-                  >
-                    {site.contact.email}
-                  </a>
-                </p>
+              {site.contact.email || site.contact.phone ? (
+                <div className="mt-6 border-t border-rule pt-5">
+                  <h3 className="text-sm font-semibold">
+                    Ne volite forme? Javite se izravno.
+                  </h3>
+                  <ul className="mt-2.5 space-y-1.5 text-sm">
+                    {site.contact.email ? (
+                      <li>
+                        <a
+                          href={`mailto:${site.contact.email}`}
+                          className="text-accent-ink underline underline-offset-4"
+                        >
+                          {site.contact.email}
+                        </a>
+                      </li>
+                    ) : null}
+                    {site.contact.phone ? (
+                      <li>
+                        <a
+                          href={`tel:${site.contact.phoneHref}`}
+                          className="text-accent-ink underline underline-offset-4"
+                        >
+                          {site.contact.phone}
+                        </a>
+                      </li>
+                    ) : null}
+                  </ul>
+                </div>
               ) : null}
             </div>
 

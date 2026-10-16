@@ -1,38 +1,74 @@
 /**
- * Email delivery through Resend's REST API.
+ * Email delivery over SMTP, using the mailbox on the project's own cPanel
+ * hosting (matija@pinko.hr) rather than a third-party sending service.
  *
- * Plain `fetch`, so there is no SDK dependency to keep current. Secrets are
- * read from the server environment only and are never exposed through a
- * NEXT_PUBLIC variable.
+ * Secrets are read from the server environment only and never exposed through
+ * a NEXT_PUBLIC variable.
  *
- * If the provider is not configured the form says so honestly instead of
- * showing a fake "sent" message — that rule is from the brief and is enforced
- * by `isMailerConfigured()`, which the page reads on the server.
+ * If SMTP is not configured the form says so honestly instead of showing a
+ * fake "sent" message. That rule is enforced by `isMailerConfigured()`, which
+ * the contact page reads on the server.
  */
 
 import "server-only";
+import nodemailer, { type Transporter } from "nodemailer";
 
-const DEFAULT_ENDPOINT = "https://api.resend.com/emails";
 const TIMEOUT_MS = Number(process.env.CONTACT_TIMEOUT_MS ?? 10_000);
-
-/**
- * Overridable so failure paths can be exercised against a local stub instead
- * of sending test submissions to a third party. Leave unset in production.
- */
-function endpoint(): string {
-  return process.env.RESEND_API_URL || DEFAULT_ENDPOINT;
-}
 
 export type MailerResult =
   | { ok: true }
   | { ok: false; reason: "not-configured" | "provider-error" | "timeout" };
 
+type SmtpConfig = {
+  host: string;
+  port: number;
+  user: string;
+  pass: string;
+  from: string;
+  to: string;
+};
+
+function readConfig(): SmtpConfig | null {
+  const host = process.env.SMTP_HOST;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASSWORD;
+  const to = process.env.CONTACT_TO_EMAIL;
+  if (!host || !user || !pass || !to) return null;
+
+  // 465 is implicit TLS, 587 is STARTTLS. cPanel serves both; 465 is default.
+  const port = Number(process.env.SMTP_PORT ?? 465);
+  if (!Number.isInteger(port) || port <= 0) return null;
+
+  return {
+    host,
+    port,
+    user,
+    pass,
+    to,
+    // The envelope sender must be a mailbox on this domain or the server will
+    // refuse to relay; the visitor's address goes in Reply-To instead.
+    from: process.env.CONTACT_FROM_EMAIL ?? user,
+  };
+}
+
 export function isMailerConfigured(): boolean {
-  return Boolean(
-    process.env.RESEND_API_KEY &&
-      process.env.CONTACT_TO_EMAIL &&
-      process.env.CONTACT_FROM_EMAIL
-  );
+  return readConfig() !== null;
+}
+
+let cached: Transporter | null = null;
+
+function transporter(config: SmtpConfig): Transporter {
+  if (cached) return cached;
+  cached = nodemailer.createTransport({
+    host: config.host,
+    port: config.port,
+    secure: config.port === 465,
+    auth: { user: config.user, pass: config.pass },
+    connectionTimeout: TIMEOUT_MS,
+    greetingTimeout: TIMEOUT_MS,
+    socketTimeout: TIMEOUT_MS,
+  });
+  return cached;
 }
 
 export async function sendContactEmail(payload: {
@@ -40,47 +76,32 @@ export async function sendContactEmail(payload: {
   text: string;
   replyTo: string;
 }): Promise<MailerResult> {
-  if (!isMailerConfigured()) return { ok: false, reason: "not-configured" };
-
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  const config = readConfig();
+  if (!config) return { ok: false, reason: "not-configured" };
 
   try {
-    const response = await fetch(endpoint(), {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: process.env.CONTACT_FROM_EMAIL,
-        to: [process.env.CONTACT_TO_EMAIL],
-        reply_to: payload.replyTo,
-        subject: payload.subject,
-        text: payload.text,
-      }),
-      signal: controller.signal,
-      cache: "no-store",
+    await transporter(config).sendMail({
+      from: { name: "Pinko web", address: config.from },
+      to: config.to,
+      replyTo: payload.replyTo,
+      subject: payload.subject,
+      text: payload.text,
     });
-
-    if (!response.ok) {
-      // Log the status only. The body can echo back submitted content, and
-      // enquiry text is personal data that does not belong in server logs.
-      console.error(
-        `[kontakt] Provider je odbio slanje. HTTP ${response.status}`
-      );
-      return { ok: false, reason: "provider-error" };
-    }
-
     return { ok: true };
   } catch (error) {
-    if (error instanceof Error && error.name === "AbortError") {
-      console.error("[kontakt] Slanje je isteklo prije odgovora providera.");
+    // Log the failure kind only. The error can echo back submitted content,
+    // and enquiry text is personal data that does not belong in server logs.
+    const code =
+      typeof error === "object" && error !== null && "code" in error
+        ? String((error as { code: unknown }).code)
+        : "unknown";
+
+    if (code === "ETIMEDOUT" || code === "ESOCKET" || code === "ECONNECTION") {
+      console.error(`[kontakt] SMTP veza nije uspjela (${code}).`);
       return { ok: false, reason: "timeout" };
     }
-    console.error("[kontakt] Slanje nije uspjelo zbog mrežne greške.");
+
+    console.error(`[kontakt] Slanje nije uspjelo (${code}).`);
     return { ok: false, reason: "provider-error" };
-  } finally {
-    clearTimeout(timer);
   }
 }

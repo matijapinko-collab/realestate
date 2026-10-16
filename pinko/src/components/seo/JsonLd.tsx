@@ -38,6 +38,7 @@ export function PersonJsonLd() {
   };
 
   if (site.contact.email) person.email = site.contact.email;
+  if (site.contact.phone) person.telephone = site.contact.phoneHref;
 
   return <JsonLd data={person} />;
 }

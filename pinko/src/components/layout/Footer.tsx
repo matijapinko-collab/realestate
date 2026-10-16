@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="border-t border-rule bg-surface">
       <div className="wrap section-tight">
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>
             <span className="text-3xl font-extrabold tracking-tight">
               pinko<span className="text-accent">.</span>
@@ -33,6 +33,34 @@ export function Footer() {
               ))}
             </ul>
           </nav>
+
+          <div>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-soft">
+              Kontakt
+            </h2>
+            <ul className="mt-4 space-y-2.5">
+              {site.contact.email ? (
+                <li>
+                  <a
+                    href={`mailto:${site.contact.email}`}
+                    className="font-medium hover:text-accent-ink hover:underline underline-offset-4"
+                  >
+                    {site.contact.email}
+                  </a>
+                </li>
+              ) : null}
+              {site.contact.phone ? (
+                <li>
+                  <a
+                    href={`tel:${site.contact.phoneHref}`}
+                    className="font-medium hover:text-accent-ink hover:underline underline-offset-4"
+                  >
+                    {site.contact.phone}
+                  </a>
+                </li>
+              ) : null}
+            </ul>
+          </div>
 
           <nav aria-label="Stranice">
             <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-soft">
