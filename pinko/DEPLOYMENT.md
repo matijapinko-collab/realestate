@@ -191,6 +191,44 @@ Stanje zatečeno isti dan: Matija je maknuo redirect na `varel.io`, pa
 WordPress** („Matija Pinko — The Gamechanger”, Avada tema) na cPanel hostingu.
 Prebacivanje DNS-a znači da taj web prestaje biti dostupan.
 
+### ⚠️ Prvo pošta, pa tek onda web
+
+Provjereno 16. 10. 2026.:
+
+```
+pinko.hr.  MX  0 pinko.hr.
+pinko.hr.  A   185.62.75.97
+mail.pinko.hr  — ne postoji
+```
+
+**MX pokazuje na samu domenu.** To znači da pošta ide tamo gdje pokazuje `A`
+zapis. Ako `A` prebacimo na Hetzner, sva pošta za `@pinko.hr` ide na server
+koji nema poštanski servis — dolazna se gubi, a i forma koja šalje kroz taj
+sandučić prestaje raditi.
+
+Zato se prvo odvaja pošta od weba:
+
+1. Dodati `A` zapis: `mail.pinko.hr → 185.62.75.97`
+2. Promijeniti `MX` iz `0 pinko.hr` u `0 mail.pinko.hr`
+3. Pričekati da se proširi i **provjeriti da pošta i dalje stiže**
+4. U SPF-u maknuti `+a` (adresa `ip4:185.62.75.97` je ionako već izričito
+   navedena, pa SPF ostaje valjan i bez njega). Ostavi li se `+a`, nakon
+   prebacivanja bi SPF ovlastio i Hetznerov IP.
+5. `DKIM` (`default._domainkey`) ne dirati.
+
+DNS se uređuje kod **ns1/ns2.mydataknox.com**, dakle u zoni kod hostera.
+
+Tek kad je pošta razdvojena, mijenja se `A` za `pinko.hr` i `www`.
+
+### Što ostaje na WordPressu
+
+`https://pinko.hr/rijetkebolesti/` (uključujući `wp-admin`) mora i dalje
+stizati na cPanel. To rješava `deploy/traefik-pinko.yaml`: pravilo za tu
+putanju ima veći prioritet i prosljeđuje na `185.62.75.97` uz `Host: pinko.hr`.
+
+Provjereno da origin na to odgovara `200` i po HTTP-u i po HTTPS-u, pa proxy
+radi i nakon što DNS pokazuje drugamo.
+
 ### Redoslijed prebacivanja
 
 1. **Arhivirati stari WordPress** prije bilo kakve promjene — izvoz sadržaja i

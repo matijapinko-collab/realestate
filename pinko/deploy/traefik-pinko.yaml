@@ -1,0 +1,54 @@
+# Traefik dinamička konfiguracija za pinko.hr na Hetzneru.
+#
+# Ide u /data/coolify/proxy/dynamic/ na serveru; Traefik gleda tu mapu
+# (`--providers.file.directory=/traefik/dynamic/ --providers.file.watch=true`)
+# i učita promjenu sam, bez restarta.
+#
+# Čemu služi: domena ide na novi Next.js web, ALI putanja /rijetkebolesti
+# mora i dalje stizati na stari WordPress na cPanelu (185.62.75.97).
+# Pravilo je duže i ima veći prioritet od pravila samog kontejnera, pa
+# pobjeđuje za tu putanju, a sve ostalo ide na novi web.
+#
+# Provjereno 16. 10. 2026.: cPanel origin odgovara 200 i po HTTP-u i po
+# HTTPS-u kad mu se pošalje `Host: pinko.hr`, pa proxy na IP radi.
+
+http:
+  routers:
+    pinko-wp-https:
+      rule: "Host(`pinko.hr`, `www.pinko.hr`) && PathPrefix(`/rijetkebolesti`)"
+      entryPoints:
+        - https
+      priority: 1000
+      service: pinko-wp
+      tls:
+        certResolver: letsencrypt
+
+    pinko-wp-http:
+      rule: "Host(`pinko.hr`, `www.pinko.hr`) && PathPrefix(`/rijetkebolesti`)"
+      entryPoints:
+        - http
+      priority: 1000
+      middlewares:
+        - pinko-wp-to-https
+      service: pinko-wp
+
+  middlewares:
+    pinko-wp-to-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+  services:
+    pinko-wp:
+      loadBalancer:
+        # Origin se gađa po IP-u jer će DNS za pinko.hr pokazivati na Hetzner.
+        servers:
+          - url: "https://185.62.75.97"
+        # WordPress mora vidjeti pravi Host, inače prepisuje adrese.
+        passHostHeader: true
+        serversTransport: pinko-wp-origin
+
+  serversTransports:
+    pinko-wp-origin:
+      # SNI prema originu, da certifikat za pinko.hr i dalje valja.
+      serverName: pinko.hr
