@@ -315,3 +315,21 @@ Za hosting okruženje (ako se na istom poslužitelju vrte i drugi projekti)
 vrijedi pravilo iz briefa: backup nije uspješan zato što postoji cron.
 Dokumentirajte i **isprobajte** vraćanje prije nego se bilo kakvo obećanje o
 kopijama objavi na webu.
+
+## Zapisano s prebacivanja 16. 10. 2026.
+
+Tri stvari koje su stajale vremena i vrijedi ih znati unaprijed:
+
+1. **Traefik v3 u datotečnom provideru ne prima `Host(`a`, `b`)`** s dva
+   argumenta — odbije pravilo i tiho ga ispusti, pa putanja padne na krivu
+   aplikaciju. Domene se spajaju s `||`. U Docker oznakama isti zapis prolazi,
+   što navodi na krivi zaključak.
+
+2. **Traefik uspoređuje sadržaj dinamičke datoteke, ne vrijeme izmjene.**
+   Ponovno kopiranje identične datoteke ne pokreće reload ni novi pokušaj
+   izdavanja certifikata. Za prisilni reload treba promijeniti sadržaj.
+
+3. **Nakon niza neuspjelih ACME pokušaja Traefik uđe u odgodu** i ne pokuša
+   ponovno ni kad se konfiguracija promijeni. Ako je DNS u međuvremenu
+   popravljen, najbrže ga pokrene `docker restart coolify-proxy`. Restart
+   prekine SVE webove na serveru na par sekundi — provjeriti ih nakon toga.

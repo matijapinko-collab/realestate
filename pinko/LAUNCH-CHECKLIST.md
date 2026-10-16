@@ -30,13 +30,20 @@ stranicu `/privatnost`.
       pa se `pinko.hr` prebacuje s cPanela na Hetzner
 - [ ] ⚠️ **Arhivirati stari WordPress** („Matija Pinko — The Gamechanger”,
       Avada) prije prebacivanja DNS-a — nakon toga nije dostupan preko domene
-- [ ] Aplikacija podignuta na Hetzneru i provjerena po IP-u, bez indeksiranja
-- [ ] Promijenjen **samo `A`/`AAAA`** zapis za `pinko.hr` i `www.pinko.hr`
-- [ ] ⚠️ **`MX`, `mail.pinko.hr`, `SPF` i `DKIM` ostali netaknuti** — na njima
-      visi pošta i slanje forme preko cPanel sandučića
+- [x] Aplikacija podignuta na Hetzneru (`pinko-web:prod`, kontejner `pinko-web`)
+- [x] **Pošta razdvojena prije weba** (16. 10. 2026.): `mail.pinko.hr` je sad
+      vlastiti `A` zapis na 185.62.75.97, `MX` pokazuje na njega. Potvrđeno u
+      cPanel Track Deliveryju: testna poruka s gmaila → `Accepted`.
+- [x] Promijenjen **samo `A`** zapis za `pinko.hr` → 167.233.239.74
+      (`www` je CNAME i ide za njim; `ns1`/`ns2` ostali na starom serveru)
+- [x] `NEXT_PUBLIC_SITE_URL=https://pinko.hr` i `NEXT_PUBLIC_ALLOW_INDEXING=true`
+      ugrađeni u produkcijski image
+- [x] Let's Encrypt certifikat izdan za `pinko.hr` (vrijedi do 14. 1. 2027.)
+- [x] `/rijetkebolesti/` i `/rijetkebolesti/wp-admin` i dalje na WordPressu
+- [ ] U SPF-u maknuti `+a` (adresa 185.62.75.97 je ionako izričito navedena)
 - [ ] Popis potrebnih preusmjerenja sa starih WordPress URL-ova
-- [ ] `NEXT_PUBLIC_SITE_URL=https://pinko.hr` i novi build
-- [ ] `NEXT_PUBLIC_ALLOW_INDEXING=true` **tek** kad domena poslužuje novi web
+- [ ] Stari WordPress na cPanelu je i dalje ondje, samo više nije na domeni —
+      odlučiti arhivira li se ili gasi
 - [ ] Odlučen odnos s Varelom
 
 Vidi `DEPLOYMENT.md` → „Domena i DNS”.
