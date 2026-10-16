@@ -59,8 +59,15 @@ export type Project = {
   role: string;
   status: ProjectStatus;
   approvedForPublication: boolean;
+  /** One line under the project name. Optional; most records do without. */
+  tagline?: string;
   summary: string;
   context: string;
+  /**
+   * The long form, when a project has one written out. Rendered in place of
+   * the short context/challenge pair, which stay as the card's fallback.
+   */
+  story?: { heading: string; body: string[] }[];
   challenge: string;
   decisions: string[];
   deliverables: string[];
@@ -119,41 +126,85 @@ export const projects: Project[] = [
   {
     slug: "elektronim-instalacije",
     projectName: "Elektronim Instalacije",
+    tagline: "Spojio sam firmu na internet. Bez bušenja zidova.",
     relationshipType: "klijent",
     role:
-      "Izrada i objava weba na WordPressu, uz postavljanje strukture stranica, sadržaja i kontakta.",
+      "Izrada poslovnog weba i postavljanje temelja digitalne prisutnosti: struktura sadržaja, tekstovi, vizualno oblikovanje i put do upita.",
     status: "lansirano",
     approvedForPublication: true,
     summary:
-      "Predstavljački web za tvrtku koja izvodi elektroinstalacije — jasna ponuda usluga i kontakt koji se nađe iz prvog pokušaja.",
+      "Elektronim zna kako dovesti struju tamo gdje treba. Trebalo je omogućiti da do njih jednako jednostavno dođe i čovjek koji firmu prvi put traži na internetu.",
     context:
-      "Elektronim Instalacije d.o.o. izvodi elektroinstalacijske radove. Takvoj tvrtki web ne služi da objašnjava struku, nego da potencijalni naručitelj u par sekundi vidi što rade, u kojim industrijama i kako ih dobiti na telefon.",
+      "Elektroinstalacije za stambene, poslovne i industrijske objekte. Zadatak je bio postaviti digitalnu prisutnost tvrtke koja ima konkretne usluge i znanje, ali ih tek treba jasno predstaviti online: objasniti što rade, kome mogu pomoći i zašto ih vrijedi kontaktirati. Jer možete biti odlični u svom poslu, ali Google još uvijek nema opciju „Ma znaš onog dobrog električara, netko mi ga je spominjao kod šogora”.",
     challenge:
-      "Posao se ne prodaje tehničkim nabrajanjem. Trebalo je ponudu posložiti u nekoliko razumljivih cjelina, pokazati stvarne radove i staviti kontakt na mjesto gdje ga nitko ne mora tražiti.",
+      "Preporuka vas dovede do razgovora — ali što se dogodi prije njega? Preporučeni izvođač najčešće prolazi još jedan mali razgovor za posao: onaj koji potencijalni klijent obavi sam sa sobom, gledajući rezultate pretraživanja.",
+    story: [
+      {
+        heading: "Problem: preporuka vas dovede do razgovora. Što se događa prije njega?",
+        body: [
+          "Kod izvođačkih tvrtki velik dio posla dolazi preko poznanstava, preporuka i prethodnih suradnji. To je odličan temelj. Ali preporučeni izvođač nakon toga često završi na još jednom malom razgovoru za posao — onom koji potencijalni klijent obavi sam sa sobom, gledajući rezultate pretraživanja.",
+          "Čime se točno bave? Rade li ovakve projekte? Mogu li im poslati upit?",
+          "Firma bez digitalne prisutnosti na ta pitanja teško odgovara prije prvog kontakta. Osoba koja je dobila preporuku nema gdje provjeriti ponudu, a netko tko za firmu još nije čuo ima jednu priliku manje da je upozna.",
+          "Elektronimu je trebao jasan, profesionalan prostor koji može preuzeti taj prvi dio predstavljanja.",
+        ],
+      },
+      {
+        heading: "Prvi izazov: krenuti od poslovanja, a ne od boje gumba",
+        body: [
+          "Kad tvrtka kreće graditi digitalnu prisutnost, lako je odmah preskočiti na fotografije, animacije i pitanje treba li naslov biti „malo veći”. Prije toga treba riješiti važnije stvari: koje usluge tvrtka nudi, kome ih želi predstaviti, što potencijalni klijent treba razumjeti prije slanja upita i koji je najjednostavniji put do kontakta.",
+          "Za Elektronim sam prezentaciju organizirao oko njihovih područja rada, s naglaskom na stanogradnju i industrijske elektroinstalacije. Time široka ponuda dobiva strukturu: posjetitelj prepozna vlastitu potrebu i nastavi prema relevantnim informacijama.",
+          "A gumb? Došao je i on na red. Preživio je.",
+        ],
+      },
+      {
+        heading: "Drugi izazov: tehničku stručnost prevesti na jezik kupca",
+        body: [
+          "Izvođač i naručitelj često gledaju isti projekt iz različitih perspektiva. Izvođač razmišlja o sustavima, izvedbi i tehničkim zahtjevima. Naručitelj želi znati može li mu netko kvalitetno riješiti instalacije u objektu koji gradi, uređuje ili modernizira.",
+          "Zato sam usluge smjestio u razumljiv poslovni kontekst: vrste objekata, područja primjene i konkretne radove. Posjetitelj tako dobiva polazište za razgovor, bez očekivanja da prije slanja upita položi stručni ispit.",
+          "Dobar web izvođača treba pokazati stručnost i olakšati kupcu da objasni što mu treba.",
+        ],
+      },
+      {
+        heading: "Treći izazov: izgraditi povjerenje prije prvog rukovanja",
+        body: [
+          "Tvrtka koja tek dolazi online treba predstaviti identitet i ponudu dovoljno jasno da posjetitelj dobije osjećaj s kim razgovara. Za to nisu potrebne rečenice poput „vodeći inovativni lider vrhunskih rješenja budućnosti”. Potrebno je odgovoriti na praktična pitanja: tko ste, što radite, za kakve projekte vas možemo angažirati i kako vas kontaktirati.",
+          "Prezentaciju sam zato povezao kroz informacije o tvrtki, pregled usluga, vizualne prikaze i dostupne kontaktne podatke. Cilj je da potencijalni klijent dođe do prvog razgovora s više razumijevanja ponude.",
+          "Povjerenje se gradi i time što čovjek ne mora pet minuta tražiti broj telefona kao da je riječ o nagradnoj igri.",
+        ],
+      },
+      {
+        heading: "Kako staviti firmu bez digitalne prisutnosti na tržište?",
+        body: [
+          "Prvi korak je dati joj adresu koju može poslati uz preporuku, uključiti u ponudu i pokazati potencijalnom partneru. Ali sama adresa nije dovoljna. Na njoj mora biti sadržaj koji predstavlja stvarno poslovanje.",
+          "U Elektronimovu slučaju web je postao temelj za takvo predstavljanje: mjesto na kojem se može pregledati ponuda i pronaći kontakt. Na taj se temelj zatim mogu nadograđivati lokalna vidljivost, nove reference, sadržaj i buduće kampanje.",
+          "Važno je krenuti s jasnom ponudom. Oglašavanje može dovesti čovjeka na stranicu, ali stranica mu mora pomoći da shvati zašto je došao. Inače samo plaćate da se više ljudi zbuni.",
+        ],
+      },
+    ],
     decisions: [
-      "WordPress, jer sadržaj mora ostati u rukama tvrtke i nakon isporuke",
-      "Struktura prema tome kako naručitelj razmišlja: usluge, industrije, projekti, kontakt",
-      "Telefon i email vidljivi već u prvom zaslonu, ne samo na stranici kontakta",
-      "Fotografije stvarnih radova umjesto generičnih stock prizora",
+      "Krenuti od poslovanja, a ne od boje gumba: prvo usluge, publika i put do upita",
+      "Prezentaciju organizirati oko područja rada, s naglaskom na stanogradnju i industrijske elektroinstalacije",
+      "Tehničku djelatnost opisati jezikom naručitelja: vrste objekata, područja primjene i konkretni radovi",
+      "Kontakt staviti tamo gdje ga nitko ne mora tražiti",
     ],
     deliverables: [
-      "Naslovnica s ponudom, industrijama i pozivom na kontakt",
-      "Stranice usluga i predstavljanja tvrtke",
-      "Pregled izvedenih projekata",
-      "Kontakt s telefonom, emailom i obrascem",
+      "Struktura sadržaja koja odvaja predstavljanje tvrtke, područja rada, usluge i kontakt",
+      "Prezentacija ponude za stanogradnju i industrijske objekte",
+      "Tekstovi i hijerarhija informacija koji tehničku djelatnost približavaju naručitelju",
+      "Vizualno oblikovanje stranice koje podupire profesionalno predstavljanje",
+      "Istaknute kontaktne informacije i pozivi na upit, da zainteresirani posjetitelj zna što dalje",
     ],
     outcomes: [
-      "Web je javno dostupan i tvrtka ga može sama dopunjavati",
-      "Ponuda je složena u cjeline koje naručitelj prepoznaje",
-      "Kontakt je dostupan iz svakog zaslona",
+      "Elektronim ima poslovni web koji predstavlja tvrtku, organizira usluge i otvara put prema kontaktu",
+      "Potencijalni klijenti imaju mjesto na kojem upoznaju ponudu prije razgovora",
+      "Tvrtka ima stranicu koja može pratiti daljnji razvoj, nove projekte i buduće marketinške aktivnosti",
     ],
-    outcomesLabel: "Moj doprinos",
-    nextStep: "Vodite obrt ili tvrtku kojoj web treba donositi upite, a ne komplimente?",
+    nextStep: "Radite odličan posao, a nema vas još na internetu?",
     featuredImage: {
       src: "/projekti/elektronim-featured.webp",
-      alt: "Naslovnica Elektronim Instalacija: naslov „Elektroinstalacije koje grade budućnost” i kontakt podaci.",
-      width: 1600,
-      height: 1000,
+      alt: "Naslovnica Elektronim Instalacija: naslov „Elektroinstalacije koje grade budućnost”, gumb za kontakt i fotografija ožičenog razvodnog ormara.",
+      width: 1903,
+      height: 915,
     },
     evidenceLinks: [
       {
@@ -176,9 +227,9 @@ export const projects: Project[] = [
       },
     ],
     publishedAt: "2026-10-16",
-    contributionLabel: "Izrada weba na WordPressu",
+    contributionLabel: "Poslovni web i digitalna prisutnost",
     internalNote:
-      "Dodano 16. 10. 2026. na Matijin zahtjev. OPREZ: opseg je opisan iz onoga što web pokazuje i iz toga što je autor sadržaja korisnik 'mpinko'. Matija nije potvrdio točan opseg posla (dizajn, sadržaj, fotografije, održavanje) — provjeriti prije nego se tekst dodatno jača.",
+      "Tekst je Matijin, dostavljen 16. 10. 2026. Jedina izmjena: prebačen iz množine („spojili smo”) u jedninu, jer Pinko je obrt jedne osobe i ostatak weba govori u prvom licu jednine — tako traži i brief. Vraćanje u množinu je izmjena na jednom mjestu.",
   },
   {
     slug: "teladoc-business-vision",

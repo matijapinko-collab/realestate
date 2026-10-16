@@ -59,6 +59,11 @@ export default async function ProjectPage({ params }: Props) {
         title={project.projectName}
         lead={
           <>
+            {project.tagline ? (
+              <p className="mb-3 text-(length:--text-title) font-extrabold">
+                {project.tagline}
+              </p>
+            ) : null}
             <p>{project.summary}</p>
             <dl className="mt-7 grid gap-5 sm:grid-cols-2">
               <div>
@@ -109,22 +114,37 @@ export default async function ProjectPage({ params }: Props) {
         </Section>
       ) : null}
 
-      <Section>
-        <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
-          <div className="space-y-10">
-            <Block title="Kontekst" body={project.context} />
-            <Block title="Izazov" body={project.challenge} />
-            <ListBlock title="Odluke" items={project.decisions} />
-          </div>
-          <div className="space-y-10">
-            <ListBlock title="Isporučeno" items={project.deliverables} />
-            <ListBlock
-              title={project.outcomesLabel ?? "Rezultat"}
-              items={project.outcomes}
-            />
-            {project.roadmap && project.roadmap.length > 0 ? (
-              <ListBlock title="U planu" items={project.roadmap} />
-            ) : null}
+      {/* A project with the long form written out reads as one column, with
+          the lists gathered underneath. Without it, the old two-column pair
+          of context and challenge still applies. */}
+      {project.story ? (
+        <>
+          <Section>
+            <div className="measure-wide space-y-12">
+              {project.story.map((part) => (
+                <section key={part.heading} data-reveal>
+                  <h2 className="text-(length:--text-title) font-extrabold">
+                    {part.heading}
+                  </h2>
+                  <div className="mt-4 space-y-4 text-ink-soft">
+                    {part.body.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+          </Section>
+
+          <Section tone="surface" tight>
+            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+              <ListBlock title="Odluke" items={project.decisions} />
+              <ListBlock title="Isporučeno" items={project.deliverables} />
+              <div className="space-y-10">
+                <ListBlock
+                  title={project.outcomesLabel ?? "Rezultat"}
+                  items={project.outcomes}
+                />
             {project.evidenceLinks.length > 0 ? (
               <div>
                 <h2 className="text-(length:--text-title) font-extrabold">
@@ -146,14 +166,60 @@ export default async function ProjectPage({ params }: Props) {
                 </ul>
               </div>
             ) : null}
+              </div>
+            </div>
+          </Section>
+        </>
+      ) : (
+        <Section>
+          <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
+            <div className="space-y-10">
+              <Block title="Kontekst" body={project.context} />
+              <Block title="Izazov" body={project.challenge} />
+              <ListBlock title="Odluke" items={project.decisions} />
+            </div>
+            <div className="space-y-10">
+              <ListBlock title="Isporučeno" items={project.deliverables} />
+              <ListBlock
+                title={project.outcomesLabel ?? "Rezultat"}
+                items={project.outcomes}
+              />
+              {project.roadmap && project.roadmap.length > 0 ? (
+                <ListBlock title="U planu" items={project.roadmap} />
+              ) : null}
+            {project.evidenceLinks.length > 0 ? (
+              <div>
+                <h2 className="text-(length:--text-title) font-extrabold">
+                  Poveznice
+                </h2>
+                <ul className="mt-4 space-y-2">
+                  {project.evidenceLinks.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        className="font-medium text-accent underline underline-offset-4"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+            </div>
           </div>
-        </div>
-      </Section>
+        </Section>
+      )}
 
-      <Section tone="surface" tight>
-        <h2 className="max-w-[22ch] text-(length:--text-display) font-extrabold">
+      <Section tight>
+        <p
+          data-reveal
+          className="measure-wide text-(length:--text-display) font-extrabold"
+        >
           {project.nextStep}
-        </h2>
+        </p>
       </Section>
 
       <ClosingContact />
