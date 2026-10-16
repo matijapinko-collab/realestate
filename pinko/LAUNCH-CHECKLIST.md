@@ -26,14 +26,18 @@ stranicu `/privatnost`.
 - [x] **Maknut redirect `pinko.hr` → `varel.io`** (Matija, 16. 10. 2026.)
 - [x] Provjereno HTTP ponašanje: `pinko.hr` i `www.pinko.hr` vraćaju 200 na
       `https://pinko.hr/`, bez preusmjeravanja
-- [ ] ⚠️ **Na `pinko.hr` sada stoji stari WordPress web** („Matija Pinko — The
-      Gamechanger”, Avada tema, engleski). Novi web ga mora zamijeniti:
-      odlučiti ide li na isti hosting umjesto WordPressa ili drugdje pa se
-      prebacuje DNS. Stari sadržaj prije gašenja arhivirati.
+- [x] **Odlučeno: novi web ide na Hetzner server** (Matija, 16. 10. 2026.),
+      pa se `pinko.hr` prebacuje s cPanela na Hetzner
+- [ ] ⚠️ **Arhivirati stari WordPress** („Matija Pinko — The Gamechanger”,
+      Avada) prije prebacivanja DNS-a — nakon toga nije dostupan preko domene
+- [ ] Aplikacija podignuta na Hetzneru i provjerena po IP-u, bez indeksiranja
+- [ ] Promijenjen **samo `A`/`AAAA`** zapis za `pinko.hr` i `www.pinko.hr`
+- [ ] ⚠️ **`MX`, `mail.pinko.hr`, `SPF` i `DKIM` ostali netaknuti** — na njima
+      visi pošta i slanje forme preko cPanel sandučića
+- [ ] Popis potrebnih preusmjerenja sa starih WordPress URL-ova
+- [ ] `NEXT_PUBLIC_SITE_URL=https://pinko.hr` i novi build
+- [ ] `NEXT_PUBLIC_ALLOW_INDEXING=true` **tek** kad domena poslužuje novi web
 - [ ] Odlučen odnos s Varelom
-- [ ] Popis potrebnih preusmjerenja sa starih URL-ova
-- [ ] `NEXT_PUBLIC_SITE_URL` postavljen na kanonsku domenu
-- [ ] `NEXT_PUBLIC_ALLOW_INDEXING=true` **tek** na produkciji
 
 Vidi `DEPLOYMENT.md` → „Domena i DNS”.
 

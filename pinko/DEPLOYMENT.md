@@ -89,37 +89,37 @@ Proxy mora:
 zaglavlje postavljati sam, a ne prosljeđivati ono koje je poslao klijent —
 inače ga je trivijalno lažirati.
 
-### Docker
+### Docker i compose
 
-```dockerfile
-FROM node:22-alpine AS deps
-WORKDIR /app
-COPY pinko/package.json pinko/package-lock.json ./
-RUN npm ci
+Datoteke su u repozitoriju, nisu samo primjer u dokumentaciji:
 
-FROM node:22-alpine AS build
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY pinko/ .
-ARG NEXT_PUBLIC_SITE_URL
-ARG NEXT_PUBLIC_ALLOW_INDEXING
-ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
-ENV NEXT_PUBLIC_ALLOW_INDEXING=$NEXT_PUBLIC_ALLOW_INDEXING
-RUN npm run build
+- `Dockerfile` — višefazni build, standalone izlaz, pokreće se kao neroot
+  korisnik. **Build kontekst je `pinko/`, ne korijen repozitorija.**
+- `.dockerignore`
+- `compose.yaml` — jedna instanca aplikacije i Caddy ispred nje
+- `deploy/Caddyfile` — TLS, preusmjeravanje na HTTPS, `www` na kanonsku
+  domenu, ograničenje veličine tijela zahtjeva
 
-FROM node:22-alpine AS run
-WORKDIR /app
-ENV NODE_ENV=production
-COPY --from=build /app/.next/standalone ./
-COPY --from=build /app/.next/static ./.next/static
-COPY --from=build /app/public ./public
-EXPOSE 3000
-ENV PORT=3000 HOSTNAME=0.0.0.0
-CMD ["node", "server.js"]
+Na serveru:
+
+```bash
+cd pinko
+cp .env.example .env     # pa upisati prave vrijednosti
+docker compose up -d --build
 ```
 
-`NEXT_PUBLIC_*` su build argumenti jer se ugrađuju u bundle. Tajne (Resend) se
-predaju tek pri pokretanju kontejnera, nikad kao build argument.
+`NEXT_PUBLIC_*` su build argumenti jer ih `next build` ugrađuje u bundle;
+promjena takve vrijednosti traži `--build`, ne samo restart. Tajne
+(`SMTP_PASSWORD`) predaju se iz `.env` tek pri pokretanju i nikad kao build
+argument — build argumenti ostaju čitljivi u povijesti slike.
+
+#### Zašto proxy mora prepisati `X-Forwarded-For`
+
+Ograničenje učestalosti forme čita prvi unos iz `x-forwarded-for`. Caddy po
+zadanom **dodaje** klijentovu adresu na postojeće zaglavlje, pa bi posjetitelj
+mogao ispred svoje staviti lažnu i zaobići ograničenje. Zato `deploy/Caddyfile`
+zaglavlje **prepisuje** (`header_up X-Forwarded-For {remote_host}`). Ako
+zamijenite Caddy nginxom ili Traefikom, isto pravilo vrijedi.
 
 ### Healthcheck
 
@@ -152,19 +152,52 @@ budu isti kao u produkciji, inače se može objaviti staging canonical.
 
 ## Domena i DNS
 
-Prije promjene DNS-a treba potvrditi kanonsku domenu. Brief bilježi opažanje od
-14. 10. 2026. da je javni dohvat `https://pinko.hr` završio na
-`https://varel.io/en`. To je opažanje, ne odluka o strategiji brenda.
+**Odluka (16. 10. 2026.):** novi Next.js web ide na **Hetzner server**. Domena
+`pinko.hr` mora pokazivati na njega.
 
-Prije lansiranja:
+Stanje zatečeno isti dan: Matija je maknuo redirect na `varel.io`, pa
+`pinko.hr` i `www.pinko.hr` vraćaju 200 — ali ono što se poslužuje je **stari
+WordPress** („Matija Pinko — The Gamechanger”, Avada tema) na cPanel hostingu.
+Prebacivanje DNS-a znači da taj web prestaje biti dostupan.
 
-- provjerite stvarno DNS/HTTP ponašanje uživo;
-- odredite kanonsku domenu i postavite `NEXT_PUBLIC_SITE_URL` na nju;
-- napravite popis potrebnih preusmjerenja sa starih URL-ova;
-- **ne mijenjajte postojeće MX i druge DNS zapise automatski** — na njima mogu
-  visjeti email i drugi projekti.
+### Redoslijed prebacivanja
 
-Aplikacija nigdje ne pretpostavlja da postojeći web ostaje ili se briše.
+1. **Arhivirati stari WordPress** prije bilo kakve promjene — izvoz sadržaja i
+   kopija datoteka. Nakon prebacivanja više mu se ne može pristupiti preko
+   domene.
+2. Podići aplikaciju na Hetzneru i provjeriti je **po IP-u ili privremenoj
+   poddomeni**, dok je `NEXT_PUBLIC_ALLOW_INDEXING` još `false`.
+3. Smanjiti TTL na A zapisu nekoliko sati prije prebacivanja, da se greška može
+   brzo vratiti.
+4. Promijeniti **samo `A` (i `AAAA`, ako postoji) zapis** za `pinko.hr` i
+   `www.pinko.hr` na IP Hetzner servera.
+5. Caddy automatski izdaje certifikat čim DNS pokazuje na server.
+6. Tek kad domena stvarno poslužuje novi web: postaviti
+   `NEXT_PUBLIC_SITE_URL=https://pinko.hr` i `NEXT_PUBLIC_ALLOW_INDEXING=true`
+   pa **ponovno buildati** (te vrijednosti su ugrađene u bundle).
+7. Provjeriti `/`, `/cjenik`, `/kontakt`, `robots.txt` i `sitemap.xml` na pravoj
+   domeni, pa poslati testni upit kroz formu.
+
+### ⚠️ Email ostaje na cPanelu
+
+Forma šalje SMTP-om kroz sandučić `matija@pinko.hr`, koji je na cPanel hostingu.
+Prebacivanje weba na Hetzner **ne smije povući i poštu**:
+
+- **`MX` zapise ne dirati.**
+- `mail.pinko.hr` (i `webmail`, `cpanel`, `autodiscover` ako postoje) moraju i
+  dalje pokazivati na cPanel server.
+- `SPF` i `DKIM` `TXT` zapise ne dirati — ako se izgube, mail ide u spam.
+- Ako je `SMTP_HOST` postavljen na `mail.pinko.hr`, provjerite nakon
+  prebacivanja da se s Hetznera to ime i dalje razrješava na cPanel IP. U
+  protivnom upišite IP ili ime cPanel servera izravno.
+
+Promijenite dakle samo zapise koji poslužuju web. Sve ostalo ostaje kako jest.
+
+### Preusmjerenja sa starih URL-ova
+
+Stari WordPress ima svoje putanje. Prije gašenja popisati one koje imaju
+promet ili vanjske poveznice i dodati im trajna preusmjerenja (`redirects` u
+`next.config.ts` ili pravilo u Caddyju), da se ne gube poveznice.
 
 ## Sigurnosne kopije
 

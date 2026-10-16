@@ -121,11 +121,17 @@ Provjeriti i cPanel → **Email Deliverability** (SPF/DKIM), inače mail ide u s
 **Riješeno 16. 10. 2026.:** Matija je maknuo redirect na `varel.io`. Provjereno:
 `pinko.hr` i `www.pinko.hr` vraćaju 200 na `https://pinko.hr/`.
 
-⚠️ Ostaje novo pitanje: na domeni sada stoji **stari WordPress web** („Matija
-Pinko — The Gamechanger”, Avada tema, engleski). Novi web ga mora zamijeniti —
-odlučiti ide li na isti hosting umjesto WordPressa ili drugdje pa se prebacuje
-DNS. Stari sadržaj arhivirati prije gašenja. Tek nakon toga postavi
-`NEXT_PUBLIC_SITE_URL` i `NEXT_PUBLIC_ALLOW_INDEXING=true`.
+Na domeni i dalje stoji **stari WordPress** („Matija Pinko — The Gamechanger”,
+Avada tema, engleski) na cPanel hostingu.
+
+**Odluka (16. 10. 2026.): novi Next.js web ide na Hetzner server**, pa se
+`pinko.hr` prebacuje s cPanela na Hetzner. Deploy datoteke su u repozitoriju
+(`Dockerfile`, `compose.yaml`, `deploy/Caddyfile`), a cijeli redoslijed
+prebacivanja je u `DEPLOYMENT.md` → „Domena i DNS”.
+
+⚠️ Dvije stvari koje se ne smiju propustiti: **arhivirati stari WordPress**
+prije promjene DNS-a, i **ne dirati `MX`, `mail.pinko.hr`, `SPF` ni `DKIM`** —
+pošta ostaje na cPanelu i kroz nju forma šalje upite.
 
 **Ne diraj DNS ni MX zapise automatski** — na njima vise mailovi i drugi projekti.
 
