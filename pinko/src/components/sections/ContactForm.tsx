@@ -218,7 +218,7 @@ export function ContactForm({ mailerReady }: { mailerReady: boolean }) {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex min-h-13 w-full items-center justify-center rounded-full bg-accent px-7 font-semibold text-white transition-colors hover:bg-accent-ink disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="inline-flex min-h-13 w-full items-center justify-center rounded-full bg-accent px-7 font-semibold text-on-accent transition-colors hover:bg-accent-ink disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {pending ? "Šaljem…" : "Pošalji upit"}
       </button>

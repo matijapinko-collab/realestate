@@ -134,7 +134,7 @@ export function MobileMenu() {
               <Link
                 href={nav.cta.href}
                 onClick={() => setOpen(false)}
-                className="flex min-h-13 w-full items-center justify-center rounded-full bg-accent px-6 font-semibold text-white"
+                className="flex min-h-13 w-full items-center justify-center rounded-full bg-accent px-6 font-semibold text-on-accent"
               >
                 {nav.cta.label}
               </Link>

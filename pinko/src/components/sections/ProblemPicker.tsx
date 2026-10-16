@@ -62,14 +62,14 @@ export function ProblemPicker() {
               className={[
                 "min-h-11 rounded-xl px-4 py-3 text-left font-semibold transition-colors duration-200",
                 selected
-                  ? "bg-accent text-white"
+                  ? "bg-accent text-on-accent"
                   : "border border-control bg-paper text-ink hover:border-ink",
               ].join(" ")}
             >
               <span className="flex items-start gap-2.5">
                 <span
                   aria-hidden="true"
-                  className={selected ? "text-white/70" : "text-accent"}
+                  className={selected ? "text-on-accent/70" : "text-accent"}
                 >
                   →
                 </span>
@@ -92,7 +92,7 @@ export function ProblemPicker() {
         </p>
         <Link
           href={active.href}
-          className="mt-5 inline-flex min-h-11 items-center rounded-full border border-ink bg-ink px-5 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-accent hover:border-accent"
+          className="mt-5 inline-flex min-h-11 items-center rounded-full border border-accent bg-accent px-5 text-[0.9375rem] font-semibold text-on-accent transition-colors hover:bg-accent-ink hover:border-accent-ink"
         >
           Pogledajte kako mogu pomoći
         </Link>

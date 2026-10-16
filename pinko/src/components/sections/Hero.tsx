@@ -1,30 +1,36 @@
 import Image from "next/image";
 import { ButtonLink } from "@/components/ui/Button";
 import { site } from "@/config/site";
+import { careerFacts } from "@/content/career";
 import { ProblemPicker } from "./ProblemPicker";
 
 /**
- * Homepage hero (brief 11.2).
+ * Homepage hero.
  *
- * The right-hand side shows Matija's portrait once `site.portrait` is set.
- * Until then it is the problem picker alone — never a stock person or an
- * AI-generated face standing in for a real one.
+ * The right-hand side shows Matija's portrait inside the accent ring once
+ * `site.portrait` is set. Until then it is a monospaced card naming the three
+ * disciplines — never a stock person or an AI-generated face standing in for
+ * a real one.
  */
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-rule">
-      {/* Decorative accent wash, kept well away from the text contrast. */}
+      {/* Decorative: the technical grid and a soft accent glow behind it. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-40 -right-32 h-[34rem] w-[34rem] rounded-full bg-accent-wash blur-3xl"
+        className="grid-field pointer-events-none absolute inset-0"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-48 -right-40 h-[38rem] w-[38rem] rounded-full bg-accent/10 blur-3xl"
       />
 
       <div className="wrap relative pt-14 pb-16 md:pt-20 md:pb-24">
-        <div className="grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div>
-            <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-semibold uppercase tracking-[0.16em] text-ink-soft">
+            <p className="mono-label flex flex-wrap items-center gap-x-2 gap-y-1 font-semibold text-ink-soft">
               <span className="text-ink">Matija Pinko</span>
-              <span aria-hidden="true" className="text-rule">
+              <span aria-hidden="true" className="text-control">
                 ·
               </span>
               <span>Development</span>
@@ -39,7 +45,8 @@ export function Hero() {
             </p>
 
             <h1 className="mt-6 text-(length:--text-hero) font-extrabold">
-              Vaš sljedeći veliki korak zaslužuje dobar razvoj.
+              Vaš sljedeći veliki korak{" "}
+              <span className="text-accent">zaslužuje dobar razvoj.</span>
             </h1>
 
             <p className="measure-wide mt-7 text-(length:--text-lead) text-ink-soft">
@@ -50,36 +57,81 @@ export function Hero() {
 
             <div className="mt-9 flex flex-wrap gap-3">
               <ButtonLink href="/kontakt" size="lg">
-                Razgovarajmo o projektu
+                Razgovarajmo o projektu{" "}
+                <span aria-hidden="true">&rarr;</span>
               </ButtonLink>
               <ButtonLink href="/projekti" variant="secondary" size="lg">
                 Pogledajte projekte
               </ButtonLink>
             </div>
 
-            <p className="mt-7 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-sm text-ink-soft">
+            <p className="mono-label mt-7 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-ink-soft">
               <span>Projekti najčešće 5.000–15.000 € + PDV</span>
-              <span aria-hidden="true" className="text-rule">
+              <span aria-hidden="true" className="text-control">
                 ·
               </span>
               <span>Moguće plaćanje na rate</span>
             </p>
           </div>
 
-          <div className="lg:pt-6">
+          <div className="flex justify-center lg:justify-end">
             {site.portrait ? (
-              <Image
-                src={site.portrait.src}
-                alt={site.portrait.alt}
-                width={site.portrait.width}
-                height={site.portrait.height}
-                priority
-                sizes="(min-width: 1024px) 38vw, 100vw"
-                className="mb-6 aspect-4/5 w-full rounded-(--radius-card) object-cover"
-              />
-            ) : null}
-            <ProblemPicker />
+              <div className="relative aspect-square w-full max-w-sm">
+                <div
+                  aria-hidden="true"
+                  className="portrait-ring absolute inset-0 rounded-full p-1.5 [mask:radial-gradient(farthest-side,transparent_calc(100%-6px),#000_calc(100%-6px))]"
+                />
+                <Image
+                  src={site.portrait.src}
+                  alt={site.portrait.alt}
+                  width={site.portrait.width}
+                  height={site.portrait.height}
+                  priority
+                  sizes="(min-width: 1024px) 32vw, 90vw"
+                  className="absolute inset-3 h-auto w-[calc(100%-1.5rem)] rounded-full object-cover"
+                  style={{ aspectRatio: "1 / 1" }}
+                />
+              </div>
+            ) : (
+              /* Placeholder while the photograph is not in the repository. */
+              <div className="w-full max-w-sm rounded-(--radius-card) border border-rule bg-surface p-7">
+                <p className="mono-label text-accent">~/pinko</p>
+                <ul className="mt-5 space-y-3">
+                  {["Development", "Marketing", "Business Development"].map(
+                    (discipline) => (
+                      <li
+                        key={discipline}
+                        className="flex items-baseline gap-3 font-mono text-ink"
+                      >
+                        <span aria-hidden="true" className="text-accent">
+                          &gt;
+                        </span>
+                        {discipline}
+                      </li>
+                    )
+                  )}
+                </ul>
+                <p className="mt-6 border-t border-rule pt-5 text-sm text-ink-soft">
+                  Jedna osoba, tri discipline. Bez prepucavanja između agencija.
+                </p>
+              </div>
+            )}
           </div>
+        </div>
+
+        <ul className="mt-14 grid gap-px overflow-hidden rounded-(--radius-card) border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+          {careerFacts.map((fact) => (
+            <li key={fact.label} className="bg-surface p-6">
+              <p className="font-mono text-4xl font-extrabold text-accent">
+                {fact.value}
+              </p>
+              <p className="mt-1.5 text-sm text-ink-soft">{fact.label}</p>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-14">
+          <ProblemPicker />
         </div>
       </div>
     </section>

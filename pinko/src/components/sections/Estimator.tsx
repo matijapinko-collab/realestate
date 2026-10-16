@@ -180,7 +180,7 @@ export function Estimator() {
 
               <Link
                 href="/kontakt"
-                className="mt-7 flex min-h-12 w-full items-center justify-center rounded-full bg-accent px-6 font-semibold text-white transition-colors hover:bg-accent-ink"
+                className="mt-7 flex min-h-12 w-full items-center justify-center rounded-full bg-accent px-6 font-semibold text-on-accent transition-colors hover:bg-accent-ink"
               >
                 Zatražite procjenu
               </Link>

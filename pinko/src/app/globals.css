@@ -1,32 +1,51 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ *
- * Design tokens (brief 9.2)
+ * Design tokens
  *
- * Light, airy, big type, lots of whitespace, one striking accent.
- * The accent is a proposed direction, not a confirmed brand colour.
+ * Dark, technical, monospaced labels, one neon accent. Replaced the earlier
+ * light scheme on 16 October 2026 at Matija's request.
+ *
+ * Every pair below was measured, not guessed:
+ *   ink on paper          16.51:1
+ *   ink-soft on paper      7.84:1
+ *   accent on paper       11.49:1
+ *   near-black on accent  11.19:1   (text on a filled green button)
+ *   control on paper       3.36:1   (WCAG 1.4.11, interactive borders)
+ * `--color-rule` stays decorative only, exactly as in the light scheme.
  * ------------------------------------------------------------------ */
 
 @theme {
-  --color-paper: #fafaf7;
-  --color-surface: #ffffff;
-  --color-ink: #171a20;
-  --color-ink-soft: #535963;
-  --color-rule: #dcddd7;
-  /* Border for interactive controls: 3.27:1 on paper, meeting WCAG 1.4.11.
-     The lighter --color-rule stays for decorative dividers and card edges. */
-  --color-control: #8a8c7e;
-  --color-accent: #2457f5;
-  --color-accent-ink: #1b45c8;
-  --color-accent-wash: #eef2ff;
+  --color-paper: #0a0c11;
+  --color-surface: #11141b;
+  /* One step up from surface, for a card sitting on a surface section. */
+  --color-raised: #171b24;
+  --color-ink: #e8ecf3;
+  --color-ink-soft: #9aa5b4;
+  --color-rule: #232936;
+  /* Border for interactive controls. The dimmer --color-rule stays for
+     decorative dividers and card edges. */
+  --color-control: #5a6678;
+  --color-accent: #36e27e;
+  --color-accent-ink: #5ceb97;
+  --color-accent-wash: #0e2318;
+  /* Text and icons placed on a filled accent surface. */
+  --color-on-accent: #04130a;
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Arial, sans-serif;
 
-  /* Fluid type scale: hero 42–56px mobile, 76–104px desktop. */
-  --text-hero: clamp(2.625rem, 1.15rem + 6.4vw, 6.5rem);
-  --text-display: clamp(2rem, 1.1rem + 3.6vw, 3.75rem);
-  --text-title: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem);
+  /* Monospace carries the technical tone: headings, labels and figures.
+     System faces for now — swapping in a vendored face is one line here. */
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono",
+    "Cascadia Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Fluid type scale. Monospace runs roughly a fifth wider than Manrope at
+     the same size, so the headings sit lower than in the light scheme —
+     otherwise a Croatian hero line takes five rows on a phone. */
+  --text-hero: clamp(2.125rem, 1.2rem + 4vw, 4.25rem);
+  --text-display: clamp(1.75rem, 1.15rem + 2.4vw, 2.875rem);
+  --text-title: clamp(1.25rem, 1.05rem + 0.85vw, 1.75rem);
   --text-lead: clamp(1.125rem, 1.05rem + 0.35vw, 1.375rem);
   --text-body: clamp(1.0625rem, 1.03rem + 0.12vw, 1.1875rem);
 
@@ -46,7 +65,7 @@
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
   }
 
   html {
@@ -67,6 +86,7 @@
   h2,
   h3,
   h4 {
+    font-family: var(--font-mono);
     overflow-wrap: break-word;
     word-break: normal;
     hyphens: manual;
@@ -92,7 +112,7 @@
 
   ::selection {
     background-color: var(--color-accent);
-    color: #fff;
+    color: var(--color-on-accent);
   }
 }
 
@@ -135,6 +155,59 @@
     border-top: 1px solid var(--color-rule);
   }
 
+  /* Faint technical grid, the backdrop of the whole design. Decorative, so
+     it is always behind content and never carries meaning. */
+  .grid-field {
+    background-image: linear-gradient(
+        to right,
+        var(--color-rule) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, var(--color-rule) 1px, transparent 1px);
+    background-size: 5rem 5rem;
+    -webkit-mask-image: radial-gradient(
+      ellipse 85% 70% at 50% 0%,
+      #000 35%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 85% 70% at 50% 0%,
+      #000 35%,
+      transparent 100%
+    );
+  }
+
+  /* Label/eyebrow treatment used across the site. */
+  .mono-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* The portrait ring: a dashed accent arc around the photograph. */
+  .portrait-ring {
+    background:
+      conic-gradient(
+          from 0deg,
+          var(--color-accent) 0deg 42deg,
+          transparent 42deg 90deg,
+          var(--color-accent) 90deg 150deg,
+          transparent 150deg 198deg,
+          var(--color-accent) 198deg 268deg,
+          transparent 268deg 310deg,
+          var(--color-accent) 310deg 360deg
+        )
+        border-box;
+    animation: ring-spin 18s linear infinite;
+  }
+
+  @keyframes ring-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
   /* Discreet entry for larger blocks (160–280ms, brief 9.3). */
   .rise {
     animation: rise 260ms var(--ease-out-soft) both;
@@ -167,5 +240,9 @@
     animation: none;
     opacity: 1;
     transform: none;
+  }
+
+  .portrait-ring {
+    animation: none;
   }
 }

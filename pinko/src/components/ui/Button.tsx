@@ -11,10 +11,10 @@ const base =
   "disabled:cursor-not-allowed disabled:opacity-55";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-accent text-white hover:bg-accent-ink",
+  primary: "bg-accent text-on-accent hover:bg-accent-ink",
   secondary:
-    "border border-control bg-surface text-ink hover:border-ink hover:bg-paper",
-  ghost: "text-ink underline decoration-rule underline-offset-4 hover:decoration-accent",
+    "border border-control bg-surface text-ink hover:border-accent hover:text-accent",
+  ghost: "text-ink underline decoration-control underline-offset-4 hover:decoration-accent",
 };
 
 const sizes: Record<Size, string> = {

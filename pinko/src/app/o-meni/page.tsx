@@ -4,7 +4,12 @@ import { Section } from "@/components/ui/Section";
 import { ClosingContact } from "@/components/sections/ClosingContact";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { bioLong, principles } from "@/content/copy";
-import { career, careerDisclaimer, experienceAreas } from "@/content/career";
+import {
+  additionalWork,
+  career,
+  careerDisclaimer,
+  experienceAreas,
+} from "@/content/career";
 
 const crumbs = [
   { name: "Naslovnica", path: "/" },
@@ -75,20 +80,56 @@ export default function AboutPage() {
         title="Odakle dolazi iskustvo"
         lead={careerDisclaimer}
       >
-        <ul className="border-t border-rule">
+        <ol className="relative space-y-px border-l border-rule pl-6 md:pl-10">
           {career.map((entry) => (
             <li
-              key={`${entry.organisation}-${entry.engagement}`}
-              className="grid gap-2 border-b border-rule py-6 md:grid-cols-[1fr_1fr_1.4fr] md:items-baseline md:gap-8"
+              key={`${entry.organisation}-${entry.period}`}
+              className="relative pb-10"
             >
-              <h3 className="text-lg font-extrabold">{entry.organisation}</h3>
-              <p className="text-sm font-semibold text-accent-ink">
-                {entry.engagement}
+              {/* Marker on the timeline; current roles get the accent. */}
+              <span
+                aria-hidden="true"
+                className={`absolute top-2 -left-[1.8125rem] size-2.5 rounded-full md:-left-[2.8125rem] ${
+                  entry.highlight ? "bg-accent" : "bg-control"
+                }`}
+              />
+              <p className="mono-label text-ink-soft">{entry.period}</p>
+              <h3 className="mt-2 text-(length:--text-title) font-extrabold">
+                {entry.role}
+              </h3>
+              <p className="mt-1 font-semibold text-accent">
+                {entry.organisation}
               </p>
-              <p className="text-ink-soft">{entry.what}</p>
+              <p className="measure-wide mt-3 text-ink-soft">{entry.summary}</p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {entry.tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className="mono-label rounded-(--radius-pill) border border-rule px-2.5 py-1 text-ink-soft"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
-        </ul>
+        </ol>
+
+        <div className="mt-4 rounded-(--radius-card) border border-rule bg-surface p-6 md:p-8">
+          <h3 className="text-lg font-extrabold">Još rada uz navedeno</h3>
+          <p className="measure-wide mt-2 text-ink-soft">
+            Bez datuma, jer ih nikad nismo potvrdili — stoje ovdje da se ne
+            izgube, a ne kao zaokružena priča.
+          </p>
+          <ul className="mt-5 grid gap-px overflow-hidden rounded-(--radius-card) border border-rule bg-rule md:grid-cols-2">
+            {additionalWork.map((item) => (
+              <li key={item.organisation} className="bg-raised p-5">
+                <h4 className="font-extrabold">{item.organisation}</h4>
+                <p className="mt-1.5 text-sm text-ink-soft">{item.what}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Section>
 
       <ClosingContact />

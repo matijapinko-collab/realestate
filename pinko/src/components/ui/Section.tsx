@@ -28,7 +28,7 @@ export function Section({
   const tones = {
     paper: "",
     surface: "bg-surface",
-    ink: "bg-ink text-white",
+    ink: "bg-accent-wash",
   } as const;
 
   return (
@@ -39,16 +39,8 @@ export function Section({
       <div className="wrap">
         {ruled ? <hr className="mb-12 border-0 hairline" /> : null}
         {(eyebrow || index) && (
-          <p
-            className={`mb-5 flex items-baseline gap-3 text-xs font-semibold tracking-[0.18em] uppercase ${
-              tone === "ink" ? "text-white/55" : "text-ink-soft"
-            }`}
-          >
-            {index ? (
-              <span className={tone === "ink" ? "text-white/55" : "text-accent"}>
-                {index}
-              </span>
-            ) : null}
+          <p className="mono-label mb-5 flex items-baseline gap-3 font-semibold text-ink-soft">
+            {index ? <span className="text-accent">{index}</span> : null}
             {eyebrow ? <span>{eyebrow}</span> : null}
           </p>
         )}
@@ -58,11 +50,7 @@ export function Section({
           </h2>
         ) : null}
         {lead ? (
-          <div
-            className={`measure-wide mt-5 text-(length:--text-lead) ${
-              tone === "ink" ? "text-white/75" : "text-ink-soft"
-            }`}
-          >
+          <div className="measure-wide mt-5 text-(length:--text-lead) text-ink-soft">
             {lead}
           </div>
         ) : null}

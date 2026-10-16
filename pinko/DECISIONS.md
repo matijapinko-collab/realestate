@@ -91,3 +91,28 @@ vidljiv bez JS-a.
    objavljeni iznosi su osnovice bez PDV-a.
 4. Wordmark `pinko.` je **prijedlog**, ne odobren logo.
 5. Akcentna boja je prijedlog, ne potvrđena boja brenda.
+
+## Tamni tehnički izgled umjesto svijetlog (16. 10. 2026.)
+
+**Odluka:** web prelazi s dosadašnje svijetle, prozračne sheme na tamnu, s
+neonski zelenim naglaskom i monospace naslovima. Povod je referenca koju je
+Matija poslao (`radnaabazar.com`).
+
+**Što je ostalo isto:** sav sadržaj. Nijedna rečenica nije promijenjena zbog
+izgleda. Promijenjeni su samo tokeni, tipografska skala i nekoliko komponenti
+koje su pretpostavljale svijetlu podlogu.
+
+**Kontrast je izmjeren, ne procijenjen:** tekst na podlozi 16,51:1, prigušeni
+tekst 7,84:1, naglasak 11,49:1, tekst na punom zelenom gumbu 11,19:1, rubovi
+kontrola 3,36:1 (WCAG 1.4.11). `--color-rule` je i dalje isključivo ukrasan.
+
+**Tipografija:** naslovi su monospace. Monospace je oko petine širi od Manropea
+pri istoj veličini, pa je skala spuštena — inače hrvatski naslov na mobitelu
+zauzme pet redova. Tijelo teksta ostaje Manrope jer se duži odlomci u
+monospaceu teže čitaju.
+
+**Što još nije napravljeno:** font je zasad sistemski monospace stack, pa izgled
+naslova ovisi o operativnom sustavu posjetitelja. Za ujednačen izgled treba
+vendorirati pravi monospace (npr. JetBrains Mono, OFL licenca) u
+`src/app/fonts/`, isto kako je Manrope vendoriran. To je jedna linija u
+`globals.css` nakon što datoteke budu u repozitoriju.
