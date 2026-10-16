@@ -588,6 +588,117 @@
     color: var(--color-on-accent);
   }
 
+  /* ---------------------------------------------------------------- *
+   * Opening sequence
+   * ---------------------------------------------------------------- */
+
+  .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 95;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    place-items: center;
+    background: var(--color-paper);
+    transition:
+      transform 800ms cubic-bezier(0.76, 0, 0.24, 1),
+      opacity 500ms ease;
+  }
+
+  .intro[data-phase="leave"] {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  .intro-deck {
+    position: relative;
+    display: grid;
+    width: min(30rem, 80vw);
+    aspect-ratio: 16 / 10;
+    /* The deck sits high and the counter low, as in the reference. */
+    align-self: start;
+    margin-top: 7vh;
+  }
+
+  .intro-card {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 0.9rem;
+    border: 1px solid var(--color-rule);
+    background: var(--color-surface);
+    box-shadow: 0 18px 50px -24px rgb(0 0 0 / 0.55);
+    opacity: 0;
+    transform: translateY(1.5rem) scale(0.97);
+    transition:
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 400ms ease;
+  }
+
+  /* While the counter runs, one card at a time is face up. */
+  .intro-card[data-active] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* At 100 the deck fans out across the middle. */
+  .intro[data-phase="fan"] .intro-card {
+    opacity: 1;
+    transform: translate(var(--fan-x), var(--fan-y)) rotate(var(--fan-r))
+      scale(0.86);
+    transition-delay: calc(var(--card-index) * 70ms);
+  }
+
+  /* Then it gathers back into a single stack. */
+  .intro[data-phase="gather"] .intro-card,
+  .intro[data-phase="leave"] .intro-card {
+    opacity: 1;
+    transform: translateY(calc(var(--card-index) * 6px)) scale(1);
+    transition-delay: calc(var(--card-index) * 45ms);
+  }
+
+  .intro-counter {
+    display: flex;
+    align-self: end;
+    padding-bottom: 10vh;
+    font-family: var(--font-sans);
+    font-size: clamp(4rem, 14vw, 11rem);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    transition: opacity 300ms ease;
+  }
+
+  :root:not([data-theme="light"]) .intro-counter {
+    font-family: var(--font-mono);
+  }
+
+  .intro[data-phase="fan"] .intro-counter,
+  .intro[data-phase="gather"] .intro-counter,
+  .intro[data-phase="leave"] .intro-counter {
+    opacity: 0;
+  }
+
+  /* Each digit is a strip of 0–9 that slides, like an odometer. */
+  .intro-digit {
+    display: block;
+    overflow: hidden;
+    height: 0.9em;
+    width: 0.62em;
+  }
+
+  .intro-digit-strip {
+    display: block;
+    transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .intro-digit-strip > span {
+    display: block;
+    height: 0.9em;
+    line-height: 0.9;
+    text-align: center;
+  }
+
   /* Endless strip. Duplicated content in the markup makes the loop seamless. */
   .marquee {
     overflow: hidden;

@@ -191,3 +191,20 @@ Preuzeto je još:
 
 Ono što **nije** preuzeto: njihov odjeljak s preporukama. Preporuka koju nitko
 nije dao ne smije se izmisliti, a pravih još nema. Vratit će se kad ih bude.
+
+## Uvodni slijed (16. 10. 2026.)
+
+Prva verzija zavjese bila je samo brojač i Matija je s pravom rekao da to nema
+veze sa snimkom. Snimka je rastavljena na kadrove i slijed je napravljen po
+njoj: kartica projekta gore, brojač dolje koji se **kotrlja po znamenkama**
+kao brojilo, na 100 se špil **raširi**, pa **skupi**, pa cijela zavjesa **ode
+prema gore** i otkrije naslovnicu.
+
+Kartice su **stvarne snimke** — naslovnica, stranica proizvoda i katalog
+100% Smart Fooda te početna Varela. Nema izmišljenih mockupa. Sve četiri
+zajedno su 57 KB.
+
+Ograničenja koja slijed poštuje: ne pokreće se pod `prefers-reduced-motion`,
+ide jednom po sesiji, `aria-hidden` je i stranica iza njega je cijelo vrijeme
+iscrtana, a prekida se klikom, tipkom ili sam od sebe nakon nešto više od tri
+sekunde.

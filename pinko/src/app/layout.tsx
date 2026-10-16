@@ -5,7 +5,7 @@ import { site } from "@/config/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MotionLayer } from "@/components/ui/MotionLayer";
-import { Preloader } from "@/components/ui/Preloader";
+import { Intro } from "@/components/ui/Intro";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 
 /**
@@ -97,7 +97,7 @@ export default function RootLayout({
         >
           Preskoči na sadržaj
         </a>
-        <Preloader />
+        <Intro />
         <MotionLayer />
         <SmoothScroll />
         {/* Decorative rail down the left edge; light mode only. */}
