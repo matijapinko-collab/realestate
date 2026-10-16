@@ -1,10 +1,10 @@
-import Image from "next/image";
 import { ButtonLink } from "@/components/ui/Button";
 import { site } from "@/config/site";
 import { careerFacts } from "@/content/career";
 import { CountUp } from "@/components/ui/CountUp";
 import { SplitLines } from "@/components/ui/SplitLines";
 import { ProblemPicker } from "./ProblemPicker";
+import { PortraitBio } from "./PortraitBio";
 import { TypedDisciplines } from "./TypedDisciplines";
 
 /**
@@ -90,22 +90,7 @@ export function Hero() {
 
           <div className="hero-aside flex justify-center lg:justify-end">
             {site.portrait ? (
-              <div className="relative aspect-square w-full max-w-sm">
-                <div
-                  aria-hidden="true"
-                  className="portrait-ring absolute inset-0 rounded-full p-1.5 [mask:radial-gradient(farthest-side,transparent_calc(100%-6px),#000_calc(100%-6px))]"
-                />
-                <Image
-                  src={site.portrait.src}
-                  alt={site.portrait.alt}
-                  width={site.portrait.width}
-                  height={site.portrait.height}
-                  priority
-                  sizes="(min-width: 1024px) 32vw, 90vw"
-                  className="absolute inset-3 h-auto w-[calc(100%-1.5rem)] rounded-full object-cover"
-                  style={{ aspectRatio: "1 / 1" }}
-                />
-              </div>
+              <PortraitBio />
             ) : (
               /* Placeholder while the photograph is not in the repository. */
               <div

@@ -72,7 +72,14 @@ export const site = {
    * `width`/`height` to its real pixel dimensions (needed so the layout does
    * not shift while it loads).
    */
-  portrait: null as MaybeConfirmed<{
+  portrait: {
+    src: "/matija-pinko.webp",
+    // Real pixel size of the file. Guessing these makes the layout jump
+    // while the image loads.
+    width: 960,
+    height: 960,
+    alt: "Matija Pinko za radnim stolom, pred otvorenim laptopom.",
+  } as MaybeConfirmed<{
     src: string;
     width: number;
     height: number;

@@ -64,11 +64,12 @@ Objavljeni su zapisi s `approvedForPublication: true` u
 
 ## 4. Vizualni materijali
 
-- [ ] **Portret u repozitorij.** Fotografija je poslana u razgovoru, ali nije
-      stigla kao datoteka u radno okruženje, pa je nisam mogao commitati.
-      Dodajte je u `pinko/public/` i upišite `site.portrait` u
-      `src/config/site.ts` (`src`, `width`, `height`, `alt`) — slot u heroju
-      je već spreman.
+- [x] **Portret je u repozitoriju** (16. 10. 2026.): `public/matija-pinko.webp`,
+      960 × 960, 50 KB. Stoji u krugu s rotirajućim prstenom u tamnom načinu i
+      otvara biografiju. Tamna fotka s ljubičastim svjetlom ovdje radi u svoju
+      korist — strah iz prve predaje odnosio se na svijetli web.
+      Ako se ikad zamijeni, upisati **stvarne** dimenzije nove datoteke u
+      `site.portrait`, inače layout poskakuje pri učitavanju.
 - [ ] Odobreni screenshotovi projekata
 
 Bez AI portreta koji se predstavlja kao stvarna fotografija i bez stock timova.

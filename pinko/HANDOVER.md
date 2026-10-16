@@ -72,29 +72,15 @@ Sve je u `src/config/site.ts`.
 
 ## 4. Što je ostalo — po prioritetu
 
-### 4.1. Fotografija u hero (spremno, čeka samo datoteku)
+### 4.1. Fotografija u heroju — RIJEŠENO 16. 10. 2026.
 
-Matijin portret **nije u repozitoriju**. Slot je već napravljen i čeka:
+Fotografija je u repozitoriju: `public/matija-pinko.webp` (960 × 960, 50 KB),
+upisana u `site.portrait`. U tamnom načinu stoji u krugu s rotirajućim
+isprekidanim prstenom i klikom otvara biografiju (`PortraitBio.tsx`).
 
-1. Stavi datoteku u `pinko/public/` (npr. `matija.jpg`).
-2. U `src/config/site.ts` upiši `site.portrait`:
-   ```ts
-   portrait: {
-     src: "/matija.jpg",
-     width: <stvarna širina>,
-     height: <stvarna visina>,
-     alt: "Matija Pinko za radnim stolom",
-   },
-   ```
-   Dimenzije **moraju** biti stvarne, inače se layout trza pri učitavanju.
-   Očitaj ih iz datoteke, ne nagađaj.
-3. `Hero.tsx` ju automatski prikaže iznad izbornika problema.
-
-**Upozorenje o dizajnu:** fotka koju je Matija pokazao je tamna, s jakim
-ljubičastim LED svjetlom. Web je svijetao i prozračan (pozadina `#FAFAF7`), pa
-će odskakati. Kad ju ubaciš, **pogledaj kako stvarno izgleda** i javi Matiji.
-Opcije koje smo već spominjali: nova fotka u dnevnom svjetlu (najbolje), obrada
-pa premještanje na `/o-meni`, ili ostaviti kako jest.
+Upozorenje iz prve predaje — da je fotka tamna i ljubičasta pa će odskakati —
+više ne vrijedi: web je u međuvremenu postao taman i fotka mu odgovara. U
+svijetlom načinu heroj je centriran i portret se ne prikazuje.
 
 ### 4.2. Rok čuvanja podataka na `/privatnost`
 
