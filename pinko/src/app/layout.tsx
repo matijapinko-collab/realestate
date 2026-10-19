@@ -69,12 +69,23 @@ export const viewport: Viewport = {
 };
 
 /**
- * Applied before first paint, so a visitor who chose the light experience
- * never sees the dark one flash past. Kept to one expression and inlined on
- * purpose: a stylesheet cannot read localStorage, and a deferred script
- * would arrive too late.
+ * Keeps the client in step with the world the server already rendered.
+ *
+ * This script used to read localStorage and set `data-theme` from it. That
+ * was fine while both worlds were one markup tree in two skins. It stopped
+ * being fine the moment they became different trees: the server picks the
+ * tree from the COOKIE, and a visitor whose localStorage disagreed got one
+ * world's markup wearing the other world's tokens. That is exactly how the
+ * dark site broke on 19 Oct 2026.
+ *
+ * So there is now one source of truth, the cookie, and this script never
+ * contradicts it. If a cookie exists the server already used it and there
+ * is nothing to do. If it does not but localStorage remembers a choice,
+ * the choice is written to the cookie and the attribute is left alone, so
+ * markup and tokens stay in agreement; the chosen world arrives on the
+ * next navigation rather than as a broken hybrid on this one.
  */
-const themeScript = `try{var t=localStorage.getItem("pinko-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}`;
+const themeScript = `try{var m=document.cookie.match(/(?:^|; )pinko-theme=(dark|light)/);if(!m){var t=localStorage.getItem("pinko-theme");if(t==="light"||t==="dark"){document.cookie="pinko-theme="+t+"; path=/; max-age=31536000; SameSite=Lax"+(location.protocol==="https:"?"; Secure":"")}}}catch(e){}`;
 
 export default async function RootLayout({
   children,
