@@ -23,7 +23,12 @@ export function ProjectCarousel({ projects }: { projects: Project[] }) {
     <div className="project-carousel" data-reveal>
       <div
         className="project-carousel-track"
-        style={{ "--carousel-copies": copies } as React.CSSProperties}
+        style={
+          {
+            "--carousel-copies": copies,
+            "--carousel-cards": projects.length,
+          } as React.CSSProperties
+        }
       >
         {Array.from({ length: copies }).map((_, copy) => (
           <ul

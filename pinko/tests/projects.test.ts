@@ -83,7 +83,9 @@ test("slugs are unique and URL safe", () => {
 });
 
 test("no record carries placeholder text", () => {
-  const banned = /lorem ipsum|todo|tbd|xxx|placeholder/i;
+  // Word boundaries matter here: this is Croatian copy, and "istodobno"
+  // contains "todo". Without \b the test fails on a perfectly good sentence.
+  const banned = /lorem ipsum|\b(todo|tbd|xxx|placeholder)\b/i;
   for (const project of projects) {
     const blob = JSON.stringify(project);
     assert.equal(

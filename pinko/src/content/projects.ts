@@ -706,6 +706,12 @@ export const projects: Project[] = [
     ],
     nextStep:
       "Imate webshop, skladište, ERP, tri Excel tablice i zaposlenika koji jedini zna kako sve to funkcionira?",
+    featuredImage: {
+      src: "/projekti/bolero-erp-cover.webp",
+      alt: "Generirana naslovna grafika projekta: mreža i krug u zelenoj boji, s naslovom „ERP i automatizacije”.",
+      width: 1600,
+      height: 1000,
+    },
     evidenceLinks: [],
     noPublicEvidence:
       "ERP, WMS i integracije su interni sustavi klijenta i nemaju javnu adresu koju bi čitatelj mogao otvoriti. Brojke u tekstu dolaze iz analiziranog migracijskog skupa podataka, a svaka je navedena s osnovicom na kojoj je izmjerena.",
@@ -851,6 +857,470 @@ export const projects: Project[] = [
     motif: "glitch",
     internalNote:
       "Dodano 19. 10. 2026. prema Matijinom briefu. GRANICE: Matija NIJE osnivač, vlasnik ni developer portala — na samom webu je naveden kao writer/mechanic, uz osnivača Roberta W. te Luku K. i Patrika B. Brojke (1M posjetitelja, 60k USD) su POVIJESNI rezultati CIJELOG portala i tako su i napisane; svaka nosi osnovicu koja to kaže. ČEKA SE: (1) Matijina featured fotografija — dok je nema, kartica koristi postojeći tipografski fallback; (2) poveznice na konkretne članke koje je napisao, za sekciju s primjerima — bez njih se ta sekcija namjerno ne objavljuje.",
+  },
+  {
+    slug: "youtube-scenariji-automobili",
+    projectName: "Automotive YouTube Content",
+    relationshipType: "klijent",
+    role:
+      "Istraživanje automobilskih tema i pisanje scenarija za videoformat.",
+    status: "lansirano",
+    approvedForPublication: true,
+    tagline:
+      "Sto YouTube scenarija. Jer očito nije bilo dovoljno pisati o autima.",
+    summary:
+      "Pisanje scenarija za automobilski YouTube kanal — ugovor usmjeren na seriju od 100 scenarija, s naglaskom na istraživanje i strukturu priče.",
+    context:
+      "Znate onaj osjećaj kad otvorite YouTube pogledati jedan video o automobilima, a tri sata kasnije gledate kako je netko restaurirao motor iz 1972.? E, upravo takav sadržaj zahtijeva dobru priču. Angažiran sam za projekt pisanja scenarija za automobilski YouTube kanal; ugovor je bio usmjeren na seriju od 100 scenarija.",
+    challenge:
+      "Automobilska publika nije baš poznata po tome da joj možete prodavati maglu. Pogotovo kad su u pitanju tehničke informacije. Ako gledatelju deset minuta objašnjavate nešto što ste mogli reći u dvije, vrlo brzo će pronaći nekoga zanimljivijeg.",
+    complications: [
+      "Tehnička točnost i gledljivost vuku na suprotne strane",
+      "Gledatelj nema obavezu ostati — svaka minuta mora zaslužiti sljedeću",
+      "Serija od stotinu scenarija traži ponovljiv postupak, ne nadahnuće",
+    ],
+    story: [
+      {
+        heading: "Pristup",
+        body: [
+          "Dobar scenarij počinje istraživanjem. Treba pronaći zanimljivu temu, razumjeti tehničke detalje i odlučiti kako ispričati priču.",
+          "Posebnu pozornost posvećivao sam strukturi, uvodu koji privlači pažnju i prirodnom slijedu informacija.",
+          "Jer YouTube nije školski referat. Nitko ne mora ostati do kraja.",
+        ],
+      },
+      {
+        heading: "Zaključak",
+        body: [
+          "Dobar YouTube scenarij nije samo tekst koji netko pročita pred mikrofonom. To je kombinacija istraživanja, dramaturgije i razumijevanja publike.",
+          "A kad su automobili u pitanju, pomaže i to što čovjeka stvarno zanima tema.",
+          "Jer teško je napisati zanimljiv video o automobilima ako jedva razlikujete auspuh od usisavača.",
+        ],
+      },
+    ],
+    decisions: [
+      "Tema se bira prema tome ima li priču, a ne samo podatke",
+      "Uvod mora zaslužiti sljedeću minutu",
+      "Tehnički detalj ide u scenarij samo ako ga gledatelj može pratiti bez pauze",
+    ],
+    deliverables: [
+      "Istraživanje automobilskih tema",
+      "Pisanje scenarija prilagođenih videoformatu",
+      "Rad na strukturi, uvodu i slijedu informacija",
+    ],
+    outcomesLabel: "Moj doprinos",
+    outcomes: [
+      "Scenariji pisani za slušanje, ne za čitanje",
+      "Ponovljiva struktura primjenjiva na cijelu seriju",
+    ],
+    metrics: [
+      {
+        value: "5/5",
+        label: "ocjena klijenta",
+        basis:
+          "Ocjena po završetku ugovora na platformi za freelance suradnju, uz preporuku „100% Recommended”. Prema Matijinoj evidenciji.",
+      },
+    ],
+    nextStep: "Trebate scenarij koji gledatelja drži do kraja?",
+    featuredImage: {
+      src: "/projekti/youtube-scenariji-automobili-cover.webp",
+      alt: "Generirana naslovna grafika projekta: valovite linije u narančastoj boji, s naslovom „100 scenarija za YouTube”.",
+      width: 1600,
+      height: 1000,
+    },
+    evidenceLinks: [],
+    noPublicEvidence:
+      "Scenariji su isporučeni klijentu i objavljuju se pod njegovim imenom, pa nema javne adrese koju bih mogao pripisati sebi. Točan broj isporučenih scenarija i rezultate objavljenih videa namjerno ne navodim dok ih klijent ne potvrdi.",
+    images: [],
+    publishedAt: "2026-10-19",
+    contributionLabel: "YouTube scenariji — istraživanje i pisanje",
+  },
+  {
+    slug: "youtube-scenariji-muska-moda",
+    projectName: "Men's Style & Fashion YouTube",
+    relationshipType: "klijent",
+    role: "Pisanje scenarija za YouTube kanal o muškom stilu i modi.",
+    status: "lansirano",
+    approvedForPublication: true,
+    tagline: "Muška moda. Jer očito nije dovoljno samo obući hlače.",
+    summary:
+      "Scenariji za kanal o muškom stilu: istraživanje, struktura i razumljiv jezik umjesto filozofskih rasprava o kaputima.",
+    context:
+      "Postoje muškarci koji znaju kombinirati odjeću. Postoje muškarci koji misle da znaju. A postoje i oni koji imaju sedam identičnih crnih majica i tvrde da je to minimalistički stil. Neću reći kojoj skupini pripadam.",
+    challenge:
+      "Moda je vizualna industrija. Ali YouTube video ne može se oslanjati samo na lijepe fotografije. Treba imati priču. Dobar scenarij mora gledatelju objasniti zašto je određena tema važna, što može naučiti i kako to primijeniti.",
+    complications: [
+      "Vizualna tema koja se mora ispričati riječima",
+      "Savjet o stilu lako sklizne u opće mjesto ili u pretjeranu teoriju",
+    ],
+    story: [
+      {
+        heading: "Moj pristup",
+        body: [
+          "Naglasak sam stavljao na istraživanje, strukturu i razumljiv jezik.",
+          "Bez nepotrebnog kompliciranja i pretvaranja običnog savjeta u filozofsku raspravu.",
+          "Cilj je bio da sadržaj bude koristan, zanimljiv i prirodan za slušanje.",
+        ],
+      },
+      {
+        heading: "Zaključak",
+        body: [
+          "Nije važno pišete li o automobilima, modi ili tehnologiji. Dobar sadržaj uvijek počinje razumijevanjem publike.",
+          "A ako možete objasniti muškarcu zašto mu trebaju drugačije cipele, možete objasniti gotovo sve.",
+        ],
+      },
+    ],
+    decisions: [
+      "Savjet mora biti primjenjiv, ne samo točan",
+      "Jezik prirodan za slušanje, bez stručnog pozerstva",
+    ],
+    deliverables: [
+      "Istraživanje tema o muškom stilu i modi",
+      "Pisanje scenarija za videoformat",
+    ],
+    outcomesLabel: "Moj doprinos",
+    outcomes: [
+      "Scenariji koji temu objasne i zadrže gledatelja",
+      "Sadržaj razumljiv publici koja nije u modnoj industriji",
+    ],
+    metrics: [
+      {
+        value: "5/5",
+        label: "ocjena klijenta",
+        basis:
+          "Ocjena po završetku suradnje; klijent je posebno pohvalio profesionalnost, razumijevanje zadatka, točnost i suradnju. Prema Matijinoj evidenciji.",
+      },
+    ],
+    nextStep: "Imate vizualnu temu koju treba ispričati riječima?",
+    featuredImage: {
+      src: "/projekti/youtube-scenariji-muska-moda-cover.webp",
+      alt: "Generirana naslovna grafika projekta: nagnute pruge u ružičastoj boji, s naslovom „Scenariji o stilu”.",
+      width: 1600,
+      height: 1000,
+    },
+    evidenceLinks: [],
+    noPublicEvidence:
+      "Scenariji se objavljuju pod imenom kanala, pa nema javne adrese koju bih mogao pripisati sebi.",
+    images: [],
+    publishedAt: "2026-10-19",
+    contributionLabel: "YouTube scenariji — stil i moda",
+  },
+  {
+    slug: "optimizacija-blog-clanaka",
+    projectName: "Optimizacija blog članaka",
+    relationshipType: "klijent",
+    role: "Optimizacija postojećih članaka na hrvatskom blogu.",
+    status: "lansirano",
+    approvedForPublication: true,
+    tagline: "Članci postoje. Google se pravi da ne zna za njih.",
+    summary:
+      "Rad na postojećem sadržaju hrvatskog bloga: namjera pretrage, struktura i prilike za poboljšanje — bez pisanja svega ispočetka.",
+    context:
+      "Imate blog. Imate članke. Možda imate čak i jako dobre članke. Samo postoji jedan mali problem. Nitko ih ne čita.",
+    challenge:
+      "Objaviti članak nije isto što i napraviti sadržaj koji može konkurirati u organskoj pretrazi. Tekst treba imati jasnu temu, odgovarati na pitanja korisnika i biti razumljivo strukturiran. A ponekad se dogodi da dobar sadržaj jednostavno nije dovoljno dobro predstavljen.",
+    complications: [
+      "Postojeći tekst ima svoju povijest i svoje autore — ne može se samo obrisati",
+      "Treba procijeniti što je vrijedno popravka, a što ne",
+    ],
+    story: [
+      {
+        heading: "Pristup",
+        body: [
+          "Projekt je bio usmjeren na optimizaciju postojećeg sadržaja.",
+          "Kod takvih zadataka najvažnije je procijeniti odgovara li članak namjeri pretraživanja, jesu li informacije jasno organizirane i gdje postoje prilike za poboljšanje.",
+          "Nema potrebe sve brisati i pisati ispočetka samo zato što netko voli velike projekte. Ponekad je pametnije popraviti ono što već postoji.",
+        ],
+      },
+      {
+        heading: "Zaključak",
+        body: [
+          "SEO nije natjecanje u tome tko će više puta napisati istu ključnu riječ.",
+          "A Google, koliko god bio pametan, još uvijek nije dužan čitati misli autora.",
+        ],
+      },
+    ],
+    decisions: [
+      "Popraviti postojeće umjesto pisati ispočetka gdje to ima smisla",
+      "Polazište je namjera pretrage, ne popis ključnih riječi",
+    ],
+    deliverables: [
+      "Pregled postojećih članaka i procjena prilika",
+      "Optimizacija teme, strukture i predstavljanja sadržaja",
+    ],
+    outcomesLabel: "Moj doprinos",
+    outcomes: [
+      "Sadržaj posložen prema onome što čitatelj zapravo traži",
+      "Jasnija struktura i predstavljanje postojećih tekstova",
+    ],
+    metrics: [
+      {
+        value: "5/5",
+        label: "ocjena klijenta",
+        basis:
+          "Ocjena po završetku suradnje, prema Matijinoj evidenciji. Podaci o promjeni organskog prometa ili pozicija nisu potvrđeni i zato nisu objavljeni.",
+      },
+    ],
+    nextStep: "Imate dobre članke koje nitko ne čita?",
+    featuredImage: {
+      src: "/projekti/optimizacija-blog-clanaka-cover.webp",
+      alt: "Generirana naslovna grafika projekta: koncentrični krugovi u plavoj boji, s naslovom „Optimizacija članaka”.",
+      width: 1600,
+      height: 1000,
+    },
+    evidenceLinks: [],
+    noPublicEvidence:
+      "Riječ je o uređivanju tuđeg bloga; članci su klijentovi i objavljeni pod njegovim imenom. Nemam potvrđene podatke o promjeni prometa ili pozicija, pa ih ne navodim.",
+    images: [],
+    publishedAt: "2026-10-19",
+    contributionLabel: "SEO optimizacija sadržaja",
+  },
+  {
+    slug: "clanak-liga-prvaka",
+    projectName: "Liga prvaka — sportski članak",
+    relationshipType: "klijent",
+    role: "Priprema i pisanje hrvatskog sportskog sadržaja za zadanu temu.",
+    status: "lansirano",
+    approvedForPublication: true,
+    tagline:
+      "Liga prvaka. Jer nogomet ima dovoljno stručnjaka, ali očito je trebao još jednoga.",
+    summary:
+      "Testni članak na hrvatskom o Ligi prvaka, za Upwork klijenta — aktualno, precizno i napisano za publiku koja temu već prati.",
+    context:
+      "Nogomet je jednostavna igra. Dvadeset i dva igrača trče za loptom, a nekoliko milijuna ljudi nakon utakmice objašnjava što je trener trebao napraviti.",
+    challenge:
+      "Sportski sadržaj mora biti aktualan, precizan i zanimljiv. Čitatelji često već poznaju osnovne informacije. Zato članak mora ponuditi jasnu priču, relevantan kontekst i razlog da ga netko pročita do kraja.",
+    complications: [
+      "Publika temu prati i prije članka — osnovne informacije nisu vrijednost",
+      "Testni angažman: jedan tekst odlučuje o cijeloj suradnji",
+    ],
+    story: [
+      {
+        heading: "Moj rad",
+        body: [
+          "Priprema i pisanje hrvatskog sportskog sadržaja za zadanu temu.",
+          "Naglasak na razumljivosti, prirodnom jeziku i prezentaciji informacija publici koja prati nogomet.",
+        ],
+      },
+      {
+        heading: "Zaključak",
+        body: [
+          "Pisanje o nogometu može izgledati jednostavno. Sve dok ne shvatite da svaki čitatelj već ima vlastitu taktiku, sastav i mišljenje o sucu.",
+          "Srećom, moj posao bio je napisati članak. Ne objasniti VAR.",
+        ],
+      },
+    ],
+    decisions: [
+      "Kontekst i priča umjesto ponavljanja poznatih informacija",
+      "Prirodan jezik publike koja sport prati, bez novinarskih fraza",
+    ],
+    deliverables: ["Hrvatski sportski članak na zadanu temu"],
+    outcomesLabel: "Moj doprinos",
+    outcomes: ["Tekst prilagođen publici koja temu već poznaje"],
+    metrics: [
+      {
+        value: "5/5",
+        label: "ocjena klijenta",
+        basis:
+          "Ocjena po završetku testnog angažmana na Upworku, prema Matijinoj evidenciji.",
+      },
+    ],
+    nextStep: "Trebate hrvatski sadržaj za publiku koja temu već poznaje?",
+    featuredImage: {
+      src: "/projekti/clanak-liga-prvaka-cover.webp",
+      alt: "Generirana naslovna grafika projekta: raspršene točke u zelenoj boji, s naslovom „Liga prvaka”.",
+      width: 1600,
+      height: 1000,
+    },
+    evidenceLinks: [],
+    noPublicEvidence:
+      "Testni članak isporučen je klijentu i objavljuje se pod njegovim imenom.",
+    images: [],
+    publishedAt: "2026-10-19",
+    contributionLabel: "Sportski sadržaj na hrvatskom",
+  },
+  {
+    slug: "masazne-kade-top-5",
+    projectName: "Top 5 proizvođača masažnih kada u SAD-u",
+    relationshipType: "klijent",
+    role: "Istraživanje kategorije i priprema usporednog B2B sadržaja.",
+    status: "lansirano",
+    approvedForPublication: true,
+    tagline: "Pet proizvođača masažnih kada. Jer i to netko mora istražiti.",
+    summary:
+      "B2B usporedni sadržaj o pet proizvođača masažnih kada na američkom tržištu — istraživanje kategorije i jasno predstavljene razlike.",
+    context:
+      "Jednog dana pišete o automobilima. Drugog o tehnologiji. A onda dođe klijent i pita možete li istražiti proizvođače masažnih kada u Americi. Naravno da možete. Dobrodošli u svijet freelance pisanja.",
+    challenge:
+      "B2B sadržaj zahtijeva drugačiji pristup od zabavnih članaka. Čitatelj želi relevantne informacije o proizvođačima i njihovoj ponudi, a ne generičke rečenice o tome kako je opuštanje važno.",
+    complications: [
+      "Nepoznata kategorija proizvoda koju treba razumjeti prije pisanja",
+      "Usporedba ima smisla samo ako su razlike stvarne i provjerene",
+    ],
+    story: [
+      {
+        heading: "Moj rad",
+        body: [
+          "Projekt je obuhvaćao pripremu sadržaja na temu pet proizvođača masažnih kada na američkom tržištu.",
+          "Za kvalitetnu usporedbu važno je razumjeti kategoriju proizvoda, provjeriti proizvođače i jasno predstaviti razlike među njima.",
+          "Iako, budimo realni, nakon dovoljno istraživanja i autoru dobro dođe masažna kada.",
+        ],
+      },
+      {
+        heading: "Zaključak",
+        body: [
+          "Dobar content writer ne mora unaprijed znati sve o svakoj industriji. Ali mora znati istraživati.",
+          "Jer ako možete danas razumjeti automobile, sutra SaaS, a prekosutra masažne kade, očito Vam Google nije jedini prijatelj.",
+        ],
+      },
+    ],
+    decisions: [
+      "Prvo razumjeti kategoriju, pa tek onda pisati usporedbu",
+      "Razlike među proizvođačima moraju biti provjerene, ne prepričane",
+    ],
+    deliverables: [
+      "Istraživanje kategorije i proizvođača",
+      "Usporedni sadržaj o pet proizvođača na američkom tržištu",
+    ],
+    outcomesLabel: "Moj doprinos",
+    outcomes: [
+      "Usporedba koja kupcu daje razliku, a ne opća mjesta",
+      "Brzo ulaženje u nepoznatu kategoriju proizvoda",
+    ],
+    metrics: [
+      {
+        value: "4/5",
+        label: "ocjena klijenta",
+        basis:
+          "Ocjena po završetku ugovora, prema Matijinoj evidenciji.",
+      },
+    ],
+    nextStep: "Trebate sadržaj u kategoriji koju tek treba razumjeti?",
+    featuredImage: {
+      src: "/projekti/masazne-kade-top-5-cover.webp",
+      alt: "Generirana naslovna grafika projekta: koncentrični krugovi u tirkiznoj boji, s naslovom „Top 5 proizvođača”.",
+      width: 1600,
+      height: 1000,
+    },
+    evidenceLinks: [],
+    noPublicEvidence:
+      "Sadržaj je isporučen klijentu i objavljuje se pod njegovim imenom.",
+    images: [],
+    publishedAt: "2026-10-19",
+    contributionLabel: "B2B istraživanje i usporedni sadržaj",
+  },
+  {
+    slug: "adpiler",
+    projectName: "Adpiler",
+    relationshipType: "klijent",
+    role:
+      "Istraživanje i pisanje sadržaja za SaaS proizvod: objašnjavanje funkcionalnosti jezikom korisnika.",
+    status: "lansirano",
+    approvedForPublication: true,
+    tagline: "SaaS sadržaj koji razumiju i ljudi koji nisu developeri.",
+    summary:
+      "SEO, digitalne tehnologije i content marketing za SaaS proizvod — funkcionalnosti objašnjene kroz probleme koje korisnik pokušava riješiti.",
+    context:
+      "Softverske tvrtke imaju jednu zanimljivu naviku. Razviju odličan proizvod. Onda ga pokušaju objasniti rečenicom koja sadrži dvanaest stručnih izraza, tri kratice i riječ „synergy”. I čude se zašto korisnici imaju pitanja.",
+    challenge:
+      "B2B softver mora istodobno komunicirati s različitim korisnicima. Neki razumiju tehničke detalje. Drugi samo žele znati hoće li im alat olakšati posao. Sadržaj mora povezati funkcionalnosti proizvoda s problemima koje korisnici pokušavaju riješiti.",
+    complications: [
+      "Dvije publike na istoj stranici: tehnička i poslovna",
+      "Funkcionalnost sama po sebi ne znači ništa dok se ne veže uz problem",
+    ],
+    story: [
+      {
+        heading: "Moj doprinos",
+        body: [
+          "Rad na istraživanju i pisanju sadržaja povezanog sa SaaS proizvodom.",
+          "Naglasak na jasnim objašnjenjima, razumljivoj strukturi i prilagodbi stručnih informacija korisnicima.",
+        ],
+      },
+      {
+        heading: "Zaključak",
+        body: [
+          "Dobar SaaS copywriting ne znači objasniti korisniku koliko je vaš softver kompliciran. Nego koliko mu život može biti jednostavniji.",
+          "Jer ako za korištenje aplikacije trebate doktorat i tri molitve, možda problem nije u korisniku.",
+        ],
+      },
+    ],
+    decisions: [
+      "Funkcionalnost se objašnjava kroz problem koji rješava",
+      "Isti tekst mora poslužiti i tehničkom i poslovnom čitatelju",
+    ],
+    deliverables: [
+      "Istraživanje proizvoda i njegovih funkcionalnosti",
+      "Pisanje sadržaja prilagođenog različitim razinama tehničkog znanja",
+    ],
+    outcomesLabel: "Moj doprinos",
+    outcomes: [
+      "Objašnjenja koja povezuju funkcionalnost s korisnikovim problemom",
+      "Struktura razumljiva i korisniku koji nije developer",
+    ],
+    nextStep: "Imate proizvod koji je teže objasniti nego napraviti?",
+    featuredImage: {
+      src: "/projekti/adpiler-cover.webp",
+      alt: "Generirana naslovna grafika projekta: mreža i krug u ljubičastoj boji, s naslovom „SaaS sadržaj koji se razumije”.",
+      width: 1600,
+      height: 1000,
+    },
+    evidenceLinks: [],
+    noPublicEvidence:
+      "Sadržaj je isporučen klijentu i objavljuje se pod njegovim imenom. Konkretne vrste isporučenih materijala i primjere treba potvrditi prije javnog prikaza, pa ih ovdje namjerno nema.",
+    images: [],
+    publishedAt: "2026-10-19",
+    contributionLabel: "SEO, digitalne tehnologije i content marketing",
+  },
+  {
+    slug: "ghostwriting-roman",
+    projectName: "Ghostwriting — ljubavni roman",
+    relationshipType: "klijent",
+    role: "Ghostwriting: pisanje romana koji je objavljen pod tuđim imenom.",
+    status: "lansirano",
+    approvedForPublication: true,
+    tagline: "Napisao sam ljubavni roman. Ne pitajte me za detalje.",
+    summary:
+      "Ghostwriting ljubavnog romana — karakter, tempo i razlog da čitatelj okrene stranicu. Iste vještine koje drže pažnju i izvan književnosti.",
+    context:
+      "Da, dobro ste pročitali. Osim tehnologije, automobila, SEO-a i poslovnih sustava, okušao sam se i u ghostwritingu ljubavnog romana.",
+    challenge:
+      "Ghostwriting je zanimljiv posao. Vi napišete priču. Netko drugi je potpiše. A Vi naučite da dobar tekst mora imati karakter, tempo, emociju i razlog da čitatelj okrene sljedeću stranicu.",
+    complications: [
+      "Autorstvo ostaje tuđe — rad se ne može pokazati",
+      "Dugi tekst mora držati tempo kroz cijelu knjigu, ne kroz jednu stranicu",
+    ],
+    story: [
+      {
+        heading: "Zašto to uopće stoji u poslovnom portfoliju",
+        body: [
+          "Upravo su to vještine koje su korisne i izvan književnosti.",
+          "Kod prodajnog teksta želite zadržati pažnju. Kod YouTube scenarija želite da gledatelj ostane do kraja. Kod romana želite da čitatelj ne može prestati čitati. Princip je sličan.",
+          "Samo što se kod poslovnih webova ljudi obično manje ljube. Barem na projektima na kojima sam ja radio.",
+        ],
+      },
+    ],
+    decisions: [
+      "Tempo i karakter prije stila",
+      "Svako poglavlje mora dati razlog za sljedeće",
+    ],
+    deliverables: ["Napisan roman, objavljen pod imenom naručitelja"],
+    outcomesLabel: "Moj doprinos",
+    outcomes: [
+      "Dugi tekst koji drži tempo i pažnju",
+      "Vještina koja se izravno prenosi na prodajni tekst i scenarij",
+    ],
+    nextStep: "Treba vam tekst koji čitatelja drži do kraja?",
+    featuredImage: {
+      src: "/projekti/ghostwriting-roman-cover.webp",
+      alt: "Generirana naslovna grafika projekta: valovite linije u crvenoj boji, s naslovom „Ghostwriting”.",
+      width: 1600,
+      height: 1000,
+    },
+    evidenceLinks: [],
+    noPublicEvidence:
+      "Ghostwriting znači da je autorstvo ugovorom tuđe. Naslov, naručitelj i ulomci se ne objavljuju bez dopuštenja, pa ih ovdje nema — i neće ih biti dok to dopuštenje ne postoji.",
+    images: [],
+    publishedAt: "2026-10-19",
+    contributionLabel: "Ghostwriting",
   },
   {
     slug: "bolero-drinks",

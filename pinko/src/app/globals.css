@@ -865,7 +865,11 @@
   .project-carousel-track {
     display: flex;
     width: max-content;
-    animation: project-carousel 64s linear infinite;
+    /* The duration follows the number of cards, so the strip keeps the same
+       speed whether the portfolio holds three projects or fifteen. A fixed
+       64s would make a long portfolio race past. */
+    animation: project-carousel calc(var(--carousel-cards, 6) * 9s) linear
+      infinite;
   }
 
   /* Slow enough to read a card as it goes by; a carousel nobody can read is

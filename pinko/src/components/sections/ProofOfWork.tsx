@@ -11,14 +11,17 @@ import { getPublishedProjects } from "@/content/projects";
  * invented logos or empty statistics.
  */
 export function ProofOfWork() {
-  const projects = getPublishedProjects().slice(0, 3);
+  // Every published project goes into the loop. It used to be the first
+  // three, which quietly hid most of the portfolio on the page where the
+  // portfolio is supposed to be the argument.
+  const projects = getPublishedProjects();
 
   return (
     <Section
       index="01"
       eyebrow="Projekti"
       marker="Projekti"
-      title="Nekoliko konkretnih stvari na kojima radim."
+      title="Konkretne stvari na kojima radim."
       tone="surface"
     >
       {projects.length === 0 ? (
