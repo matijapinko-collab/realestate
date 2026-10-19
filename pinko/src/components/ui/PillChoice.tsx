@@ -46,11 +46,17 @@ export function PillChoice() {
   const [leaving, setLeaving] = useState(false);
 
   useEffect(() => {
-    let chosen: string | null = null;
-    try {
-      chosen = localStorage.getItem("pinko-theme");
-    } catch {
-      // Storage blocked: treat it as a first visit and ask.
+    // The cookie is the source of truth, because it is what the server
+    // used to pick the world. Asking localStorage alone meant the chooser
+    // reappeared over a visitor who had already chosen.
+    let chosen: string | null =
+      document.cookie.match(/(?:^|; )pinko-theme=(dark|light)/)?.[1] ?? null;
+    if (!chosen) {
+      try {
+        chosen = localStorage.getItem("pinko-theme");
+      } catch {
+        // Storage blocked: treat it as a first visit and ask.
+      }
     }
     if (chosen === "dark" || chosen === "light") return;
 

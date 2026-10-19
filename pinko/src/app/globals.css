@@ -1258,3 +1258,390 @@
   }
 }
 
+
+/* ==================================================================== *
+ * LIGHT EXPERIENCE
+ *
+ * A separate design system for the light world, built from the reference
+ * recording rather than from memory. The palette is sampled from the
+ * recording's own frames with ffmpeg, then measured against WCAG 2.2:
+ *
+ *   page ground sampled at ......... #EEEDF5
+ *   accent sampled at .............. #876CEF
+ *
+ *   #17151C on #EEEDF5 .. 15.57  AAA   headings and body
+ *   #605C6B on #EEEDF5 ..  5.58  AA    secondary text
+ *   #6D4BD6 on #EEEDF5 ..  4.98  AA    links and small-label fills
+ *   #FFFFFF on #6D4BD6 ..  5.79  AA    text on those fills
+ *   #9254FF on #EEEDF5 ..  3.66  large display and UI shapes only
+ *
+ * That last line is the whole reason there are two purples. The reference
+ * purple is beautiful and too pale to carry small text: it is kept for the
+ * big round call to action, the dot fields and decorative shapes, where
+ * 3:1 is the bar that applies, and the darker sibling does the work that
+ * needs 4.5. The brief's proposed #777480 for secondary text measured
+ * 3.93 and was darkened for the same reason.
+ * ==================================================================== */
+
+@layer components {
+  .lx {
+    --lx-ground: #eeedf5;
+    --lx-surface: #ffffff;
+    --lx-ink: #17151c;
+    --lx-soft: #605c6b;
+    --lx-rule: #dcd8e7;
+    --lx-accent: #6d4bd6;
+    --lx-display: #9254ff;
+    --lx-wash: #e5d9ff;
+    color: var(--lx-ink);
+    background: var(--lx-ground);
+  }
+
+  .lx-wrap {
+    width: min(100% - 2.5rem, 90rem);
+    margin-inline: auto;
+  }
+  @media (min-width: 768px) {
+    .lx-wrap {
+      width: min(100% - 4.5rem, 90rem);
+    }
+  }
+
+  .lx-section {
+    padding-block: clamp(5rem, 3rem + 8vw, 11rem);
+  }
+
+  /* Display type: large, medium weight, tight. The reference sets its
+     headline at 83px with line-height equal to the size. */
+  .lx-display {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(2.75rem, 1rem + 7vw, 6.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .lx-h2 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(2rem, 1.1rem + 3.6vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .lx-h3 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  .lx-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lx-soft);
+  }
+  .lx-lead {
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.1875rem);
+    line-height: 1.55;
+    color: var(--lx-soft);
+    max-width: 44ch;
+  }
+  .lx-body {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--lx-soft);
+    max-width: 60ch;
+  }
+
+  /* Buttons: dark with white text, as the brief asks. */
+  .lx-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding-inline: 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    background: var(--lx-ink);
+    color: #ffffff;
+    transition: background-color 220ms var(--ease-out-soft);
+  }
+  .lx-btn:hover {
+    background: var(--lx-accent);
+  }
+  .lx-btn-ghost {
+    background: transparent;
+    color: var(--lx-ink);
+    border: 1px solid var(--lx-rule);
+  }
+  .lx-btn-ghost:hover {
+    background: var(--lx-ink);
+    color: #ffffff;
+    border-color: var(--lx-ink);
+  }
+
+  /* The round arrow button from the reference's service rows. */
+  .lx-round {
+    display: inline-grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 999px;
+    background: var(--lx-ink);
+    color: #ffffff;
+    flex: none;
+    transition:
+      background-color 220ms var(--ease-out-soft),
+      rotate 320ms var(--ease-out-soft);
+  }
+  [data-open="true"] .lx-round {
+    rotate: 45deg;
+    background: var(--lx-accent);
+  }
+
+  .lx-card {
+    background: var(--lx-surface);
+    border: 1px solid var(--lx-rule);
+    border-radius: 1.25rem;
+  }
+
+  /* The faint dot field behind the big section titles. */
+  .lx-dotfield {
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--lx-ink) 18%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 14px 14px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lx-btn,
+    .lx-round {
+      transition: none;
+    }
+  }
+}
+
+@layer components {
+  .lx-mosaic {
+    position: relative;
+    display: block;
+  }
+
+  .lx-mosaic-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .lx-plate {
+    grid-column: span 12;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--lx-ink) 6%, transparent);
+  }
+  @media (min-width: 768px) {
+    .lx-plate {
+      grid-column: span var(--span);
+    }
+  }
+  .lx-plate img {
+    transition: scale 700ms var(--ease-out-soft);
+  }
+  .lx-mosaic:hover .lx-plate img {
+    scale: 1.015;
+  }
+
+  /* The round detail button. Positioned with a transform from two custom
+     properties, so following the pointer never touches layout. */
+  .lx-detail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 999px;
+    background: var(--lx-display);
+    color: #ffffff;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    pointer-events: none;
+    opacity: 0;
+    scale: 0.6;
+    translate: calc(var(--x, 50%) - 3.5rem) calc(var(--y, 50%) - 3.5rem);
+    transition:
+      opacity 220ms var(--ease-out-soft),
+      scale 260ms var(--ease-out-soft);
+  }
+  .lx-detail[data-active="true"] {
+    opacity: 1;
+    scale: 1;
+  }
+  /* No hover on touch, where it would only ever be a stuck overlay. */
+  @media (hover: none) {
+    .lx-detail {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lx-plate img,
+    .lx-detail {
+      transition: none;
+    }
+    .lx-mosaic:hover .lx-plate img {
+      scale: 1;
+    }
+  }
+}
+
+@layer components {
+  .lx-dots {
+    width: 13rem;
+    height: 13rem;
+  }
+  .lx-dot {
+    fill: color-mix(in srgb, var(--lx-ink) 12%, transparent);
+    transition:
+      fill 420ms var(--ease-out-soft),
+      r 420ms var(--ease-out-soft);
+  }
+  .lx-dot-on {
+    fill: var(--lx-display);
+    transition:
+      fill 420ms var(--ease-out-soft),
+      r 420ms var(--ease-out-soft);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lx-dot,
+    .lx-dot-on {
+      transition: none;
+    }
+  }
+}
+
+@layer components {
+  /* Words start grey and resolve to ink as --reveal moves from 0 to 1.
+     Without JavaScript, or with reduced motion, every word is simply ink. */
+  .lx-word {
+    color: var(--lx-ink);
+  }
+  .lx-statement[data-enabled="true"] .lx-word {
+    color: color-mix(
+      in srgb,
+      var(--lx-ink)
+        calc(
+          100% *
+            clamp(
+              0,
+              (var(--reveal, 0) * (var(--n) + 6) - var(--i)) / 6,
+              1
+            )
+        ),
+      color-mix(in srgb, var(--lx-ink) 22%, transparent)
+    );
+    transition: color 220ms linear;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lx-statement .lx-word {
+      color: var(--lx-ink);
+      transition: none;
+    }
+  }
+}
+
+@layer components {
+  .lx-preview-frame {
+    overflow: hidden;
+    border-radius: 1rem;
+    aspect-ratio: 3 / 4;
+    background: color-mix(in srgb, var(--lx-ink) 6%, transparent);
+  }
+  .lx-preview img {
+    transition: scale 700ms var(--ease-out-soft);
+  }
+  .lx-preview:hover img {
+    scale: 1.03;
+  }
+
+  .lx-link-arrow {
+    font-weight: 600;
+    color: var(--lx-accent);
+  }
+  .lx-link-arrow::after {
+    content: " \2197";
+  }
+
+  .lx-ref-list {
+    border-top: 1px solid var(--lx-rule);
+  }
+  .lx-ref-row {
+    display: flex;
+    width: 100%;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--lx-rule);
+    text-align: left;
+    transition: color 200ms var(--ease-out-soft);
+  }
+  .lx-ref-row[data-active="true"] {
+    color: var(--lx-accent);
+  }
+  .lx-ref-row:hover {
+    color: var(--lx-accent);
+  }
+
+  .lx-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: 1px solid var(--lx-rule);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .lx-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .lx-grid-cell {
+    display: grid;
+    place-items: center;
+    min-height: 7rem;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 500;
+    border-right: 1px solid var(--lx-rule);
+    border-bottom: 1px solid var(--lx-rule);
+    transition: background-color 200ms var(--ease-out-soft);
+  }
+  .lx-grid-cell:hover {
+    background: var(--lx-wash);
+  }
+
+  .lx-btn-big {
+    min-height: 4.25rem;
+    padding-inline: 2.5rem;
+    font-size: 1.125rem;
+    background: var(--lx-display);
+  }
+  .lx-btn-big:hover {
+    background: var(--lx-accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lx-preview img,
+    .lx-ref-row,
+    .lx-grid-cell {
+      transition: none;
+    }
+    .lx-preview:hover img {
+      scale: 1;
+    }
+  }
+}
