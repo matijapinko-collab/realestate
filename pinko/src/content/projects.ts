@@ -166,6 +166,13 @@ export const projects: Project[] = [
       "Bolero je imao proizvod i širok izbor okusa. Trebalo je razviti prodaju na platformi na kojoj se za kupčevu pažnju natječe gotovo sve što ima cijenu i fotografiju. Otvoriti trgovinu bio je početak; posao je bio povezati asortiman s Temu prodajnim modelom, razumjeti uvjete platforme i organizirati sve iza kupnje.",
     challenge:
       "Kupac vidi proizvod i cijenu. Iza toga moraju raditi podaci o artiklu, pakiranje, raspoloživost, obrada narudžbe i put do kupčevih vrata. Drugim riječima, puno više od „stavili smo proizvode na internet”. To danas može i toster, ako ima dovoljno dobar Wi-Fi.",
+    complications: [
+      "Na marketplaceu se za istu pažnju natječe gotovo sve što ima cijenu i fotografiju",
+      "Osnovna cijena prodavatelja i cijena koju kupac vidi nisu isto — bez te razlike i rezultati se krivo čitaju",
+      "Kod instant napitaka okus privlači, ali količina i format pakiranja moraju biti jednako jasni",
+      "Prodaja iz vlastitog skladišta znači stvarnu obradu svake narudžbe, a ne samo objavljen listing",
+      "Rast pažnje i rast kupnje lako se pomiješaju ako se ne prate zajedno",
+    ],
     story: [
       {
         heading: "Ponuda dovoljno široka da izbor ima smisla",
@@ -278,6 +285,12 @@ export const projects: Project[] = [
       "Elektroinstalacije za stambene, poslovne i industrijske objekte. Zadatak je bio postaviti digitalnu prisutnost tvrtke koja ima konkretne usluge i znanje, ali ih tek treba jasno predstaviti online: objasniti što rade, kome mogu pomoći i zašto ih vrijedi kontaktirati. Jer možete biti odlični u svom poslu, ali Google još uvijek nema opciju „Ma znaš onog dobrog električara, netko mi ga je spominjao kod šogora”.",
     challenge:
       "Preporuka vas dovede do razgovora — ali što se dogodi prije njega? Preporučeni izvođač najčešće prolazi još jedan mali razgovor za posao: onaj koji potencijalni klijent obavi sam sa sobom, gledajući rezultate pretraživanja.",
+    complications: [
+      "Preporučeni izvođač prolazi još jedan tihi razgovor za posao — onaj koji klijent obavi sam, u rezultatima pretraživanja",
+      "Bez digitalne prisutnosti na pitanja „čime se bave” i „rade li ovakve projekte” nema se gdje odgovoriti prije prvog kontakta",
+      "Široka ponuda bez strukture ostavlja posjetitelja da sam pogađa odnosi li se išta od toga na njega",
+      "Izvođač razmišlja o sustavima i izvedbi, a naručitelj o objektu koji gradi — isti projekt, dvije perspektive",
+    ],
     story: [
       {
         heading: "Problem: preporuka vas dovede do razgovora. Što se događa prije njega?",
@@ -385,6 +398,13 @@ export const projects: Project[] = [
       "Teladoc je telemedicinska platforma na kojoj je Business Vision bio angažiran kao agencija. Nisam bio Teladocov dobavljač niti je Teladoc klijent Pinko obrta — bio sam COO tvrtke čiji je tim radio na projektu, u razdoblju siječanj 2023. – prosinac 2024.",
     challenge:
       "Razvoj digitalnog proizvoda traži puno više od dobrog koda. Poslovne ciljeve treba povezati s kapacitetom tima, razvoj s realnim prioritetima, a svakodnevne odluke s onim što se pokušava postići. Kod telemedicine se tome pridružuje i svrha proizvoda: tehnologija treba pomoći ljudima da lakše dođu do zdravstvene skrbi.",
+    complications: [
+      "Poslovne ciljeve treba uskladiti sa stvarnim kapacitetom tima, a ne s onim koji bi se dobro čitao u planu",
+      "Razvojni tim, partner i osoba koja donosi poslovnu odluku gledaju isti projekt iz potpuno različitih kutova",
+      "Proces koji ne olakšava rad proizvodi samo još jedan sastanak",
+      "Ambicija bez organizacijske i financijske podrške ostaje prezentacija",
+      "Granica odgovornosti mora ostati jasna: vođenje agencijskog tima na projektu nije isto što i autorstvo cijelog proizvoda",
+    ],
     decisions: [
       "Vodstvo kao posao s ljudima, a ne s tablicama: mentoriranje, usklađivanje očekivanja i jasni ciljevi",
       "Proces ima smisla samo ako ljudima olakšava rad — ako proizvodi još jedan sastanak, preispituje se",
@@ -437,6 +457,13 @@ export const projects: Project[] = [
       "100% Smart Food prodaje dodatke prehrani na više tržišta, kroz maloprodaju i B2B. Katalog, cijene, akcije i narudžbe godinama žive u WordPressu i WooCommerceu, na kojima radi cijela operativa: nabava, zalihe, računovodstvo, podrška.",
     challenge:
       "Gotova tema je došla do svoje granice. Stranica proizvoda se dugo otvarala, pravila kupnje nisu stala u predloške, a svaka izmjena značila je borbu s nečim tuđim. Katalog se pritom nije smio seliti — ljudi koji svaki dan rade u administraciji ne smiju preko noći ostati bez alata koji znaju.",
+    complications: [
+      "Prelazak se morao dogoditi bez gašenja prodaje — webshop je cijelo vrijeme radio na živom prometu",
+      "Svaka izmjena na gotovoj temi značila je borbu s nečim tuđim",
+      "Katalog se nije smio seliti — ljudi koji svaki dan rade u administraciji ne smiju ostati bez alata koji znaju",
+      "Omnibus pravila o prikazu cijene morala su biti dio proizvoda, a ne plugin zalijepljen sa strane",
+      "Plaćanja se nisu smjela puštati dok testne narudžbe ne prođu čiste",
+    ],
     decisions: [
       "Razdvojiti glavu od repa: WordPress ostaje mjesto gdje se vodi katalog, a Next.js preuzima ono što kupac vidi",
       "Vlastiti konektor umjesto gotovog REST-a — jedan ugovor o podacima između dva sustava, koji se verzionira i može vratiti unatrag",
@@ -737,6 +764,12 @@ export const projects: Project[] = [
       "Tražilice za alate uglavnom su popisi s afilijacijskim poveznicama. Varel je pokušaj da to bude korisno: katalog alata, usporedbe, vodiči i uredničko pismo na jednom mjestu, na više jezika, s administracijom u kojoj sadržaj može mijenjati čovjek koji nije programer.",
     challenge:
       "Višejezičnost se ne da nalijepiti naknadno, a katalog, usporedbe, vodiči i tekstovi dijele iste pojmove. Uz to proizvod ne smije ovisiti o meni: ako za svaku izmjenu treba deployment, projekt je mrtav čim se prestanem njime baviti.",
+    complications: [
+      "Višejezičnost se ne da nalijepiti naknadno — jezik mora biti u modelu podataka od prvog dana",
+      "Katalog, usporedbe, vodiči i tekstovi dijele iste pojmove, pa se ne mogu razvijati odvojeno",
+      "Proizvod koji za svaku izmjenu sadržaja traži deployment mrtav je čim se prestanem njime baviti",
+      "Početni opseg bio je prevelik i trebalo ga je smanjiti u hodu, umjesto vući dalje",
+    ],
     decisions: [
       "Jezik ugrađen u model podataka od prvog dana, a ne dodan kao prijevodna datoteka",
       "Vlastita administracija umjesto gotovog CMS-a — uredničko sučelje za alate, usporedbe, vodiče i objave",
