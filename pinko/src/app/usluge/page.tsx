@@ -91,7 +91,7 @@ export default function ServicesPage() {
       <Section
         tone="surface"
         eyebrow="Razgraničenje"
-        title="Arhitektura ili Business Development?"
+        title="Arhitektura ili poslovni plan?"
         lead="Dva različita pitanja, dvije različite isporuke — i nikad dvostruki račun za isti sat rada."
       >
         <div className="grid gap-5 md:grid-cols-2">
@@ -107,7 +107,7 @@ export default function ServicesPage() {
           </div>
           <div className="rounded-(--radius-card) border border-rule bg-paper p-7">
             <h3 className="text-(length:--text-title) font-extrabold">
-              Business Development
+              Poslovni plan
             </h3>
             <p className="mt-3 text-ink-soft">
               Odgovara{" "}
