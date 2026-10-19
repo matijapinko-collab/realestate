@@ -850,13 +850,19 @@ export const projects: Project[] = [
     ],
     nextStep:
       "Trebate sadržaj koji ljudi stvarno traže, a ne tekst koji popunjava stranicu?",
+    featuredImage: {
+      src: "/projekti/vehicle-freak-featured.webp",
+      alt: "Sekcija „Vehicle Freak Expertise” na portalu: četiri ilustrirana portreta uredničkog tima s imenima i ulogama — osnivač, urednik te dvojica pisaca, među kojima Matija P.",
+      width: 1237,
+      height: 389,
+    },
     evidenceLinks: [{ label: "vehiclefreak.com", href: "https://vehiclefreak.com/" }],
     images: [],
     publishedAt: "2026-10-19",
     contributionLabel: "SEO sadržaj, pisanje i monetizacija",
     motif: "glitch",
     internalNote:
-      "Dodano 19. 10. 2026. prema Matijinom briefu. GRANICE: Matija NIJE osnivač, vlasnik ni developer portala — na samom webu je naveden kao writer/mechanic, uz osnivača Roberta W. te Luku K. i Patrika B. Brojke (1M posjetitelja, 60k USD) su POVIJESNI rezultati CIJELOG portala i tako su i napisane; svaka nosi osnovicu koja to kaže. ČEKA SE: (1) Matijina featured fotografija — dok je nema, kartica koristi postojeći tipografski fallback; (2) poveznice na konkretne članke koje je napisao, za sekciju s primjerima — bez njih se ta sekcija namjerno ne objavljuje.",
+      "Dodano 19. 10. 2026. prema Matijinom briefu. GRANICE: Matija NIJE osnivač, vlasnik ni developer portala — na samom webu je naveden kao writer/mechanic, uz osnivača Roberta W. te Luku K. i Patrika B. Brojke (1M posjetitelja, 60k USD) su POVIJESNI rezultati CIJELOG portala i tako su i napisane; svaka nosi osnovicu koja to kaže. Istaknuta slika je Matijin snimak sekcije „Vehicle Freak Expertise” (dostavljena 19. 10. 2026.); pokazuje njegovu ulogu u timu, što je i dokaz granica iz ovog zapisa. ČEKA SE: poveznice na konkretne članke koje je napisao, za sekciju s primjerima — bez njih se ta sekcija namjerno ne objavljuje.",
   },
   {
     slug: "youtube-scenariji-automobili",

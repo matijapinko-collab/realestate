@@ -1,70 +1,113 @@
+import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 
 /**
- * Brief 11.8 / 6.2.
+ * Hosting and maintenance.
  *
- * Deliberately no fake server status lights and no specifications on the
- * homepage: what a buyer cares about is responsibility, backups, data
- * separation, growth and a clear price. The public wording in 6.2 still has to
- * be confirmed against the real setup before launch.
+ * Matija's copy of 19 Oct 2026, word for word. Still no fake server status
+ * lights and no uptime percentage: what this section promises is a named
+ * person, a backup that has been restored at least once, and a price with
+ * nothing hidden in it. Those are promises he can keep.
  */
+
+const POINTS = [
+  {
+    index: "01",
+    title: "Jedan čovjek. Isti broj već 20 godina. Uvijek se javim.",
+    body: [
+      "Kad web krepa, nećete slušati kako hosting tvrdi da je kriv developer, a developer da je kriv hosting.",
+      "Zovete mene.",
+      "Dobro, možda prvo malo opsujete. Ali onda zovete mene.",
+    ],
+  },
+  {
+    index: "02",
+    title: "Backup postoji. I stvarno ga znamo vratiti.",
+    body: [
+      "Znate kaj je gore od toga da izgubite podatke? Da shvatite da imate backup koji ne radi.",
+      "Zato dogovaramo koliko često se rade sigurnosne kopije, gdje ih čuvamo i kako provjeravamo povrat.",
+      "Jer „imam backup” i „mogu vratiti web” nisu baš ista stvar.",
+    ],
+  },
+  {
+    index: "03",
+    title: "Plaćate hosting. Ne moje lijepe oči.",
+    body: [
+      "Hosting je hosting. Održavanje je održavanje. Unaprijed dogovaramo kaj je uključeno, koliko sati podrške imate i koliko sve to košta.",
+      "Bez misterioznih naknada, iznenadnih računa i stavke administrativna obrada servera od 300 eura.",
+      "Ako nešto dodatno treba napraviti, prvo se dogovorimo.",
+    ],
+  },
+];
+
 export function Infrastructure() {
   return (
     <Section
       eyebrow="Hosting i održavanje"
-      title="Napravili smo web. Super. A tko ga sad čuva?"
+      title="Web je lansiran. Šampanjac je otvoren. A sad se molimo da ne krepa?"
+      lead={
+        <>
+          <p className="font-extrabold text-ink">E pa nećemo baš tako.</p>
+          <p className="mt-4">
+            Napraviti web je jedna stvar. Pobrinuti se da radi i sutra, i
+            prekosutra, i onda kad ga netko odluči posjetiti u tri ujutro je
+            sasvim druga.
+          </p>
+          <p className="mt-4">
+            Serveri, baze podataka, sigurnosne kopije, nadogradnje i ostale
+            divote koje nitko ne primjećuje dok sve radi. A kad prestane
+            raditi? Odjednom svi znaju moj broj.
+          </p>
+          <p className="mt-4">
+            Srećom, mene moji klijenti zovu samo da si čestitamo praznike ili
+            dogovorimo nove usluge. Uz vrhunsko iskustvo i znanje, ne morate
+            očekivati probleme, nego ćete zaboraviti kako problemi s webom
+            izgledaju!
+          </p>
+          <p className="mt-4">
+            Bilo da imate Next.js aplikaciju, WordPress, WooCommerce ili nekaj
+            sasvim deseto, mogu Vam složiti hosting i održavanje prema stvarnim
+            potrebama projekta. Ne brinite, radim s profesionalnom
+            infrastrukturom, ne s praznim obećanjima.
+          </p>
+        </>
+      }
     >
-      <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-        <div className="space-y-5 text-(length:--text-lead)">
-          <p>
-            Web ne prestaje trebati pažnju samo zato što je lansiran. Serveri,
-            nadogradnje, sigurnosne kopije i održavanje nisu baš najuzbudljiviji
-            dio digitalnog poslovanja. Ali postanu jako zanimljivi kad nešto
-            prestane raditi.
-          </p>
-          <p className="text-ink-soft">
-            Uz razvoj mogu preuzeti postavljanje i upravljanje hosting
-            okruženjem: od Next.js aplikacija i baza podataka do postojećih
-            WordPress i WooCommerce sustava. Radim s infrastrukturom pružatelja
-            Hetzner i MyDataKnox, a okruženje biramo prema projektu, prometu i
-            potrebama poslovanja.
-          </p>
-          <p className="text-ink-soft">
-            Dogovaramo što se prati, koliko se često izrađuju sigurnosne kopije i
-            kako izgleda održavanje. Kad projekt traži vlastito okruženje,
-            planiramo ga zasebno.
-          </p>
-          <ButtonLink
-            href="/usluge/development#hosting"
-            variant="secondary"
-            className="mt-2"
+      <ul className="grid gap-px overflow-hidden rounded-(--radius-card) border border-rule bg-rule lg:grid-cols-3">
+        {POINTS.map((point, i) => (
+          <li
+            key={point.index}
+            data-reveal
+            data-reveal-delay={i}
+            className="spotlight bg-surface p-6 md:p-7"
           >
-            Hosting i Care paketi
-          </ButtonLink>
-        </div>
+            <p className="mono-label font-semibold text-accent">
+              {point.index}
+            </p>
+            <h3 className="mt-2 text-(length:--text-title) font-extrabold">
+              {point.title}
+            </h3>
+            <div className="mt-3 space-y-2.5 text-ink-soft">
+              {point.body.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ul>
 
-        <ul className="grid gap-px self-start overflow-hidden rounded-(--radius-card) border border-rule bg-rule">
-          {[
-            {
-              title: "Odgovornost na jednom mjestu",
-              body: "Jedan kontakt za razvoj i okruženje, bez prebacivanja krivice između dobavljača.",
-            },
-            {
-              title: "Kopije i povrat",
-              body: "Dogovoreni interval, zadržavanje i odvojena lokacija — uz probu vraćanja, jer backup nije uspješan samo zato što postoji cron.",
-            },
-            {
-              title: "Jasna cijena",
-              body: "Hosting i održavanje su dvije stavke. Vidite što plaćate i koliko sati zahvata je uključeno.",
-            },
-          ].map((item) => (
-            <li key={item.title} className="bg-surface p-6">
-              <h3 className="font-extrabold">{item.title}</h3>
-              <p className="mt-2 text-ink-soft">{item.body}</p>
-            </li>
-          ))}
-        </ul>
+      <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+        <ButtonLink href="/kontakt" size="lg">
+          Matija, čuvaj mi web od katastrofe{" "}
+          <span aria-hidden="true">&rarr;</span>
+        </ButtonLink>
+        <Link
+          href="/usluge/development#hosting"
+          className="font-semibold text-accent-ink underline underline-offset-4"
+        >
+          Hosting i Care paketi
+        </Link>
       </div>
     </Section>
   );
