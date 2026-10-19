@@ -6,6 +6,7 @@ import {
   prefetchPassage,
   wormholeAvailable,
 } from "@/components/ui/Wormhole";
+import { applyTheme } from "@/lib/apply-theme";
 
 export type Theme = "dark" | "light";
 
@@ -51,12 +52,7 @@ export function ThemeToggle({ className }: { className?: string }) {
         );
         return;
       }
-      document.documentElement.setAttribute("data-theme", next);
-      try {
-        localStorage.setItem("pinko-theme", next);
-      } catch {
-        // Private browsing or blocked storage: the choice is simply not kept.
-      }
+      applyTheme(next);
     },
     [theme]
   );

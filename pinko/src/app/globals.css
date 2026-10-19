@@ -315,7 +315,16 @@
     display: none;
   }
 
-  :root[data-theme="light"] .side-rail {
+  /* The dashed rail and its scroll dot belong to the earlier light system.
+     The current one carries structure with type, space and hairlines, so
+     they stay hidden. Kept here rather than in the components layer,
+     because utilities win over components no matter the source order. */
+  :root[data-theme="light"] .side-rail,
+  :root[data-theme="light"] .rail-dot {
+    display: none;
+  }
+
+  :root[data-theme="light"] .side-rail.side-rail-legacy {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -509,7 +518,7 @@
     display: none;
   }
 
-  :root[data-theme="light"] .rail-dot {
+  :root[data-theme="light"] .rail-dot.rail-dot-legacy {
     position: fixed;
     left: 2.25rem;
     top: 0;
@@ -1255,5 +1264,184 @@
     font-size: clamp(1.5rem, 0.9rem + 1.9vw, 2.5rem);
     line-height: 1.1;
     overflow-wrap: anywhere;
+  }
+}
+
+/* ==================================================================== *
+ * PINKO LIGHT
+ *
+ * A restrained editorial system for the light world. One accent, used
+ * sparingly; structure carried by type, space and hairlines rather than
+ * by colour. Measured against WCAG 2.2:
+ *
+ *   #17141C on #F7F6F2 .. 16.84  AAA   body and headings
+ *   #56525C on #F7F6F2 ..  7.04  AAA   secondary text
+ *   #27409E on #F7F6F2 ..  8.39  AAA   links and the accent ground
+ *   #FFFFFF on #27409E ..  9.08  AAA   text on the accent
+ *
+ * The hairline is 1.21:1 against the paper, which is fine for a decorative
+ * rule but never enough to be the only thing marking a control; every
+ * interactive element here carries text or a fill as well.
+ * ==================================================================== */
+
+@layer components {
+  .pl {
+    --pl-paper: #f7f6f2;
+    --pl-surface: #ffffff;
+    --pl-ink: #17141c;
+    --pl-soft: #56525c;
+    --pl-rule: #e3e1db;
+    --pl-accent: #27409e;
+    color: var(--pl-ink);
+    background: var(--pl-paper);
+  }
+
+  .pl-section {
+    padding-block: clamp(5rem, 3rem + 8vw, 11rem);
+    border-top: 1px solid var(--pl-rule);
+  }
+  .pl-section:first-child {
+    border-top: 0;
+  }
+  .pl-ink-section {
+    background: var(--pl-accent);
+    color: #ffffff;
+  }
+
+  .pl-wrap {
+    width: min(100% - 2.5rem, 78rem);
+    margin-inline: auto;
+  }
+  @media (min-width: 768px) {
+    .pl-wrap {
+      width: min(100% - 5rem, 78rem);
+    }
+  }
+
+  .pl-display {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(2.5rem, 1.3rem + 5vw, 5.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .pl-h2 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(1.875rem, 1.2rem + 2.6vw, 3.25rem);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  .pl-h3 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(1.375rem, 1.1rem + 1.1vw, 1.875rem);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+  }
+  .pl-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pl-soft);
+  }
+  .pl-ink-section .pl-kicker {
+    color: rgb(255 255 255 / 0.75);
+  }
+  .pl-lead {
+    font-size: clamp(1.125rem, 1.02rem + 0.5vw, 1.5rem);
+    line-height: 1.45;
+    max-width: 40ch;
+  }
+  .pl-body {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    max-width: 62ch;
+    color: var(--pl-soft);
+  }
+  .pl-ink-section .pl-body {
+    color: rgb(255 255 255 / 0.85);
+  }
+  .pl-figure {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(2.25rem, 1.2rem + 4vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+  }
+
+  .pl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 3rem;
+    padding-inline: 1.625rem;
+    border-radius: 999px;
+    font-weight: 600;
+    background: var(--pl-ink);
+    color: var(--pl-paper);
+    transition: background-color 200ms var(--ease-out-soft);
+  }
+  .pl-btn:hover {
+    background: var(--pl-accent);
+  }
+  .pl-btn-ghost {
+    background: transparent;
+    color: inherit;
+    border: 1px solid currentColor;
+  }
+  .pl-btn-ghost:hover {
+    background: var(--pl-ink);
+    color: var(--pl-paper);
+    border-color: var(--pl-ink);
+  }
+  .pl-ink-section .pl-btn {
+    background: #ffffff;
+    color: var(--pl-ink);
+  }
+  .pl-ink-section .pl-btn:hover {
+    background: var(--pl-paper);
+  }
+
+  .pl-link {
+    position: relative;
+    font-weight: 600;
+    color: var(--pl-accent);
+  }
+  .pl-ink-section .pl-link {
+    color: #ffffff;
+  }
+  .pl-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 1px;
+    background: currentColor;
+    scale: 1 1;
+    transform-origin: left;
+    transition: scale 260ms var(--ease-out-soft);
+  }
+  .pl-link:hover::after {
+    scale: 0 1;
+    transform-origin: right;
+  }
+
+  .pl-rule {
+    border-top: 1px solid var(--pl-rule);
+  }
+  .pl-ink-section .pl-rule {
+    border-color: rgb(255 255 255 / 0.25);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pl-btn,
+    .pl-link::after {
+      transition: none;
+    }
   }
 }

@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { site } from "@/config/site";
 import { Header } from "@/components/layout/Header";
+import { LightNavigation } from "@/components/light/LightNavigation";
+import { LightFooter } from "@/components/light/LightFooter";
+import { getTheme } from "@/lib/theme";
 import { Footer } from "@/components/layout/Footer";
 import { MotionLayer } from "@/components/ui/MotionLayer";
 import { Intro } from "@/components/ui/Intro";
@@ -75,16 +78,22 @@ export const viewport: Viewport = {
  */
 const themeScript = `try{var t=localStorage.getItem("pinko-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}`;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // The two worlds have different navigation and footers, so the layout
+  // has to know which it is rendering. The cookie makes pages render per
+  // request; with no database behind them that costs a few milliseconds
+  // and buys the right world in the first byte, with no flash.
+  const theme = await getTheme();
+
   return (
     <html
       lang={site.lang}
       className={manrope.variable}
-      data-theme="dark"
+      data-theme={theme}
       // The inline script below rewrites this before React hydrates; that is
       // the point of it, so the difference is expected rather than a bug.
       suppressHydrationWarning
@@ -118,9 +127,9 @@ export default function RootLayout({
         {/* Decorative rail down the left edge; light mode only. */}
         <div aria-hidden="true" className="side-rail" />
         <div aria-hidden="true" className="rail-dot" />
-        <Header />
+        {theme === "light" ? <LightNavigation /> : <Header />}
         <main id="sadrzaj">{children}</main>
-        <Footer />
+        {theme === "light" ? <LightFooter /> : <Footer />}
       </body>
     </html>
   );
