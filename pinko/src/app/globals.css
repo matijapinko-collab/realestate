@@ -315,7 +315,16 @@
     display: none;
   }
 
-  :root[data-theme="light"] .side-rail {
+  /* The dashed rail and the scroll dot belong to the first light system.
+     The Light Experience draws its own structure, so they stay hidden.
+     Declared in the utilities layer because that is where the rail is, and
+     a later layer wins no matter the source order. */
+  :root[data-theme="light"] .side-rail,
+  :root[data-theme="light"] .rail-dot {
+    display: none;
+  }
+
+  :root[data-theme="light"] .side-rail.side-rail-legacy {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -509,7 +518,7 @@
     display: none;
   }
 
-  :root[data-theme="light"] .rail-dot {
+  :root[data-theme="light"] .rail-dot.rail-dot-legacy {
     position: fixed;
     left: 2.25rem;
     top: 0;
@@ -1642,6 +1651,167 @@
     }
     .lx-preview:hover img {
       scale: 1;
+    }
+  }
+}
+
+@layer components {
+  .lx-nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-bottom: 1px solid var(--lx-rule);
+    background: color-mix(in srgb, var(--lx-ground) 92%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .lx-nav-link {
+    position: relative;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--lx-ink);
+  }
+  .lx-nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.4rem;
+    height: 1px;
+    background: currentColor;
+    scale: 0 1;
+    transform-origin: left;
+    transition: scale 260ms var(--ease-out-soft);
+  }
+  .lx-nav-link:hover::after,
+  .lx-nav-link:focus-visible::after {
+    scale: 1 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lx-nav-link::after {
+      transition: none;
+    }
+  }
+}
+
+@layer components {
+  /* The light world's opening sequence. Everything here is transform and
+     opacity, so it never reflows the page underneath. */
+  .lx-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    display: grid;
+    place-items: center;
+    background: var(--lx-ground);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .lx-intro[data-play="true"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .lx-intro[data-leaving="true"] {
+    opacity: 0;
+    transition: opacity 480ms var(--ease-out-soft);
+    pointer-events: none;
+  }
+
+  .lx-intro-stage {
+    position: relative;
+    width: min(44rem, 82vw);
+    aspect-ratio: 16 / 10;
+  }
+  .lx-intro-plate {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 30px 80px -40px rgb(23 21 28 / 0.45);
+    opacity: 0;
+  }
+  .lx-intro[data-play="true"] .lx-intro-plate {
+    animation: lx-plate-in 900ms var(--ease-out-soft) forwards;
+  }
+  .lx-intro-plate-1 {
+    inset: 0;
+    animation-delay: 60ms;
+  }
+  .lx-intro-plate-2 {
+    width: 26%;
+    aspect-ratio: 3 / 4;
+    right: -4%;
+    bottom: -12%;
+    animation-delay: 240ms;
+  }
+  .lx-intro-plate-3 {
+    width: 46%;
+    aspect-ratio: 16 / 9;
+    left: -8%;
+    top: -14%;
+    animation-delay: 420ms;
+  }
+
+  @keyframes lx-plate-in {
+    from {
+      opacity: 0;
+      translate: 0 2.5rem;
+      scale: 0.96;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+    }
+  }
+
+  .lx-intro-mark {
+    position: absolute;
+    top: clamp(1.5rem, 4vw, 3rem);
+    left: clamp(1.25rem, 4vw, 3rem);
+    font-size: clamp(1.5rem, 1rem + 1.4vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    opacity: 0;
+  }
+  .lx-intro-mark span {
+    color: #c2185b;
+  }
+  .lx-intro[data-play="true"] .lx-intro-mark {
+    animation: lx-fade-up 600ms var(--ease-out-soft) 520ms forwards;
+  }
+
+  .lx-intro-count {
+    position: absolute;
+    right: clamp(1.25rem, 4vw, 3rem);
+    bottom: clamp(1.25rem, 4vw, 3rem);
+    font-family: var(--font-sans);
+    font-size: clamp(3rem, 2rem + 6vw, 7rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+    color: color-mix(in srgb, var(--lx-ink) 85%, transparent);
+    opacity: 0;
+  }
+  .lx-intro[data-play="true"] .lx-intro-count {
+    animation: lx-fade-up 500ms var(--ease-out-soft) 120ms forwards;
+  }
+
+  @keyframes lx-fade-up {
+    from {
+      opacity: 0;
+      translate: 0 0.75rem;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lx-intro {
+      display: none;
     }
   }
 }

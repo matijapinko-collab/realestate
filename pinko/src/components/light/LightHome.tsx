@@ -13,6 +13,7 @@ import { LightMosaic } from "./LightMosaic";
 import { LightServices } from "./LightServices";
 import { LightStatement } from "./LightStatement";
 import { LightReferences } from "./LightReferences";
+import { LightIntro } from "./LightIntro";
 
 /**
  * The light world's homepage, rebuilt against the reference recording.
@@ -66,6 +67,8 @@ const GRID_PROJECTS = [
 export function LightHome() {
   return (
     <div className="lx">
+      <LightIntro />
+
       {/* 02 HERO + 03 FEATURED PREVIEWS */}
       <section className="lx-section pb-0">
         <div className="lx-wrap">
