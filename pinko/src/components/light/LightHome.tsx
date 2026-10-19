@@ -439,11 +439,13 @@ export function LightHome() {
             ))}
           </div>
           <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <ButtonLink
-              href={lightContact.primary.href}
-              size="lg"
-              className="bg-white text-ink hover:bg-accent-wash"
-            >
+            {/* No colour overrides here. The dark world's closing section
+                sits on a dark ground, so its button is inverted; this one
+                sits on a pale ground, and carrying those overrides across
+                left white text on a white fill: a 1:1 contrast, which is
+                an invisible button, not a subtle one. The plain primary
+                variant is dark on pale and measures 17.9:1. */}
+            <ButtonLink href={lightContact.primary.href} size="lg">
               {lightContact.primary.label}
             </ButtonLink>
             <Link
