@@ -1,0 +1,42 @@
+# Reverse proxy for the Pinko site.
+#
+# Caddy gets and renews the certificate itself and redirects HTTP to HTTPS,
+# so nothing here has to be arranged by hand.
+
+{$SITE_DOMAIN} {
+	encode zstd gzip
+
+	# The contact form reads the client IP from `X-Forwarded-For` and rate
+	# limits per IP. Caddy appends to an incoming header by default, which
+	# would let a visitor put a forged address in front of their own, so the
+	# header is REPLACED with the real remote address here.
+	reverse_proxy web:3000 {
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Real-IP {remote_host}
+	}
+
+	# The form never needs more than a few kilobytes. Anything larger is
+	# refused by the proxy, before it reaches the application.
+	request_body {
+		max_size 64KB
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "SAMEORIGIN"
+	}
+
+	log {
+		output file /data/access.log {
+			roll_size 10MB
+			roll_keep 5
+		}
+	}
+}
+
+# www goes to the canonical domain so only one address is indexed.
+www.{$SITE_DOMAIN} {
+	redir https://{$SITE_DOMAIN}{uri} permanent
+}

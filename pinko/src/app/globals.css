@@ -1,0 +1,1817 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Design tokens
+ *
+ * Dark, technical, monospaced labels, one neon accent. Replaced the earlier
+ * light scheme on 16 October 2026 at Matija's request.
+ *
+ * Every pair below was measured, not guessed:
+ *   ink on paper          16.51:1
+ *   ink-soft on paper      7.84:1
+ *   accent on paper       11.49:1
+ *   near-black on accent  11.19:1   (text on a filled green button)
+ *   control on paper       3.36:1   (WCAG 1.4.11, interactive borders)
+ * `--color-rule` stays decorative only, exactly as in the light scheme.
+ * ------------------------------------------------------------------ */
+
+@theme {
+  --color-paper: #0a0c11;
+  --color-surface: #11141b;
+  /* One step up from surface, for a card sitting on a surface section. */
+  --color-raised: #171b24;
+  --color-ink: #e8ecf3;
+  --color-ink-soft: #9aa5b4;
+  --color-rule: #232936;
+  /* Border for interactive controls. The dimmer --color-rule stays for
+     decorative dividers and card edges. */
+  --color-control: #5a6678;
+  --color-accent: #36e27e;
+  --color-accent-ink: #5ceb97;
+  --color-accent-wash: #0e2318;
+  /* Text and icons placed on a filled accent surface. */
+  --color-on-accent: #04130a;
+  /* The "o" in the wordmark. Pink in both worlds, at two weights so it
+     stays readable on either paper: 7.46:1 here, 5.16:1 in light mode. */
+  --color-brand-pink: #ff6bb3;
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Monospace carries the technical tone: headings, labels and figures.
+     System faces for now — swapping in a vendored face is one line here. */
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono",
+    "Cascadia Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Fluid type scale. Monospace runs roughly a fifth wider than Manrope at
+     the same size, so the headings sit lower than in the light scheme —
+     otherwise a Croatian hero line takes five rows on a phone. */
+  --text-hero: clamp(2.125rem, 1.2rem + 4vw, 4.25rem);
+  --text-display: clamp(1.75rem, 1.15rem + 2.4vw, 2.875rem);
+  --text-title: clamp(1.25rem, 1.05rem + 0.85vw, 1.75rem);
+  --text-lead: clamp(1.125rem, 1.05rem + 0.35vw, 1.375rem);
+  --text-body: clamp(1.0625rem, 1.03rem + 0.12vw, 1.1875rem);
+
+  /* Section rhythm: 56–80px mobile, 96–144px desktop. */
+  --space-section: clamp(3.5rem, 1.5rem + 7vw, 9rem);
+  --space-section-tight: clamp(2.5rem, 1.2rem + 4.5vw, 6rem);
+
+  --radius-card: 1rem;
+  --radius-pill: 999px;
+
+  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ------------------------------------------------------------------ *
+ * Base
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------ *
+ * Light mode — a different site, not a lighter one
+ *
+ * The dark scheme is the terminal look. Light mode is the second
+ * experience Matija asked for: near-white lavender paper, near-black ink,
+ * monochrome accents, dashed rules, and the quieter typography that goes
+ * with it. Same content, same routes, deliberately different feeling.
+ *
+ * Measured, as always: ink 16.43:1 on paper and 18.71:1 on a card, muted
+ * ink 6.26:1, white on a filled black control 18.71:1, control borders
+ * 3.47:1 on paper and 3.95:1 on a card. `--color-rule` stays decorative.
+ * ------------------------------------------------------------------ */
+
+:root[data-theme="light"] {
+  /* Light mode is monochrome: the accent is ink, the way the reference
+     treats it. Colour comes from the work on show, not from the chrome. */
+  --color-paper: #eff0f4;
+  --color-surface: #ffffff;
+  --color-raised: #f7f7fa;
+  --color-ink: #121214;
+  --color-ink-soft: #55585f;
+  --color-rule: #d5d6dd;
+  --color-control: #7d8088;
+  --color-accent: #121214;
+  --color-accent-ink: #000000;
+  --color-accent-wash: #e6e7ee;
+  --color-on-accent: #ffffff;
+  --color-brand-pink: #c2185b;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  /* Light mode drops the monospace headline voice for a plain grotesque,
+     and lets the type run larger because it is no longer a terminal. */
+  :root[data-theme="light"] h1,
+  :root[data-theme="light"] h2,
+  :root[data-theme="light"] h3,
+  :root[data-theme="light"] h4 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.035em;
+  }
+
+  :root[data-theme="light"] {
+    --text-hero: clamp(2.5rem, 1.1rem + 6vw, 6rem);
+    --text-display: clamp(2rem, 1.1rem + 3.4vw, 4rem);
+    --text-title: clamp(1.375rem, 1.05rem + 1.3vw, 2rem);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-size: var(--text-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Croatian text has long compounds; never let a heading break a word. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-mono);
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: manual;
+    text-wrap: balance;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Only remove the ring for pointer users who did not tab here. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Utilities
+ * ------------------------------------------------------------------ */
+
+@layer utilities {
+  .wrap {
+    width: 100%;
+    max-width: 77.5rem; /* 1240px */
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 48rem) {
+    .wrap {
+      padding-inline: 2rem;
+    }
+  }
+
+  .section {
+    padding-block: var(--space-section);
+  }
+
+  .section-tight {
+    padding-block: var(--space-section-tight);
+  }
+
+  /* Readable measure, roughly 65 characters. */
+  .measure {
+    max-width: 34rem;
+  }
+
+  .measure-wide {
+    max-width: 48rem;
+  }
+
+  .hairline {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  /* Faint technical grid, the backdrop of the whole design. Decorative, so
+     it is always behind content and never carries meaning. */
+  .grid-field {
+    background-image: linear-gradient(
+        to right,
+        var(--color-rule) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, var(--color-rule) 1px, transparent 1px);
+    background-size: 5rem 5rem;
+    -webkit-mask-image: radial-gradient(
+      ellipse 85% 70% at 50% 0%,
+      #000 35%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 85% 70% at 50% 0%,
+      #000 35%,
+      transparent 100%
+    );
+  }
+
+  /* Label/eyebrow treatment used across the site. */
+  .mono-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Motion
+   *
+   * Everything below is opt-in twice over: the styles only bite once the
+   * script adds `.js-motion` to <html>, and the script never adds it when
+   * the visitor asked for reduced motion. Without JavaScript the page is
+   * simply the finished state — nothing is hidden behind an animation.
+   * ---------------------------------------------------------------- */
+
+  /* Blocks rise into place as they enter the viewport. */
+  .js-motion [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+
+  .js-motion [data-reveal] {
+    transition:
+      opacity 620ms var(--ease-out-soft),
+      transform 620ms var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  /* A card lights up from wherever the pointer is. The two custom
+     properties are written by the script on pointer move. */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 260ms var(--ease-out-soft);
+    background: radial-gradient(
+      16rem circle at var(--spot-x, 50%) var(--spot-y, 0%),
+      color-mix(in oklab, var(--color-accent) 16%, transparent),
+      transparent 70%
+    );
+  }
+
+  .spotlight:hover::before,
+  .spotlight:focus-within::before {
+    opacity: 1;
+  }
+
+  /* Reading progress, pinned under the header. */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    height: 2px;
+    width: 100%;
+    transform-origin: 0 50%;
+    transform: scaleX(var(--scroll-progress, 0));
+    background: linear-gradient(
+      to right,
+      var(--color-accent),
+      var(--color-accent-ink)
+    );
+  }
+
+  /* Light mode draws its rules dashed, the way the reference does. */
+  :root[data-theme="light"] .hairline,
+  :root[data-theme="light"] .rule-dashed {
+    border-style: dashed;
+  }
+
+  /* The dotted rail that runs down the left edge in light mode. */
+  .side-rail {
+    display: none;
+  }
+
+  /* The dashed rail and the scroll dot belong to the first light system.
+     The Light Experience draws its own structure, so they stay hidden.
+     Declared in the utilities layer because that is where the rail is, and
+     a later layer wins no matter the source order. */
+  :root[data-theme="light"] .side-rail,
+  :root[data-theme="light"] .rail-dot {
+    display: none;
+  }
+
+  :root[data-theme="light"] .side-rail.side-rail-legacy {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 2.25rem;
+    z-index: 5;
+    display: block;
+    width: 1px;
+    background-image: linear-gradient(
+      to bottom,
+      var(--color-rule) 55%,
+      transparent 55%
+    );
+    background-size: 1px 9px;
+    pointer-events: none;
+  }
+
+  @media (max-width: 64rem) {
+    :root[data-theme="light"] .side-rail {
+      display: none;
+    }
+  }
+
+  /* Headline split into words, each arriving from below behind a mask. */
+  .split-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+  }
+
+  .split-word {
+    display: inline-block;
+  }
+
+  .js-motion [data-split]:not([data-revealed]) .split-word {
+    transform: translateY(110%);
+  }
+
+  .js-motion [data-split] .split-word {
+    transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--word-index, 0) * 55ms);
+  }
+
+  /* The word that gets struck through once the line has landed. */
+  .struck {
+    position: relative;
+    color: var(--color-ink-soft);
+  }
+
+  .struck::after {
+    content: "";
+    position: absolute;
+    top: 55%;
+    left: -0.04em;
+    height: max(2px, 0.045em);
+    width: calc(100% + 0.08em);
+    background: currentColor;
+    transform-origin: 0 50%;
+    transform: scaleX(1);
+  }
+
+  .js-motion [data-split]:not([data-revealed]) .struck::after {
+    transform: scaleX(0);
+  }
+
+  .js-motion .struck::after {
+    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1) 900ms;
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Light mode layout
+   *
+   * The same markup, arranged the way the reference arranges it: one
+   * centred column, the type doing the work, the terminal card gone.
+   * ---------------------------------------------------------------- */
+
+  :root[data-theme="light"] .hero-grid {
+    display: block;
+  }
+
+  :root[data-theme="light"] .hero-copy {
+    margin-inline: auto;
+    max-width: 60rem;
+    text-align: center;
+  }
+
+  :root[data-theme="light"] .hero-copy .measure-wide {
+    margin-inline: auto;
+  }
+
+  :root[data-theme="light"] .hero-copy > p {
+    justify-content: center;
+  }
+
+  :root[data-theme="light"] .hero-copy .mono-label {
+    justify-content: center;
+  }
+
+  :root[data-theme="light"] .hero-copy > div {
+    justify-content: center;
+  }
+
+  /* The studio scheme leads with the type alone. The portrait, its turning
+     ring and the typed prompt are motifs of the terminal world and stay
+     there; the biography they opened is reachable from "O meni" in the
+     navigation, so nothing becomes unreachable by hiding this. */
+  :root[data-theme="light"] .hero-aside {
+    display: none;
+  }
+
+  /* The terminal scheme keeps its accent on the second line of the hero,
+     which is what it had before the headline was split into words. */
+  :root:not([data-theme="light"]) .hero-copy h1 .split-line:nth-child(2) {
+    color: var(--color-accent);
+  }
+
+  /* Dark mode keeps the claim out of the way; light mode leads with it. */
+  :root:not([data-theme="light"]) .hero-strike {
+    font-size: var(--text-lead);
+  }
+
+  /* The grid field is a terminal motif; light mode uses plain paper. */
+  :root[data-theme="light"] .grid-field {
+    display: none;
+  }
+
+  /* Section headings centre in light mode, as on the reference. */
+  :root[data-theme="light"] .section-head {
+    margin-inline: auto;
+    max-width: 48rem;
+    text-align: center;
+  }
+
+  :root[data-theme="light"] .section-head h2 {
+    max-width: none;
+  }
+
+  :root[data-theme="light"] .section-head .measure-wide {
+    margin-inline: auto;
+  }
+
+  /* Process cards pin one under the other while the section scrolls past.
+     Single column only: side by side there is nothing to stack. */
+  @media (min-width: 48rem) {
+    :root[data-theme="light"] .process-stack {
+      display: block;
+    }
+
+    :root[data-theme="light"] .process-stack > li {
+      position: sticky;
+      top: calc(5rem + var(--step) * 1.25rem);
+      margin-inline: auto;
+      max-width: 48rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 -1px 0 0 var(--color-rule);
+    }
+  }
+
+  /* Words of a scroll-lit statement. Until the script marks them, they are
+     plain readable text — the effect is the colour, nothing else. */
+  .statement[data-lit="running"] .statement-word {
+    color: var(--color-rule);
+    transition: color 320ms var(--ease-out-soft);
+  }
+
+  :root[data-theme="light"] .statement[data-lit="running"] .statement-word {
+    color: color-mix(in oklab, var(--color-ink) 22%, transparent);
+  }
+
+  .statement[data-lit="running"] .statement-word[data-lit] {
+    color: var(--color-ink);
+  }
+
+  /* Oversized section title with the reference's dotted texture behind it. */
+  .giant-title {
+    font-size: clamp(2.75rem, 1rem + 9vw, 9rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+  }
+
+  .dot-field {
+    background-image: radial-gradient(
+      var(--color-control) 1px,
+      transparent 1px
+    );
+    background-size: 14px 14px;
+    opacity: 0.35;
+  }
+
+  /* The dot that rides the left rail as the page scrolls. */
+  .rail-dot {
+    display: none;
+  }
+
+  :root[data-theme="light"] .rail-dot.rail-dot-legacy {
+    position: fixed;
+    left: 2.25rem;
+    top: 0;
+    z-index: 6;
+    display: block;
+    translate: -50% calc(var(--scroll-progress, 0) * 100vh);
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    pointer-events: none;
+  }
+
+  @media (max-width: 64rem) {
+    :root[data-theme="light"] .rail-dot {
+      display: none;
+    }
+  }
+
+  /* The oversized marker word. Terminal mode has its own numbered index
+     and does not need it, so it only exists in light mode. */
+  .section-marker {
+    display: none;
+  }
+
+  :root[data-theme="light"] .section-marker {
+    position: relative;
+    display: block;
+    margin-bottom: 2.5rem;
+    isolation: isolate;
+  }
+
+  :root[data-theme="light"] .section-marker .dot-field {
+    position: absolute;
+    inset: -1rem -1rem 20% -1rem;
+    z-index: -1;
+    display: block;
+    -webkit-mask-image: linear-gradient(to right, #000 25%, transparent 75%);
+    mask-image: linear-gradient(to right, #000 25%, transparent 75%);
+  }
+
+  :root[data-theme="light"] .section-marker .giant-title {
+    display: block;
+    color: color-mix(in oklab, var(--color-ink) 90%, transparent);
+  }
+
+  /* Service rows become cards with a round arrow button, as on the
+     reference. The call to action keeps its words for screen readers and
+     loses them visually. */
+  :root[data-theme="light"] .discipline-item {
+    border-bottom: 0;
+    margin-bottom: 1.25rem;
+    border: 1px dashed var(--color-rule);
+    border-radius: var(--radius-card);
+    background: var(--color-surface);
+    padding: 1.75rem 2rem;
+    transition: border-color 300ms var(--ease-out-soft);
+  }
+
+  :root[data-theme="light"] .discipline-item:hover {
+    border-color: var(--color-ink);
+  }
+
+  :root[data-theme="light"] .discipline-cta {
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    font-size: 0;
+    transition: transform 300ms var(--ease-out-soft);
+  }
+
+  :root[data-theme="light"] .discipline-item:hover .discipline-cta {
+    transform: translate(2px, -2px);
+  }
+
+  :root[data-theme="light"] .discipline-cta::after {
+    content: "↗";
+    font-size: 1.375rem;
+    line-height: 1;
+    color: var(--color-on-accent);
+  }
+
+  /* ---------------------------------------------------------------- *
+   * The pill choice
+   *
+   * The picture keeps its own aspect ratio and the targets are placed as
+   * percentages of it, so a hotspot sits on its pill at every width — on a
+   * phone just as on a desktop. The targets are always at least a 44px
+   * touch area, however small the picture gets.
+   * ---------------------------------------------------------------- */
+
+  /* The chooser is a full-screen modal; nothing in it may scroll the page
+     sideways. At 320px the nowrap labels beside the right-hand pill pushed
+     the document 30px wider than the viewport — measured on a first visit,
+     which is exactly when this screen is shown. */
+  .pill-choice {
+    overflow: hidden;
+  }
+
+  .pill-choice-intro {
+    font-family: var(--font-mono);
+    font-size: clamp(0.75rem, 0.6rem + 0.6vw, 0.95rem);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #8a8f99;
+    margin-bottom: 1rem;
+    padding-inline: 1rem;
+    text-align: center;
+  }
+
+  /* The box must match the rendered picture exactly, or the percentage
+     hotspots drift. Clamping the height separately letterboxes the image
+     inside a wider box and the rings end up beside the pills — so the
+     height limit is folded into the width instead. */
+  .pill-choice-stage {
+    position: relative;
+    width: min(60rem, 94vw, calc(72vh * 1409 / 1116));
+    aspect-ratio: 1409 / 1116;
+  }
+
+  /* The button IS the ring, placed exactly on its pill; the label floats
+     above it. Centring the whole button on the pill instead would push the
+     ring below the pill by half the label's height. */
+  .pill-choice-target {
+    position: absolute;
+    translate: -50% -50%;
+    width: max(3rem, 4.5vw);
+    height: max(3rem, 4.5vw);
+    padding: 0;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    color: #fff;
+  }
+
+  .pill-choice-label {
+    position: absolute;
+    /* Clear of the fingertips, so the label stays legible. */
+    bottom: calc(100% + 1.5rem);
+    left: 50%;
+    translate: -50% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    white-space: nowrap;
+    line-height: 1.15;
+    text-shadow:
+      0 2px 14px rgb(0 0 0 / 0.95),
+      0 0 4px rgb(0 0 0 / 0.9);
+  }
+
+  .pill-choice-title {
+    font-family: var(--font-mono);
+    font-size: clamp(0.8rem, 0.6rem + 0.9vw, 1.125rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pill-choice-ring {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: 999px;
+    border-width: 2px;
+    border-style: solid;
+    opacity: 0.5;
+    transition:
+      opacity 220ms var(--ease-out-soft),
+      transform 220ms var(--ease-out-soft),
+      box-shadow 220ms var(--ease-out-soft);
+  }
+
+  .pill-choice-target:hover .pill-choice-ring,
+  .pill-choice-target:focus-visible .pill-choice-ring {
+    opacity: 1;
+    transform: scale(1.15);
+    box-shadow: 0 0 30px currentColor;
+  }
+
+  .pill-choice-target:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 8px;
+    border-radius: 999px;
+  }
+
+  /* On a phone the picture is small, so the ring keeps a full touch target
+     even when 4.5vw would be tiny. */
+  @media (max-width: 40rem) {
+    .pill-choice-target {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+
+    .pill-choice-label {
+      bottom: calc(100% + 0.9rem);
+    }
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Opening sequence
+   * ---------------------------------------------------------------- */
+
+  .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 95;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    place-items: center;
+    background: var(--color-paper);
+    transition:
+      transform 800ms cubic-bezier(0.76, 0, 0.24, 1),
+      opacity 500ms ease;
+  }
+
+  .intro[data-phase="leave"] {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  .intro-deck {
+    position: relative;
+    display: grid;
+    width: min(30rem, 80vw);
+    aspect-ratio: 16 / 10;
+    /* The deck sits high and the counter low, as in the reference. */
+    align-self: start;
+    margin-top: 7vh;
+  }
+
+  .intro-card {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 0.9rem;
+    border: 1px solid var(--color-rule);
+    background: var(--color-surface);
+    box-shadow: 0 18px 50px -24px rgb(0 0 0 / 0.55);
+    opacity: 0;
+    transform: translateY(1.5rem) scale(0.97);
+    transition:
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 400ms ease;
+  }
+
+  /* While the counter runs, one card at a time is face up. */
+  .intro-card[data-active] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* At 100 the deck fans out across the middle. */
+  .intro[data-phase="fan"] .intro-card {
+    opacity: 1;
+    transform: translate(var(--fan-x), var(--fan-y)) rotate(var(--fan-r))
+      scale(0.86);
+    transition-delay: calc(var(--card-index) * 70ms);
+  }
+
+  /* Then it gathers back into a single stack. */
+  .intro[data-phase="gather"] .intro-card,
+  .intro[data-phase="leave"] .intro-card {
+    opacity: 1;
+    transform: translateY(calc(var(--card-index) * 6px)) scale(1);
+    transition-delay: calc(var(--card-index) * 45ms);
+  }
+
+  .intro-counter {
+    display: flex;
+    align-self: end;
+    padding-bottom: 10vh;
+    font-family: var(--font-sans);
+    font-size: clamp(4rem, 14vw, 11rem);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    transition: opacity 300ms ease;
+  }
+
+  :root:not([data-theme="light"]) .intro-counter {
+    font-family: var(--font-mono);
+  }
+
+  .intro[data-phase="fan"] .intro-counter,
+  .intro[data-phase="gather"] .intro-counter,
+  .intro[data-phase="leave"] .intro-counter {
+    opacity: 0;
+  }
+
+  /* Each digit is a strip of 0–9 that slides, like an odometer. */
+  .intro-digit {
+    display: block;
+    overflow: hidden;
+    height: 0.9em;
+    width: 0.62em;
+  }
+
+  .intro-digit-strip {
+    display: block;
+    transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .intro-digit-strip > span {
+    display: block;
+    height: 0.9em;
+    line-height: 0.9;
+    text-align: center;
+  }
+
+  /* Coming out of the tunnel: the new world eases in rather than appearing
+     mid-sentence. Only the page's own regions move, never the overlay. */
+  .world-enter body > header,
+  .world-enter body > main,
+  .world-enter body > footer {
+    animation: world-enter 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes world-enter {
+    from {
+      opacity: 0;
+      transform: scale(1.015);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Project carousel
+   *
+   * Pure CSS, in both schemes. The track holds several copies of the same
+   * list and slides left by exactly one copy, which makes the return to the
+   * start invisible.
+   * ---------------------------------------------------------------- */
+
+  .project-carousel {
+    /* Runs edge to edge, out past the page gutters. */
+    margin-inline: calc(50% - 50vw);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 6%,
+      #000 94%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 6%,
+      #000 94%,
+      transparent
+    );
+  }
+
+  .project-carousel-track {
+    display: flex;
+    width: max-content;
+    /* The duration follows the number of cards, so the strip keeps the same
+       speed whether the portfolio holds three projects or fifteen. A fixed
+       64s would make a long portfolio race past. */
+    animation: project-carousel calc(var(--carousel-cards, 6) * 9s) linear
+      infinite;
+  }
+
+  /* Slow enough to read a card as it goes by; a carousel nobody can read is
+     decoration pretending to be content. */
+  .project-carousel:hover .project-carousel-track,
+  .project-carousel:focus-within .project-carousel-track {
+    animation-play-state: paused;
+  }
+
+  .project-carousel-set {
+    display: flex;
+    flex-shrink: 0;
+    gap: 1.25rem;
+    padding-inline: 0.625rem;
+  }
+
+  .project-carousel-set > li {
+    width: 22rem;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 30rem) {
+    .project-carousel-set > li {
+      width: 17rem;
+    }
+  }
+
+  @keyframes project-carousel {
+    to {
+      /* One full copy, including the gap that follows it. */
+      transform: translateX(calc(-100% / var(--carousel-copies, 3)));
+    }
+  }
+
+  /* Endless strip. Duplicated content in the markup makes the loop seamless. */
+  .marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+  }
+
+  .marquee > * {
+    display: flex;
+    width: max-content;
+    animation: marquee 42s linear infinite;
+  }
+
+  .marquee:hover > * {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* The caret in the typed line. */
+  .caret::after {
+    content: "";
+    display: inline-block;
+    width: 0.6ch;
+    height: 1.1em;
+    translate: 0 0.18em;
+    background: var(--color-accent);
+    animation: caret 1.05s steps(2, start) infinite;
+  }
+
+  @keyframes caret {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* The portrait ring: a dashed accent arc around the photograph. */
+  .portrait-ring {
+    background:
+      conic-gradient(
+          from 0deg,
+          var(--color-accent) 0deg 42deg,
+          transparent 42deg 90deg,
+          var(--color-accent) 90deg 150deg,
+          transparent 150deg 198deg,
+          var(--color-accent) 198deg 268deg,
+          transparent 268deg 310deg,
+          var(--color-accent) 310deg 360deg
+        )
+        border-box;
+    animation: ring-spin 18s linear infinite;
+  }
+
+  @keyframes ring-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  /* Discreet entry for larger blocks (160–280ms, brief 9.3). */
+  .rise {
+    animation: rise 260ms var(--ease-out-soft) both;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* Important content must be visible even without animation JS or motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .rise {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .portrait-ring,
+  .marquee > *,
+  .caret::after,
+  .project-carousel-track {
+    animation: none;
+  }
+
+  .pill-choice,
+  .pill-choice-ring {
+    transition: none;
+  }
+
+  .project-carousel {
+    overflow-x: auto;
+  }
+
+  .js-motion [data-split]:not([data-revealed]) .split-word,
+  .js-motion [data-split] .split-word {
+    transform: none;
+    transition: none;
+  }
+
+  .js-motion [data-split]:not([data-revealed]) .struck::after {
+    transform: scaleX(1);
+  }
+
+  /* A revealed-on-scroll block must never be left invisible. */
+  .js-motion [data-reveal],
+  .js-motion [data-reveal]:not([data-revealed]) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .scroll-progress,
+  .rail-dot {
+    display: none;
+  }
+
+  .world-enter body > header,
+  .world-enter body > main,
+  .world-enter body > footer {
+    animation: none;
+  }
+
+  .statement[data-lit="running"] .statement-word {
+    color: inherit;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Print — the CV on paper
+ *
+ * Nothing on paper may be dark, cut off, or chrome: no navigation, no
+ * footer, no curtain, no rails, no decorative fields. Ink on white, pages
+ * that break between sections rather than through them.
+ * ------------------------------------------------------------------ */
+
+@media print {
+  :root,
+  :root[data-theme="light"] {
+    --color-paper: #ffffff;
+    --color-surface: #ffffff;
+    --color-raised: #ffffff;
+    --color-ink: #000000;
+    --color-ink-soft: #333333;
+    --color-rule: #b4b4b4;
+    --color-control: #777777;
+    --color-accent: #000000;
+    --color-accent-ink: #000000;
+    --color-accent-wash: #ffffff;
+    --color-on-accent: #ffffff;
+    color-scheme: light;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  header[class*="sticky"],
+  footer,
+  .side-rail,
+  .rail-dot,
+  .scroll-progress,
+  .intro,
+  .marquee,
+  .cv-print-hide,
+  dialog {
+    display: none !important;
+  }
+
+  .cv {
+    max-width: none;
+    padding: 0;
+  }
+
+  .cv h1 {
+    font-size: 22pt;
+  }
+
+  .cv .cv-head {
+    font-size: 13pt;
+    margin-top: 18pt;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* An entry never splits across two sheets. */
+  .cv-block,
+  .cv li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .cv a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  /* A printed link is useless without its address. */
+  .cv a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8.5pt;
+    color: #444;
+  }
+
+  @page {
+    margin: 14mm 14mm 16mm;
+  }
+}
+
+@layer components {
+  /* ------------------------------------------------------------------ *
+   * Glitch title (terminal scheme only)
+   *
+   * A short digital stutter on a case-study title, for the record that is
+   * about a gaming and technology portal. Two offset copies of the same
+   * text are drawn from `data-text`, so the heading in the markup stays a
+   * single ordinary heading for a screen reader and a crawler.
+   *
+   * The studio scheme reads as an editorial magazine and gets none of it,
+   * and the whole effect is off until `.js-motion` lands on <html> — so a
+   * visitor without JavaScript, or with reduced motion, sees a plain
+   * heading rather than something that never settles.
+   * ------------------------------------------------------------------ */
+  .glitch-title {
+    position: relative;
+  }
+
+  :root:not([data-theme="light"]).js-motion .glitch-title::before,
+  :root:not([data-theme="light"]).js-motion .glitch-title::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    /* The copies must not be read out a second time. */
+    speak: never;
+  }
+
+  :root:not([data-theme="light"]).js-motion .glitch-title::before {
+    color: var(--color-accent);
+    clip-path: inset(0 0 58% 0);
+    animation: glitch-shift-a 4.5s steps(2, end) infinite;
+  }
+
+  :root:not([data-theme="light"]).js-motion .glitch-title::after {
+    color: var(--color-brand-pink);
+    clip-path: inset(62% 0 0 0);
+    animation: glitch-shift-b 4.5s steps(2, end) infinite;
+  }
+
+  @keyframes glitch-shift-a {
+    0%,
+    92%,
+    100% {
+      opacity: 0;
+      translate: 0 0;
+    }
+    93% {
+      opacity: 0.85;
+      translate: -0.06em 0;
+    }
+    96% {
+      opacity: 0.85;
+      translate: 0.05em 0;
+    }
+    98% {
+      opacity: 0;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes glitch-shift-b {
+    0%,
+    92%,
+    100% {
+      opacity: 0;
+      translate: 0 0;
+    }
+    94% {
+      opacity: 0.8;
+      translate: 0.06em 0;
+    }
+    97% {
+      opacity: 0.8;
+      translate: -0.04em 0;
+    }
+    99% {
+      opacity: 0;
+      translate: 0 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root .glitch-title::before,
+    :root .glitch-title::after {
+      content: none;
+      animation: none;
+    }
+  }
+}
+
+@layer components {
+  /* A published figure can be "#1" or "1.000.000+", and the monospaced face
+     makes the long one four times the width of the short one. The size
+     follows the viewport instead of a fixed step, and a value that still
+     does not fit breaks rather than running over its neighbour. */
+  .metric-value {
+    font-size: clamp(1.5rem, 0.9rem + 1.9vw, 2.5rem);
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+  }
+}
+
+
+/* ==================================================================== *
+ * LIGHT EXPERIENCE
+ *
+ * A separate design system for the light world, built from the reference
+ * recording rather than from memory. The palette is sampled from the
+ * recording's own frames with ffmpeg, then measured against WCAG 2.2:
+ *
+ *   page ground sampled at ......... #EEEDF5
+ *   accent sampled at .............. #876CEF
+ *
+ *   #17151C on #EEEDF5 .. 15.57  AAA   headings and body
+ *   #605C6B on #EEEDF5 ..  5.58  AA    secondary text
+ *   #6D4BD6 on #EEEDF5 ..  4.98  AA    links and small-label fills
+ *   #FFFFFF on #6D4BD6 ..  5.79  AA    text on those fills
+ *   #9254FF on #EEEDF5 ..  3.66  large display and UI shapes only
+ *
+ * That last line is the whole reason there are two purples. The reference
+ * purple is beautiful and too pale to carry small text: it is kept for the
+ * big round call to action, the dot fields and decorative shapes, where
+ * 3:1 is the bar that applies, and the darker sibling does the work that
+ * needs 4.5. The brief's proposed #777480 for secondary text measured
+ * 3.93 and was darkened for the same reason.
+ * ==================================================================== */
+
+@layer components {
+  .lx {
+    --lx-ground: #eeedf5;
+    --lx-surface: #ffffff;
+    --lx-ink: #17151c;
+    --lx-soft: #605c6b;
+    --lx-rule: #dcd8e7;
+    --lx-accent: #6d4bd6;
+    --lx-display: #9254ff;
+    --lx-wash: #e5d9ff;
+    color: var(--lx-ink);
+    background: var(--lx-ground);
+  }
+
+  .lx-wrap {
+    width: min(100% - 2.5rem, 90rem);
+    margin-inline: auto;
+  }
+  @media (min-width: 768px) {
+    .lx-wrap {
+      width: min(100% - 4.5rem, 90rem);
+    }
+  }
+
+  .lx-section {
+    padding-block: clamp(5rem, 3rem + 8vw, 11rem);
+  }
+
+  /* Display type: large, medium weight, tight. The reference sets its
+     headline at 83px with line-height equal to the size. */
+  .lx-display {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(2.75rem, 1rem + 7vw, 6.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .lx-h2 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(2rem, 1.1rem + 3.6vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .lx-h3 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  .lx-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lx-soft);
+  }
+  .lx-lead {
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.1875rem);
+    line-height: 1.55;
+    color: var(--lx-soft);
+    max-width: 44ch;
+  }
+  .lx-body {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--lx-soft);
+    max-width: 60ch;
+  }
+
+  /* Buttons: dark with white text, as the brief asks. */
+  .lx-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding-inline: 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    background: var(--lx-ink);
+    color: #ffffff;
+    transition: background-color 220ms var(--ease-out-soft);
+  }
+  .lx-btn:hover {
+    background: var(--lx-accent);
+  }
+  .lx-btn-ghost {
+    background: transparent;
+    color: var(--lx-ink);
+    border: 1px solid var(--lx-rule);
+  }
+  .lx-btn-ghost:hover {
+    background: var(--lx-ink);
+    color: #ffffff;
+    border-color: var(--lx-ink);
+  }
+
+  /* The round arrow button from the reference's service rows. */
+  .lx-round {
+    display: inline-grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 999px;
+    background: var(--lx-ink);
+    color: #ffffff;
+    flex: none;
+    transition:
+      background-color 220ms var(--ease-out-soft),
+      rotate 320ms var(--ease-out-soft);
+  }
+  [data-open="true"] .lx-round {
+    rotate: 45deg;
+    background: var(--lx-accent);
+  }
+
+  .lx-card {
+    background: var(--lx-surface);
+    border: 1px solid var(--lx-rule);
+    border-radius: 1.25rem;
+  }
+
+  /* The faint dot field behind the big section titles. */
+  .lx-dotfield {
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--lx-ink) 18%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 14px 14px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lx-btn,
+    .lx-round {
+      transition: none;
+    }
+  }
+}
+
+@layer components {
+  .lx-mosaic {
+    position: relative;
+    display: block;
+  }
+
+  .lx-mosaic-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .lx-plate {
+    grid-column: span 12;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--lx-ink) 6%, transparent);
+  }
+  @media (min-width: 768px) {
+    .lx-plate {
+      grid-column: span var(--span);
+    }
+  }
+  .lx-plate img {
+    transition: scale 700ms var(--ease-out-soft);
+  }
+  .lx-mosaic:hover .lx-plate img {
+    scale: 1.015;
+  }
+
+  /* The round detail button. Positioned with a transform from two custom
+     properties, so following the pointer never touches layout. */
+  .lx-detail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 999px;
+    background: var(--lx-display);
+    color: #ffffff;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    pointer-events: none;
+    opacity: 0;
+    scale: 0.6;
+    translate: calc(var(--x, 50%) - 3.5rem) calc(var(--y, 50%) - 3.5rem);
+    transition:
+      opacity 220ms var(--ease-out-soft),
+      scale 260ms var(--ease-out-soft);
+  }
+  .lx-detail[data-active="true"] {
+    opacity: 1;
+    scale: 1;
+  }
+  /* No hover on touch, where it would only ever be a stuck overlay. */
+  @media (hover: none) {
+    .lx-detail {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lx-plate img,
+    .lx-detail {
+      transition: none;
+    }
+    .lx-mosaic:hover .lx-plate img {
+      scale: 1;
+    }
+  }
+}
+
+@layer components {
+  .lx-dots {
+    width: 13rem;
+    height: 13rem;
+  }
+  .lx-dot {
+    fill: color-mix(in srgb, var(--lx-ink) 12%, transparent);
+    transition:
+      fill 420ms var(--ease-out-soft),
+      r 420ms var(--ease-out-soft);
+  }
+  .lx-dot-on {
+    fill: var(--lx-display);
+    transition:
+      fill 420ms var(--ease-out-soft),
+      r 420ms var(--ease-out-soft);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lx-dot,
+    .lx-dot-on {
+      transition: none;
+    }
+  }
+}
+
+@layer components {
+  /* Words start grey and resolve to ink as --reveal moves from 0 to 1.
+     Without JavaScript, or with reduced motion, every word is simply ink. */
+  .lx-word {
+    color: var(--lx-ink);
+  }
+  .lx-statement[data-enabled="true"] .lx-word {
+    color: color-mix(
+      in srgb,
+      var(--lx-ink)
+        calc(
+          100% *
+            clamp(
+              0,
+              (var(--reveal, 0) * (var(--n) + 6) - var(--i)) / 6,
+              1
+            )
+        ),
+      color-mix(in srgb, var(--lx-ink) 22%, transparent)
+    );
+    transition: color 220ms linear;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lx-statement .lx-word {
+      color: var(--lx-ink);
+      transition: none;
+    }
+  }
+}
+
+@layer components {
+  .lx-preview-frame {
+    overflow: hidden;
+    border-radius: 1rem;
+    aspect-ratio: 3 / 4;
+    background: color-mix(in srgb, var(--lx-ink) 6%, transparent);
+  }
+  .lx-preview img {
+    transition: scale 700ms var(--ease-out-soft);
+  }
+  .lx-preview:hover img {
+    scale: 1.03;
+  }
+
+  .lx-link-arrow {
+    font-weight: 600;
+    color: var(--lx-accent);
+  }
+  .lx-link-arrow::after {
+    content: " \2197";
+  }
+
+  .lx-ref-list {
+    border-top: 1px solid var(--lx-rule);
+  }
+  .lx-ref-row {
+    display: flex;
+    width: 100%;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--lx-rule);
+    text-align: left;
+    transition: color 200ms var(--ease-out-soft);
+  }
+  .lx-ref-row[data-active="true"] {
+    color: var(--lx-accent);
+  }
+  .lx-ref-row:hover {
+    color: var(--lx-accent);
+  }
+
+  .lx-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: 1px solid var(--lx-rule);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .lx-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .lx-grid-cell {
+    display: grid;
+    place-items: center;
+    min-height: 7rem;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 500;
+    border-right: 1px solid var(--lx-rule);
+    border-bottom: 1px solid var(--lx-rule);
+    transition: background-color 200ms var(--ease-out-soft);
+  }
+  .lx-grid-cell:hover {
+    background: var(--lx-wash);
+  }
+
+  .lx-btn-big {
+    min-height: 4.25rem;
+    padding-inline: 2.5rem;
+    font-size: 1.125rem;
+    background: var(--lx-display);
+  }
+  .lx-btn-big:hover {
+    background: var(--lx-accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lx-preview img,
+    .lx-ref-row,
+    .lx-grid-cell {
+      transition: none;
+    }
+    .lx-preview:hover img {
+      scale: 1;
+    }
+  }
+}
+
+@layer components {
+  .lx-nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-bottom: 1px solid var(--lx-rule);
+    background: color-mix(in srgb, var(--lx-ground) 92%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .lx-nav-link {
+    position: relative;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--lx-ink);
+  }
+  .lx-nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.4rem;
+    height: 1px;
+    background: currentColor;
+    scale: 0 1;
+    transform-origin: left;
+    transition: scale 260ms var(--ease-out-soft);
+  }
+  .lx-nav-link:hover::after,
+  .lx-nav-link:focus-visible::after {
+    scale: 1 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lx-nav-link::after {
+      transition: none;
+    }
+  }
+}
+
+@layer components {
+  /* The light world's opening sequence. Everything here is transform and
+     opacity, so it never reflows the page underneath. */
+  .lx-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    display: grid;
+    place-items: center;
+    background: var(--lx-ground);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .lx-intro[data-play="true"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .lx-intro[data-leaving="true"] {
+    opacity: 0;
+    transition: opacity 480ms var(--ease-out-soft);
+    pointer-events: none;
+  }
+
+  .lx-intro-stage {
+    position: relative;
+    width: min(44rem, 82vw);
+    aspect-ratio: 16 / 10;
+  }
+  .lx-intro-plate {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 30px 80px -40px rgb(23 21 28 / 0.45);
+    opacity: 0;
+  }
+  .lx-intro[data-play="true"] .lx-intro-plate {
+    animation: lx-plate-in 900ms var(--ease-out-soft) forwards;
+  }
+  .lx-intro-plate-1 {
+    inset: 0;
+    animation-delay: 60ms;
+  }
+  .lx-intro-plate-2 {
+    width: 26%;
+    aspect-ratio: 3 / 4;
+    right: -4%;
+    bottom: -12%;
+    animation-delay: 240ms;
+  }
+  .lx-intro-plate-3 {
+    width: 46%;
+    aspect-ratio: 16 / 9;
+    left: -8%;
+    top: -14%;
+    animation-delay: 420ms;
+  }
+
+  @keyframes lx-plate-in {
+    from {
+      opacity: 0;
+      translate: 0 2.5rem;
+      scale: 0.96;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+    }
+  }
+
+  .lx-intro-mark {
+    position: absolute;
+    top: clamp(1.5rem, 4vw, 3rem);
+    left: clamp(1.25rem, 4vw, 3rem);
+    font-size: clamp(1.5rem, 1rem + 1.4vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    opacity: 0;
+  }
+  .lx-intro-mark span {
+    color: #c2185b;
+  }
+  .lx-intro[data-play="true"] .lx-intro-mark {
+    animation: lx-fade-up 600ms var(--ease-out-soft) 520ms forwards;
+  }
+
+  .lx-intro-count {
+    position: absolute;
+    right: clamp(1.25rem, 4vw, 3rem);
+    bottom: clamp(1.25rem, 4vw, 3rem);
+    font-family: var(--font-sans);
+    font-size: clamp(3rem, 2rem + 6vw, 7rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+    color: color-mix(in srgb, var(--lx-ink) 85%, transparent);
+    opacity: 0;
+  }
+  .lx-intro[data-play="true"] .lx-intro-count {
+    animation: lx-fade-up 500ms var(--ease-out-soft) 120ms forwards;
+  }
+
+  @keyframes lx-fade-up {
+    from {
+      opacity: 0;
+      translate: 0 0.75rem;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lx-intro {
+      display: none;
+    }
+  }
+}
