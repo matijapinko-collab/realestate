@@ -114,8 +114,9 @@ test("every published record links to something verifiable", () => {
   // there is nothing to verify, which is exactly what this site avoids.
   for (const project of getPublishedProjects()) {
     assert.ok(
-      project.evidenceLinks.length > 0,
-      `${project.slug} is published without a single evidence link`
+      project.evidenceLinks.length > 0 ||
+        (project.noPublicEvidence ?? "").length > 20,
+      `${project.slug} is published with neither an evidence link nor a stated reason for having none`
     );
     for (const link of project.evidenceLinks) {
       assert.ok(

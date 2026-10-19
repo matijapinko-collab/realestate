@@ -168,6 +168,17 @@ export default async function ProjectPage({ params }: Props) {
                   title={project.outcomesLabel ?? "Rezultat"}
                   items={project.outcomes}
                 />
+            {project.evidenceLinks.length === 0 && project.noPublicEvidence ? (
+              <div>
+                <h2 className="text-(length:--text-title) font-extrabold">
+                  Zašto nema poveznice
+                </h2>
+                <p className="measure-wide mt-4 text-ink-soft">
+                  {project.noPublicEvidence}
+                </p>
+              </div>
+            ) : null}
+
             {project.evidenceLinks.length > 0 ? (
               <div>
                 <h2 className="text-(length:--text-title) font-extrabold">
@@ -210,6 +221,17 @@ export default async function ProjectPage({ params }: Props) {
               {project.roadmap && project.roadmap.length > 0 ? (
                 <ListBlock title="U planu" items={project.roadmap} />
               ) : null}
+            {project.evidenceLinks.length === 0 && project.noPublicEvidence ? (
+              <div>
+                <h2 className="text-(length:--text-title) font-extrabold">
+                  Zašto nema poveznice
+                </h2>
+                <p className="measure-wide mt-4 text-ink-soft">
+                  {project.noPublicEvidence}
+                </p>
+              </div>
+            ) : null}
+
             {project.evidenceLinks.length > 0 ? (
               <div>
                 <h2 className="text-(length:--text-title) font-extrabold">

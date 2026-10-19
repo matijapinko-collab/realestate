@@ -95,6 +95,13 @@ export type Project = {
    */
   featuredImage?: ProjectImage;
   evidenceLinks: EvidenceLink[];
+  /**
+   * Why a published record has no public link to check. Internal systems —
+   * an ERP, a warehouse process — leave nothing on the open web, and an
+   * unrelated marketing site is not evidence of them. Stating the reason is
+   * honest; quietly dropping the requirement would not be.
+   */
+  noPublicEvidence?: string;
   images: ProjectImage[];
   /** Scrollable captures of the live site. */
   liveScreens?: LiveScreen[];
@@ -483,6 +490,182 @@ export const projects: Project[] = [
     contributionLabel: "Next.js storefront nad WordPressom",
     internalNote:
       "Objavu odobrio Matija 16. 10. 2026. Tekst je namjerno bez imena poslužitelja, incidenata, brojeva narudžbi i internih brojki iz ERP-a — to je klijentova kuhinja i ne ide na javni portfelj.",
+  },
+  {
+    slug: "bolero-erp",
+    projectName: "Bolero Adria — ERP i automatizacije",
+    relationshipType: "klijent",
+    role:
+      "Analiza poslovnih procesa, planiranje ERP arhitekture, koordinacija digitalne transformacije i integracija.",
+    status: "u-razvoju",
+    approvedForPublication: true,
+    tagline:
+      "Kako smo odlučili da Excel, pet webshopova i skladište prestanu živjeti svaki u svojem svemiru.",
+    summary:
+      "Reorganizacija digitalnih temelja poslovanja koje povezuje distribuciju, pakirne procese, webshopove, marketplace kanale i skladišta: analiza postojećeg sustava, ERP arhitektura, migracijska strategija i integracije.",
+    context:
+      "Bolero Adria posluje u distribuciji pića, prehrambenih proizvoda i dodataka prehrani. Kroz brendove Bolero Drinks i 100% Smart Food povezuje webshopove, fizičku prodaju, B2B kupce, skladišta i međunarodne marketplace kanale.",
+    challenge:
+      "Problem nije bio nedostatak softvera. Problem je bio što poslovanju treba jedan pouzdan izvor istine.",
+    story: [
+      {
+        heading: "Sve je radilo. Dok nismo počeli gledati kako.",
+        body: [
+          "Postoji jedna posebna faza u razvoju svake tvrtke. Posao raste. Narudžbe dolaze. Proizvodi se prodaju. Ljudi rade. I svi su uvjereni da je sve pod kontrolom.",
+          "Sve dok netko ne postavi jedno vrlo jednostavno pitanje: „Koliko zapravo imamo proizvoda na skladištu?” Onda kreće zabava.",
+          "Jedan sustav kaže jedno. Drugi sustav kaže drugo. Netko ima Excel tablicu. Netko zna napamet. A netko je siguran da je jučer vidio još dvije kutije iza palete.",
+          "Jer prodavati na jednom webshopu nije isto što i koordinirati više prodajnih kanala, različita pakiranja, skladišta, cijene, dokumente i logistiku.",
+        ],
+      },
+      {
+        heading: "Dijagnoza: imamo podatke. Imamo i nekoliko verzija istine.",
+        body: [
+          "Prvi zadatak nije bio odabrati najljepši ERP. Bio je razumjeti što se stvarno događa u poslovanju. Analizirali smo postojeći Bizkit sustav, strukturu artikala, poslovne partnere, skladišne lokacije i povijesne dokumente.",
+          "Migracija nije kopiranje tablice iz jednog programa u drugi. Ako preselite neuredne podatke u novi sustav, niste riješili problem. Samo ste mu kupili novi stan.",
+          "Artikli i identifikatori: proizvodi se prodaju pojedinačno, u kutijama i kroz različite prodajne kanale. Ako više zapisa dijeli EAN ili dio artikala nema EAN, nije dovoljno naslijepo prenijeti stare oznake — potrebna je jasna strategija za SKU, EAN i pakiranja.",
+          "Skladišta i lokacije: u starom sustavu identificirano je 19 lokacija, a operativno poslovanje oslanja se na četiri fizička skladišta. To ne znači automatski da je 15 lokacija pogrešno. Znači da treba utvrditi predstavljaju li stvarne skladišne pozicije, povijesne evidencije, virtualne lokacije ili nešto četvrto.",
+          "Više prodajnih kanala: Bolero Adria koristi više WooCommerce trgovina, a poslovanje uključuje i Amazon te Temu. Svaki kanal ima vlastitu logiku narudžbi, cijena, statusa i dostave. Kupca ne zanima zašto su dva sustava prikazala različitu zalihu. Njega zanima gdje je njegov paket. I potpuno je u pravu.",
+        ],
+      },
+      {
+        heading: "Cilj: jedan sustav koji zna što se događa",
+        body: [
+          "Nismo željeli napraviti još jedan program koji će zaposlenici morati otvarati uz pet postojećih. Željeli smo postaviti temelje sustava koji povezuje poslovanje.",
+          "Zato je definiran smjer prema Odoo ERP platformi, s prilagođenim integracijama i modulima ondje gdje standardne funkcionalnosti nisu dovoljne.",
+          "Sustav treba povezati nabavu i dobavljače, skladišta i zalihe, pakiranja i proizvodne procese, webshopove i marketplace kanale, B2B i maloprodaju, logistiku i dostavu te izvještavanje.",
+          "Ne, ne želimo još 37 Excel tablica. Želimo da poslovanje može odgovoriti na osnovna pitanja bez organiziranja sastanka.",
+        ],
+      },
+      {
+        heading: "Arhitektura: ERP kao mozak, prodajni kanali kao ruke",
+        body: [
+          "Ključna projektna odluka bila je definirati vlasništvo nad podacima. U predloženoj arhitekturi Odoo postaje središnji operativni sustav za artikle, skladišta, pakiranja i raspoloživost robe. WooCommerce ostaje prodajni kanal i mjesto na kojem kupac naručuje proizvode. Amazon i Temu zadržavaju vlastite marketplace procese, a integracijski sloj usklađuje podatke.",
+          "Predviđeni tok narudžbe: kupac naručuje na webshopu ili marketplaceu, integracija preuzima narudžbu, ERP identificira artikle i njihove prodajne jedinice, provjerava raspoloživost i rezervira robu, skladište dobiva zadatak za pripremu, nakon obrade otpreme status se vraća prodajnom kanalu, a dokumenti ostaju dostupni za izvještavanje.",
+          "To je ciljna arhitektura, ne tvrdnja da je svaka navedena integracija već implementirana.",
+          "Zamislite da imate posljednju kutiju nekog proizvoda. Webshop kaže da je dostupna. Amazon kaže da je dostupna. Temu kaže da je dostupna. A skladištar kaže da je upravo otišla. Tri kupca, jedna kutija. Zato centralna evidencija zaliha i kontrolirana sinkronizacija nisu luksuz.",
+        ],
+      },
+      {
+        heading: "Najzanimljiviji izazov: pakiranja",
+        body: [
+          "Bolero i Smart Food nisu poslovanje u kojem svaki proizvod uvijek dolazi u jednoj jednostavnoj prodajnoj jedinici. Postoje pojedinačni artikli, kutije, kombinacije i pakiranja koja zahtijevaju dodatnu operativnu logiku.",
+          "Kupac naruči paket s više odabranih okusa. Sustav ne smije samo evidentirati prodaju jednog generičkog paketa — mora znati koje su stvarne komponente potrebne i kako se njihova potrošnja odražava na skladište. Ako se paket proda, a komponente ne skinu sa zalihe, stanje će s vremenom postati nepouzdano.",
+          "Za proces pakiranja definirali smo potrebu za jasnim modelom komponenti, izborom okusa, skladišnim kretanjima i odgovarajućim radnim zadacima. Kupac bira okuse. Sustav zna što treba pripremiti. Skladište zna što treba uzeti.",
+          "To bi trebalo biti normalno. Ali tko je radio s poslovnim sustavima, zna da je „normalno” ponekad najskuplja funkcionalnost.",
+        ],
+      },
+      {
+        heading: "Migracija: 33.727 razloga za oprez",
+        body: [
+          "Kod zamjene ERP-a jedan od najvećih rizika nije novi sustav, nego podaci koje nosite iz starog. Bolero Adria ima značajnu povijest poslovnih dokumenata koju nije razumno samo izbrisati, a nije nužno ni sve stare dokumente ponovno knjižiti u novom ERP-u.",
+          "Zato smo razradili pristup u kojem se razlikuju operativni podaci potrebni za nastavak poslovanja, povijesni dokumenti koji moraju ostati dostupni, neispravni ili neusklađeni zapisi koje treba provjeriti te početna stanja skladišta koja se moraju potvrditi inventurom.",
+          "Jedan od važnih principa projekta jest zadržavanje starog sustava kao povijesne arhive, uz kontroliran početak rada u novom sustavu.",
+          "Jer najgore što možete napraviti jest prenijeti deset godina problema i nazvati to digitalnom transformacijom. To nije transformacija. To je selidba nereda.",
+        ],
+      },
+      {
+        heading: "WMS: skladište ne smije biti escape room",
+        body: [
+          "Kada imate više skladišta, prodajnih kanala i različitih pakiranja, nije dovoljno znati samo ukupnu količinu proizvoda. Važno je znati gdje se roba nalazi, što je rezervirano, što treba pripremiti i što je već otpremljeno.",
+          "U funkcionalni opseg uključeni su zaprimanje robe, skladišne lokacije i premještanja, inventure, rezervacije i priprema narudžbi, pakiranje i kompletiranje, otpremnice i dostava, povrati te praćenje operativnih statusa.",
+          "Cilj je smanjiti ovisnost o informacijama koje postoje samo u nečijoj glavi. Jer „pitaj Ivana, on zna gdje je” nije skladišni sustav. To je usmena predaja. A usmena predaja je odlična za narodne pjesme. Za skladište baš i nije.",
+        ],
+      },
+      {
+        heading: "Moja uloga: manje prezentacija, više razumijevanja problema",
+        body: [
+          "Moja uloga nije samo odabrati softver i reći developerima što da naprave. Uključuje razumijevanje načina na koji tvrtka posluje, prepoznavanje problema i povezivanje tehničkih rješenja sa stvarnim operativnim potrebama.",
+          "Radio sam na analizi postojećih sustava, definiranju ERP zahtjeva, pripremi migracijske strategije, planiranju integracija i koordinaciji digitalnih procesa. Posebno je važno povezati ono što se često promatra odvojeno: webshop, skladište, nabavu, logistiku i marketing.",
+          "Jer nema smisla povećavati prodaju ako operativa ne može pratiti rast. Dobar ERP ne počinje kodom. Počinje pitanjem: „Zašto ovo uopće radimo ovako?”",
+          "A odgovori znaju biti fantastični. „Oduvijek tako radimo.” „Tako je radio prošli kolega.” „Nemoj to dirati, radi.” Moj omiljeni je posljednji. Posebno kad ne radi.",
+        ],
+      },
+      {
+        heading: "Najveći problem digitalne transformacije nije tehnologija",
+        body: [
+          "Tehnologija je alat. Pravi izazov je razumjeti poslovanje koje je godinama raslo, mijenjalo se i prilagođavalo bez mogućnosti da netko svaki put stane i ponovno osmisli cijeli proces.",
+          "Svaka iznimka ima razlog. Svaka tablica ima svoju povijest. Svaki zaposlenik ima način rada koji mu pomaže da preživi dan. A onda dođem ja i pitam zašto nešto radimo baš tako. Nekad dobijem dobar odgovor. Nekad dobijem Excel. Uglavnom dobijem još posla.",
+          "Cilj je izgraditi sustav koji može pratiti rast poslovanja bez proporcionalnog rasta administrativnog kaosa. A najbolji dio? Ako sve napravimo kako treba, jednog dana nitko neće posebno razmišljati o ERP-u. Jer će jednostavno raditi.",
+        ],
+      },
+    ],
+    decisions: [
+      "Odoo kao središnji operativni sustav za artikle, skladišta, pakiranja i raspoloživost robe",
+      "WooCommerce ostaje prodajni kanal, a ne izvor istine o zalihama",
+      "Integracijski sloj s jasno definiranim vlasništvom nad podacima prema svakom kanalu",
+      "Stari sustav zadržan kao povijesna arhiva umjesto prenošenja svih dokumenata u novi ERP",
+      "Strategija za SKU, EAN i pakiranja prije migracije, a ne nakon nje",
+      "Model komponenti i skladišnih kretanja za pakiranja s odabirom okusa",
+    ],
+    deliverables: [
+      "Analiza postojeće Bizkit baze: artikli, partneri, povijesni dokumenti, EAN identifikatori i skladišne lokacije",
+      "Funkcionalni opseg: nabava, skladišta, pakiranja, prodajni kanali, B2B, POS, dostava, povrati, naplata i izvještavanje",
+      "Migracijska strategija s razdvajanjem povijesne arhive od operativnih podataka",
+      "Integracijska arhitektura prema WooCommerce trgovinama i marketplace kanalima",
+      "Opseg skladišnih procesa (WMS) od zaprimanja do povrata",
+    ],
+    outcomesLabel: "Dosadašnji rezultati",
+    outcomes: [
+      "Analizirana postojeća baza i identificirani problemi s EAN identifikatorima i skladišnim lokacijama",
+      "Definirani ključni poslovni procesi kroz cijeli funkcionalni opseg",
+      "Odabran tehnološki smjer: Odoo kao temelj buduće centralizacije",
+      "Razrađena migracijska strategija i kontrolirano uspostavljanje početnih zaliha",
+      "Definirana integracijska arhitektura s jasnijim vlasništvom nad podacima",
+    ],
+    metrics: [
+      {
+        value: "762",
+        label: "artikla u analizi",
+        basis:
+          "Analizirani migracijski skup podataka iz postojećeg Bizkit sustava, a ne završno stanje produkcijske migracije.",
+      },
+      {
+        value: "523",
+        label: "poslovna partnera",
+        basis:
+          "Analizirani migracijski skup podataka iz postojećeg Bizkit sustava, a ne završno stanje produkcijske migracije.",
+      },
+      {
+        value: "33.727",
+        label: "povijesnih računa",
+        basis:
+          "Analizirani migracijski skup podataka iz postojećeg Bizkit sustava, a ne završno stanje produkcijske migracije.",
+      },
+      {
+        value: "32.980",
+        label: "otpremnica",
+        basis:
+          "Analizirani migracijski skup podataka iz postojećeg Bizkit sustava, a ne završno stanje produkcijske migracije.",
+      },
+      {
+        value: "19",
+        label: "evidentiranih lokacija prema 4 fizička skladišta",
+        basis:
+          "Evidencija lokacija u Bizkit sustavu usporedno s brojem fizičkih skladišta; dio lokacija tek treba razvrstati kao stvarne, povijesne ili virtualne.",
+      },
+      {
+        value: "61 / 204",
+        label: "dijeljenih EAN kodova / artikala bez EAN-a",
+        basis:
+          "Analizirani migracijski skup podataka iz postojećeg Bizkit sustava; podloga za strategiju SKU-a, EAN-a i pakiranja.",
+      },
+    ],
+    roadmap: [
+      "Potvrda početnih stanja skladišta inventurom",
+      "Fazno puštanje modula u rad uz stari sustav kao arhivu",
+      "Implementacija integracija prema WooCommerce trgovinama i marketplace kanalima",
+      "Mjerenje učinaka nakon puštanja: pouzdanost zaliha, ručni rad, skladišni procesi i izvještavanje",
+    ],
+    nextStep:
+      "Imate webshop, skladište, ERP, tri Excel tablice i zaposlenika koji jedini zna kako sve to funkcionira?",
+    evidenceLinks: [],
+    noPublicEvidence:
+      "ERP, WMS i integracije su interni sustavi klijenta i nemaju javnu adresu koju bi čitatelj mogao otvoriti. Brojke u tekstu dolaze iz analiziranog migracijskog skupa podataka, a svaka je navedena s osnovicom na kojoj je izmjerena.",
+    images: [],
+    publishedAt: "2026-10-19",
+    contributionLabel: "ERP arhitektura, migracija i integracije",
+    internalNote:
+      "Tekst je Matijin, dostavljen 19. 10. 2026. Status je namjerno 'u razvoju': analiza, migracijska priprema i fazni razvoj. Nijedna integracija nije prikazana kao implementirana, a očekivane koristi stoje kao očekivanja koja treba potvrditi mjerenjem nakon puštanja. Nema javne poveznice — razlog je zapisan u noPublicEvidence.",
   },
   {
     slug: "bolero-drinks",
