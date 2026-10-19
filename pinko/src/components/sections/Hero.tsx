@@ -38,7 +38,7 @@ export function Hero() {
             <h1 className="text-(length:--text-hero) font-extrabold">
               <SplitLines
                 lines={[
-                  "Dosta Vam je žmuhlera",
+                  "Dosta Vam je žmuklera",
                   "koji Vam samo uzimaju novce?",
                 ]}
               />
