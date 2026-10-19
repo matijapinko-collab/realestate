@@ -94,7 +94,7 @@ export function Hero() {
                 <PortraitBio />
                 {/* The terminal line survives the arrival of the photograph;
                     it moved from the card the portrait replaced. */}
-                <TypedDisciplines compact className="mt-16" />
+                <TypedDisciplines compact className="hero-typed mt-16" />
               </div>
             ) : (
               /* Placeholder while the photograph is not in the repository. */

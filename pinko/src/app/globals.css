@@ -439,6 +439,12 @@
     display: none;
   }
 
+  /* The typed prompt is a terminal motif too, and reads as a stray line of
+     code under a portrait in the studio composition. */
+  :root[data-theme="light"] .hero-typed {
+    display: none;
+  }
+
   /* The terminal scheme keeps its accent on the second line of the hero,
      which is what it had before the headline was split into words. */
   :root:not([data-theme="light"]) .hero-copy h1 .split-line:nth-child(2) {
