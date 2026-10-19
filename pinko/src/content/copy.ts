@@ -1,7 +1,11 @@
 /** Shared editorial copy, so the same words are not retyped per page. */
 
-export const bioShort =
-  "Ja sam Matija Pinko. Razvijam webove, webshopove i aplikacije te povezujem tehnologiju, sadržaj i prodajne procese. Volim kad web izgleda odlično. Još više volim kad kupac lako naruči, podaci završe gdje trebaju, a vi imate manje ručnog posla.";
+export const bioShort = [
+  "Da, dobro ste pročitali. Dok normalni ljudi bježe od problema, ja ih dobrovoljno tražim. I još mi je zabavno!",
+  "Radim webove, webshopove, aplikacije, marketing i svašta nekaj kaj uključuje računala, puno razmišljanja i povremeno razgovaranje sa samim sobom.",
+  "Volim kad stvari rade kak spada. Još više volim kad mi netko kaže da se nekaj ne može napraviti.",
+  "A najviše volim kad na kraju ispadne da se ipak može.",
+];
 
 export const bioLong = [
   "Bok, ja sam Matija. Developer, marketingaš, čovjek za poslovne procese i povremeni profesionalni neprijatelj loše organizacije.",
@@ -14,16 +18,31 @@ export const bioLong = [
 
 export const principles = [
   {
-    title: "Izravan razgovor",
-    body: "Razgovarate sa mnom, ne s posrednikom. Odluke objašnjavam jezikom posla, a ne kraticama.",
+    index: "01",
+    title: "Jedan čovek. Bez pokvarenog telefona.",
+    body: [
+      "Kad me angažirate, razgovarate sa mnom. Ne s account managerom koji razgovara s project managerom koji tek onda pokušava pronaći developera.",
+      "Ak nekaj ne valja, znate koga zvati.",
+      "Nažalost, i ja.",
+    ],
   },
   {
-    title: "Definiran opseg",
-    body: "Prije početka znamo što je uključeno, što nije i što se mjeri kao gotovo.",
+    index: "02",
+    title: "Prvo se dogovorimo. Onda radimo cirkus.",
+    body: [
+      "Prije početka dogovorimo kaj radimo, koliko košta i kad treba biti gotovo.",
+      "Bez misterioznih dodatnih troškova, iznenadnih promjena plana i legendarne rečenice „To nismo tak dogovorili”.",
+      "Za cirkus sam uvijek raspoložen. Samo ne na Vaš račun.",
+    ],
   },
   {
-    title: "Povezana izvedba",
-    body: "Razvoj, sadržaj i procesi prate isti plan, pa se odluke iz jednog područja ne ruše u drugom.",
+    index: "03",
+    title: "Ne gledam samo jedan kotačić.",
+    body: [
+      "Kaj Vam vrijedi najljepši webshop na svijetu ak narudžbe završavaju u nečijem inboxu, skladište nema pojma kaj se prodalo, a marketing dovodi ljude na stranicu koja ne radi?",
+      "Zato povezujem tehnologiju, marketing i poslovanje. Da sve skupa ima glavu i rep.",
+      "A ne da na kraju Vi izgubite glavu, a ja tražim rep.",
+    ],
   },
 ];
 

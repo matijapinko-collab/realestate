@@ -51,8 +51,17 @@ export default function AboutPage() {
           <ul className="grid gap-px self-start overflow-hidden rounded-(--radius-card) border border-rule bg-rule">
             {principles.map((principle) => (
               <li key={principle.title} className="bg-surface p-6">
-                <h2 className="text-lg font-extrabold">{principle.title}</h2>
-                <p className="mt-2 text-ink-soft">{principle.body}</p>
+                <p className="mono-label font-semibold text-accent">
+                  {principle.index}
+                </p>
+                <h2 className="mt-2 text-lg font-extrabold">
+                  {principle.title}
+                </h2>
+                <div className="mt-3 space-y-2.5 text-ink-soft">
+                  {principle.body.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
               </li>
             ))}
           </ul>

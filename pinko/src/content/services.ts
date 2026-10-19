@@ -104,18 +104,22 @@ export const bizDevBoundaries = [
 ];
 
 /* ------------------------------------------------------------------ *
- * The four services (brief of 19 Oct 2026)
+ * The three services (copy of 19 Oct 2026)
  *
- * The site used to present three disciplines — Development, Marketing and
- * Business Development. The brief names four services instead, written the
- * way a client describes a problem rather than the way an agency sorts its
- * departments. The headline, body and CTA of each are Matija's own words and
- * are reproduced as written.
+ * Matija's own words, Kajkavian spelling included. The four-service split
+ * from earlier the same day lasted about an hour: this copy is written as
+ * Development, Marketing and Business Development, so the slugs go back to
+ * what they always were and the four interim addresses redirect here.
  *
- * The detailed item lists above are not rewritten: each item moves to the
- * service it belongs to, and every one of them still appears exactly once.
- * Nothing here invents a service that was not already offered.
+ * `blocks` carry the sales copy. `items` are the factual scope lists above,
+ * unchanged — the jokes sell, the list says what is actually included, and
+ * the boundaries say what is not.
  * ------------------------------------------------------------------ */
+
+export type ServiceBlock = {
+  title: string;
+  body: string[];
+};
 
 export type Service = {
   slug: string;
@@ -124,103 +128,182 @@ export type Service = {
   name: string;
   /** The promise, in Matija's voice. */
   headline: string;
-  /** Body paragraphs, in order. */
-  body: string[];
+  /** Opening paragraphs under the headline. */
+  intro: string[];
+  /** The sales copy, one block per thing he does. */
+  blocks: ServiceBlock[];
   cta: string;
-  /** Detailed items, drawn from the lists above. */
+  /** Detailed scope, from the lists above. */
   items: ServiceItem[];
   boundaries: string[];
-  /** Where the old discipline page pointed, so links keep working. */
-  previousPath?: string;
 };
-
-const byTitle = (items: ServiceItem[], titles: string[]): ServiceItem[] =>
-  titles.map((title) => {
-    const found = items.find((item) => item.title === title);
-    if (!found) throw new Error(`Nepoznata stavka usluge: ${title}`);
-    return found;
-  });
 
 export const services: Service[] = [
   {
-    slug: "web-stranice-i-aplikacije",
+    slug: "development",
     index: "01",
-    name: "Web stranice i aplikacije",
+    name: "Development",
     headline:
-      "Web koji nije samo digitalna posjetnica koju nitko ne posjećuje.",
-    body: [
-      "Svi znamo one webove koji izgledaju prekrasno, ali ništa ne prodaju. Ja ga ne želim napraviti.",
-      "Budimo realni, svi imamo webove da zaradimo pare, ne zato jer nam dosadno. Radim brze, moderne i funkcionalne webove i aplikacije koji imaju konkretan posao. Dovesti kupca, objasniti ponudu, prikupiti upit ili riješiti poslovni problem.",
-      "Jer ako je jedina funkcija weba da šef veli „E super ovo baš lijepo izgleda”, mogli smo mu jednostavno kupiti ogledalo.",
+      "Vi zamislite. Ja napravim. Onda se zajedno pravimo da je bilo jednostavno.",
+    intro: [
+      "Imate genijalnu ideju za web? Super! Postoji samo jedan mali problem. Sad to netko treba i napraviti.",
+      "A ako ste već imali developera koji Vam je šest mjeseci objašnjavao da je projekt „gotovo gotov”, onda ste definitivno na pravom mjestu.",
+      "Ja ne pričam samo o tehnologiji. Ja je koristim da Vam riješim problem.",
     ],
-    cta: "Hoću web koji nešto radi",
-    items: byTitle(developmentServices, [
-      "Next.js poslovni webovi",
-      "Web aplikacije",
-      "Arhitektura sustava",
-      "Hosting i infrastruktura",
-    ]),
+    blocks: [
+      {
+        title: "Web stranice",
+        body: [
+          "Lijepe, brze i pametne. Baš kao ja, samo bez bolova u leđima.",
+          "Ne radim webove da ih možete pokazivati rodbini na nedjeljnom ručku. Dobro, možete i to.",
+          "Radim ih da Vam donose upite, kupce i posao.",
+        ],
+      },
+      {
+        title: "Webshopovi",
+        body: [
+          "Znate onaj divan osjećaj kad kupac naruči proizvod, plati ga i dobije ono što je naručio? E, to!",
+          "Bez narudžbi koje misteriozno nestaju, zaliha koje postoje samo u teoriji i košarice koja se raspadne čim netko klikne „Plati”.",
+        ],
+      },
+      {
+        title: "Aplikacije po mjeri",
+        body: [
+          "Imate ideju za aplikaciju koju nitko drugi ne razumije? Savršeno. Ni moja mama još uvijek ne razumije čime se točno bavim.",
+          "Objasnite mi što želite postići, a ja ću smisliti kako to napraviti.",
+        ],
+      },
+      {
+        title: "Integracije i automatizacije",
+        body: [
+          "Imate pet programa koji međusobno ne razgovaraju? Kaj su se posvađali? Spojit ćemo ih.",
+          "A ako netko kod Vas osam sati dnevno ručno prepisuje podatke, možda bi bilo lijepo da tom čovjeku omogućimo da konačno radi nešto korisnije.",
+        ],
+      },
+      {
+        title: "Hosting i održavanje",
+        body: [
+          "Napravili smo web. Sve radi. Svi sretni. I kaj sad? Pustimo ga da se sam snalazi u životu?",
+          "Ne baš. Brinem se da stvari nastave raditi i nakon što prestanemo slaviti lansiranje.",
+        ],
+      },
+    ],
+    cta: "Matija, napravi mi nekaj pametno!",
+    items: developmentServices,
     boundaries: developmentBoundaries,
-    previousPath: "/usluge/development",
   },
   {
-    slug: "webshopovi",
+    slug: "marketing",
     index: "02",
-    name: "Webshopovi",
-    headline: "Webshop koji prodaje. Znam, zvuči suludo.",
-    body: [
-      "Nije dovoljno staviti proizvode na internet, dodati košaricu i čekati da novac počne padati s neba. Nažalost, internet ne funkcionira tako. Provjerio sam.",
-      "Razvijam webshopove koji povezuju proizvode, naplatu, logistiku, analitiku i poslovne procese u jednu smislenu cjelinu.",
-      "Složiti ćemo Vam nešto da imate manje ručnog posla, više prostora za rad, a nadajmo se najviše od svega da budete imali novaca!",
+    name: "Marketing",
+    headline:
+      "Imate najbolji proizvod na svijetu? To kaže i svaki drugi direktor.",
+    intro: [
+      "Nemojte se ljutiti. Siguran sam da je Vaš proizvod fantastičan. Samo postoji jedna mala nezgodacija.",
+      "Nitko ne zna da postoji. A oni koji znaju, možda kupuju kod konkurencije jer je prva iskočila na Googleu.",
+      "Krasno, jelda? Ajmo to promijeniti.",
     ],
-    cta: "Ajmo prodati nešto",
-    items: [
-      ...byTitle(developmentServices, ["Webshopovi", "Modernizacija"]),
-      ...byTitle(bizDevServices, ["E-commerce poslovni model"]),
+    blocks: [
+      {
+        title: "SEO i content",
+        body: [
+          "Google Vas ne voli? Nema veze. Ni mene nisu svi voljeli u školi.",
+          "Ali to ne znači da se ne možemo potruditi da Vas ljudi pronađu.",
+          "Istražujem što kupci traže, pišem sadržaj koji ima smisla i radim na tome da Vaš web ne bude digitalna verzija napuštenog kioska.",
+        ],
+      },
+      {
+        title: "Copywriting",
+        body: [
+          "„Mi smo vodeća tvrtka s dugogodišnjim iskustvom i individualnim pristupom svakom klijentu.” Ajme meni.",
+          "Ako Vam na webu piše nekaj slično, moramo razgovarati.",
+          "Ljudi ne kupuju zato što ste „dinamičan tim stručnjaka”. Kupuju jer razumiju što nudite i zašto im to treba. A ako ih pritom uspijemo nasmijati, još bolje.",
+        ],
+      },
+      {
+        title: "Email marketing",
+        body: [
+          "Imate bazu kupaca kojima se niste javili od prošlog Božića? A sad biste im htjeli prodati nešto?",
+          "Pa dobro, mogli bismo se prvo barem pristojno javiti.",
+          "Radim email kampanje i automatizacije koje održavaju odnos s kupcima, a ne testiraju koliko brzo mogu pronaći gumb „Odjavi se”.",
+        ],
+      },
+      {
+        title: "Amazon i Temu",
+        body: [
+          "Oćete prodavati u Njemačkoj? Francuskoj? Po cijeloj Europi? Može!",
+          "Samo nemojte misliti da je dovoljno prevesti naziv proizvoda na njemački i čekati milijune. Marketplace ima svoja pravila, naknade, logistiku i oglašavanje.",
+          "A Amazon posebno voli podsjetiti čovjeka da u životu ništa nije jednostavno. Znam. Družimo se već neko vrijeme.",
+        ],
+      },
+      {
+        title: "Analitika i optimizacija",
+        body: [
+          "„Matija, imali smo 40.000 klikova!” Super! Koliko ste zaradili? „Pa...” E, vidite.",
+          "Zato ne gledam samo koliko ljudi dolazi, nego što rade kad dođu.",
+          "Jer od klikova se, nažalost, još uvijek ne mogu platiti režije.",
+        ],
+      },
     ],
-    boundaries: developmentBoundaries,
-  },
-  {
-    slug: "automatizacije-i-erp",
-    index: "03",
-    name: "Automatizacije i ERP",
-    headline: "Ako nešto radite ručno 47 puta dnevno, imamo problem.",
-    body: [
-      "Excel je fantastičan alat. Dok ne postane glavni direktor vaše tvrtke.",
-      "Povezujem sustave, automatiziram procese i razvijam poslovna rješenja koja uklanjaju nepotrebno prepisivanje, kopiranje i svakodnevno živciranje.",
-      "Ako zaposlenik svaki dan tri sata prebacuje podatke iz jednog sustava u drugi, ne treba mu motivacijski seminar. Treba mu dati otkaz.",
-      "Okej, šalim se, treba mu složiti automatizaciju da se može baviti stvarima koje zarađuju novce.",
-    ],
-    cta: "Otpustimo dosadne zadatke",
-    items: [
-      ...byTitle(developmentServices, ["API integracije i automatizacije"]),
-      ...byTitle(bizDevServices, [
-        "Specifikacija ERP/CRM i integracija",
-        "Digitalni poslovni audit",
-        "Plan razvoja za 90 dana",
-        "Vanjski voditelj digitalnog razvoja",
-      ]),
-    ],
-    boundaries: bizDevBoundaries,
-    previousPath: "/usluge/business-development",
-  },
-  {
-    slug: "marketing-i-ecommerce-rast",
-    index: "04",
-    name: "Marketing i eCommerce rast",
-    headline: "Promet je super. Kupci su još bolji.",
-    body: [
-      "Možete imati milijun posjetitelja. Ako nitko ništa ne kupi, čestitam — imate jako popularan trošak.",
-      "Bavim se SEO-om, digitalnim oglašavanjem, prodajnim kanalima, Amazonom, Temuom i razvojem eCommerce poslovanja.",
-      "Ne zanima me koliko smo klikova skupili za prezentaciju. Zanima me što se dogodilo nakon klika.",
-    ],
-    cta: "Dosta klikova, hoću rezultate",
-    items: [
-      ...marketingServices,
-      ...byTitle(bizDevServices, ["Razvoj novih kanala i tržišta"]),
-    ],
+    cta: "Ajmo nekaj i zaraditi!",
+    items: marketingServices,
     boundaries: marketingBoundaries,
-    previousPath: "/usluge/marketing",
+  },
+  {
+    slug: "business-development",
+    index: "03",
+    name: "Business Development",
+    headline: "Firma Vam raste? A živci se smanjuju?",
+    intro: [
+      "Čestitam! Izgleda da ste uspješni.",
+      "Samo još moramo riješiti činjenicu da nitko više ne zna tko kaj radi, gdje su podaci i zašto za običnu narudžbu trebate zvati četiri čovjeka.",
+      "A možda ste već kupili neki skupi softver koji je trebao sve riješiti. I sad imate isti problem. Samo u ljepšem sučelju.",
+    ],
+    blocks: [
+      {
+        title: "Poslovni audit",
+        body: [
+          "Dođem, pogledam kako radite i počnem postavljati pitanja. Puno pitanja.",
+          "Neka će Vam se svidjeti. Neka baš i neće. Pogotovo ono: „A zakaj to uopće radite tak?”",
+          "Ali obećajem da ne pitam samo zato da Vas živciram. Dobro, možda malo.",
+        ],
+      },
+      {
+        title: "ERP i CRM",
+        body: [
+          "Znate kaj je najskuplji poslovni sustav? Onaj koji ste platili, a nitko ga ne koristi.",
+          "Pomažem Vam odabrati, posložiti i povezati sustave s načinom na koji Vaša firma stvarno radi.",
+          "Ne onako kako je neki konzultant zamislio nakon dva sastanka i jednog cappuccina.",
+        ],
+      },
+      {
+        title: "Automatizacija poslovanja",
+        body: [
+          "Ako svaki dan ponavljate isti dosadan zadatak, imam dvije vijesti.",
+          "Loša: vjerojatno ste na njega već potrošili jako puno vremena. Dobra: možda ga više nećete morati raditi.",
+          "A sad zamislite da Vam računalo konačno radi za Vas. Nevjerojatna tehnologija, taj kompjuter.",
+        ],
+      },
+      {
+        title: "Razvoj novih prodajnih kanala",
+        body: [
+          "Želite proširiti poslovanje? Odlično!",
+          "Ali prije nego što krenemo osvajati Europu, možda bi bilo dobro provjeriti hoćete li na svakoj narudžbi zaraditi ili izgubiti tri eura.",
+          "Znam da zvuči kao detalj. Ali takvi detalji znaju biti prilično neugodni kad ih pomnožite s deset tisuća.",
+        ],
+      },
+      {
+        title: "Strategija i planiranje",
+        body: [
+          "Neću Vam napisati strategiju od 120 stranica koju ćemo svečano spremiti u Google Drive i više nikad otvoriti.",
+          "Dogovorit ćemo što radimo, zašto, kojim redom i kako ćemo znati da je uspjelo.",
+          "Znam. Skoro pa revolucionarno.",
+        ],
+      },
+    ],
+    cta: "Matija, spašavaj firmu!",
+    items: bizDevServices,
+    boundaries: bizDevBoundaries,
   },
 ];
 

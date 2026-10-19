@@ -48,12 +48,12 @@ export async function generateMetadata({
     title: `${service.name} — ${service.headline}`,
     // `body` is never empty, but the index signature is checked, so the
     // headline stands in rather than leaving the description undefined.
-    description: service.body[0] ?? service.headline,
+    description: service.intro[0] ?? service.headline,
     alternates: { canonical: `/usluge/${service.slug}` },
   };
 }
 
-const WITH_PACKAGES = new Set(["web-stranice-i-aplikacije", "webshopovi"]);
+const WITH_PACKAGES = new Set(["development"]);
 
 export default async function ServicePage({
   params,
@@ -75,7 +75,7 @@ export default async function ServicePage({
       <BreadcrumbJsonLd items={crumbs} />
       <ServiceJsonLd
         name={service.name}
-        description={service.body[0] ?? service.headline}
+        description={service.intro[0] ?? service.headline}
         path={`/usluge/${service.slug}`}
       />
 
@@ -85,7 +85,7 @@ export default async function ServicePage({
         title={service.headline}
         lead={
           <>
-            {service.body.map((paragraph, i) => (
+            {service.intro.map((paragraph, i) => (
               <p key={paragraph} className={i > 0 ? "mt-4" : undefined}>
                 {paragraph}
               </p>
@@ -96,7 +96,27 @@ export default async function ServicePage({
         breadcrumbs={crumbs}
       />
 
-      <Section title="Što radim">
+      {/* The sales copy first, in Matija's own words, and the factual scope
+          list under it. The jokes are what someone reads; the list is what
+          they get, and the boundaries at the foot say what they do not. */}
+      <Section>
+        <div className="measure-wide space-y-12">
+          {service.blocks.map((block) => (
+            <section key={block.title} data-reveal>
+              <h2 className="text-(length:--text-title) font-extrabold">
+                {block.title}
+              </h2>
+              <div className="mt-4 space-y-4 text-ink-soft">
+                {block.body.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      </Section>
+
+      <Section tone="surface" title="Što to konkretno uključuje">
         <ServiceList items={service.items} />
       </Section>
 

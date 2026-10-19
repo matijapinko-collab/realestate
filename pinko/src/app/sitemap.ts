@@ -12,10 +12,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: { path: string; priority: number }[] = [
     { path: "/", priority: 1 },
     { path: "/usluge", priority: 0.9 },
-    { path: "/usluge/web-stranice-i-aplikacije", priority: 0.9 },
-    { path: "/usluge/webshopovi", priority: 0.9 },
-    { path: "/usluge/automatizacije-i-erp", priority: 0.8 },
-    { path: "/usluge/marketing-i-ecommerce-rast", priority: 0.8 },
+    { path: "/usluge/development", priority: 0.9 },
+    { path: "/usluge/marketing", priority: 0.8 },
+    { path: "/usluge/business-development", priority: 0.8 },
     { path: "/cjenik", priority: 0.9 },
     { path: "/projekti", priority: 0.7 },
     { path: "/o-meni", priority: 0.7 },

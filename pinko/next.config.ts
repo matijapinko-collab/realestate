@@ -27,21 +27,33 @@ const nextConfig: NextConfig = {
    * addresses are gone for good, and anything already linked or indexed
    * should be told so once rather than served the same page at two URLs.
    */
+  /**
+   * Service addresses. The site split into four services on the morning of
+   * 19 Oct 2026 and went back to three the same afternoon, when the copy
+   * arrived written that way. The three slugs are the originals, so only
+   * the four interim addresses need forwarding — and none of these targets
+   * is itself a source, so there is no redirect loop.
+   */
   async redirects() {
     return [
       {
-        source: "/usluge/development",
-        destination: "/usluge/web-stranice-i-aplikacije",
+        source: "/usluge/web-stranice-i-aplikacije",
+        destination: "/usluge/development",
         permanent: true,
       },
       {
-        source: "/usluge/marketing",
-        destination: "/usluge/marketing-i-ecommerce-rast",
+        source: "/usluge/webshopovi",
+        destination: "/usluge/development",
         permanent: true,
       },
       {
-        source: "/usluge/business-development",
-        destination: "/usluge/automatizacije-i-erp",
+        source: "/usluge/automatizacije-i-erp",
+        destination: "/usluge/business-development",
+        permanent: true,
+      },
+      {
+        source: "/usluge/marketing-i-ecommerce-rast",
+        destination: "/usluge/marketing",
         permanent: true,
       },
     ];

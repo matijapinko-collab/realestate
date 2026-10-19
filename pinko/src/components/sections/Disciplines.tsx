@@ -13,14 +13,14 @@ export function Disciplines() {
       index="02"
       eyebrow="Usluge"
       marker="Usluge"
-      title="Kaj treba popraviti? Osim raspoloženja ponedjeljkom."
-      lead="Od webova i webshopova do automatizacija i marketinga. Radim stvari koje trebaju raditi. Revolucionaran koncept, znam."
+      title="Kaj ćemo danas spašavati?"
+      lead="Imate web koji ne radi, marketing koji ne prodaje ili poslovanje koje se drži na selotejpu i dobroj volji zaposlenika? Pa di ste Vi meni bili do sad?!"
     >
       <ul className="border-t border-rule">
         {services.map((discipline) => (
           <li key={discipline.slug} data-reveal className="discipline-item border-b border-rule">
             <Link
-              href={`/usluge/${discipline.slug}`}
+              href={`/usluge#${discipline.slug}`}
               className="group grid gap-5 py-9 transition-colors md:grid-cols-[auto_1fr_auto] md:items-start md:gap-10"
             >
               <span className="text-sm font-bold text-accent md:pt-2">
@@ -35,7 +35,7 @@ export function Disciplines() {
                   {discipline.headline}
                 </p>
                 <p className="measure-wide mt-3 text-ink-soft">
-                  {discipline.body[0]}
+                  {discipline.intro[0]}
                 </p>
               </div>
 
