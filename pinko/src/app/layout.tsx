@@ -91,6 +91,17 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Plausible: cookie-free and aggregate-only, which is why it loads
+            unconditionally instead of behind a consent banner. It is omitted
+            entirely while no domain is configured, so development and
+            preview builds never report into the real figures. */}
+        {site.analytics.domain ? (
+          <script
+            defer
+            data-domain={site.analytics.domain}
+            src={site.analytics.src}
+          />
+        ) : null}
       </head>
       <body className="font-sans">
         <a

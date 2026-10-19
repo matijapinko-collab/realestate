@@ -66,7 +66,11 @@ export function PortraitBio() {
           alt={portrait.alt}
           width={portrait.width}
           height={portrait.height}
-          priority
+          // Explicitly lazy, which also suppresses the <head> preload: that
+          // link cannot know which world the visitor chose, and the studio
+          // scheme hides this whole column. Above the fold, lazy still
+          // starts the fetch immediately in the terminal scheme.
+          loading="lazy"
           sizes="(min-width: 1024px) 24rem, 80vw"
           className="absolute inset-3 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] rounded-full object-cover transition-transform duration-500 ease-[cubic-bezier(.22,.61,.36,1)] group-hover:scale-[1.02]"
         />

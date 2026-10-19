@@ -10,8 +10,8 @@ import type { Theme } from "@/components/ui/ThemeToggle";
  * Shown only to someone who has not chosen before — a returning visitor
  * goes straight to the world they picked. The choice is a pair of real
  * buttons, so it works with a keyboard and reads properly to a screen
- * reader; the pills are the visible target, the labels sit above them, and
- * either half of the button activates it.
+ * reader; the pills are the visible target, the label above each one names
+ * the world it opens, and either half of the button activates it.
  *
  * The hotspots are placed as percentages of the picture, measured from the
  * file itself (red at 24.0% / 76.7%, blue at 75.7% / 77.7%), so they stay on
@@ -24,8 +24,7 @@ import type { Theme } from "@/components/ui/ThemeToggle";
 const CHOICES = [
   {
     theme: "dark" as Theme,
-    label: "Red pill",
-    sub: "Fun web",
+    label: "Fun web",
     x: 24.0,
     y: 76.7,
     ring: "#e23b3b",
@@ -33,8 +32,7 @@ const CHOICES = [
   },
   {
     theme: "light" as Theme,
-    label: "Blue pill",
-    sub: "Pro web",
+    label: "Pro web",
     x: 75.7,
     y: 77.7,
     ring: "#2f8ee0",
@@ -118,7 +116,6 @@ export function PillChoice() {
           >
             <span className="pill-choice-label">
               <span className="pill-choice-title">{choice.label}</span>
-              <span className="pill-choice-sub">{choice.sub}</span>
             </span>
             <span
               aria-hidden="true"

@@ -148,15 +148,22 @@ aplikaciji i ne smije se dodati ni u sadržaj ni u konfiguraciju.
       produkciji (cPanel → Email Accounts → Connect Devices daje host i port)
 - [ ] Provjeren SPF/DKIM (cPanel → Email Deliverability), da mail ne ide u spam
 - [ ] Testno slanje na produkciji prošlo
-- [ ] Odluka o analitici — trenutačno nema nikakvog alata za praćenje
+- [x] Odluka o analitici — **Plausible**, bez kolačića i bez bannera
+- [ ] Otvoren račun na plausible.io i dodana stranica `pinko.hr` (do tada
+      skripta se učitava, ali brojke nemaju gdje sletjeti)
 - [x] Podaci o voditelju obrade u `/privatnost` — popunjeni iz configa
 - [x] **Rok čuvanja podataka** — 12 mjeseci od zadnje komunikacije, upisano na
       `/privatnost` (uz napomenu da dokumentacija o sklopljenoj suradnji ostaje
       onoliko dugo koliko nalažu računovodstveni i porezni propisi)
 
-Ako se uvede analitika: nazvati je u pravilima privatnosti, a sve što nije
-nužno stvarno blokirati do pristanka. Ukrasni cookie banner bez blokade nije
-prihvatljiv.
+Analitika je Plausible i imenovana je u pravilima privatnosti. Nema kolačića,
+nema lokalne pohrane i nema identifikatora koji prati posjetitelja, pa nema ni
+pristanka za tražiti — zato nema bannera. Ako ikad dođe alat koji *jest*
+osoban, mora se stvarno blokirati do pristanka; ukrasni banner bez blokade
+nije prihvatljiv.
+
+Skripta se učitava samo kad je `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` postavljen pri
+buildu, pa razvoj i preview ne upisuju u stvarne brojke.
 
 ## 8. Prije samog prebacivanja
 

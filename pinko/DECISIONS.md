@@ -315,6 +315,10 @@ svoj svijet — pitanje se ne ponavlja.
 element jedan `<button>`. To su stvarni gumbi s punim nazivima za čitače
 ekrana („Crvena pilula — Fun web, tamni način"), pa izbor radi i tipkovnicom.
 
+Natpis govori **što se otvara, a ne koja je pilula**: „Fun web" i „Pro web".
+Boja pilule to već kaže, pa je „Red pill" iznad crvene pilule bio opis slike
+umjesto ponude (ispravljeno 19. 10. 2026.).
+
 Hotspotovi su postavljeni u postotcima slike, izmjereno iz same datoteke:
 crvena 24,0 % / 76,7 %, plava 75,6 % / 78,0 %.
 
@@ -327,3 +331,39 @@ nakon popravka: odstupanje 0–2 px na desktopu i mobitelu.
 
 Zavjesa s brojačem se **ne pokreće** kad su pilule prikazane — jedan ulaz je
 dovoljan. Bez JavaScripta izbornika nema i web se otvara u tamnom načinu.
+
+## Analitika: Plausible (19. 10. 2026.)
+
+Web sada mjeri posjećenost **Plausibleom** i ničim drugim. Razlog je što je
+to jedini alat koji ne traži da se pravila privatnosti razvodne: nema
+kolačića, nema lokalne pohrane, nema identifikatora koji prati osobu kroz
+posjete ni kroz druge webove, a IP i preglednik koriste se samo za izračun
+dnevne nepovratne oznake i ne pohranjuju se u izvornom obliku. Obrada ostaje
+u EU (Plausible Insights OÜ, Estonija).
+
+**Zato nema cookie bannera.** To nije propust nego posljedica izbora alata:
+nema osobnih podataka na koje bi se pristajalo. Pravila privatnosti sada
+Plausible izrijekom imenuju — to je obećanje koje je ta stranica dala dok
+analitike još nije bilo.
+
+Skripta se ispisuje **samo kad je `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` postavljen**
+pri buildu. Lokalni razvoj i preview buildovi tako ne upisuju u stvarne
+brojke. `NEXT_PUBLIC_PLAUSIBLE_SRC` dopušta prebacivanje na vlastiti
+Plausible ili na proxy putanju ako blokatori oglasa postanu problem, bez
+diranja ijedne komponente.
+
+Obje varijable čitaju se s `||`, ne `??`, iz istog razloga kao kontakt
+adresa: ARG koji je deklariran a nije proslijeđen daje prazan string.
+
+## Svijetla tema bez portreta (19. 10. 2026.)
+
+Portret u prstenu, rotacija oko njega i otkucani redak ispod njega motivi su
+terminalskog svijeta i **ostaju samo u njemu**. Studijska tema sada počinje
+tipografijom, kako referenca i radi. Biografija koju je portret otvarao nije
+izgubljena — do nje se dolazi preko „O meni" u navigaciji.
+
+Usput: slika je prestala biti `priority`. U Next.js 16 je ta zastavica
+zastarjela u korist `preload`, a i jedno i drugo ispisuje `<link>` u `<head>`
+koji ne može znati koji je svijet posjetitelj izabrao — svatko tko uđe u
+svijetli svijet plaćao je 51 KB za fotografiju koju nikad ne vidi. Sada je
+`loading="lazy"`; u tamnoj temi je u prvom ekranu pa se dohvaća odmah.

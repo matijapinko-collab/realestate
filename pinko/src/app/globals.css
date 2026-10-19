@@ -417,31 +417,11 @@
     justify-content: center;
   }
 
-  /* Light mode keeps the centred composition but is still a personal site,
-     so the portrait moves above the headline rather than disappearing. */
-  :root[data-theme="light"] .hero-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
+  /* The studio scheme leads with the type alone. The portrait, its turning
+     ring and the typed prompt are motifs of the terminal world and stay
+     there; the biography they opened is reachable from "O meni" in the
+     navigation, so nothing becomes unreachable by hiding this. */
   :root[data-theme="light"] .hero-aside {
-    order: -1;
-    width: 100%;
-    max-width: 13rem;
-    margin-bottom: 2.5rem;
-    justify-content: center;
-  }
-
-  /* Without a photograph the aside is the terminal card, which belongs to
-     the dark scheme alone — it would look out of place here. */
-  :root[data-theme="light"] .hero-aside:has(> .hero-fallback) {
-    display: none;
-  }
-
-  /* The typed prompt is a terminal motif too, and reads as a stray line of
-     code under a portrait in the studio composition. */
-  :root[data-theme="light"] .hero-typed {
     display: none;
   }
 
@@ -662,7 +642,7 @@
 
   .pill-choice-label {
     position: absolute;
-    /* Clear of the fingertips, so the second line stays legible. */
+    /* Clear of the fingertips, so the label stays legible. */
     bottom: calc(100% + 1.5rem);
     left: 50%;
     translate: -50% 0;
@@ -682,11 +662,6 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-  }
-
-  .pill-choice-sub {
-    font-size: clamp(0.7rem, 0.6rem + 0.5vw, 0.9rem);
-    color: #c9ccd3;
   }
 
   .pill-choice-ring {

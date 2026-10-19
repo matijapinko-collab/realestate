@@ -94,6 +94,30 @@ export const site = {
     alt: string;
   }>,
 
+  /**
+   * Analytics.
+   *
+   * Plausible, and only Plausible: no cookies, no cross-site identifiers, no
+   * personal data, everything aggregated. That is what lets this site keep
+   * its promise on /privatnost — no consent banner, because there is
+   * nothing to consent to.
+   *
+   * `domain` is the site name as it is registered in Plausible, and the whole
+   * script is omitted while it is empty. So development and preview builds
+   * send nothing and the real figures stay clean; production sets
+   * NEXT_PUBLIC_PLAUSIBLE_DOMAIN at build time.
+   *
+   * `src` points at Plausible Cloud by default and can be repointed at a
+   * self-hosted instance (or a proxied path, if ad blockers become an issue)
+   * without touching any component.
+   */
+  analytics: {
+    domain: process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN || null,
+    src:
+      process.env.NEXT_PUBLIC_PLAUSIBLE_SRC ||
+      "https://plausible.io/js/script.js",
+  },
+
   vatRate: 0.25,
 } as const;
 

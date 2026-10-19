@@ -160,14 +160,39 @@ export default function PrivacyPage() {
             <p>
               Ovaj web ne koristi kolačiće za praćenje, ne postavlja reklamne
               piksele i ne učitava alate trećih strana za profiliranje. Font se
-              poslužuje s ovog poslužitelja, pa posjet stranici ne šalje vaše
-              podatke vanjskim servisima.
+              poslužuje s ovog poslužitelja.
             </p>
-            <p className="mt-3">
-              Ako se kasnije uvede analitika, ovdje će biti imenovana, a sve što
-              nije nužno stvarno će se blokirati dok ne date pristanak —
-              ukrasni banner bez blokade nije prihvatljiv.
-            </p>
+            {site.analytics.domain ? (
+              <>
+                <p className="mt-3">
+                  Posjećenost mjerim alatom <strong>Plausible Analytics</strong>{" "}
+                  (Plausible Insights OÜ, Estonija). Plausible ne postavlja
+                  kolačiće i ne koristi lokalnu pohranu preglednika, ne prati
+                  vas po drugim webovima niti povezuje vaše posjete s uređajem.
+                  IP adresa i podaci o pregledniku koriste se samo za izračun
+                  dnevne, nepovratne oznake posjeta — u izvornom obliku ne
+                  pohranjuju se.
+                </p>
+                <p className="mt-3">
+                  Vidim isključivo zbirne brojke: koja je stranica otvorena,
+                  odakle je posjet došao, okvirnu lokaciju (država, regija,
+                  grad), vrstu uređaja, preglednik i zadržavanje na stranici.
+                  Prema podacima pružatelja, obrada i pohrana ostaju unutar EU.
+                </p>
+                <p className="mt-3">
+                  Zato za ovo mjerenje nema bannera za pristanak — nema osobnih
+                  podataka na koje biste pristajali. Ako ipak ne želite da se
+                  posjet broji, dovoljan je bilo koji blokator skripti;
+                  stranica radi jednako.
+                </p>
+              </>
+            ) : (
+              <p className="mt-3">
+                Ako se kasnije uvede analitika, ovdje će biti imenovana, a sve
+                što nije nužno stvarno će se blokirati dok ne date pristanak —
+                ukrasni banner bez blokade nije prihvatljiv.
+              </p>
+            )}
           </Article>
         </div>
       </Section>
