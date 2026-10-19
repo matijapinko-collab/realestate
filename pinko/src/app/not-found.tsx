@@ -7,8 +7,8 @@ export default function NotFound() {
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-soft">
           <span className="text-accent">404</span>
         </p>
-        <h1 className="mt-5 max-w-[16ch] text-(length:--text-hero) font-extrabold">
-          Ove stranice nema.
+        <h1 className="mt-5 max-w-[22ch] text-(length:--text-hero) font-extrabold">
+          Ova stranica je otišla na sastanak i nikad se nije vratila.
         </h1>
         <p className="measure mt-7 text-(length:--text-lead) text-ink-soft">
           Možda je poveznica stara ili je adresa krivo prepisana. Krenimo od

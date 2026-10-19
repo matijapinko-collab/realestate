@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { disciplines, nav, site } from "@/config/site";
+import { nav, site } from "@/config/site";
+import { services } from "@/content/services";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -22,13 +23,13 @@ export function Footer() {
               Usluge
             </h2>
             <ul className="mt-4 space-y-2.5">
-              {disciplines.map((d) => (
-                <li key={d.href}>
+              {services.map((d) => (
+                <li key={d.slug}>
                   <Link
-                    href={d.href}
+                    href={`/usluge/${d.slug}`}
                     className="font-medium hover:text-accent-ink hover:underline underline-offset-4"
                   >
-                    {d.title}
+                    {d.name}
                   </Link>
                 </li>
               ))}
@@ -103,6 +104,7 @@ export function Footer() {
           </div>
           <div className="space-y-1 lg:text-right">
             <p>Sve cijene na webu su bez PDV-a.</p>
+            <p>Napravio Matija. Ako nešto ne radi, znate koga kriviti.</p>
             <p>
               © {year} {site.person}
             </p>

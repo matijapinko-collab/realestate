@@ -27,13 +27,19 @@ export default function ContactPage() {
 
       <PageHeader
         eyebrow="Kontakt"
-        title="Što vam je već predugo na „trebalo bi”?"
+        title="Imate problem? Krasno. Već imamo nešto zajedničko."
         lead={
-          <p>
-            Pošaljite mi što želite poboljšati, gdje ste zapeli i kada biste
-            voljeli krenuti. Trebaju mi samo ime, email i nekoliko rečenica —
-            ostalo je neobavezno.
-          </p>
+          <>
+            <p>
+              Opišite što vas muči, što želite napraviti ili što je prethodni
+              izvođač obećao da će biti gotovo prošli utorak.
+            </p>
+            <p className="mt-4">
+              Ne morate znati tehnologiju. Ne morate imati tehničku
+              specifikaciju od 80 stranica. Dovoljno je da znate što želite
+              postići. Ja ću postavljati neugodna pitanja. Ona korisna.
+            </p>
+          </>
         }
         breadcrumbs={crumbs}
       />

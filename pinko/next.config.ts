@@ -21,6 +21,31 @@ const nextConfig: NextConfig = {
   output: "standalone",
   outputFileTracingRoot: projectRoot,
   poweredByHeader: false,
+  /**
+   * The three discipline pages became four service pages with the brief of
+   * 19 Oct 2026. These are permanent redirects, not rewrites: the old
+   * addresses are gone for good, and anything already linked or indexed
+   * should be told so once rather than served the same page at two URLs.
+   */
+  async redirects() {
+    return [
+      {
+        source: "/usluge/development",
+        destination: "/usluge/web-stranice-i-aplikacije",
+        permanent: true,
+      },
+      {
+        source: "/usluge/marketing",
+        destination: "/usluge/marketing-i-ecommerce-rast",
+        permanent: true,
+      },
+      {
+        source: "/usluge/business-development",
+        destination: "/usluge/automatizacije-i-erp",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     // Only local images are used for now. Add remote hosts here deliberately.
     remotePatterns: [],

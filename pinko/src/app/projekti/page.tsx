@@ -28,13 +28,20 @@ export default function ProjectsPage() {
 
       <PageHeader
         eyebrow="Projekti"
-        title="Konkretan rad, s konkretnim doprinosom."
+        title="Nisam rekao da znam ovaj posao. Dobro, jesam. Al evo dokaza."
         lead={
-          <p>
-            Uz svaki projekt piše kakav je bio odnos, što sam točno radio i u
-            kojem je statusu. Bez postotaka rasta koje nitko nije provjerio i
-            bez tuđih logotipa dok ih nisam dobio i smio objaviti.
-          </p>
+          <>
+            <p>
+              Iza svakog projekta stoji neki problem, nekoliko dobrih ideja i
+              barem jedan trenutak kad sam se zapitao zašto nisam otvorio
+              pekaru. Ali na kraju je trebalo raditi. I to je cijela poanta.
+            </p>
+            <p className="mt-4">
+              Uz svaki projekt piše kakav je bio odnos, što sam točno radio i u
+              kojem je statusu. Bez postotaka rasta koje nitko nije provjerio i
+              bez tuđih logotipa dok ih nisam dobio i smio objaviti.
+            </p>
+          </>
         }
         breadcrumbs={crumbs}
       />

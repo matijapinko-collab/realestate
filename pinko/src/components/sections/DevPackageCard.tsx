@@ -11,6 +11,9 @@ export function DevPackageCard({ pkg }: { pkg: DevPackage }) {
       ) : null}
 
       <h3 className="text-(length:--text-title) font-extrabold">{pkg.name}</h3>
+      {pkg.quip ? (
+        <p className="mt-3 font-semibold text-accent-ink">{pkg.quip}</p>
+      ) : null}
       <p className="mt-3 text-ink-soft">{pkg.summary}</p>
 
       <div className="mt-6 border-t border-rule pt-6">

@@ -47,10 +47,16 @@ export default function PricingPage() {
 
       <PageHeader
         eyebrow="Cjenik"
-        title="Cijene koje možete pogledati prije nego se javite."
+        title="Koliko košta? Manje od loše odluke."
         lead={
           <>
             <p>
+              Nisam najjeftiniji. Nisam ni pokušavao biti. Ako želite najnižu
+              cijenu, internet je prepun zanimljivih ponuda. Ako želite nekoga
+              tko će razumjeti što radite, postaviti prava pitanja i preuzeti
+              odgovornost za dogovoreni posao, nastavite čitati.
+            </p>
+            <p className="mt-4">
               Sve cijene su bez PDV-a. „Od” označava navedeni početni opseg, a
               konačna ponuda slijedi nakon što definiramo zahtjeve. Troškovi
               platformi, licenci, domena, vanjskih servisa i oglašavanja
@@ -281,7 +287,7 @@ export default function PricingPage() {
         tone="surface"
         eyebrow="Plaćanje"
         index="08"
-        title="Dobar projekt može imati pametan raspored plaćanja."
+        title="Da, može na rate. Ne, ne može na lijepe oči."
         lead="Moguće je plaćanje po fazama, do 6 mjesečnih rata prema dogovoru te do 12 rata za veće projekte. Možemo dogovoriti i početnu izradu uz mjesečni razvoj i podršku."
       >
         <div className="grid gap-5 md:grid-cols-3">

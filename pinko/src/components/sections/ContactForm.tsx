@@ -46,8 +46,7 @@ export function ContactForm({ mailerReady }: { mailerReady: boolean }) {
           {state.message}
         </h2>
         <p className="mt-4 text-ink-soft">
-          Pročitat ću što ste napisali i javiti vam koji je sljedeći smislen
-          korak.
+          Hvala na poruci! Javit ću se čim proučim o čemu se radi.
         </p>
       </div>
     );
@@ -79,7 +78,8 @@ export function ContactForm({ mailerReady }: { mailerReady: boolean }) {
       <Field
         id={ids.name}
         name="name"
-        label="Ime i prezime"
+        label="Kako Vas zovu kad nisu ljuti?"
+        hint="Ime i prezime."
         required
         autoComplete="name"
         defaultValue={state.values.name}
@@ -90,7 +90,8 @@ export function ContactForm({ mailerReady }: { mailerReady: boolean }) {
         id={ids.email}
         name="email"
         type="email"
-        label="Email"
+        label="Gdje da Vam javim dobre vijesti?"
+        hint="Email adresa na koju odgovaram."
         required
         autoComplete="email"
         defaultValue={state.values.email}
@@ -100,7 +101,7 @@ export function ContactForm({ mailerReady }: { mailerReady: boolean }) {
       <Field
         id={ids.message}
         name="message"
-        label="Što želite poboljšati?"
+        label="Ispričajte mi svoju digitalnu tragediju."
         hint="Gdje ste zapeli, što vam radi najveću gužvu i kada biste voljeli krenuti."
         required
         textarea
@@ -161,7 +162,7 @@ export function ContactForm({ mailerReady }: { mailerReady: boolean }) {
           <SelectField
             id={ids.category}
             name="category"
-            label="Područje"
+            label="Koju vrstu glavobolje liječimo?"
             placeholder="Odaberite ili preskočite"
             options={categoryOptions}
             defaultValue={state.values.category}
@@ -220,7 +221,7 @@ export function ContactForm({ mailerReady }: { mailerReady: boolean }) {
         disabled={pending}
         className="inline-flex min-h-13 w-full items-center justify-center rounded-full bg-accent px-7 font-semibold text-on-accent transition-colors hover:bg-accent-ink disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
-        {pending ? "Šaljem…" : "Pošalji upit"}
+        {pending ? "Šaljem…" : "Pošalji problem Matiji →"}
       </button>
     </form>
   );

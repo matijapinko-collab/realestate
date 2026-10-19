@@ -69,7 +69,7 @@ export async function submitContactForm(
   if (String(formData.get("tvrtka_url") ?? "").length > 0) {
     return {
       status: "success",
-      message: "Upit je stigao. Hvala na kontekstu — sad imamo od čega krenuti.",
+      message: "Problem zaprimljen. Panika je zasad nepotrebna.",
       errors: {},
       values: {},
     };
@@ -149,7 +149,7 @@ export async function submitContactForm(
     return {
       status: "error",
       message:
-        "Slanje trenutačno ne radi, pa upit nije stigao do mene. Pokušajte ponovno za koju minutu ili mi se javite izravno.",
+        "Ovaj put problem je stvarno kod mene. Pokušajte ponovno za koju minutu ili mi se javite izravno.",
       errors: {},
       values,
     };
@@ -157,7 +157,7 @@ export async function submitContactForm(
 
   return {
     status: "success",
-    message: "Upit je stigao. Hvala na kontekstu — sad imamo od čega krenuti.",
+    message: "Problem zaprimljen. Panika je zasad nepotrebna.",
     errors: {},
     values: {},
   };

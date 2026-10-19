@@ -30,16 +30,18 @@ export default function AboutPage() {
 
       <PageHeader
         eyebrow="O meni"
-        title="Bok, ja sam Matija. Volim kad stvari imaju smisla."
-        lead={<p>{bioLong[0]}</p>}
-        cta={{ href: "/kontakt", label: "Upoznajmo vaš projekt" }}
+        title="Tko je ovaj nevjerojatni čovjek?"
+        lead={
+          <p>Mama kaže da sam sposoban. Klijenti uglavnom potvrđuju isto.</p>
+        }
+        cta={{ href: "/kontakt", label: "Upoznajmo se. Bez PowerPointa." }}
         breadcrumbs={crumbs}
       />
 
       <Section>
         <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <div className="measure-wide space-y-5 text-(length:--text-lead)">
-            {bioLong.slice(1).map((paragraph) => (
+            {bioLong.map((paragraph) => (
               <p key={paragraph} className="text-ink-soft">
                 {paragraph}
               </p>

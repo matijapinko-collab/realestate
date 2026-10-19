@@ -1,14 +1,18 @@
 import { ButtonLink } from "@/components/ui/Button";
 import { site } from "@/config/site";
-import { careerFacts } from "@/content/career";
-import { CountUp } from "@/components/ui/CountUp";
 import { SplitLines } from "@/components/ui/SplitLines";
-import { ProblemPicker } from "./ProblemPicker";
 import { PortraitBio } from "./PortraitBio";
 import { TypedDisciplines } from "./TypedDisciplines";
 
 /**
  * Homepage hero.
+ *
+ * The three lines of copy are fixed by the brief of 19 Oct 2026 and are
+ * reproduced word for word, colloquial spelling included ("čovek",
+ * "riješavam"). Nothing else may live in this section: no eyebrow naming the
+ * disciplines, no price range, no second slogan — the brief is explicit that
+ * the hero carries this text and the two buttons and nothing more. The
+ * numbers and the problem picker that used to sit here moved down the page.
  *
  * The right-hand side shows Matija's portrait inside the accent ring once
  * `site.portrait` is set. Until then it is a monospaced card naming the three
@@ -31,61 +35,41 @@ export function Hero() {
       <div className="wrap relative pt-14 pb-16 md:pt-20 md:pb-24">
         <div className="hero-grid grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div className="hero-copy">
-            <p className="mono-label flex flex-wrap items-center gap-x-2 gap-y-1 font-semibold text-ink-soft">
-              <span className="text-ink">Matija Pinko</span>
-              <span aria-hidden="true" className="text-control">
-                ·
-              </span>
-              <span>Development</span>
-              <span aria-hidden="true" className="text-accent">
-                /
-              </span>
-              <span>Marketing</span>
-              <span aria-hidden="true" className="text-accent">
-                /
-              </span>
-              <span>Business Development</span>
-            </p>
-
-            <h1 className="mt-6 text-(length:--text-hero) font-extrabold">
+            <h1 className="text-(length:--text-hero) font-extrabold">
               <SplitLines
-                lines={["Vaš sljedeći veliki korak", "zaslužuje dobar razvoj."]}
+                lines={[
+                  "Dosta Vam je žmuhlera",
+                  "koji Vam samo uzimaju novce?",
+                ]}
               />
             </h1>
 
-            {/* The reference crosses out the word it is rejecting. Here the
-                rejected word is true: this is a one-person trade, not an
-                agency, and the page says so before anyone has to ask. */}
+            {/* The rejected word is struck through, as the brief asks. It is
+                also true: this is a one-person trade, not an agency. */}
             <p className="hero-strike mt-5 text-(length:--text-title) font-extrabold">
               <SplitLines
-                lines={["Ne agencija.", "Jedan čovjek koji isporuči."]}
+                lines={[
+                  "Spas je ovdje. Ne agencija.",
+                  "Jedan čovek koji uvijek isporuči!",
+                ]}
                 strike="agencija."
               />
             </p>
 
             <p className="measure-wide mt-7 text-(length:--text-lead) text-ink-soft">
-              Razvijam Next.js webove, webshopove i aplikacije. Povezujem ih sa
-              sadržajem, automatizacijama i poslovnim procesima koji vam pomažu
-              prodavati i raditi jednostavnije.
+              Bok! Ja sam Matija i ja riješavam probleme. Ponekad čak i one koje
+              nisam ja napravio!
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
-              <ButtonLink href="/kontakt" size="lg">
-                Razgovarajmo o projektu{" "}
+              <ButtonLink href="/projekti" size="lg">
+                Daj da vidim kaj si napravio{" "}
                 <span aria-hidden="true">&rarr;</span>
               </ButtonLink>
-              <ButtonLink href="/projekti" variant="secondary" size="lg">
-                Pogledajte projekte
+              <ButtonLink href="/kontakt" variant="secondary" size="lg">
+                Imam problem. Naravno da imam.
               </ButtonLink>
             </div>
-
-            <p className="mono-label mt-7 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-ink-soft">
-              <span>Projekti najčešće 5.000–15.000 € + PDV</span>
-              <span aria-hidden="true" className="text-control">
-                ·
-              </span>
-              <span>Moguće plaćanje na rate</span>
-            </p>
           </div>
 
           <div className="hero-aside flex justify-center lg:justify-end">
@@ -110,26 +94,6 @@ export function Hero() {
               </div>
             )}
           </div>
-        </div>
-
-        <ul className="mt-14 grid gap-px overflow-hidden rounded-(--radius-card) border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
-          {careerFacts.map((fact, i) => (
-            <li
-              key={fact.label}
-              data-reveal
-              data-reveal-delay={i}
-              className="spotlight bg-surface p-6"
-            >
-              <p className="font-mono text-4xl font-extrabold text-accent">
-                <CountUp value={fact.value} />
-              </p>
-              <p className="mt-1.5 text-sm text-ink-soft">{fact.label}</p>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-14" data-reveal>
-          <ProblemPicker />
         </div>
       </div>
     </section>

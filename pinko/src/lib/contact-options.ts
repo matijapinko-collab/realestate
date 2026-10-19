@@ -14,10 +14,17 @@ export const budgetOptions = [
   { value: "mjesecna-suradnja", label: "Želim mjesečnu suradnju" },
 ] as const;
 
+/**
+ * These follow the four services, so the answer on the form means the same
+ * thing as the page the visitor came from. `development` keeps its value
+ * even though its label changed: it is stored in sent enquiries and in the
+ * tests, and renaming it would only break those for cosmetic reasons.
+ */
 export const categoryOptions = [
-  { value: "development", label: "Development" },
-  { value: "marketing", label: "Marketing" },
-  { value: "business-development", label: "Business Development" },
+  { value: "development", label: "Web stranica ili aplikacija" },
+  { value: "webshop", label: "Webshop" },
+  { value: "business-development", label: "Automatizacije i ERP" },
+  { value: "marketing", label: "Marketing i eCommerce rast" },
   { value: "nisam-siguran", label: "Nisam siguran — trebam preporuku" },
 ] as const;
 

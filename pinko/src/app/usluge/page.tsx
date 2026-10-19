@@ -4,12 +4,12 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { ClosingContact } from "@/components/sections/ClosingContact";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
-import { disciplines } from "@/config/site";
+import { services } from "@/content/services";
 
 export const metadata: Metadata = {
-  title: "Usluge — razvoj, marketing i poslovni razvoj",
+  title: "Usluge — web, webshop, automatizacije i marketing",
   description:
-    "Tri područja i jedan povezan plan: Next.js razvoj i integracije, SEO, sadržaj i email te digitalni audit, plan rasta i vođenje razvoja.",
+    "Web stranice i aplikacije, webshopovi, automatizacije i ERP te marketing i eCommerce rast. Radim stvari koje trebaju raditi.",
   alternates: { canonical: "/usluge" },
 };
 
@@ -24,13 +24,12 @@ export default function ServicesPage() {
       />
       <PageHeader
         eyebrow="Usluge"
-        title="Tri područja. Jedan povezan plan."
+        title="Kaj treba popraviti? Osim raspoloženja ponedjeljkom."
         lead={
           <>
             <p>
-              Razvoj digitalnog proizvoda, privlačenje i zadržavanje kupaca te
-              organizacija rasta. Isti čovjek povezuje područja, a svaki
-              angažman ima zaseban opseg i vlastitu cijenu.
+              Od webova i webshopova do automatizacija i marketinga. Radim
+              stvari koje trebaju raditi. Revolucionaran koncept, znam.
             </p>
             <p className="mt-4">
               Ne morate uzeti sve. Većina suradnji počne s jednim problemom koji
@@ -46,28 +45,31 @@ export default function ServicesPage() {
       />
 
       <Section>
-        <ul className="grid gap-5 lg:grid-cols-3">
-          {disciplines.map((discipline) => (
+        <ul className="grid gap-5 lg:grid-cols-2">
+          {services.map((discipline) => (
             <li key={discipline.slug}>
               <Link
-                href={discipline.href}
+                href={`/usluge/${discipline.slug}`}
                 className="group flex h-full flex-col rounded-(--radius-card) border border-rule bg-surface p-7 transition-colors hover:border-ink"
               >
                 <span className="text-sm font-bold text-accent">
                   {discipline.index}
                 </span>
                 <h2 className="mt-3 text-(length:--text-title) font-extrabold group-hover:text-accent-ink">
-                  {discipline.title}
+                  {discipline.name}
                 </h2>
                 <p className="mt-3 font-semibold">{discipline.headline}</p>
-                <p className="mt-4 text-ink-soft">{discipline.claim}</p>
+                <p className="mt-4 text-ink-soft">{discipline.body[0]}</p>
                 <ul className="mt-6 space-y-2">
-                  {discipline.highlights.map((item) => (
-                    <li key={item} className="flex gap-2.5 text-sm text-ink-soft">
+                  {discipline.items.slice(0, 4).map((item) => (
+                    <li
+                      key={item.title}
+                      className="flex gap-2.5 text-sm text-ink-soft"
+                    >
                       <span aria-hidden="true" className="text-accent">
                         —
                       </span>
-                      {item}
+                      {item.title}
                     </li>
                   ))}
                 </ul>

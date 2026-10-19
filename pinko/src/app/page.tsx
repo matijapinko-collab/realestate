@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
+import { FactsStrip } from "@/components/sections/FactsStrip";
+import { ProblemPicker } from "@/components/sections/ProblemPicker";
 import { CapabilityMarquee } from "@/components/sections/CapabilityMarquee";
 import { ProofOfWork } from "@/components/sections/ProofOfWork";
 import { Statement } from "@/components/sections/Statement";
@@ -24,6 +26,12 @@ export default function HomePage() {
     <>
       <PersonJsonLd />
       <Hero />
+      <FactsStrip />
+      {/* Moved out of the hero with the 19 Oct 2026 brief, which reserves
+          that section for its own three lines. */}
+      <section className="wrap pt-12 md:pt-16" data-reveal>
+        <ProblemPicker />
+      </section>
       <CapabilityMarquee />
       <Statement />
       <ProofOfWork />

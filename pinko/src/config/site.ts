@@ -136,49 +136,9 @@ export const nav = {
   cta: { href: "/kontakt", label: "Imate ideju?" },
 } as const;
 
-export const disciplines = [
-  {
-    index: "01",
-    slug: "development",
-    href: "/usluge/development",
-    title: "Development",
-    claim: "Od weba koji predstavlja posao do aplikacije koja ga pokreće.",
-    headline: "Napravimo da radi. I da lijepo izgleda dok radi.",
-    cta: "Opišite što trebate razviti",
-    highlights: [
-      "Next.js webovi, webshopovi i web aplikacije",
-      "API integracije i automatizacije",
-      "Arhitektura, hosting i tehničko održavanje",
-    ],
-  },
-  {
-    index: "02",
-    slug: "marketing",
-    href: "/usluge/marketing",
-    title: "Marketing",
-    claim: "Sadržaj, email i prodajni kanali koji kupcu olakšavaju odluku.",
-    headline: "Dobar proizvod zaslužuje da ga netko i pronađe.",
-    cta: "Posložimo sljedeći korak",
-    highlights: [
-      "SEO strategija i sadržaj koji objašnjava ponudu",
-      "Email marketing i automatizirani tokovi",
-      "Amazon i Temu kao prodajni kanali",
-    ],
-  },
-  {
-    index: "03",
-    slug: "business-development",
-    href: "/usluge/business-development",
-    title: "Business Development",
-    claim: "Jasni prioriteti prije nego krenemo trošiti vrijeme i budžet.",
-    headline: "Prvo posložimo što ima smisla razvijati.",
-    cta: "Pogledajmo širu sliku",
-    highlights: [
-      "Digitalni poslovni audit i plan za 90 dana",
-      "Ekonomika e-commercea i novih kanala",
-      "Specifikacija ERP/CRM integracija i vođenje razvoja",
-    ],
-  },
-] as const;
-
-export type Discipline = (typeof disciplines)[number];
+/*
+ * `disciplines` lived here until 19 Oct 2026. The site now offers four
+ * services instead of three disciplines, and they are defined with their
+ * copy in `src/content/services.ts` — one source of truth, no table here
+ * that quietly disagrees with it.
+ */

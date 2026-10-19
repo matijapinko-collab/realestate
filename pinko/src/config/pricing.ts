@@ -121,6 +121,12 @@ export type DevPackage = {
   price: Price;
   /** Label shown on the card, never an invented "best seller" badge. */
   badge?: string;
+  /**
+   * One line of the site's own voice, from the 19 Oct 2026 brief. It sits
+   * under the package name and never carries a claim — the numbers, scope
+   * and boundaries below it do that work.
+   */
+  quip?: string;
   scope: string;
   timeline: string;
   summary: string;
@@ -132,6 +138,8 @@ export const devPackages: DevPackage[] = [
   {
     slug: "web-koji-radi-posao",
     name: "Web koji radi posao",
+    quip:
+      "Za tvrtke koje žele nešto više od digitalne brošure s kontakt formom koju nitko ne provjerava.",
     price: { amount: 6500, from: true },
     scope:
       "Next.js poslovni web, do 7 sadržajnih stranica, jedan jezik, uređivanje sadržaja, kontaktna forma",
@@ -155,6 +163,8 @@ export const devPackages: DevPackage[] = [
   {
     slug: "shop-s-planom",
     name: "Shop s planom",
+    quip:
+      "Jer webshop bez procesa iza sebe može biti vrlo skup način za proizvodnju glavobolja.",
     price: { amount: 11500, from: true },
     badge: "Za webshopove i brendove",
     scope:
@@ -183,6 +193,8 @@ export const devPackages: DevPackage[] = [
   {
     slug: "aplikacija-po-mjeri",
     name: "Aplikacija po mjeri",
+    quip:
+      "Kad ste već peti put rekli „Trebao bi nam sustav koji...”, vrijeme je da ga napravimo.",
     price: { amount: 14500, from: true },
     scope:
       "MVP jedne web aplikacije: jedan glavni proces, do 2 korisničke uloge, do 8 ključnih ekrana i 1 integracija",

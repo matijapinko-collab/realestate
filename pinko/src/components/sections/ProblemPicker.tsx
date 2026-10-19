@@ -18,7 +18,7 @@ const options = [
     approach:
       "Krećemo od kupovnog toka i sadržaja, pa onda biramo tehnologiju. Web dobiva strukturu koju vaši kupci razumiju i koju vi možete sami uređivati.",
     projectType: "Web koji radi posao ili Shop s planom",
-    href: "/usluge/development",
+    href: "/usluge/web-stranice-i-aplikacije",
   },
   {
     id: "kupci",
@@ -26,7 +26,7 @@ const options = [
     approach:
       "Prvo pogledamo što ljudi zapravo traže i kako to objašnjavate. SEO, sadržaj i email tokovi onda rade na istoj priči, a ne svaki za sebe.",
     projectType: "SEO smjer, Sadržaj koji prodaje ili Email start",
-    href: "/usluge/marketing",
+    href: "/usluge/marketing-i-ecommerce-rast",
   },
   {
     id: "rucno",
@@ -34,7 +34,7 @@ const options = [
     approach:
       "Popišemo gdje se podaci prepisuju i koliko to košta u vremenu. Zatim automatiziramo korake koji se najviše ponavljaju i povezujemo sustave koji to dopuštaju.",
     projectType: "API integracija, Aplikacija po mjeri ili Digitalni audit",
-    href: "/usluge/business-development",
+    href: "/usluge/automatizacije-i-erp",
   },
 ] as const;
 

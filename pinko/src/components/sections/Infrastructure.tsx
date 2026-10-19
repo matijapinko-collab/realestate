@@ -32,7 +32,7 @@ export function Infrastructure() {
             planiramo ga zasebno.
           </p>
           <ButtonLink
-            href="/usluge/development#hosting"
+            href="/usluge/web-stranice-i-aplikacije#hosting"
             variant="secondary"
             className="mt-2"
           >

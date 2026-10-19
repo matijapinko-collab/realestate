@@ -4,10 +4,12 @@ export const bioShort =
   "Ja sam Matija Pinko. Razvijam webove, webshopove i aplikacije te povezujem tehnologiju, sadržaj i prodajne procese. Volim kad web izgleda odlično. Još više volim kad kupac lako naruči, podaci završe gdje trebaju, a vi imate manje ručnog posla.";
 
 export const bioLong = [
-  "Moj posao počinje pitanjem: što vam zapravo treba da posao ide lakše?",
-  "Kroz sadržaj, marketing, upravljanje projektima i digitalnim proizvodima stigao sam do razvoja sustava koji povezuju sve te dijelove. Danas kroz Pinko radim na webovima, webshopovima, aplikacijama i integracijama, uz SEO, email automatizacije i razvoj prodajnih kanala.",
-  "Posebno me zanimaju projekti u kojima tehnologija rješava konkretan problem: kupac brže pronađe proizvod, narudžba se manje puta ručno prepisuje, sadržaj jasnije objasni ponudu ili vlasnik napokon vidi što treba razvijati sljedeće.",
-  "Surađujete izravno sa mnom. Razgovaramo normalno, dogovorimo prioritete i znamo što isporučujemo. A ako se na sastanku pojavi kratica koju nitko nije tražio, prevest ću je na hrvatski.",
+  "Bok, ja sam Matija. Developer, marketingaš, čovjek za poslovne procese i povremeni profesionalni neprijatelj loše organizacije.",
+  "Volim tehnologiju, komplicirane projekte i onaj trenutak kad nešto što je svima išlo na živce konačno počne normalno raditi.",
+  "Ne volim beskonačne sastanke, prezentacije koje ništa ne govore i kad mi netko veli da se nešto ne može. Ja sam kao Kolinda i tvrrrrrdim da se to može!",
+  "Radio sam na digitalnim proizvodima, eCommerce sustavima, marketinškim projektima i poslovnim procesima. Nekad razvijam. Nekad vodim projekt. Nekad objašnjavam zašto nije dobra ideja raditi sve u Excelu.",
+  "A nekad samo gledam u ekran i pitam se tko je ovo napravio. Onda se sjetim da sam možda bio ja.",
+  "Uglavnom, ako imate problem koji traži kombinaciju tehnologije, poslovnog razmišljanja i zdravog razuma — mogli bismo se dobro slagati.",
 ];
 
 export const principles = [
