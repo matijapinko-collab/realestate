@@ -140,7 +140,7 @@ export const experience: CvExperience[] = [
     role: "KAM & Delivery team lead",
     period: "lipanj 2025. — rujan 2026.",
     summary:
-      "Razvoj prodaje, vođenje ključnih kupaca i poslovni razvoj u tvrtki za zapošljavanje i poslovno savjetovanje. Vodim odnos s klijentom od prvog kontakta i pregovora do isporuke usluge, uz koordinaciju internih timova.",
+      "Razvoj prodaje, vođenje ključnih kupaca i poslovni razvoj u tvrtki za zapošljavanje i poslovno savjetovanje. Vodio sam odnos s klijentom od prvog kontakta i pregovora do isporuke usluge, uz koordinaciju internih timova.",
     tags: ["Key account management", "Pregovaranje", "Poslovni razvoj"],
     highlight: true,
   },

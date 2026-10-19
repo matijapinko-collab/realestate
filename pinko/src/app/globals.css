@@ -331,7 +331,7 @@
     display: none;
   }
 
-  :root[data-theme="light"] .side-rail {
+  :root[data-theme="light"] .side-rail.side-rail-legacy {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -349,7 +349,7 @@
   }
 
   @media (max-width: 64rem) {
-    :root[data-theme="light"] .side-rail {
+    :root[data-theme="light"] .side-rail.side-rail-legacy {
       display: none;
     }
   }
@@ -595,7 +595,7 @@
     display: none;
   }
 
-  :root[data-theme="light"] .rail-dot {
+  :root[data-theme="light"] .rail-dot.rail-dot-legacy {
     position: fixed;
     left: 2.25rem;
     top: 0;
@@ -610,7 +610,7 @@
   }
 
   @media (max-width: 64rem) {
-    :root[data-theme="light"] .rail-dot {
+    :root[data-theme="light"] .rail-dot.rail-dot-legacy {
       display: none;
     }
   }
@@ -1341,5 +1341,215 @@
     font-size: clamp(1.5rem, 0.9rem + 1.9vw, 2.5rem);
     line-height: 1.1;
     overflow-wrap: anywhere;
+  }
+}
+
+/* ==================================================================== *
+ * THE LIGHT EXPERIENCE
+ *
+ * A separate design system, not a skin. Measured against WCAG 2.2:
+ *
+ *   #17141C on #F7F6F2 .. 16.84  AAA
+ *   #17141C on #C8B8FF .. 10.19  AAA   lavender ground
+ *   #17141C on #F7E67D .. 14.37  AAA   yellow ground
+ *   #17141C on #FFBCA7 .. 11.28  AAA   peach ground
+ *   #17141C on #B8E7CE .. 13.32  AAA   mint ground
+ *   #FFFFFF on #354BFF ..  5.83  AA    the one inverted ground
+ *   #354BFF on #F7F6F2 ..  5.39  AA    accent as text
+ *
+ * The colour logic follows from those numbers rather than from taste:
+ * every pastel is a ground for near-black type, electric blue is the only
+ * colour dark enough to carry light type, and near-black on blue (3.12)
+ * is allowed for oversized display and UI edges but never for body text.
+ * ==================================================================== */
+
+@layer components {
+  .lw-navlink {
+    position: relative;
+  }
+  .lw-navlink::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.35rem;
+    height: 1px;
+    background: currentColor;
+    scale: 0 1;
+    transform-origin: left;
+    transition: scale 260ms var(--ease-out-soft);
+  }
+  .lw-navlink:hover::after,
+  .lw-navlink:focus-visible::after {
+    scale: 1 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lw-navlink::after {
+      transition: none;
+    }
+  }
+
+  /* The switch is chrome shared by both worlds. Its active state is styled
+     here rather than with utilities, because a Tailwind utility sits in a
+     later layer and would win on layer order no matter the specificity —
+     which is why the light world kept wearing the previous system's red. */
+  .theme-toggle-on {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  :root[data-theme="light"] .theme-toggle-on {
+    background: #17141c;
+    color: #f7f6f2;
+  }
+
+  .light-world {
+    --lw-ink: #17141c;
+    --lw-paper: #f7f6f2;
+    --lw-lavender: #c8b8ff;
+    --lw-blue: #354bff;
+    --lw-yellow: #f7e67d;
+    --lw-peach: #ffbca7;
+    --lw-mint: #b8e7ce;
+    color: var(--lw-ink);
+  }
+
+  /* Full-bleed grounds. Each section owns its colour; no section picks one
+     at random — the sequence runs paper, lavender, paper, pastels, paper,
+     blue, so colour marks a change of subject rather than decorating. */
+  .lw-section {
+    position: relative;
+    padding-block: clamp(4.5rem, 3rem + 7vw, 9rem);
+  }
+  .lw-paper {
+    background: var(--lw-paper);
+  }
+  .lw-lavender {
+    background: var(--lw-lavender);
+  }
+  .lw-yellow {
+    background: var(--lw-yellow);
+  }
+  .lw-peach {
+    background: var(--lw-peach);
+  }
+  .lw-mint {
+    background: var(--lw-mint);
+  }
+  .lw-blue {
+    background: var(--lw-blue);
+    color: #ffffff;
+  }
+
+  .lw-wrap {
+    width: min(100% - 2rem, 86rem);
+    margin-inline: auto;
+  }
+  @media (min-width: 768px) {
+    .lw-wrap {
+      width: min(100% - 4rem, 86rem);
+    }
+  }
+
+  /* One family, one weight, enormous sizes — the reference's discipline,
+     not its letterforms. Line height equal to the size on display type. */
+  .lw-display {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(2.75rem, 1.2rem + 6.4vw, 7rem);
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .lw-h2 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(2rem, 1.1rem + 3.6vw, 4.25rem);
+    line-height: 1;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+  }
+  .lw-h3 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  .lw-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .lw-lead {
+    font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.375rem);
+    line-height: 1.5;
+    max-width: 46ch;
+  }
+  .lw-body {
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 58ch;
+  }
+
+  /* A giant number, used once per figure in Impact. */
+  .lw-figure {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(3rem, 1.4rem + 6vw, 7.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+  }
+
+  .lw-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding-inline: 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    background: var(--lw-ink);
+    color: var(--lw-paper);
+    transition: background-color 220ms var(--ease-out-soft);
+  }
+  .lw-pill:hover {
+    background: var(--lw-blue);
+  }
+  .lw-pill-ghost {
+    background: transparent;
+    color: inherit;
+    border: 1px solid currentColor;
+  }
+  .lw-pill-ghost:hover {
+    background: var(--lw-ink);
+    color: var(--lw-paper);
+  }
+  .lw-blue .lw-pill {
+    background: #ffffff;
+    color: var(--lw-ink);
+  }
+  .lw-blue .lw-pill:hover {
+    background: var(--lw-yellow);
+  }
+
+  /* Hairline rules, the editorial device that replaces card borders. */
+  .lw-rule {
+    border-top: 1px solid color-mix(in srgb, var(--lw-ink) 18%, transparent);
+  }
+
+  /* A dotted field, as a ground for display type. Decorative only. */
+  .lw-dots {
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--lw-ink) 22%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 16px 16px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lw-pill {
+      transition: none;
+    }
   }
 }

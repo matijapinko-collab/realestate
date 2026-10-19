@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getTheme } from "@/lib/theme";
+import { LightHome } from "@/components/light/LightHome";
 import { Hero } from "@/components/sections/Hero";
 import { FactsStrip } from "@/components/sections/FactsStrip";
 import { CapabilityMarquee } from "@/components/sections/CapabilityMarquee";
@@ -19,7 +21,26 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-export default function HomePage() {
+/**
+ * One URL, two worlds.
+ *
+ * The server reads the theme cookie and renders that world's tree — not
+ * both with one hidden, which would put every sentence in the page twice.
+ * Someone who has never chosen gets the dark world, which is also what the
+ * pill chooser opens over.
+ */
+export default async function HomePage() {
+  const theme = await getTheme();
+
+  if (theme === "light") {
+    return (
+      <>
+        <PersonJsonLd />
+        <LightHome />
+      </>
+    );
+  }
+
   return (
     <>
       <PersonJsonLd />

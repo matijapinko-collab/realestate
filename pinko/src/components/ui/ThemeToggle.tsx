@@ -6,6 +6,7 @@ import {
   prefetchPassage,
   wormholeAvailable,
 } from "@/components/ui/Wormhole";
+import { applyTheme } from "@/lib/apply-theme";
 
 export type Theme = "dark" | "light";
 
@@ -51,12 +52,7 @@ export function ThemeToggle({ className }: { className?: string }) {
         );
         return;
       }
-      document.documentElement.setAttribute("data-theme", next);
-      try {
-        localStorage.setItem("pinko-theme", next);
-      } catch {
-        // Private browsing or blocked storage: the choice is simply not kept.
-      }
+      applyTheme(next);
     },
     [theme]
   );
@@ -90,9 +86,7 @@ export function ThemeToggle({ className }: { className?: string }) {
               : "Uključi svijetlu dimenziju"
           }
           className={`mono-label rounded-(--radius-pill) px-3 py-1.5 font-semibold transition-colors ${
-            theme === value
-              ? "bg-accent text-on-accent"
-              : "text-ink-soft hover:text-ink"
+            theme === value ? "theme-toggle-on" : "text-ink-soft hover:text-ink"
           }`}
         >
           {label}
