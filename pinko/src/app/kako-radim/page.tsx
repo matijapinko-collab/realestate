@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getTheme } from "@/lib/theme";
+import { LightProcess } from "@/components/light/LightProcess";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { Faq } from "@/components/sections/Faq";
@@ -19,7 +21,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/kako-radim" },
 };
 
-export default function HowIWorkPage() {
+export default async function HowIWorkPage() {
+  // One URL, two worlds; see src/lib/theme.ts.
+  if ((await getTheme()) === "light") return <LightProcess />;
+
+
   return (
     <>
       <BreadcrumbJsonLd items={crumbs} />

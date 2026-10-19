@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getTheme } from "@/lib/theme";
+import { LightServices } from "@/components/light/LightServices";
 import Link from "next/link";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
@@ -32,7 +34,11 @@ const crumbs = [
   { name: "Usluge", path: "/usluge" },
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  // One URL, two worlds; see src/lib/theme.ts.
+  if ((await getTheme()) === "light") return <LightServices />;
+
+
   return (
     <>
       <BreadcrumbJsonLd items={crumbs} />

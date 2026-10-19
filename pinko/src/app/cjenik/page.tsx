@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getTheme } from "@/lib/theme";
+import { LightPricing } from "@/components/light/LightPricing";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { PackageTable } from "@/components/sections/PackageTable";
@@ -40,7 +42,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/cjenik" },
 };
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  // One URL, two worlds; see src/lib/theme.ts.
+  if ((await getTheme()) === "light") return <LightPricing />;
+
+
   return (
     <>
       <BreadcrumbJsonLd items={crumbs} />

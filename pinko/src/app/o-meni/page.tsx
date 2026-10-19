@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getTheme } from "@/lib/theme";
+import { LightAbout } from "@/components/light/LightAbout";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { ClosingContact } from "@/components/sections/ClosingContact";
@@ -23,7 +25,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/o-meni" },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  // One URL, two worlds; see src/lib/theme.ts.
+  if ((await getTheme()) === "light") return <LightAbout />;
+
+
   return (
     <>
       <BreadcrumbJsonLd items={crumbs} />

@@ -1553,3 +1553,70 @@
     }
   }
 }
+
+@layer components {
+  /* A filter is a real radio button with its input visually hidden: the
+     keyboard and the screen reader get a proper radio group, the eye gets
+     a pill. The focus ring follows the input, so it is never invisible. */
+  .lw-filter {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-inline: 1.125rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--lw-ink) 25%, transparent);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      background-color 180ms var(--ease-out-soft),
+      color 180ms var(--ease-out-soft);
+  }
+  .lw-filter:hover {
+    background: color-mix(in srgb, var(--lw-ink) 8%, transparent);
+  }
+  .lw-filter:has(input:checked) {
+    background: var(--lw-ink);
+    color: var(--lw-paper);
+    border-color: var(--lw-ink);
+  }
+  .lw-filter:has(input:focus-visible) {
+    outline: 2px solid var(--lw-blue);
+    outline-offset: 2px;
+  }
+
+  .lw-card {
+    display: block;
+  }
+
+  .lw-underline {
+    position: relative;
+  }
+  .lw-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background: currentColor;
+    scale: 1 1;
+    transform-origin: left;
+    transition: scale 300ms var(--ease-out-soft);
+  }
+  .group:hover .lw-underline::after {
+    scale: 0 1;
+    transform-origin: right;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lw-filter,
+    .lw-underline::after,
+    .lw-card img {
+      transition: none !important;
+    }
+    .group:hover .lw-card img {
+      scale: 1 !important;
+    }
+  }
+}

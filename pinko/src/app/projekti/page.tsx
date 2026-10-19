@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getTheme } from "@/lib/theme";
+import { LightProjects } from "@/components/light/LightProjects";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { ClosingContact } from "@/components/sections/ClosingContact";
@@ -19,7 +21,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/projekti" },
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  // One URL, two worlds. The server renders the chosen one; see
+  // src/lib/theme.ts for why this is a cookie and not CSS.
+  if ((await getTheme()) === "light") return <LightProjects />;
+
+
   const projects = getPublishedProjects();
 
   return (
