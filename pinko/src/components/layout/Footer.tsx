@@ -27,7 +27,7 @@ export function Footer() {
                 <li key={d.slug}>
                   <Link
                     href={`/usluge/${d.slug}`}
-                    className="font-medium hover:text-accent-ink hover:underline underline-offset-4"
+                    className="inline-flex min-h-6 items-center font-medium hover:text-accent-ink hover:underline underline-offset-4"
                   >
                     {d.name}
                   </Link>
@@ -45,7 +45,7 @@ export function Footer() {
                 <li>
                   <a
                     href={`mailto:${site.contact.email}`}
-                    className="font-medium hover:text-accent-ink hover:underline underline-offset-4"
+                    className="inline-flex min-h-6 items-center font-medium hover:text-accent-ink hover:underline underline-offset-4"
                   >
                     {site.contact.email}
                   </a>
@@ -55,7 +55,7 @@ export function Footer() {
                 <li>
                   <a
                     href={`tel:${site.contact.phoneHref}`}
-                    className="font-medium hover:text-accent-ink hover:underline underline-offset-4"
+                    className="inline-flex min-h-6 items-center font-medium hover:text-accent-ink hover:underline underline-offset-4"
                   >
                     {site.contact.phone}
                   </a>
@@ -73,7 +73,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="font-medium hover:text-accent-ink hover:underline underline-offset-4"
+                    className="inline-flex min-h-6 items-center font-medium hover:text-accent-ink hover:underline underline-offset-4"
                   >
                     {item.label}
                   </Link>
@@ -82,7 +82,7 @@ export function Footer() {
               <li>
                 <Link
                   href={nav.cta.href}
-                  className="font-medium hover:text-accent-ink hover:underline underline-offset-4"
+                  className="inline-flex min-h-6 items-center font-medium hover:text-accent-ink hover:underline underline-offset-4"
                 >
                   Kontakt
                 </Link>

@@ -256,7 +256,7 @@ export default async function ProjectPage({ params }: Props) {
                     <li key={link.href}>
                       <a
                         href={link.href}
-                        className="font-medium text-accent underline underline-offset-4"
+                        className="inline-flex min-h-6 items-center font-medium text-accent underline underline-offset-4"
                         rel="noopener noreferrer"
                         target="_blank"
                       >
@@ -309,7 +309,7 @@ export default async function ProjectPage({ params }: Props) {
                     <li key={link.href}>
                       <a
                         href={link.href}
-                        className="font-medium text-accent underline underline-offset-4"
+                        className="inline-flex min-h-6 items-center font-medium text-accent underline underline-offset-4"
                         rel="noopener noreferrer"
                         target="_blank"
                       >

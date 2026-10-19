@@ -40,7 +40,9 @@ export function PageHeader({
                   ) : (
                     <Link
                       href={crumb.path}
-                      className="hover:text-accent-ink hover:underline underline-offset-4"
+                      // 24px minimum target, WCAG 2.2 AA (2.5.8). These
+                      // measured 20px tall on a phone.
+                      className="inline-flex min-h-6 items-center hover:text-accent-ink hover:underline underline-offset-4"
                     >
                       {crumb.name}
                     </Link>

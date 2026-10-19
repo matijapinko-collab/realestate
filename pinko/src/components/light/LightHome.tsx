@@ -26,22 +26,28 @@ import { LightIntro } from "./LightIntro";
  * captions, which describe what each capture actually shows.
  */
 
+/**
+ * Teladoc's capture is 1900 by 702, and a portrait frame cannot hold it
+ * whole. Rather than shrink it into an empty plate or crop it blind, the
+ * plate is cut around the part that carries the project: the logo, the
+ * consultation, the doctor on the screen.
+ */
 const PREVIEWS = [
   {
     slug: "100-smart-food",
     label: "eCommerce",
     src: "/projekti/smart-food/mobile-home.webp",
-    alt: "Naslovnica webshopa 100% Smart Food na mobitelu.",
+    alt: "Naslovnica webshopa 100% Smart Food na mobitelu s istaknutom jesenskom ponudom dostave.",
     width: 720,
     height: 1559,
   },
   {
-    slug: "vehicle-freak",
-    label: "Sadržaj i SEO",
-    src: "/projekti/vehicle-freak-featured.webp",
-    alt: "Sekcija Vehicle Freak Expertise s uredničkim timom portala.",
-    width: 1237,
-    height: 389,
+    slug: "teladoc-business-vision",
+    label: "Vodstvo i proizvod",
+    src: "/projekti/teladoc-plate.webp",
+    alt: "Naslovnica telemedicinske platforme Teladoc Health.",
+    width: 720,
+    height: 961,
   },
   {
     slug: "bolero-temu",

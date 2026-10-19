@@ -104,7 +104,7 @@ export function Infrastructure() {
         </ButtonLink>
         <Link
           href="/usluge/development#hosting"
-          className="font-semibold text-accent-ink underline underline-offset-4"
+          className="inline-flex min-h-6 items-center font-semibold text-accent-ink underline underline-offset-4"
         >
           Hosting i Care paketi
         </Link>

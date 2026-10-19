@@ -97,7 +97,7 @@ export const lightMosaics: LightMosaic[] = [
       },
       {
         src: "/projekti/smart-food/mobile-home.webp",
-        alt: "Naslovnica webshopa na mobitelu: navigacija, pretraga i istaknuta ponuda.",
+        alt: "Naslovnica webshopa na mobitelu: navigacija, pretraga i istaknuta jesenska ponuda dostave.",
         width: 720,
         height: 1559,
         span: 5,

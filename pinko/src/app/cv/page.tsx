@@ -44,7 +44,7 @@ export default function CvPage() {
           <li>{cvProfile.location}</li>
           <li>
             <a
-              className="underline underline-offset-4"
+              className="inline-flex min-h-6 items-center underline underline-offset-4"
               href={`mailto:${cvProfile.email}`}
             >
               {cvProfile.email}
@@ -52,7 +52,7 @@ export default function CvPage() {
           </li>
           <li>
             <a
-              className="underline underline-offset-4"
+              className="inline-flex min-h-6 items-center underline underline-offset-4"
               href={cvProfile.linkedin}
               rel="noopener noreferrer"
               target="_blank"
@@ -61,7 +61,7 @@ export default function CvPage() {
             </a>
           </li>
           <li>
-            <a className="underline underline-offset-4" href={cvProfile.web}>
+            <a className="inline-flex min-h-6 items-center underline underline-offset-4" href={cvProfile.web}>
               pinko.hr
             </a>
           </li>

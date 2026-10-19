@@ -17,16 +17,25 @@ export function LiveScroll({ screens }: { screens: LiveScreen[] }) {
   return (
     <ul className="grid gap-8 lg:grid-cols-2">
       {screens.map((screen, i) => (
-        <li key={screen.href + screen.label} data-reveal data-reveal-delay={i}>
+        // `min-w-0`, without which this grid item takes the min-content
+        // width of the URL below and pushes the page sideways on a phone:
+        // a grid item defaults to `min-width: auto`, and `truncate` cannot
+        // shrink a flex child that is not allowed to.
+        <li
+          key={screen.href + screen.label}
+          data-reveal
+          data-reveal-delay={i}
+          className="min-w-0"
+        >
           <figure className="spotlight overflow-hidden rounded-(--radius-card) border border-rule bg-surface transition-colors duration-300 hover:border-accent">
             {/* Browser chrome, purely decorative. */}
-            <div className="flex items-center gap-3 border-b border-rule px-4 py-3">
+            <div className="flex min-w-0 items-center gap-3 border-b border-rule px-4 py-3">
               <span aria-hidden="true" className="flex gap-1.5">
                 <span className="size-2.5 rounded-full bg-control" />
                 <span className="size-2.5 rounded-full bg-control" />
                 <span className="size-2.5 rounded-full bg-control" />
               </span>
-              <span className="mono-label truncate text-ink-soft">
+              <span className="mono-label min-w-0 truncate text-ink-soft">
                 {screen.href.replace(/^https:\/\//, "")}
               </span>
             </div>
@@ -56,7 +65,7 @@ export function LiveScroll({ screens }: { screens: LiveScreen[] }) {
                 href={screen.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-semibold text-accent underline underline-offset-4"
+                className="inline-flex min-h-6 items-center text-sm font-semibold text-accent underline underline-offset-4"
               >
                 Otvorite uživo <span aria-hidden="true">↗</span>
               </a>

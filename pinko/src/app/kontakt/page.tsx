@@ -92,7 +92,7 @@ export default function ContactPage() {
                       <li>
                         <a
                           href={`mailto:${site.contact.email}`}
-                          className="text-accent-ink underline underline-offset-4"
+                          className="inline-flex min-h-6 items-center text-accent-ink underline underline-offset-4"
                         >
                           {site.contact.email}
                         </a>
@@ -102,7 +102,7 @@ export default function ContactPage() {
                       <li>
                         <a
                           href={`tel:${site.contact.phoneHref}`}
-                          className="text-accent-ink underline underline-offset-4"
+                          className="inline-flex min-h-6 items-center text-accent-ink underline underline-offset-4"
                         >
                           {site.contact.phone}
                         </a>
@@ -118,7 +118,7 @@ export default function ContactPage() {
               u{" "}
               <a
                 href="/privatnost"
-                className="text-accent-ink underline underline-offset-4"
+                className="inline-flex min-h-6 items-center text-accent-ink underline underline-offset-4"
               >
                 pravilima privatnosti
               </a>
