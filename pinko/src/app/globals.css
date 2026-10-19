@@ -1142,3 +1142,94 @@
     margin: 14mm 14mm 16mm;
   }
 }
+
+@layer components {
+  /* ------------------------------------------------------------------ *
+   * Glitch title (terminal scheme only)
+   *
+   * A short digital stutter on a case-study title, for the record that is
+   * about a gaming and technology portal. Two offset copies of the same
+   * text are drawn from `data-text`, so the heading in the markup stays a
+   * single ordinary heading for a screen reader and a crawler.
+   *
+   * The studio scheme reads as an editorial magazine and gets none of it,
+   * and the whole effect is off until `.js-motion` lands on <html> — so a
+   * visitor without JavaScript, or with reduced motion, sees a plain
+   * heading rather than something that never settles.
+   * ------------------------------------------------------------------ */
+  .glitch-title {
+    position: relative;
+  }
+
+  :root:not([data-theme="light"]).js-motion .glitch-title::before,
+  :root:not([data-theme="light"]).js-motion .glitch-title::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    /* The copies must not be read out a second time. */
+    speak: never;
+  }
+
+  :root:not([data-theme="light"]).js-motion .glitch-title::before {
+    color: var(--color-accent);
+    clip-path: inset(0 0 58% 0);
+    animation: glitch-shift-a 4.5s steps(2, end) infinite;
+  }
+
+  :root:not([data-theme="light"]).js-motion .glitch-title::after {
+    color: var(--color-brand-pink);
+    clip-path: inset(62% 0 0 0);
+    animation: glitch-shift-b 4.5s steps(2, end) infinite;
+  }
+
+  @keyframes glitch-shift-a {
+    0%,
+    92%,
+    100% {
+      opacity: 0;
+      translate: 0 0;
+    }
+    93% {
+      opacity: 0.85;
+      translate: -0.06em 0;
+    }
+    96% {
+      opacity: 0.85;
+      translate: 0.05em 0;
+    }
+    98% {
+      opacity: 0;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes glitch-shift-b {
+    0%,
+    92%,
+    100% {
+      opacity: 0;
+      translate: 0 0;
+    }
+    94% {
+      opacity: 0.8;
+      translate: 0.06em 0;
+    }
+    97% {
+      opacity: 0.8;
+      translate: -0.04em 0;
+    }
+    99% {
+      opacity: 0;
+      translate: 0 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root .glitch-title::before,
+    :root .glitch-title::after {
+      content: none;
+      animation: none;
+    }
+  }
+}

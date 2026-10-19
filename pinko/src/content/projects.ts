@@ -69,6 +69,13 @@ export type Project = {
    */
   story?: { heading: string; body: string[] }[];
   challenge: string;
+  /**
+   * What turned out to be harder than it looked. The brief of 19 Oct 2026
+   * asks every case study to say this out loud instead of jumping from the
+   * problem straight to the tidy solution. Optional: a record only has one
+   * when the work actually produced complications worth naming.
+   */
+  complications?: string[];
   decisions: string[];
   deliverables: string[];
   /** Functional or operational outcomes only — never invented revenue. */
@@ -108,6 +115,13 @@ export type Project = {
   publishedAt: string | null;
   /** Shown on the card as a one-line contribution label. */
   contributionLabel: string;
+  /**
+   * An optional visual motif for the case study's title. "glitch" gives the
+   * terminal scheme a short digital stutter and leaves the studio scheme
+   * untouched — the studio reads as an editorial magazine, and a glitch
+   * would be out of place there. Reduced motion switches it off entirely.
+   */
+  motif?: "glitch";
   /** Internal note for the launch checklist; never rendered. */
   internalNote?: string;
 };
@@ -507,6 +521,13 @@ export const projects: Project[] = [
       "Bolero Adria posluje u distribuciji pića, prehrambenih proizvoda i dodataka prehrani. Kroz brendove Bolero Drinks i 100% Smart Food povezuje webshopove, fizičku prodaju, B2B kupce, skladišta i međunarodne marketplace kanale.",
     challenge:
       "Problem nije bio nedostatak softvera. Problem je bio što poslovanju treba jedan pouzdan izvor istine.",
+    complications: [
+      "Dijeljeni i nedostajući EAN kodovi — stare oznake nije bilo moguće naslijepo prenijeti",
+      "Devetnaest evidentiranih lokacija prema četiri fizička skladišta, bez unaprijed poznatog značenja razlike",
+      "Gotovo 67.000 povijesnih računa i otpremnica koje treba razumjeti prije bilo kakvog uvoza",
+      "Više prodajnih kanala s vlastitom logikom narudžbi, cijena, statusa i dostave",
+      "Pakiranja s odabirom okusa koja traže model komponenti, a ne prodaju generičkog paketa",
+    ],
     story: [
       {
         heading: "Sve je radilo. Dok nismo počeli gledati kako.",
@@ -760,28 +781,130 @@ export const projects: Project[] = [
     slug: "virus-hr",
     projectName: "Virus.hr",
     relationshipType: "autorski-rad",
-    role: "Autorstvo i urednički sadržaj.",
+    role:
+      "Istraživanje, pisanje i priprema uredničkog sadržaja iz područja tehnologije i gaming industrije.",
     status: "lansirano",
-    approvedForPublication: false,
+    approvedForPublication: true,
+    tagline:
+      "Kad ti je posao pisati o igrama, tehnologiji i svemu što internet izbaci. Zvuči teško, znam.",
     summary:
-      "Autorski i urednički rad kao dokaz sadržajne ekspertize, ne kao razvojni projekt.",
+      "Content writing, research i tech journalism za hrvatski gaming i tehnološki portal: praćenje industrije, provjera izvora i pisanje članaka koje netko stvarno poželi pročitati.",
     context:
-      "Medijski portal za koji je Matija pisao i uređivao sadržaj.",
+      "Virus.hr je hrvatski gaming i tehnološki portal koji prati svijet videoigara, hardvera, softvera, novih tehnologija i događanja u digitalnoj industriji.",
     challenge:
-      "Teme je trebalo objasniti jezikom čitatelja, bez žargona.",
-    decisions: [
-      "Sadržaj prema stvarnoj namjeri čitatelja",
-      "Urednička kontrola kvalitete i konzistentnosti",
+      "Problem nije pronaći vijesti. Problem je pronaći one koje su stvarno zanimljive, provjeriti informacije i objasniti ih na način koji nije dosadan kao upute za sastavljanje uredskog ormara.",
+    complications: [
+      "Informacije se u industriji često pojavljuju kao glasine, curenja podataka ili marketinške najave",
+      "Razliku između potvrđene vijesti i tvrdnje s foruma treba vidjeti prije objave, ne poslije",
+      "Tehnički sadržaj mora biti precizan za entuzijaste i razumljiv onima koji ne razlikuju GPU od CPU-a",
+      "Količina dnevnih vijesti veća je od onoga što itko može pročitati, pa je izbor teme dio posla",
     ],
-    deliverables: ["Autorski tekstovi", "Urednički rad na sadržaju"],
-    outcomes: ["Objavljeni tekstovi kao dokaz sadržajne ekspertize"],
-    nextStep: "Treba vam sadržaj koji objašnjava ponudu bez žargona?",
-    evidenceLinks: [],
+    story: [
+      {
+        heading:
+          "Gaming, tehnologija i beskonačna količina vijesti. Netko je morao sve to pratiti.",
+        body: [
+          "Postoje ljudi koji nakon posla upale računalo kako bi se opustili. A postoje i oni koji upale računalo, otvore dvadesetak izvora, krenu čitati o novim grafičkim karticama, poskupljenjima konzola, umjetnoj inteligenciji i posljednjoj poslovnoj katastrofi nekog velikog gaming izdavača. Pogodite kojoj skupini pripadam.",
+          "Moj dio posla bio je istraživati aktualne teme, pratiti razvoj industrije i pretvarati informacije u članke koje ljudi žele pročitati.",
+          "Jer nije dovoljno samo prenijeti vijest. Treba razumjeti što se dogodilo, zašto je važno i zašto bi čitatelja uopće trebalo biti briga. A ako pritom uspijem ubaciti malo humora, još bolje.",
+        ],
+      },
+      {
+        heading:
+          "Internet proizvodi više vijesti nego što normalan čovjek može pročitati",
+        body: [
+          "Svaki dan donosi novu lavinu informacija. NVIDIA predstavlja novu tehnologiju. AMD priprema odgovor. Microsoft mijenja strategiju. Sony razmišlja o budućnosti PlayStationa. Ubisoft ponovno objašnjava zašto je sve pod kontrolom. A umjetna inteligencija u međuvremenu pokušava preuzeti pola interneta.",
+          "Posebno u gaming i tehnološkoj industriji, gdje se informacije često pojavljuju kao glasine, neslužbena curenja podataka, izjave analitičara ili marketinške najave.",
+          "Zato kvalitetan članak mora razlikovati činjenice od pretpostavki. Jer između „Sony je potvrdio” i „netko na forumu tvrdi” postoji prilično velika razlika. Iako internet ponekad misli drukčije.",
+        ],
+      },
+      {
+        heading: "Research — prvo istraživanje, onda tipkovnica",
+        body: [
+          "Jedan od najvažnijih dijelova mojeg rada bilo je praćenje relevantnih izvora i istraživanje tema prije pisanja: međunarodni gaming i tehnološki mediji, najave proizvođača hardvera i softvera, razvoj umjetne inteligencije, događanja u industriji, usporedba informacija iz više izvora, provjera tehničkih specifikacija i konteksta te poslovne odluke velikih tehnoloških kompanija.",
+          "Nije poanta uzeti prvi članak koji Google izbaci i prepričati ga. Poanta je razumjeti temu dovoljno dobro da je možeš objasniti nekome tko nema vremena provesti tri sata istražujući istu stvar.",
+          "Dobar research čitatelju štedi vrijeme. Loš research proizvodi još jedan članak koji nitko nije trebao.",
+        ],
+      },
+      {
+        heading: "Tech novosti — od novih procesora do umjetne inteligencije",
+        body: [
+          "Tehnologija se mijenja toliko brzo da ono što je danas revolucionarno sutra već dobije nasljednika. Fokus je bio na novostima koje imaju stvaran utjecaj na korisnike: nove generacije grafičkih kartica, procesora i komponenti, razvoj AI tehnologije, promjene cijena hardvera, softverske inovacije i novi proizvodi.",
+          "Ali tehnički članak ne bi trebao biti samo popis specifikacija. Ako nova grafička kartica ima više jezgri, bržu memoriju i veću potrošnju energije, čitatelju treba objasniti što to zapravo znači. Hoće li dobiti bolje performanse? Hoće li morati mijenjati napajanje? Isplati li se nadogradnja? Ili proizvođač samo želi da ponovno potroši pola plaće?",
+          "Tehnologija je zanimljiva tek kad objasnimo što ona znači ljudima koji je koriste.",
+        ],
+      },
+      {
+        heading: "Gaming industrija — više od trailera i datuma izlaska",
+        body: [
+          "Gaming nije samo zabava. To je globalna industrija u kojoj se susreću tehnologija, kreativnost, marketing, financije i poslovne strategije. Pratio sam teme vezane uz razvoj videoigara, izdavače, nove konzole, promjene na tržištu, poslovne odluke i tehnološke trendove.",
+          "Posebno su zanimljive situacije u kojima se očekivanja igrača i poslovni interesi kompanija baš i ne slažu. A takvih situacija, srećom za novinare, nikad ne nedostaje.",
+          "Kada veliki izdavač odgodi igru, priča nije samo u novom datumu izlaska. Važno je razumjeti što odgoda znači za igrače, razvojni studio, poslovanje kompanije i budućnost franšize. Isto vrijedi za rast cijena konzola, pretplatničke modele, mikrotransakcije i promjene u distribuciji igara.",
+        ],
+      },
+      {
+        heading: "Pisanje članaka — informativno ne mora značiti dosadno",
+        body: [
+          "Internet je već prepun tekstova koji zvuče kao da ih je pisao korporativni odjel za odnose s javnošću. „Kompanija je izrazila zadovoljstvo inovativnim strateškim pristupom.” Predivno. A sad nam recite što su zapravo napravili.",
+          "Članak mora imati dobar naslov, smislen uvod, provjerene informacije i dovoljno konteksta da čitatelj razumije temu. Bez nepotrebnog razvlačenja. Bez izmišljanja senzacija. I bez pet odlomaka uvoda prije nego što konačno saznamo o čemu se radi.",
+          "Prvo pronaći priču: nije svaka objava vrijedna zasebnog članka. Drugo, istražiti kontekst: što se dogodilo prije, tko je uključen, koliko su informacije pouzdane. Treće, napisati razumljiv tekst: dovoljno precizan za entuzijaste, razumljiv i ljudima koji ne razlikuju GPU od CPU-a. Četvrto, dati tekstu karakter: dobar naslov privlači pozornost, dobar tekst je zadržava.",
+          "A malo sarkazma nikad nije ubilo dobar članak. Barem koliko znam.",
+        ],
+      },
+      {
+        heading: "Zašto je ovaj projekt važan?",
+        body: [
+          "Virus.hr pokazuje drugu stranu mojeg profesionalnog iskustva. Ne bavim se samo razvojem webova, webshopova i poslovnih sustava. Bavim se i informacijama: istraživanjem, razumijevanjem tržišta, analizom trendova i pisanjem sadržaja koji kompleksne teme pretvara u razumljive priče.",
+          "To je iskustvo koje se izravno prenosi na content marketing, SEO sadržaj, komunikaciju proizvoda i digitalne strategije.",
+          "Jer možete imati najbolji proizvod na svijetu. Ako ga ne znate objasniti ljudima, imate prilično skup problem. A upravo tu dobar sadržaj radi razliku.",
+        ],
+      },
+      {
+        heading: "Nije svaki posao u kodu",
+        body: [
+          "Virus.hr mi je omogućio da spojim nekoliko stvari koje me stvarno zanimaju: tehnologiju, gaming, istraživanje i pisanje. I da pritom imam sasvim legitimno opravdanje za praćenje novih grafičkih kartica, gaming konferencija i poslovnih odluka tehnoloških kompanija.",
+          "Šalu na stranu, kvalitetan digitalni sadržaj zahtijeva ozbiljan rad. Treba pronaći pravu temu, razumjeti informacije, provjeriti izvore i napisati tekst koji će netko stvarno poželjeti pročitati.",
+          "Jer internetu ne treba još sadržaja samo zato da ga ima. Treba mu više sadržaja koji ima smisla. A ako se čitatelj pritom i nasmije — još bolje.",
+        ],
+      },
+    ],
+    decisions: [
+      "Teme se biraju prema aktualnosti i relevantnosti za hrvatsku publiku, a ne prema tome što je lako prepričati",
+      "Informacije se uspoređuju iz više izvora prije objave",
+      "Činjenica i pretpostavka u tekstu su jasno razdvojene",
+      "Tehnički sadržaj objašnjava što specifikacija znači korisniku, a ne samo koja je",
+      "Naslov i struktura su dio posla, ne naknadni dodatak",
+    ],
+    deliverables: [
+      "Istraživanje i praćenje tehnoloških i gaming tema",
+      "Priprema i pisanje informativnih i analitičkih članaka",
+      "Provjera izvora, specifikacija i konteksta prije objave",
+      "Oblikovanje naslova i strukture digitalnog sadržaja",
+    ],
+    outcomesLabel: "Moj doprinos",
+    outcomes: [
+      "Istraživački pristup aktualnim temama",
+      "Pisanje informativnih i analitičkih članaka",
+      "Razumijevanje tehnoloških i gaming trendova",
+      "Prilagodba kompleksnih informacija široj publici",
+      "Kreiranje naslova i strukture digitalnog sadržaja",
+      "Kritičko vrednovanje izvora i informacija",
+    ],
+    nextStep:
+      "Trebate nekoga tko zna pisati o stvarima koje drugi jedva razumiju?",
+    featuredImage: {
+      src: "/projekti/virus-featured.webp",
+      alt: "Naslovnica portala Virus.hr: izbornik rubrika, traka s najnovijim vijestima i kartice recenzija i novosti.",
+      width: 1600,
+      height: 993,
+    },
+    evidenceLinks: [{ label: "virus.hr", href: "https://virus.hr/" }],
     images: [],
-    publishedAt: null,
-    contributionLabel: "Autorski i urednički sadržaj",
+    publishedAt: "2026-10-19",
+    contributionLabel: "Content & Research — istraživanje i pisanje",
+    motif: "glitch",
     internalNote:
-      "Potvrditi opis uloge i prava objave odabranih tekstova prije objave.",
+      "Tekst je Matijin, dostavljen 19. 10. 2026. GRANICE koje je sam postavio i koje se ne smiju prekoračiti: Matija NIJE developer portala, nije dizajner weba i nije autor svih objavljenih članaka. Zapis se odnosi isključivo na istraživanje, praćenje tema te pripremu i pisanje sadržaja. Broj članaka, čitanost i organski promet namjerno NISU objavljeni — mogu se dodati tek uz pouzdane podatke. Istaknuta slika je snimka naslovnice od 19. 10. 2026. (snimio Claude s virus.hr; zamijeniti ako Matija pošalje svoju).",
   },
 ];
 

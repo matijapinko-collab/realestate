@@ -57,6 +57,7 @@ export default async function ProjectPage({ params }: Props) {
       <PageHeader
         eyebrow={relationshipLabels[project.relationshipType]}
         title={project.projectName}
+        titleClassName={project.motif === "glitch" ? "glitch-title" : undefined}
         lead={
           <>
             {project.tagline ? (
@@ -117,6 +118,64 @@ export default async function ProjectPage({ params }: Props) {
       {/* A project with the long form written out reads as one column, with
           the lists gathered underneath. Without it, the old two-column pair
           of context and challenge still applies. */}
+      {/* The five parts every case study owes the reader, from the brief of
+          19 Oct 2026: the problem, what turned out to be harder than it
+          looked, what was actually built, what came of it and — kept
+          separate on purpose — which part of it was Matija's own work.
+          Nothing is restated that the record does not already contain;
+          "Komplikacije" simply disappears where a project had none. */}
+      <Section tight>
+        <dl
+          data-reveal
+          className="grid gap-px overflow-hidden rounded-(--radius-card) border border-rule bg-rule md:grid-cols-2"
+        >
+          <FivePart title="Problem">{project.challenge}</FivePart>
+
+          {project.complications && project.complications.length > 0 ? (
+            <FivePart title="Komplikacije">
+              <ul className="space-y-2">
+                {project.complications.map((item) => (
+                  <li key={item} className="flex gap-2.5">
+                    <span aria-hidden="true" className="shrink-0 text-accent">
+                      ·
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </FivePart>
+          ) : null}
+
+          <FivePart title="Rješenje">
+            <ul className="space-y-2">
+              {project.deliverables.slice(0, 4).map((item) => (
+                <li key={item} className="flex gap-2.5">
+                  <span aria-hidden="true" className="shrink-0 text-accent">
+                    ·
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </FivePart>
+
+          <FivePart title={project.outcomesLabel ?? "Rezultat"}>
+            <ul className="space-y-2">
+              {project.outcomes.slice(0, 4).map((item) => (
+                <li key={item} className="flex gap-2.5">
+                  <span aria-hidden="true" className="shrink-0 text-accent">
+                    ·
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </FivePart>
+
+          <FivePart title="Moj doprinos">{project.role}</FivePart>
+        </dl>
+      </Section>
+
       {project.metrics && project.metrics.length > 0 ? (
         <Section tight>
           {/* A figure is published only with the basis it was measured on.
@@ -296,6 +355,26 @@ function ListBlock({ title, items }: { title: string; items: string[] }) {
           </li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+/**
+ * One cell of the five-part summary. A description list is the right element
+ * here: each heading labels the block under it, and that relationship is in
+ * the markup rather than only in the layout.
+ */
+function FivePart({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="bg-surface p-6 md:p-7">
+      <dt className="mono-label font-semibold text-accent">{title}</dt>
+      <dd className="measure-wide mt-3 text-ink-soft">{children}</dd>
     </div>
   );
 }

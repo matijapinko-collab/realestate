@@ -9,10 +9,13 @@ export function PageHeader({
   lead,
   cta,
   breadcrumbs,
+  titleClassName,
 }: {
   eyebrow: string;
   index?: string;
   title: string;
+  /** Extra classes on the h1, for a per-page motif. */
+  titleClassName?: string;
   lead: ReactNode;
   cta?: { href: string; label: string };
   breadcrumbs?: { name: string; path: string }[];
@@ -53,7 +56,12 @@ export function PageHeader({
           <span>{eyebrow}</span>
         </p>
 
-        <h1 className="mt-5 max-w-[18ch] text-(length:--text-hero) font-extrabold">
+        <h1
+          className={`mt-5 max-w-[18ch] text-(length:--text-hero) font-extrabold${
+            titleClassName ? ` ${titleClassName}` : ""
+          }`}
+          data-text={title}
+        >
           {title}
         </h1>
 
