@@ -29,10 +29,11 @@ export const careerFacts = [
 ] as const;
 
 /**
- * Named in the original brief and still without dates. Bolero Adria, OlyBet
- * and HT OneApp moved into the dated CV entries once the CV brief supplied
- * their periods; Morgancode is the last one waiting. Ask Matija before
- * publishing anything more specific about it.
+ * Named in the original brief and still without dates. Bolero Adria and HT
+ * OneApp moved into the dated CV entries once the CV brief supplied their
+ * periods; Morgancode is the last one waiting. Ask Matija before publishing
+ * anything more specific about it. (OlyBet was removed from the site
+ * entirely on 19 Oct 2026, at his request.)
  */
 export const additionalWork = [
   {

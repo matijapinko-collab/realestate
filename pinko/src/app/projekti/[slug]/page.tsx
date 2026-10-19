@@ -180,7 +180,15 @@ export default async function ProjectPage({ params }: Props) {
         <Section tight>
           {/* A figure is published only with the basis it was measured on.
               The basis is not a footnote here; it sits under the number. */}
-          <ul className="grid gap-px overflow-hidden rounded-(--radius-card) border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+          <ul
+            className={`grid gap-px overflow-hidden rounded-(--radius-card) border border-rule bg-rule sm:grid-cols-2 ${
+              // Columns follow the number of figures, so three metrics fill
+              // the row instead of leaving an empty cell beside them.
+              project.metrics.length % 3 === 0
+                ? "lg:grid-cols-3"
+                : "lg:grid-cols-4"
+            }`}
+          >
             {project.metrics.map((metric, i) => (
               <li
                 key={metric.label}
@@ -188,7 +196,7 @@ export default async function ProjectPage({ params }: Props) {
                 data-reveal-delay={i}
                 className="spotlight bg-surface p-6"
               >
-                <p className="font-mono text-(length:--text-display) font-extrabold text-accent">
+                <p className="metric-value font-mono font-extrabold text-accent">
                   {metric.value}
                 </p>
                 <p className="mt-2 font-semibold">{metric.label}</p>

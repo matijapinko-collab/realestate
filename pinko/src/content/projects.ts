@@ -716,6 +716,143 @@ export const projects: Project[] = [
       "Tekst je Matijin, dostavljen 19. 10. 2026. Status je namjerno 'u razvoju': analiza, migracijska priprema i fazni razvoj. Nijedna integracija nije prikazana kao implementirana, a očekivane koristi stoje kao očekivanja koja treba potvrditi mjerenjem nakon puštanja. Nema javne poveznice — razlog je zapisan u noPublicEvidence.",
   },
   {
+    slug: "vehicle-freak",
+    projectName: "Vehicle Freak",
+    relationshipType: "autorski-rad",
+    role:
+      "Pisanje i istraživanje sadržaja o održavanju i kupnji vozila, SEO sadržajna strategija, skripte za YouTube te rad na affiliate i oglasnoj monetizaciji — kao član uredničkog tima, ne kao osnivač ni vlasnik portala.",
+    status: "lansirano",
+    approvedForPublication: true,
+    tagline:
+      "Nisam samo pisao članke. Sudjelovao sam u stvaranju sadržaja koji je pomagao ljudima, privlačio organski promet i bio dio iznimno uspješnog digitalnog poslovnog modela.",
+    summary:
+      "Američki portal o održavanju i kupnji vozila: SEO sadržajna strategija, gotovo tisuću članaka na kojima sam osobno radio, skripte za YouTube i monetizacija kroz oglase i affiliate.",
+    context:
+      "Vehicle Freak je portal koji čitateljima daje savjete o održavanju vozila, kupnji i kvarovima. Osnovao ga je Robert W., a sadržaj radi uredničko-mehaničarski tim u kojem sam naveden kao writer/mechanic. Ovo je zapis o mom dijelu tog rada, ne o cijelom portalu.",
+    challenge:
+      "Čovjek koji u 23 h traži zašto mu auto radi čudan zvuk ne želi esej o povijesti motora s unutarnjim izgaranjem. Želi odgovor koji razumije, dovoljno točan da po njemu može postupiti. Takav sadržaj mora istovremeno zadovoljiti tražilicu i čovjeka — a to dvoje ne traže uvijek isto.",
+    complications: [
+      "Automobilski savjeti su tema u kojoj kriva informacija nekoga može koštati novca ili sigurnosti",
+      "Ista pretraga dolazi od profesionalca i od nekoga tko prvi put otvara haubu — tekst mora poslužiti obojici",
+      "Organski promet ovisi o tražilici koja mijenja pravila bez najave",
+      "Monetizacija kroz oglase i affiliate ne smije pojesti tekst zbog kojeg je čitatelj uopće došao",
+      "Opseg: tisuću članaka nije pisanje, nego proizvodni proces koji mora biti ponovljiv",
+    ],
+    story: [
+      {
+        heading: "Problem i prilika",
+        body: [
+          "Pretrage o automobilima su beskrajne i vrlo konkretne: koliko ulja ide u određeni motor, što znači određena lampica, isplati li se popravak ili je vrijeme za novi auto. Ljudi te odgovore traže u trenutku kad im stvarno trebaju.",
+          "Prilika je bila u tome što je velik dio tog sadržaja na internetu ili površan, ili pisan za tražilicu umjesto za čovjeka, ili toliko stručan da ga razumije samo netko tko odgovor ionako već zna.",
+          "Portal je gradio sadržaj koji pokriva te pretrage ozbiljno: po markama, sustavima vozila i konkretnim kvarovima.",
+        ],
+      },
+      {
+        heading: "SEO strategija",
+        body: [
+          "Sadržaj je planiran prema stvarnim pretragama, a ne prema temama koje nekome zvuče zanimljivo. To znači raditi na namjeri iza pretrage: traži li čovjek dijagnozu, uputu, usporedbu ili odluku o kupnji.",
+          "Teme su se grupirale po markama, sustavima i tipovima kvarova, pa članci nisu stajali svaki za sebe nego su se međusobno povezivali u cjeline.",
+          "Struktura teksta slijedila je isto pravilo: odgovor blizu vrha, pa objašnjenje, pa detalji za onoga tko ih želi. Čitatelj koji je došao po jednu brojku ne bi je trebao tražiti u petom odlomku.",
+        ],
+      },
+      {
+        heading: "Content strategija i research",
+        body: [
+          "Svaki je tekst počinjao istraživanjem: specifikacije proizvođača, servisni podaci, iskustva s foruma i usporedba izvora kad se podaci razlikuju.",
+          "Kod automobilskih savjeta to nije formalnost. Pogrešan podatak o količini ulja, momentu pritezanja ili intervalu zamjene nekoga stvarno košta — ili novca, ili gore.",
+          "Zato je dio posla bio znati kada podatak nije dovoljno siguran da bi se napisao kao činjenica, i napisati ga kao ono što jest.",
+        ],
+      },
+      {
+        heading: "Skripte za YouTube",
+        body: [
+          "Dio sadržaja pisan je za video, a to je drugi zanat. Tekst koji dobro funkcionira na stranici ne funkcionira naglas.",
+          "Video gledatelj nema pregled stranice, ne može preskočiti na tablicu i ne vraća se gore da provjeri korak. Skripta mora voditi redom i držati pažnju bez vizualnog oslonca koji članak ima.",
+        ],
+      },
+      {
+        heading: "Affiliate marketing i oglašavanje",
+        body: [
+          "Poslovni model stajao je na dvije noge: prihod od oglašavanja i affiliate program, prije svega Amazonov, koji je na portalu i javno naveden.",
+          "To postavlja granicu koju je lako prijeći: preporuka mora biti preporuka, a ne izlika za poveznicu. Čitatelj koji jednom kupi krivu stvar po našem savjetu ne vraća se po drugi.",
+          "Zato su proizvodi ulazili u tekst ondje gdje su stvarno odgovarali problemu o kojem tekst govori, a sadržaj je ostao čitljiv i onome tko ne klikne ništa.",
+        ],
+      },
+      {
+        heading: "Rezultati",
+        body: [
+          "U razdoblju najveće popularnosti portal je imao više od milijun jedinstvenih posjetitelja mjesečno i preko 60.000 USD mjesečnog prihoda od oglašavanja.",
+          "To su povijesni rezultati cijelog portala i rezultat rada cijelog tima, u razdoblju koje je prošlo. Nisu moja osobna zasluga i nisu trenutačna statistika — ne bih ih ni objavljivao da to ne piše ovdje.",
+          "Ono što je moje: gotovo tisuću članaka na kojima sam osobno radio, i sadržajni sustav koji je taj promet mogao hraniti iz mjeseca u mjesec.",
+        ],
+      },
+      {
+        heading: "Moj osobni doprinos",
+        body: [
+          "Bio sam pisac i istraživač sadržaja u uredničkom timu. Nisam osnovao portal, nisam ga razvijao kao proizvod i nisam autor svega što je na njemu objavljeno.",
+          "Radio sam na istraživanju i pisanju članaka, na sadržajnoj strani SEO-a, na skriptama za video i na tome da sadržaj i monetizacija mogu stajati na istoj stranici bez da se međusobno guše.",
+          "Nisam samo pisao članke. Sudjelovao sam u stvaranju sadržaja koji je pomagao ljudima, privlačio organski promet i bio dio iznimno uspješnog digitalnog poslovnog modela.",
+        ],
+      },
+      {
+        heading: "Zašto ovo stoji u portfoliju razvojnog studija",
+        body: [
+          "Jer je to ista vještina koju danas prodajem pod imenom content i SEO: razumjeti što netko traži, dati mu odgovor koji može upotrijebiti i složiti to tako da ga tražilica nađe.",
+          "Razlika je samo u tome što je tamo tema bila kočnica koja škripi, a ovdje je webshop koji ne prodaje.",
+        ],
+      },
+    ],
+    decisions: [
+      "Sadržaj planiran prema stvarnoj namjeri pretrage, ne prema temama koje zvuče zanimljivo",
+      "Odgovor blizu vrha teksta, detalji ispod — za čitatelja koji je došao po jednu informaciju",
+      "Podatak koji nije dovoljno siguran ne piše se kao činjenica",
+      "Affiliate preporuka ide samo ondje gdje proizvod stvarno odgovara problemu iz teksta",
+      "Članci povezani u cjeline po markama, sustavima i kvarovima umjesto da stoje svaki za sebe",
+    ],
+    deliverables: [
+      "Istraživanje i pisanje članaka o održavanju, kvarovima i kupnji vozila",
+      "Sadržajna strana SEO-a: teme, namjera pretrage, struktura teksta i povezivanje članaka",
+      "Skripte za YouTube sadržaj",
+      "Rad na affiliate i oglasnoj monetizaciji unutar sadržaja",
+    ],
+    outcomesLabel: "Moj doprinos",
+    outcomes: [
+      "Gotovo tisuću članaka na kojima sam osobno radio",
+      "Sadržajni sustav koji je mogao hraniti organski promet kontinuirano, a ne u naletima",
+      "Tekstovi pisani tako da budu upotrebljivi i početniku i nekome tko se razumije",
+      "Monetizacija ugrađena u sadržaj bez da ga pojede",
+    ],
+    metrics: [
+      {
+        value: "1.000.000+",
+        label: "jedinstvenih posjetitelja mjesečno",
+        basis:
+          "Povijesni podatak za cijeli portal u razdoblju njegove najveće popularnosti, prema Matijinom projektnom iskustvu. Nije trenutačna statistika i nije rezultat jedne osobe.",
+      },
+      {
+        value: "60.000+ USD",
+        label: "mjesečnog prihoda od oglašavanja",
+        basis:
+          "Povijesni podatak za cijeli portal u najuspješnijem razdoblju, prema Matijinom projektnom iskustvu. Prihod portala, ne Matijin honorar, i nije trenutačno stanje.",
+      },
+      {
+        value: "~1.000",
+        label: "članaka na kojima sam osobno radio",
+        basis:
+          "Matijina procjena vlastitog opsega rada na portalu. Portal ima i druge autore; ovo je samo njegov dio.",
+      },
+    ],
+    nextStep:
+      "Trebate sadržaj koji ljudi stvarno traže, a ne tekst koji popunjava stranicu?",
+    evidenceLinks: [{ label: "vehiclefreak.com", href: "https://vehiclefreak.com/" }],
+    images: [],
+    publishedAt: "2026-10-19",
+    contributionLabel: "SEO sadržaj, pisanje i monetizacija",
+    motif: "glitch",
+    internalNote:
+      "Dodano 19. 10. 2026. prema Matijinom briefu. GRANICE: Matija NIJE osnivač, vlasnik ni developer portala — na samom webu je naveden kao writer/mechanic, uz osnivača Roberta W. te Luku K. i Patrika B. Brojke (1M posjetitelja, 60k USD) su POVIJESNI rezultati CIJELOG portala i tako su i napisane; svaka nosi osnovicu koja to kaže. ČEKA SE: (1) Matijina featured fotografija — dok je nema, kartica koristi postojeći tipografski fallback; (2) poveznice na konkretne članke koje je napisao, za sekciju s primjerima — bez njih se ta sekcija namjerno ne objavljuje.",
+  },
+  {
     slug: "bolero-drinks",
     projectName: "Bolero Drinks",
     relationshipType: "interni-razvoj",

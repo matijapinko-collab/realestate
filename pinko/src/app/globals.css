@@ -1233,3 +1233,15 @@
     }
   }
 }
+
+@layer components {
+  /* A published figure can be "#1" or "1.000.000+", and the monospaced face
+     makes the long one four times the width of the short one. The size
+     follows the viewport instead of a fixed step, and a value that still
+     does not fit breaks rather than running over its neighbour. */
+  .metric-value {
+    font-size: clamp(1.5rem, 0.9rem + 1.9vw, 2.5rem);
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+  }
+}
