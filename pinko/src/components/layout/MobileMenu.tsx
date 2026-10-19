@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { nav } from "@/config/site";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 /**
  * Mobile navigation. Keyboard-operable: the trigger and the panel are plain
@@ -129,6 +130,13 @@ export function MobileMenu() {
                 ))}
               </ul>
             </nav>
+
+            {/* The switch is hidden in the header on phones because it did
+                not fit; it must still exist somewhere, so it lives here. */}
+            <div className="border-t border-rule p-4">
+              <p className="mono-label mb-3 text-ink-soft">Način prikaza</p>
+              <ThemeToggle className="flex w-full justify-center" />
+            </div>
 
             <div className="border-t border-rule p-4">
               <Link

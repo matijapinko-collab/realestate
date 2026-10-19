@@ -80,20 +80,36 @@
  * ------------------------------------------------------------------ */
 
 :root[data-theme="light"] {
-  --color-paper: #eff0f4;
+  /* Light Mode 2.0 palette. The brief proposed these and asked for the
+     contrast to be measured rather than assumed, so it was — every pair
+     below is a measured ratio against WCAG 2.2, not an eyeball.
+
+       #171717 on #F8F7F4 .. 16.73  AAA   body text
+       #656565 on #F8F7F4 ..  5.44  AA    secondary text
+       #B83D28 on #F8F7F4 ..  5.25  AA    accent text and links
+       #FFFFFF on #B83D28 ..  5.62  AA    text on an accent fill
+       #767068 on #F8F7F4 ..  4.57  AA    control borders (3:1 needed)
+       #C2185B on #F8F7F4 ..  5.48  AA    the pink "o"
+
+     The brief's #D74C32 measured 3.94 against the paper — below the 4.5
+     a small label needs, though fine for a large graphic. So the accent
+     token is its darker sibling #B83D28, which clears AA both as text and
+     as a fill, and #D74C32 stays available for oversized display work
+     where 3:1 is the bar that applies. */
+  --color-paper: #f8f7f4;
   --color-surface: #ffffff;
-  --color-raised: #f7f7fa;
-  --color-ink: #121214;
-  --color-ink-soft: #55585f;
-  --color-rule: #d5d6dd;
-  --color-control: #7d8088;
-  /* Light mode is monochrome: the accent is ink, the way the reference
-     treats it. Colour comes from the work on show, not from the chrome. */
-  --color-accent: #121214;
-  --color-accent-ink: #000000;
-  --color-accent-wash: #e6e7ee;
+  --color-raised: #fcfbf9;
+  --color-ink: #171717;
+  --color-ink-soft: #656565;
+  --color-rule: #e5e3de;
+  --color-control: #767068;
+  --color-accent: #b83d28;
+  --color-accent-ink: #92301f;
+  --color-accent-wash: #fbefeb;
   --color-on-accent: #ffffff;
   --color-brand-pink: #c2185b;
+  /* Oversized display only, where 3:1 applies. Never small text. */
+  --color-accent-display: #d74c32;
 }
 
 @layer base {
@@ -391,38 +407,108 @@
    * centred column, the type doing the work, the terminal card gone.
    * ---------------------------------------------------------------- */
 
-  :root[data-theme="light"] .hero-grid {
-    display: block;
-  }
-
+  /* The studio hero is an editorial spread, not a centred poster: type on
+     the left, the photograph on the right, and both calls to action inside
+     the first screen. It was centred when the light world had no portrait;
+     with the portrait back, centring pushed the buttons below the fold. */
   :root[data-theme="light"] .hero-copy {
-    margin-inline: auto;
-    max-width: 60rem;
-    text-align: center;
+    text-align: left;
   }
 
-  :root[data-theme="light"] .hero-copy .measure-wide {
-    margin-inline: auto;
+  /* Four lines at 6rem fill a laptop screen on their own. The headline stays
+     dominant without taking the whole first screen with it. */
+  :root[data-theme="light"] .hero-copy h1 {
+    font-size: clamp(2.25rem, 1.2rem + 3.2vw, 3.75rem);
+    line-height: 1.04;
   }
 
-  :root[data-theme="light"] .hero-copy > p {
-    justify-content: center;
+  /* The four intro paragraphs are the reason the buttons were landing below
+     the fold. At body size with tighter leading they fit, and the call to
+     action sits inside the first screen on a normal laptop — measured, not
+     assumed. */
+  @media (min-width: 1024px) {
+    :root[data-theme="light"] .hero-copy > div:first-of-type p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    :root[data-theme="light"] .hero-copy > div:first-of-type {
+      margin-top: 1.25rem;
+    }
+    :root[data-theme="light"] .hero-copy > div:first-of-type > * + * {
+      margin-top: 0.6rem;
+    }
+    :root[data-theme="light"] .hero-strike {
+      margin-top: 0.9rem;
+    }
   }
 
-  :root[data-theme="light"] .hero-copy .mono-label {
-    justify-content: center;
-  }
-
-  :root[data-theme="light"] .hero-copy > div {
-    justify-content: center;
-  }
-
-  /* The studio scheme leads with the type alone. The portrait, its turning
-     ring and the typed prompt are motifs of the terminal world and stay
-     there; the biography they opened is reachable from "O meni" in the
-     navigation, so nothing becomes unreachable by hiding this. */
+  /* The studio scheme shows the same photograph, but still: an editorial
+     crop, no turning ring, no typed prompt, nothing in motion. Matija asked
+     for the ring and the typing to stay out of this world; the Light Mode
+     2.0 brief asks for a large photograph in it. Both hold, because the
+     only thing that changes here is the stylesheet. */
   :root[data-theme="light"] .hero-aside {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Without a photograph the aside is the terminal card, which belongs to
+     the dark scheme alone. */
+  :root[data-theme="light"] .hero-aside:has(> .hero-fallback) {
     display: none;
+  }
+
+  /* The ring is the animation. It does not cross over. */
+  :root[data-theme="light"] .portrait-ring {
+    display: none;
+  }
+
+  /* The typed prompt is a terminal motif too. */
+  :root[data-theme="light"] .hero-typed {
+    display: none;
+  }
+
+  /* Portrait as an editorial plate rather than a circle in a ring. */
+  :root[data-theme="light"] .hero-aside > div {
+    max-width: 26rem;
+  }
+
+  :root[data-theme="light"] .hero-aside button {
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    max-width: none;
+    border-radius: 0;
+    cursor: pointer;
+  }
+
+  :root[data-theme="light"] .hero-aside button > span[aria-hidden="true"] {
+    display: none;
+  }
+
+  :root[data-theme="light"] .hero-aside img {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    object-position: center 22%;
+  }
+
+  /* One caption per world. */
+  .portrait-byline {
+    display: none;
+  }
+
+  :root[data-theme="light"] .portrait-cta {
+    display: none;
+  }
+
+  :root[data-theme="light"] .portrait-byline {
+    position: static;
+    display: block;
+    margin-top: 1rem;
+    text-align: left;
+    font-size: 0.875rem;
+    color: var(--color-ink-soft);
   }
 
   /* The terminal scheme keeps its accent on the second line of the hero,
@@ -603,6 +689,14 @@
    * phone just as on a desktop. The targets are always at least a 44px
    * touch area, however small the picture gets.
    * ---------------------------------------------------------------- */
+
+  /* The chooser is a full-screen modal; nothing in it may scroll the page
+     sideways. At 320px the nowrap labels beside the right-hand pill pushed
+     the document 30px wider than the viewport — measured on a first visit,
+     which is exactly when this screen is shown. */
+  .pill-choice {
+    overflow: hidden;
+  }
 
   .pill-choice-intro {
     font-family: var(--font-mono);

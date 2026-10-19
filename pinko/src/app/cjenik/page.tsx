@@ -47,7 +47,7 @@ export default function PricingPage() {
 
       <PageHeader
         eyebrow="Cjenik"
-        title="Koliko košta? Manje od loše odluke."
+        title="Koliko košta? Ovisi. Ali neću Vas tjerati da pogađate."
         lead={
           <>
             <p>

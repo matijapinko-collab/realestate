@@ -10,13 +10,13 @@ import { faq } from "@/content/copy";
  */
 export function Faq({
   tone = "paper",
-  title = "Pitanja koja obično dođu prva",
+  title = "Pitanja koja biste me ionako pitali.",
 }: {
   tone?: "paper" | "surface";
   title?: string;
 }) {
   return (
-    <Section index="06" eyebrow="FAQ" title={title} tone={tone}>
+    <Section eyebrow="FAQ" title={title} tone={tone}>
       <ul className="border-t border-rule">
         {faq.map((item) => (
           <li key={item.question} className="border-b border-rule">

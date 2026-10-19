@@ -63,7 +63,11 @@ export function ThemeToggle({ className }: { className?: string }) {
 
   return (
     <div
-      className={`inline-flex items-center gap-0.5 rounded-(--radius-pill) border border-control p-0.5 ${className ?? ""}`}
+      // No display utility here on purpose: it used to hardcode
+      // `inline-flex`, which beat the `hidden` the header passed in and left
+      // a 138px control on a 320px screen — 30px of horizontal scroll on
+      // every page. The caller decides whether and when it shows.
+      className={`items-center gap-0.5 rounded-(--radius-pill) border border-control p-0.5 ${className ?? ""}`}
       role="group"
       aria-label="Dimenzija weba"
     >
