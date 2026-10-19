@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { getTheme } from "@/lib/theme";
-import { LightProcess } from "@/components/light/LightProcess";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { Faq } from "@/components/sections/Faq";
@@ -21,28 +19,20 @@ export const metadata: Metadata = {
   alternates: { canonical: "/kako-radim" },
 };
 
-export default async function HowIWorkPage() {
-  // One URL, two worlds; see src/lib/theme.ts.
-  if ((await getTheme()) === "light") return <LightProcess />;
-
-
+export default function HowIWorkPage() {
   return (
     <>
       <BreadcrumbJsonLd items={crumbs} />
 
       <PageHeader
         eyebrow="Kako radim"
-        title="Dobar projekt počinje razgovorom. Ne računom."
+        title="Od prve kave do prve verzije. I dalje."
         lead={
-          <>
-            <p>
-              Prvo želim razumjeti kaj Vas muči. Onda ćemo dogovoriti kako to
-              riješiti, koliko košta i što ćete dobiti.
-            </p>
-            <p className="mt-4">
-              Bez čitanja misli, nagađanja i misterioznih dodatnih troškova.
-            </p>
-          </>
+          <p>
+            Kava je dobrodošla. Prezentacija od 87 slajdova nije obavezna. Ovdje
+            piše što se stvarno događa u svakoj fazi i što iz nje dobivate —
+            bez skrivanja rada iza nejasnog „našeg procesa”.
+          </p>
         }
         cta={{ href: "/kontakt", label: "Krenimo od razgovora" }}
         breadcrumbs={crumbs}

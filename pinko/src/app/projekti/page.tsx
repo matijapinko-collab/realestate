@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { getTheme } from "@/lib/theme";
-import { LightProjects } from "@/components/light/LightProjects";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { ClosingContact } from "@/components/sections/ClosingContact";
@@ -21,12 +19,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/projekti" },
 };
 
-export default async function ProjectsPage() {
-  // One URL, two worlds. The server renders the chosen one; see
-  // src/lib/theme.ts for why this is a cookie and not CSS.
-  if ((await getTheme()) === "light") return <LightProjects />;
-
-
+export default function ProjectsPage() {
   const projects = getPublishedProjects();
 
   return (
@@ -39,10 +32,9 @@ export default async function ProjectsPage() {
         lead={
           <>
             <p>
-              Od webova i webshopova do milijunskih content projekata, ERP
-              sustava i međunarodnih prodajnih kanala. Ovo su projekti na
-              kojima sam radio, problemi koje smo rješavali i moj stvarni
-              doprinos.
+              Iza svakog projekta stoji neki problem, nekoliko dobrih ideja i
+              barem jedan trenutak kad sam se zapitao zašto nisam otvorio
+              pekaru. Ali na kraju je trebalo raditi. I to je cijela poanta.
             </p>
             <p className="mt-4">
               Uz svaki projekt piše kakav je bio odnos, što sam točno radio i u

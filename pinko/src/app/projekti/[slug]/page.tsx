@@ -6,8 +6,6 @@ import { ClosingContact } from "@/components/sections/ClosingContact";
 import Image from "next/image";
 import { LiveScroll } from "@/components/sections/LiveScroll";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
-import { getTheme } from "@/lib/theme";
-import { LightCaseStudy } from "@/components/light/LightCaseStudy";
 import {
   getProjectBySlug,
   getPublishedProjects,
@@ -51,23 +49,6 @@ export default async function ProjectPage({ params }: Props) {
     { name: "Projekti", path: "/projekti" },
     { name: project.projectName, path: `/projekti/${project.slug}` },
   ];
-
-  // Related work: other published projects that share a category with this
-  // one. Falls back to the newest few rather than showing an empty row.
-  const others = getPublishedProjects().filter((p) => p.slug !== project.slug);
-  const sharing = others.filter((p) =>
-    p.categories.some((c) => project.categories.includes(c)),
-  );
-  const related = (sharing.length > 0 ? sharing : others).slice(0, 3);
-
-  if ((await getTheme()) === "light") {
-    return (
-      <>
-        <BreadcrumbJsonLd items={crumbs} />
-        <LightCaseStudy project={project} related={related} />
-      </>
-    );
-  }
 
   return (
     <>

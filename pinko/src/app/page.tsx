@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { getTheme } from "@/lib/theme";
-import { LightHome } from "@/components/light/LightHome";
 import { Hero } from "@/components/sections/Hero";
 import { FactsStrip } from "@/components/sections/FactsStrip";
+import { ProblemPicker } from "@/components/sections/ProblemPicker";
 import { CapabilityMarquee } from "@/components/sections/CapabilityMarquee";
 import { ProofOfWork } from "@/components/sections/ProofOfWork";
+import { Statement } from "@/components/sections/Statement";
 import { Disciplines } from "@/components/sections/Disciplines";
 import { AboutMatija } from "@/components/sections/AboutMatija";
 import { Process } from "@/components/sections/Process";
@@ -21,34 +21,21 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-/**
- * One URL, two worlds.
- *
- * The server reads the theme cookie and renders that world's tree — not
- * both with one hidden, which would put every sentence in the page twice.
- * Someone who has never chosen gets the dark world, which is also what the
- * pill chooser opens over.
- */
-export default async function HomePage() {
-  const theme = await getTheme();
-
-  if (theme === "light") {
-    return (
-      <>
-        <PersonJsonLd />
-        <LightHome />
-      </>
-    );
-  }
-
+export default function HomePage() {
   return (
     <>
       <PersonJsonLd />
       <Hero />
       <FactsStrip />
+      {/* Moved out of the hero with the 19 Oct 2026 brief, which reserves
+          that section for its own three lines. */}
+      <section className="wrap pt-12 md:pt-16" data-reveal>
+        <ProblemPicker />
+      </section>
       <CapabilityMarquee />
-      <Disciplines />
+      <Statement />
       <ProofOfWork />
+      <Disciplines />
       <AboutMatija />
       <Process />
       <PricingPreview />

@@ -6,7 +6,6 @@ import {
   prefetchPassage,
   wormholeAvailable,
 } from "@/components/ui/Wormhole";
-import { applyTheme } from "@/lib/apply-theme";
 
 export type Theme = "dark" | "light";
 
@@ -52,18 +51,19 @@ export function ThemeToggle({ className }: { className?: string }) {
         );
         return;
       }
-      applyTheme(next);
+      document.documentElement.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem("pinko-theme", next);
+      } catch {
+        // Private browsing or blocked storage: the choice is simply not kept.
+      }
     },
     [theme]
   );
 
   return (
     <div
-      // No display utility here on purpose: it used to hardcode
-      // `inline-flex`, which beat the `hidden` the header passed in and left
-      // a 138px control on a 320px screen — 30px of horizontal scroll on
-      // every page. The caller decides whether and when it shows.
-      className={`items-center gap-0.5 rounded-(--radius-pill) border border-control p-0.5 ${className ?? ""}`}
+      className={`inline-flex items-center gap-0.5 rounded-(--radius-pill) border border-control p-0.5 ${className ?? ""}`}
       role="group"
       aria-label="Dimenzija weba"
     >
@@ -86,7 +86,9 @@ export function ThemeToggle({ className }: { className?: string }) {
               : "Uključi svijetlu dimenziju"
           }
           className={`mono-label rounded-(--radius-pill) px-3 py-1.5 font-semibold transition-colors ${
-            theme === value ? "theme-toggle-on" : "text-ink-soft hover:text-ink"
+            theme === value
+              ? "bg-accent text-on-accent"
+              : "text-ink-soft hover:text-ink"
           }`}
         >
           {label}

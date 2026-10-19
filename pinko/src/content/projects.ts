@@ -23,28 +23,6 @@ export type RelationshipType =
 
 export type ProjectStatus = "lansirano" | "u-razvoju" | "u-pripremi";
 
-/**
- * What kind of work a project was. Shared by both worlds: the light
- * portfolio filters by it, and nothing about it is presentation.
- *
- * A project may belong to more than one — most real ones do — but never to
- * one it did not actually involve.
- */
-export type ProjectCategory =
-  | "development"
-  | "marketing"
-  | "ecommerce"
-  | "business"
-  | "leadership";
-
-export const categoryLabels: Record<ProjectCategory, string> = {
-  development: "Development",
-  marketing: "Marketing i sadržaj",
-  ecommerce: "eCommerce",
-  business: "Business development",
-  leadership: "Proizvod i vodstvo",
-};
-
 export type EvidenceLink = {
   label: string;
   href: string;
@@ -80,7 +58,6 @@ export type Project = {
   /** Precise description of Matija's contribution. No overstating. */
   role: string;
   status: ProjectStatus;
-  categories: ProjectCategory[];
   approvedForPublication: boolean;
   /** One line under the project name. Optional; most records do without. */
   tagline?: string;
@@ -182,7 +159,6 @@ export const projects: Project[] = [
     role:
       "Razvoj prodajnog kanala na Temuu: ponuda i podaci o artiklima, odnos cijene i promocije, analiza prodaje te operativa od narudžbe do dostave.",
     status: "lansirano",
-    categories: ["ecommerce", "marketing"],
     approvedForPublication: true,
     summary:
       "Novi prodajni kanal za Bolero na Temuu — od asortimana i cijena do narudžbi, skladišta i dostave. Proizvod je došao na prvo mjesto kategorije pića.",
@@ -302,7 +278,6 @@ export const projects: Project[] = [
     role:
       "Izrada poslovnog weba i postavljanje temelja digitalne prisutnosti: struktura sadržaja, tekstovi, vizualno oblikovanje i put do upita.",
     status: "lansirano",
-    categories: ["development"],
     approvedForPublication: true,
     summary:
       "Elektronim zna kako dovesti struju tamo gdje treba. Trebalo je omogućiti da do njih jednako jednostavno dođe i čovjek koji firmu prvi put traži na internetu.",
@@ -416,7 +391,6 @@ export const projects: Project[] = [
     role:
       "Chief Operating Officer Business Visiona; vođenje tima angažiranog na Teladoc projektu, uz odgovornost za operativu i povezivanje razvoja s poslovnim prioritetima.",
     status: "lansirano",
-    categories: ["leadership"],
     approvedForPublication: true,
     summary:
       "Vođenje agencijskog tima iza telemedicinske platforme, uz operativu, razvoj proizvoda i usklađivanje prioriteta s dionicima.",
@@ -476,7 +450,6 @@ export const projects: Project[] = [
     role:
       "Vodim razvoj i puštanje u rad: arhitektura storefronta, vlastiti konektor prema WordPressu, plaćanja i dostava, mjerenje, izvozi prema usporedbama cijena i operativa koja sve to drži na nogama.",
     status: "lansirano",
-    categories: ["development", "ecommerce"],
     approvedForPublication: true,
     summary:
       "Webshop sportske prehrane prebačen s gotove WordPress teme na vlastiti Next.js storefront — bez gašenja prodaje i bez preseljenja kataloga.",
@@ -566,7 +539,6 @@ export const projects: Project[] = [
     role:
       "Analiza poslovnih procesa, planiranje ERP arhitekture, koordinacija digitalne transformacije i integracija.",
     status: "u-razvoju",
-    categories: ["business", "ecommerce"],
     approvedForPublication: true,
     tagline:
       "Kako smo odlučili da Excel, pet webshopova i skladište prestanu živjeti svaki u svojem svemiru.",
@@ -756,7 +728,6 @@ export const projects: Project[] = [
     role:
       "Pisanje i istraživanje sadržaja o održavanju i kupnji vozila, SEO sadržajna strategija, skripte za YouTube te rad na affiliate i oglasnoj monetizaciji — kao član uredničkog tima, ne kao osnivač ni vlasnik portala.",
     status: "lansirano",
-    categories: ["marketing"],
     approvedForPublication: true,
     tagline:
       "Nisam samo pisao članke. Sudjelovao sam u stvaranju sadržaja koji je pomagao ljudima, privlačio organski promet i bio dio iznimno uspješnog digitalnog poslovnog modela.",
@@ -879,19 +850,13 @@ export const projects: Project[] = [
     ],
     nextStep:
       "Trebate sadržaj koji ljudi stvarno traže, a ne tekst koji popunjava stranicu?",
-    featuredImage: {
-      src: "/projekti/vehicle-freak-featured.webp",
-      alt: "Sekcija „Vehicle Freak Expertise” na portalu: četiri ilustrirana portreta uredničkog tima s imenima i ulogama — osnivač, urednik te dvojica pisaca, među kojima Matija P.",
-      width: 1237,
-      height: 389,
-    },
     evidenceLinks: [{ label: "vehiclefreak.com", href: "https://vehiclefreak.com/" }],
     images: [],
     publishedAt: "2026-10-19",
     contributionLabel: "SEO sadržaj, pisanje i monetizacija",
     motif: "glitch",
     internalNote:
-      "Dodano 19. 10. 2026. prema Matijinom briefu. GRANICE: Matija NIJE osnivač, vlasnik ni developer portala — na samom webu je naveden kao writer/mechanic, uz osnivača Roberta W. te Luku K. i Patrika B. Brojke (1M posjetitelja, 60k USD) su POVIJESNI rezultati CIJELOG portala i tako su i napisane; svaka nosi osnovicu koja to kaže. Istaknuta slika je Matijin snimak sekcije „Vehicle Freak Expertise” (dostavljena 19. 10. 2026.); pokazuje njegovu ulogu u timu, što je i dokaz granica iz ovog zapisa. ČEKA SE: poveznice na konkretne članke koje je napisao, za sekciju s primjerima — bez njih se ta sekcija namjerno ne objavljuje.",
+      "Dodano 19. 10. 2026. prema Matijinom briefu. GRANICE: Matija NIJE osnivač, vlasnik ni developer portala — na samom webu je naveden kao writer/mechanic, uz osnivača Roberta W. te Luku K. i Patrika B. Brojke (1M posjetitelja, 60k USD) su POVIJESNI rezultati CIJELOG portala i tako su i napisane; svaka nosi osnovicu koja to kaže. ČEKA SE: (1) Matijina featured fotografija — dok je nema, kartica koristi postojeći tipografski fallback; (2) poveznice na konkretne članke koje je napisao, za sekciju s primjerima — bez njih se ta sekcija namjerno ne objavljuje.",
   },
   {
     slug: "youtube-scenariji-automobili",
@@ -900,7 +865,6 @@ export const projects: Project[] = [
     role:
       "Istraživanje automobilskih tema i pisanje scenarija za videoformat.",
     status: "lansirano",
-    categories: ["marketing"],
     approvedForPublication: true,
     tagline:
       "Sto YouTube scenarija. Jer očito nije bilo dovoljno pisati o autima.",
@@ -976,7 +940,6 @@ export const projects: Project[] = [
     relationshipType: "klijent",
     role: "Pisanje scenarija za YouTube kanal o muškom stilu i modi.",
     status: "lansirano",
-    categories: ["marketing"],
     approvedForPublication: true,
     tagline: "Muška moda. Jer očito nije dovoljno samo obući hlače.",
     summary:
@@ -1047,7 +1010,6 @@ export const projects: Project[] = [
     relationshipType: "klijent",
     role: "Optimizacija postojećih članaka na hrvatskom blogu.",
     status: "lansirano",
-    categories: ["marketing"],
     approvedForPublication: true,
     tagline: "Članci postoje. Google se pravi da ne zna za njih.",
     summary:
@@ -1118,7 +1080,6 @@ export const projects: Project[] = [
     relationshipType: "klijent",
     role: "Priprema i pisanje hrvatskog sportskog sadržaja za zadanu temu.",
     status: "lansirano",
-    categories: ["marketing"],
     approvedForPublication: true,
     tagline:
       "Liga prvaka. Jer nogomet ima dovoljno stručnjaka, ali očito je trebao još jednoga.",
@@ -1183,7 +1144,6 @@ export const projects: Project[] = [
     relationshipType: "klijent",
     role: "Istraživanje kategorije i priprema usporednog B2B sadržaja.",
     status: "lansirano",
-    categories: ["marketing"],
     approvedForPublication: true,
     tagline: "Pet proizvođača masažnih kada. Jer i to netko mora istražiti.",
     summary:
@@ -1255,7 +1215,6 @@ export const projects: Project[] = [
     role:
       "Istraživanje i pisanje sadržaja za SaaS proizvod: objašnjavanje funkcionalnosti jezikom korisnika.",
     status: "lansirano",
-    categories: ["marketing"],
     approvedForPublication: true,
     tagline: "SaaS sadržaj koji razumiju i ljudi koji nisu developeri.",
     summary:
@@ -1317,7 +1276,6 @@ export const projects: Project[] = [
     relationshipType: "klijent",
     role: "Ghostwriting: pisanje romana koji je objavljen pod tuđim imenom.",
     status: "lansirano",
-    categories: ["marketing"],
     approvedForPublication: true,
     tagline: "Napisao sam ljubavni roman. Ne pitajte me za detalje.",
     summary:
@@ -1371,7 +1329,6 @@ export const projects: Project[] = [
     role:
       "Razvoj prodajnog weba i iskustva odabira proizvoda i paketa, uz rad na prodajnim kanalima i infrastrukturi.",
     status: "u-razvoju",
-    categories: ["development", "ecommerce"],
     approvedForPublication: false,
     summary:
       "Prodajni web i odabir proizvoda/paketa za brend napitaka, povezan s operativom više kanala.",
@@ -1407,7 +1364,6 @@ export const projects: Project[] = [
     role:
       "Vlastiti proizvod, od prazne mape do produkcije: arhitektura, model podataka, razvoj, vlastita administracija, alati i objava.",
     status: "u-razvoju",
-    categories: ["development"],
     approvedForPublication: true,
     summary:
       "Višejezična platforma za pronalaženje i usporedbu alata za rad, s vlastitom administracijom i alatima koji rade posao umjesto čitatelja.",
@@ -1468,7 +1424,6 @@ export const projects: Project[] = [
     role:
       "Istraživanje, pisanje i priprema uredničkog sadržaja iz područja tehnologije i gaming industrije.",
     status: "lansirano",
-    categories: ["marketing"],
     approvedForPublication: true,
     tagline:
       "Kad ti je posao pisati o igrama, tehnologiji i svemu što internet izbaci. Zvuči teško, znam.",

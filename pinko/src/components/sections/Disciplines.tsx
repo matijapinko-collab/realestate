@@ -10,22 +10,11 @@ import { services } from "@/content/services";
 export function Disciplines() {
   return (
     <Section
-      index="01"
-      eyebrow="Kaj radim"
+      index="02"
+      eyebrow="Usluge"
       marker="Usluge"
-      title="Tri područja. Jedan čovek. Neobjašnjiva količina kave."
-      lead={
-        <>
-          <p>
-            Neki ljudi rade webove. Drugi marketing. Treći poslovne
-            strategije. Ja sam tijekom godina nekako završio u sve tri priče.
-          </p>
-          <p className="mt-4">
-            Ispostavilo se da je to korisno kad treba riješiti problem koji ne
-            stane uredno u jednu kategoriju.
-          </p>
-        </>
-      }
+      title="Kaj ćemo danas spašavati?"
+      lead="Imate web koji ne radi, marketing koji ne prodaje ili poslovanje koje se drži na selotejpu i dobroj volji zaposlenika? Pa di ste Vi meni bili do sad?!"
     >
       <ul className="border-t border-rule">
         {services.map((discipline) => (
@@ -43,17 +32,15 @@ export function Disciplines() {
                   {discipline.name}
                 </h3>
                 <p className="measure-wide mt-3 text-(length:--text-lead) font-semibold">
-                  {discipline.card.headline}
+                  {discipline.headline}
                 </p>
-                <div className="measure-wide mt-3 space-y-2.5 text-ink-soft">
-                  {discipline.card.body.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
+                <p className="measure-wide mt-3 text-ink-soft">
+                  {discipline.intro[0]}
+                </p>
               </div>
 
               <span className="discipline-cta self-end text-sm font-semibold text-accent md:self-start md:pt-3">
-                {discipline.card.cta}{" "}
+                {discipline.cta}{" "}
                 <span
                   aria-hidden="true"
                   className="inline-block transition-transform group-hover:translate-x-0.5"

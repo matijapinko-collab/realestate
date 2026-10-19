@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { getTheme } from "@/lib/theme";
-import { LightPricing } from "@/components/light/LightPricing";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { PackageTable } from "@/components/sections/PackageTable";
@@ -42,18 +40,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/cjenik" },
 };
 
-export default async function PricingPage() {
-  // One URL, two worlds; see src/lib/theme.ts.
-  if ((await getTheme()) === "light") return <LightPricing />;
-
-
+export default function PricingPage() {
   return (
     <>
       <BreadcrumbJsonLd items={crumbs} />
 
       <PageHeader
         eyebrow="Cjenik"
-        title="Koliko košta? Ovisi. Ali neću Vas tjerati da pogađate."
+        title="Koliko košta? Manje od loše odluke."
         lead={
           <>
             <p>

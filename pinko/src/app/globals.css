@@ -80,36 +80,20 @@
  * ------------------------------------------------------------------ */
 
 :root[data-theme="light"] {
-  /* Light Mode 2.0 palette. The brief proposed these and asked for the
-     contrast to be measured rather than assumed, so it was — every pair
-     below is a measured ratio against WCAG 2.2, not an eyeball.
-
-       #171717 on #F8F7F4 .. 16.73  AAA   body text
-       #656565 on #F8F7F4 ..  5.44  AA    secondary text
-       #B83D28 on #F8F7F4 ..  5.25  AA    accent text and links
-       #FFFFFF on #B83D28 ..  5.62  AA    text on an accent fill
-       #767068 on #F8F7F4 ..  4.57  AA    control borders (3:1 needed)
-       #C2185B on #F8F7F4 ..  5.48  AA    the pink "o"
-
-     The brief's #D74C32 measured 3.94 against the paper — below the 4.5
-     a small label needs, though fine for a large graphic. So the accent
-     token is its darker sibling #B83D28, which clears AA both as text and
-     as a fill, and #D74C32 stays available for oversized display work
-     where 3:1 is the bar that applies. */
-  --color-paper: #f8f7f4;
+  --color-paper: #eff0f4;
   --color-surface: #ffffff;
-  --color-raised: #fcfbf9;
-  --color-ink: #171717;
-  --color-ink-soft: #656565;
-  --color-rule: #e5e3de;
-  --color-control: #767068;
-  --color-accent: #b83d28;
-  --color-accent-ink: #92301f;
-  --color-accent-wash: #fbefeb;
+  --color-raised: #f7f7fa;
+  --color-ink: #121214;
+  --color-ink-soft: #55585f;
+  --color-rule: #d5d6dd;
+  --color-control: #7d8088;
+  /* Light mode is monochrome: the accent is ink, the way the reference
+     treats it. Colour comes from the work on show, not from the chrome. */
+  --color-accent: #121214;
+  --color-accent-ink: #000000;
+  --color-accent-wash: #e6e7ee;
   --color-on-accent: #ffffff;
   --color-brand-pink: #c2185b;
-  /* Oversized display only, where 3:1 applies. Never small text. */
-  --color-accent-display: #d74c32;
 }
 
 @layer base {
@@ -331,7 +315,7 @@
     display: none;
   }
 
-  :root[data-theme="light"] .side-rail.side-rail-legacy {
+  :root[data-theme="light"] .side-rail {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -349,7 +333,7 @@
   }
 
   @media (max-width: 64rem) {
-    :root[data-theme="light"] .side-rail.side-rail-legacy {
+    :root[data-theme="light"] .side-rail {
       display: none;
     }
   }
@@ -407,108 +391,38 @@
    * centred column, the type doing the work, the terminal card gone.
    * ---------------------------------------------------------------- */
 
-  /* The studio hero is an editorial spread, not a centred poster: type on
-     the left, the photograph on the right, and both calls to action inside
-     the first screen. It was centred when the light world had no portrait;
-     with the portrait back, centring pushed the buttons below the fold. */
+  :root[data-theme="light"] .hero-grid {
+    display: block;
+  }
+
   :root[data-theme="light"] .hero-copy {
-    text-align: left;
+    margin-inline: auto;
+    max-width: 60rem;
+    text-align: center;
   }
 
-  /* Four lines at 6rem fill a laptop screen on their own. The headline stays
-     dominant without taking the whole first screen with it. */
-  :root[data-theme="light"] .hero-copy h1 {
-    font-size: clamp(2.25rem, 1.2rem + 3.2vw, 3.75rem);
-    line-height: 1.04;
+  :root[data-theme="light"] .hero-copy .measure-wide {
+    margin-inline: auto;
   }
 
-  /* The four intro paragraphs are the reason the buttons were landing below
-     the fold. At body size with tighter leading they fit, and the call to
-     action sits inside the first screen on a normal laptop — measured, not
-     assumed. */
-  @media (min-width: 1024px) {
-    :root[data-theme="light"] .hero-copy > div:first-of-type p {
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-    :root[data-theme="light"] .hero-copy > div:first-of-type {
-      margin-top: 1.25rem;
-    }
-    :root[data-theme="light"] .hero-copy > div:first-of-type > * + * {
-      margin-top: 0.6rem;
-    }
-    :root[data-theme="light"] .hero-strike {
-      margin-top: 0.9rem;
-    }
-  }
-
-  /* The studio scheme shows the same photograph, but still: an editorial
-     crop, no turning ring, no typed prompt, nothing in motion. Matija asked
-     for the ring and the typing to stay out of this world; the Light Mode
-     2.0 brief asks for a large photograph in it. Both hold, because the
-     only thing that changes here is the stylesheet. */
-  :root[data-theme="light"] .hero-aside {
-    width: 100%;
+  :root[data-theme="light"] .hero-copy > p {
     justify-content: center;
   }
 
-  /* Without a photograph the aside is the terminal card, which belongs to
-     the dark scheme alone. */
-  :root[data-theme="light"] .hero-aside:has(> .hero-fallback) {
+  :root[data-theme="light"] .hero-copy .mono-label {
+    justify-content: center;
+  }
+
+  :root[data-theme="light"] .hero-copy > div {
+    justify-content: center;
+  }
+
+  /* The studio scheme leads with the type alone. The portrait, its turning
+     ring and the typed prompt are motifs of the terminal world and stay
+     there; the biography they opened is reachable from "O meni" in the
+     navigation, so nothing becomes unreachable by hiding this. */
+  :root[data-theme="light"] .hero-aside {
     display: none;
-  }
-
-  /* The ring is the animation. It does not cross over. */
-  :root[data-theme="light"] .portrait-ring {
-    display: none;
-  }
-
-  /* The typed prompt is a terminal motif too. */
-  :root[data-theme="light"] .hero-typed {
-    display: none;
-  }
-
-  /* Portrait as an editorial plate rather than a circle in a ring. */
-  :root[data-theme="light"] .hero-aside > div {
-    max-width: 26rem;
-  }
-
-  :root[data-theme="light"] .hero-aside button {
-    aspect-ratio: 4 / 5;
-    width: 100%;
-    max-width: none;
-    border-radius: 0;
-    cursor: pointer;
-  }
-
-  :root[data-theme="light"] .hero-aside button > span[aria-hidden="true"] {
-    display: none;
-  }
-
-  :root[data-theme="light"] .hero-aside img {
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-    object-position: center 22%;
-  }
-
-  /* One caption per world. */
-  .portrait-byline {
-    display: none;
-  }
-
-  :root[data-theme="light"] .portrait-cta {
-    display: none;
-  }
-
-  :root[data-theme="light"] .portrait-byline {
-    position: static;
-    display: block;
-    margin-top: 1rem;
-    text-align: left;
-    font-size: 0.875rem;
-    color: var(--color-ink-soft);
   }
 
   /* The terminal scheme keeps its accent on the second line of the hero,
@@ -595,7 +509,7 @@
     display: none;
   }
 
-  :root[data-theme="light"] .rail-dot.rail-dot-legacy {
+  :root[data-theme="light"] .rail-dot {
     position: fixed;
     left: 2.25rem;
     top: 0;
@@ -610,7 +524,7 @@
   }
 
   @media (max-width: 64rem) {
-    :root[data-theme="light"] .rail-dot.rail-dot-legacy {
+    :root[data-theme="light"] .rail-dot {
       display: none;
     }
   }
@@ -689,14 +603,6 @@
    * phone just as on a desktop. The targets are always at least a 44px
    * touch area, however small the picture gets.
    * ---------------------------------------------------------------- */
-
-  /* The chooser is a full-screen modal; nothing in it may scroll the page
-     sideways. At 320px the nowrap labels beside the right-hand pill pushed
-     the document 30px wider than the viewport — measured on a first visit,
-     which is exactly when this screen is shown. */
-  .pill-choice {
-    overflow: hidden;
-  }
 
   .pill-choice-intro {
     font-family: var(--font-mono);
@@ -1341,282 +1247,5 @@
     font-size: clamp(1.5rem, 0.9rem + 1.9vw, 2.5rem);
     line-height: 1.1;
     overflow-wrap: anywhere;
-  }
-}
-
-/* ==================================================================== *
- * THE LIGHT EXPERIENCE
- *
- * A separate design system, not a skin. Measured against WCAG 2.2:
- *
- *   #17141C on #F7F6F2 .. 16.84  AAA
- *   #17141C on #C8B8FF .. 10.19  AAA   lavender ground
- *   #17141C on #F7E67D .. 14.37  AAA   yellow ground
- *   #17141C on #FFBCA7 .. 11.28  AAA   peach ground
- *   #17141C on #B8E7CE .. 13.32  AAA   mint ground
- *   #FFFFFF on #354BFF ..  5.83  AA    the one inverted ground
- *   #354BFF on #F7F6F2 ..  5.39  AA    accent as text
- *
- * The colour logic follows from those numbers rather than from taste:
- * every pastel is a ground for near-black type, electric blue is the only
- * colour dark enough to carry light type, and near-black on blue (3.12)
- * is allowed for oversized display and UI edges but never for body text.
- * ==================================================================== */
-
-@layer components {
-  .lw-navlink {
-    position: relative;
-  }
-  .lw-navlink::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -0.35rem;
-    height: 1px;
-    background: currentColor;
-    scale: 0 1;
-    transform-origin: left;
-    transition: scale 260ms var(--ease-out-soft);
-  }
-  .lw-navlink:hover::after,
-  .lw-navlink:focus-visible::after {
-    scale: 1 1;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .lw-navlink::after {
-      transition: none;
-    }
-  }
-
-  /* The switch is chrome shared by both worlds. Its active state is styled
-     here rather than with utilities, because a Tailwind utility sits in a
-     later layer and would win on layer order no matter the specificity —
-     which is why the light world kept wearing the previous system's red. */
-  .theme-toggle-on {
-    background: var(--color-accent);
-    color: var(--color-on-accent);
-  }
-  :root[data-theme="light"] .theme-toggle-on {
-    background: #17141c;
-    color: #f7f6f2;
-  }
-
-  .light-world {
-    --lw-ink: #17141c;
-    --lw-paper: #f7f6f2;
-    --lw-lavender: #c8b8ff;
-    --lw-blue: #354bff;
-    --lw-yellow: #f7e67d;
-    --lw-peach: #ffbca7;
-    --lw-mint: #b8e7ce;
-    color: var(--lw-ink);
-  }
-
-  /* Full-bleed grounds. Each section owns its colour; no section picks one
-     at random — the sequence runs paper, lavender, paper, pastels, paper,
-     blue, so colour marks a change of subject rather than decorating. */
-  .lw-section {
-    position: relative;
-    padding-block: clamp(4.5rem, 3rem + 7vw, 9rem);
-  }
-  .lw-paper {
-    background: var(--lw-paper);
-  }
-  .lw-lavender {
-    background: var(--lw-lavender);
-  }
-  .lw-yellow {
-    background: var(--lw-yellow);
-  }
-  .lw-peach {
-    background: var(--lw-peach);
-  }
-  .lw-mint {
-    background: var(--lw-mint);
-  }
-  .lw-blue {
-    background: var(--lw-blue);
-    color: #ffffff;
-  }
-
-  .lw-wrap {
-    width: min(100% - 2rem, 86rem);
-    margin-inline: auto;
-  }
-  @media (min-width: 768px) {
-    .lw-wrap {
-      width: min(100% - 4rem, 86rem);
-    }
-  }
-
-  /* One family, one weight, enormous sizes — the reference's discipline,
-     not its letterforms. Line height equal to the size on display type. */
-  .lw-display {
-    font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: clamp(2.75rem, 1.2rem + 6.4vw, 7rem);
-    line-height: 0.96;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-  }
-  .lw-h2 {
-    font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: clamp(2rem, 1.1rem + 3.6vw, 4.25rem);
-    line-height: 1;
-    letter-spacing: -0.028em;
-    text-wrap: balance;
-  }
-  .lw-h3 {
-    font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-  }
-  .lw-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-  .lw-lead {
-    font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.375rem);
-    line-height: 1.5;
-    max-width: 46ch;
-  }
-  .lw-body {
-    font-size: 1rem;
-    line-height: 1.6;
-    max-width: 58ch;
-  }
-
-  /* A giant number, used once per figure in Impact. */
-  .lw-figure {
-    font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: clamp(3rem, 1.4rem + 6vw, 7.5rem);
-    line-height: 0.9;
-    letter-spacing: -0.04em;
-  }
-
-  .lw-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    min-height: 3rem;
-    padding-inline: 1.5rem;
-    border-radius: 999px;
-    font-weight: 600;
-    background: var(--lw-ink);
-    color: var(--lw-paper);
-    transition: background-color 220ms var(--ease-out-soft);
-  }
-  .lw-pill:hover {
-    background: var(--lw-blue);
-  }
-  .lw-pill-ghost {
-    background: transparent;
-    color: inherit;
-    border: 1px solid currentColor;
-  }
-  .lw-pill-ghost:hover {
-    background: var(--lw-ink);
-    color: var(--lw-paper);
-  }
-  .lw-blue .lw-pill {
-    background: #ffffff;
-    color: var(--lw-ink);
-  }
-  .lw-blue .lw-pill:hover {
-    background: var(--lw-yellow);
-  }
-
-  /* Hairline rules, the editorial device that replaces card borders. */
-  .lw-rule {
-    border-top: 1px solid color-mix(in srgb, var(--lw-ink) 18%, transparent);
-  }
-
-  /* A dotted field, as a ground for display type. Decorative only. */
-  .lw-dots {
-    background-image: radial-gradient(
-      color-mix(in srgb, var(--lw-ink) 22%, transparent) 1px,
-      transparent 1px
-    );
-    background-size: 16px 16px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .lw-pill {
-      transition: none;
-    }
-  }
-}
-
-@layer components {
-  /* A filter is a real radio button with its input visually hidden: the
-     keyboard and the screen reader get a proper radio group, the eye gets
-     a pill. The focus ring follows the input, so it is never invisible. */
-  .lw-filter {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-    padding-inline: 1.125rem;
-    border-radius: 999px;
-    border: 1px solid color-mix(in srgb, var(--lw-ink) 25%, transparent);
-    font-size: 0.9375rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition:
-      background-color 180ms var(--ease-out-soft),
-      color 180ms var(--ease-out-soft);
-  }
-  .lw-filter:hover {
-    background: color-mix(in srgb, var(--lw-ink) 8%, transparent);
-  }
-  .lw-filter:has(input:checked) {
-    background: var(--lw-ink);
-    color: var(--lw-paper);
-    border-color: var(--lw-ink);
-  }
-  .lw-filter:has(input:focus-visible) {
-    outline: 2px solid var(--lw-blue);
-    outline-offset: 2px;
-  }
-
-  .lw-card {
-    display: block;
-  }
-
-  .lw-underline {
-    position: relative;
-  }
-  .lw-underline::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -2px;
-    height: 1px;
-    background: currentColor;
-    scale: 1 1;
-    transform-origin: left;
-    transition: scale 300ms var(--ease-out-soft);
-  }
-  .group:hover .lw-underline::after {
-    scale: 0 1;
-    transform-origin: right;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .lw-filter,
-    .lw-underline::after,
-    .lw-card img {
-      transition: none !important;
-    }
-    .group:hover .lw-card img {
-      scale: 1 !important;
-    }
   }
 }

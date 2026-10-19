@@ -15,21 +15,9 @@ export function PricingPreview() {
   return (
     <Section
       index="05"
-      eyebrow="Novci, novci"
-      title="Koliko to košta? Ajmo odmah riješiti najvažnije pitanje."
-      lead={
-        <>
-          <p>
-            Ne volim kad morate ispuniti tri formulara i dogovoriti dva
-            sastanka samo da saznate okvirnu cijenu. Zato su početne cijene
-            javne.
-          </p>
-          <p className="mt-4">
-            A konačna ponuda ovisi o tome što stvarno trebate. Sve cijene su
-            bez PDV-a.
-          </p>
-        </>
-      }
+      eyebrow="Cijene"
+      title="Da odmah znamo o kakvom projektu pričamo."
+      lead="Sve cijene su bez PDV-a. „Od” znači navedeni početni opseg — konačna ponuda slijedi nakon što definiramo zahtjeve."
       tone="surface"
     >
       <ul className="grid gap-5 md:grid-cols-3">

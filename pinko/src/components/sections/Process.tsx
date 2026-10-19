@@ -6,17 +6,9 @@ export function Process() {
   return (
     <Section
       index="04"
-      eyebrow="Bez misterija"
-      title="Od prve kave do gotovog projekta. Bez nepotrebne drame."
-      lead={
-        <>
-          <p>
-            Ne trebate doći s tehničkom specifikacijom od 80 stranica.
-            Dovoljno je da znate što Vas muči i što želite postići.
-          </p>
-          <p className="mt-4">Ostalo ćemo razraditi zajedno.</p>
-        </>
-      }
+      eyebrow="Proces"
+      title="Od prve kave do prve verzije. I dalje."
+      lead="Kava je dobrodošla. Prezentacija od 87 slajdova nije obavezna."
     >
       {/* The cards stack and pin as you scroll, each one coming to rest on
           the one before it. Pure `position: sticky` — no scroll handler, so

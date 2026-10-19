@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import type { Theme } from "@/components/ui/ThemeToggle";
-import { applyTheme } from "@/lib/apply-theme";
 
 /**
  * The doorway: red pill or blue pill, and the site opens in that world.
@@ -71,7 +70,12 @@ export function PillChoice() {
   }, []);
 
   const choose = useCallback((theme: Theme) => {
-    applyTheme(theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    try {
+      localStorage.setItem("pinko-theme", theme);
+    } catch {
+      // The world still opens; it just will not be remembered.
+    }
     setLeaving(true);
     document.documentElement.style.overflow = "";
     window.setTimeout(() => setOpen(false), 620);

@@ -123,12 +123,6 @@ export type ServiceBlock = {
 
 export type Service = {
   slug: string;
-  /**
-   * Short pitch for the homepage card. The services page carries the long
-   * sales copy; this is the same offer said in four lines, from the Light
-   * Mode 2.0 brief. One source, two lengths — not two sources.
-   */
-  card: { headline: string; body: string[]; cta: string };
   index: string;
   /** Short name, used in navigation and cards. */
   name: string;
@@ -147,15 +141,6 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "development",
-    card: {
-      headline:
-        "Vi zamislite. Ja napravim. Onda se pravimo da je bilo jednostavno.",
-      body: [
-        "Web stranice, webshopovi, aplikacije, integracije i automatizacije.",
-        "Ne radim digitalne proizvode samo zato da lijepo izgledaju na prezentaciji. Radim ih da ljudi mogu jednostavno kupiti, naručiti, pronaći informaciju ili obaviti posao.",
-      ],
-      cta: "Ajmo nekaj napraviti",
-    },
     index: "01",
     name: "Development",
     headline:
@@ -209,14 +194,6 @@ export const services: Service[] = [
   },
   {
     slug: "marketing",
-    card: {
-      headline: "Imate odličan proizvod? Super. Zna li itko za njega?",
-      body: [
-        "SEO, content strategija, copywriting, email marketing, Amazon, Temu i digitalne kampanje.",
-        "Dobar marketing ne završava klikom. Zanima me što se dogodi nakon njega. Jer od impresivnog broja prikaza još uvijek ne možete platiti dobavljača.",
-      ],
-      cta: "Ajmo nekaj i prodati",
-    },
     index: "02",
     name: "Marketing",
     headline:
@@ -274,14 +251,6 @@ export const services: Service[] = [
   },
   {
     slug: "business-development",
-    card: {
-      headline: "Posao raste, a kaos raste brže? Čestitam, uspješni ste.",
-      body: [
-        "Poslovni procesi, ERP i CRM, operativa, digitalna transformacija i razvoj novih prodajnih kanala.",
-        "Ako za jednu narudžbu morate zvati četiri čovjeka, otvarati šest tablica i nadati se najboljem, možda je vrijeme da nekaj promijenimo.",
-      ],
-      cta: "Ajmo posložiti taj cirkus",
-    },
     index: "03",
     name: "Business Development",
     headline: "Firma Vam raste? A živci se smanjuju?",

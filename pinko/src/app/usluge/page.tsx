@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { getTheme } from "@/lib/theme";
-import { LightServices } from "@/components/light/LightServices";
 import Link from "next/link";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { ClosingContact } from "@/components/sections/ClosingContact";
-import { ProblemPicker } from "@/components/sections/ProblemPicker";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { services } from "@/content/services";
 
@@ -34,26 +31,22 @@ const crumbs = [
   { name: "Usluge", path: "/usluge" },
 ];
 
-export default async function ServicesPage() {
-  // One URL, two worlds; see src/lib/theme.ts.
-  if ((await getTheme()) === "light") return <LightServices />;
-
-
+export default function ServicesPage() {
   return (
     <>
       <BreadcrumbJsonLd items={crumbs} />
 
       <PageHeader
         eyebrow="Usluge"
-        title="Kaj Vas muči? Osim ponedjeljka."
+        title="Kaj ćemo danas spašavati?"
         lead={
           <>
             <p>
-              Web koji ne prodaje? Marketing koji troši novce? Poslovanje koje
-              se drži na selotejpu?
+              Imate web koji ne radi, marketing koji ne prodaje ili poslovanje
+              koje se drži na selotejpu i dobroj volji zaposlenika?
             </p>
             <p className="mt-4 font-extrabold text-ink">
-              Dobro. Imamo od čega krenuti.
+              Pa di ste Vi meni bili do sad?!
             </p>
             <p className="mt-4">
               Ja sam Matija. Radim webove, webshopove, aplikacije, marketing i
@@ -119,14 +112,6 @@ export default async function ServicesPage() {
           </div>
         </Section>
       ))}
-
-      <Section
-        eyebrow="Odakle početi"
-        title="Kaj Vas trenutno najviše koči?"
-        lead="Odaberite ono što vam zvuči najbliže; vodi na područje koje se time bavi."
-      >
-        <ProblemPicker />
-      </Section>
 
       <Section
         eyebrow="Pošteno pitanje"

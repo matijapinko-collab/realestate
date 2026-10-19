@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Theme } from "@/components/ui/ThemeToggle";
-import { applyTheme } from "@/lib/apply-theme";
 
 /**
  * The passage between the two worlds.
@@ -70,6 +69,15 @@ export function wormholeAvailable() {
     window.matchMedia("(prefers-reduced-motion: no-preference)").matches &&
     window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches
   );
+}
+
+function applyTheme(theme: Theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  try {
+    localStorage.setItem("pinko-theme", theme);
+  } catch {
+    // Storage blocked: the choice simply is not kept.
+  }
 }
 
 export function Wormhole() {
