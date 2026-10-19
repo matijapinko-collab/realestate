@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { site } from "@/config/site";
+import { Section } from "@/components/ui/Section";
+import { ButtonLink } from "@/components/ui/Button";
+import { CapabilityMarquee } from "@/components/sections/CapabilityMarquee";
 import { getProjectBySlug } from "@/content/projects";
 import {
   lightAbout,
@@ -19,393 +21,440 @@ import {
 /**
  * The light world's homepage.
  *
- * Architecture from the brief of 19 Oct 2026: hero, selected work, business
- * approach, expertise, about, process, hosting, questions, contact. Work
- * comes second on purpose, so the projects argue before the service list
- * does, and only four of them appear here rather than the whole catalogue.
+ * It is the site's existing design language — the same Section, the same
+ * buttons, the same monochrome studio palette — carrying the light world's
+ * own words and its own order of sections: hero, selected work, approach,
+ * expertise, about, process, hosting, questions, contact.
  *
- * Copy comes from src/content/light-copy.ts, which is the light world's
- * own. Pictures and links come from the shared project records, so a
- * screenshot or a slug is never maintained twice.
+ * What makes it a separate world is the copy and the architecture, not a
+ * second visual system. Dark keeps its sections and its sentences; this one
+ * never touches them.
+ *
+ * House rules for the copy are in src/content/light-copy.ts: no em dashes,
+ * no decorative hyphens, no quotation marks in anything a visitor reads.
+ * Any punctuation added here has to respect them too.
  */
 export function LightHome() {
   return (
-    <div className="pl">
+    <>
       {/* 01 */}
-      <section className="pl-section">
-        <div className="pl-wrap">
-          <p className="pl-kicker">{lightHero.kicker}</p>
+      <section className="relative overflow-hidden border-b border-rule">
+        <div
+          aria-hidden="true"
+          className="grid-field pointer-events-none absolute inset-0"
+        />
+        <div className="wrap relative pt-14 pb-16 md:pt-20 md:pb-24">
+          <p className="mono-label font-semibold text-ink-soft">
+            {lightHero.kicker}
+          </p>
 
-          <div className="mt-10 grid items-start gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
-            <div>
-              <h1 className="pl-display">{lightHero.title}</h1>
-              <div className="mt-10 space-y-5">
-                {lightHero.body.map((paragraph, i) => (
-                  <p
-                    key={paragraph}
-                    className={i === 0 ? "pl-lead" : "pl-body"}
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
+          <h1 className="mt-6 text-(length:--text-hero) font-extrabold">
+            {lightHero.title}
+          </h1>
 
-              <div className="mt-11 flex flex-wrap gap-3">
-                <Link href={lightHero.primary.href} className="pl-btn">
-                  {lightHero.primary.label}
-                </Link>
-                <Link
-                  href={lightHero.secondary.href}
-                  className="pl-btn pl-btn-ghost"
-                >
-                  {lightHero.secondary.label}
-                </Link>
-              </div>
-            </div>
+          <div className="measure-wide mt-8 space-y-4">
+            {lightHero.body.map((paragraph, i) => (
+              <p
+                key={paragraph}
+                className={
+                  i === 0
+                    ? "text-(length:--text-lead)"
+                    : "text-(length:--text-lead) text-ink-soft"
+                }
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
 
-            {site.portrait ? (
-              <figure className="lg:pt-3">
-                <div className="aspect-4/5 overflow-hidden">
-                  <Image
-                    src={site.portrait.src}
-                    alt={site.portrait.alt}
-                    width={site.portrait.width}
-                    height={site.portrait.height}
-                    sizes="(min-width: 1024px) 30rem, 90vw"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <figcaption className="pl-kicker mt-4">
-                  Matija Pinko, Pinko obrt za informatičke usluge
-                </figcaption>
-              </figure>
-            ) : null}
+          <div className="mt-10 flex flex-wrap gap-3">
+            <ButtonLink href={lightHero.primary.href} size="lg">
+              {lightHero.primary.label}
+            </ButtonLink>
+            <ButtonLink
+              href={lightHero.secondary.href}
+              variant="secondary"
+              size="lg"
+            >
+              {lightHero.secondary.label}
+            </ButtonLink>
           </div>
         </div>
       </section>
+
+      <CapabilityMarquee />
 
       {/* 02 */}
-      <section className="pl-section">
-        <div className="pl-wrap">
-          <p className="pl-kicker">{lightWorkIntro.kicker}</p>
-          <h2 className="pl-h2 mt-6 max-w-[22ch]">{lightWorkIntro.title}</h2>
-          <div className="mt-8 space-y-4">
-            {lightWorkIntro.body.map((paragraph) => (
-              <p key={paragraph} className="pl-body">
+      <Section
+        index="01"
+        eyebrow="Odabrani projekti"
+        marker="Projekti"
+        title={lightWorkIntro.title}
+        lead={
+          <>
+            {lightWorkIntro.body.map((paragraph, i) => (
+              <p key={paragraph} className={i > 0 ? "mt-4" : undefined}>
                 {paragraph}
               </p>
             ))}
-          </div>
-        </div>
-      </section>
+          </>
+        }
+        tone="surface"
+      >
+        <div className="space-y-16">
+          {lightWork.map((work) => {
+            const project = getProjectBySlug(work.slug);
+            const image =
+              project?.featuredImage ?? project?.liveScreens?.[0]?.image;
 
-      {lightWork.map((work, i) => {
-        const project = getProjectBySlug(work.slug);
-        const image = project?.featuredImage ?? project?.liveScreens?.[0]?.image;
-        const flip = i % 2 === 1;
-
-        return (
-          <section
-            key={work.slug}
-            className="pl-section"
-            aria-labelledby={`work-${work.slug}`}
-          >
-            <div className="pl-wrap">
-              {image ? (
-                <figure className="overflow-hidden">
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    width={image.width}
-                    height={image.height}
-                    sizes="(min-width: 1280px) 78rem, 92vw"
-                    className="h-auto w-full"
-                  />
-                </figure>
-              ) : null}
-
-              <div
-                className={`mt-12 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 ${
-                  flip ? "lg:[&>div:first-child]:order-last" : ""
-                }`}
+            return (
+              <article
+                key={work.slug}
+                data-reveal
+                aria-labelledby={`work-${work.slug}`}
               >
-                <div>
-                  <p className="pl-kicker">{work.kicker}</p>
-                  <p className="mt-4 text-sm font-semibold">{work.name}</p>
-                  {work.status ? (
-                    <p className="pl-kicker mt-4">{work.status}</p>
-                  ) : null}
+                {image ? (
+                  <figure className="overflow-hidden rounded-(--radius-card) border border-rule bg-paper">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={image.width}
+                      height={image.height}
+                      sizes="(min-width: 1280px) 76rem, 92vw"
+                      className="h-auto w-full"
+                    />
+                  </figure>
+                ) : null}
 
-                  {work.figures.length > 0 ? (
-                    <ul className="mt-10 space-y-8">
-                      {work.figures.map((figure) => (
-                        <li key={figure.label}>
-                          <p className="pl-figure">{figure.value}</p>
-                          <p className="pl-body mt-2 text-[0.9375rem]">
-                            {figure.label}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </div>
-
-                <div>
-                  <h3 id={`work-${work.slug}`} className="pl-h3">
-                    {work.title}
-                  </h3>
-                  <div className="mt-6 space-y-4">
-                    {work.body.map((paragraph) => (
-                      <p key={paragraph} className="pl-body">
-                        {paragraph}
+                <div className="mt-8 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
+                  <div>
+                    <p className="mono-label text-ink-soft">{work.kicker}</p>
+                    <p className="mt-3 font-extrabold">{work.name}</p>
+                    {work.status ? (
+                      <p className="mono-label mt-4 text-accent">
+                        {work.status}
                       </p>
-                    ))}
-                  </div>
-                  <Link
-                    href={`/projekti/${work.slug}`}
-                    className="pl-link mt-8 inline-block"
-                  >
-                    Pogledajte case study
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </section>
-        );
-      })}
+                    ) : null}
 
-      <section className="pl-section">
-        <div className="pl-wrap">
-          <h2 className="pl-h3">{lightWorkOutro.title}</h2>
-          <p className="pl-body mt-5">{lightWorkOutro.body}</p>
-          <Link href={lightWorkOutro.cta.href} className="pl-btn mt-8">
-            {lightWorkOutro.cta.label}
-          </Link>
+                    {work.figures.length > 0 ? (
+                      <ul className="mt-8 space-y-6">
+                        {work.figures.map((figure) => (
+                          <li key={figure.label}>
+                            <p className="metric-value font-mono font-extrabold text-accent">
+                              {figure.value}
+                            </p>
+                            <p className="mt-1.5 text-sm text-ink-soft">
+                              {figure.label}
+                            </p>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+
+                  <div>
+                    <h3
+                      id={`work-${work.slug}`}
+                      className="text-(length:--text-title) font-extrabold"
+                    >
+                      {work.title}
+                    </h3>
+                    <div className="measure-wide mt-5 space-y-3.5 text-ink-soft">
+                      {work.body.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                    </div>
+                    <Link
+                      href={`/projekti/${work.slug}`}
+                      className="mt-6 inline-block font-semibold text-accent-ink underline underline-offset-4"
+                    >
+                      Pogledajte case study
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
-      </section>
+
+        <div className="mt-16 border-t border-rule pt-8">
+          <h3 className="text-(length:--text-title) font-extrabold">
+            {lightWorkOutro.title}
+          </h3>
+          <p className="measure-wide mt-4 text-ink-soft">
+            {lightWorkOutro.body}
+          </p>
+          <ButtonLink
+            href={lightWorkOutro.cta.href}
+            variant="secondary"
+            className="mt-7"
+          >
+            {lightWorkOutro.cta.label}
+          </ButtonLink>
+        </div>
+      </Section>
 
       {/* 03 */}
-      <section className="pl-section">
-        <div className="pl-wrap">
-          <p className="pl-kicker">{lightApproach.kicker}</p>
-          <h2 className="pl-h2 mt-6 max-w-[20ch]">{lightApproach.title}</h2>
-          <div className="mt-8 space-y-4">
-            {lightApproach.body.map((paragraph) => (
-              <p key={paragraph} className="pl-body">
+      <Section
+        index="02"
+        eyebrow="Poslovni pristup"
+        marker="Pristup"
+        title={lightApproach.title}
+        lead={
+          <>
+            {lightApproach.body.map((paragraph, i) => (
+              <p key={paragraph} className={i > 0 ? "mt-4" : undefined}>
                 {paragraph}
               </p>
             ))}
-          </div>
-
-          <ol className="mt-16">
-            {lightApproach.points.map((point, i) => (
-              <li
-                key={point.title}
-                data-reveal
-                className="pl-rule grid gap-4 py-9 lg:grid-cols-[5rem_1fr_1.4fr] lg:gap-14"
-              >
-                <p className="pl-kicker lg:pt-2">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
-                <h3 className="pl-h3">{point.title}</h3>
-                <p className="pl-body lg:pt-1">{point.body}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+          </>
+        }
+      >
+        <ol className="border-t border-rule">
+          {lightApproach.points.map((point, i) => (
+            <li
+              key={point.title}
+              data-reveal
+              className="grid gap-4 border-b border-rule py-8 lg:grid-cols-[5rem_1fr_1.3fr] lg:gap-12"
+            >
+              <p className="mono-label font-semibold text-accent lg:pt-2">
+                {String(i + 1).padStart(2, "0")}
+              </p>
+              <h3 className="text-(length:--text-title) font-extrabold">
+                {point.title}
+              </h3>
+              <p className="text-ink-soft lg:pt-1">{point.body}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
 
       {/* 04 */}
-      <section className="pl-section">
-        <div className="pl-wrap">
-          <p className="pl-kicker">{lightServices.kicker}</p>
-          <h2 className="pl-h2 mt-6 max-w-[22ch]">{lightServices.title}</h2>
-          <div className="mt-8 space-y-4">
-            {lightServices.body.map((paragraph) => (
-              <p key={paragraph} className="pl-body">
+      <Section
+        index="03"
+        eyebrow="Usluge"
+        marker="Usluge"
+        title={lightServices.title}
+        lead={
+          <>
+            {lightServices.body.map((paragraph, i) => (
+              <p key={paragraph} className={i > 0 ? "mt-4" : undefined}>
                 {paragraph}
               </p>
             ))}
-          </div>
-
-          <div className="mt-16 space-y-16">
-            {lightServices.areas.map((area) => (
-              <article
-                key={area.slug}
-                data-reveal
-                className="pl-rule grid gap-8 pt-9 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20"
-              >
+          </>
+        }
+        tone="surface"
+      >
+        <div className="space-y-12">
+          {lightServices.areas.map((area) => (
+            <article
+              key={area.slug}
+              data-reveal
+              className="border-t border-rule pt-8"
+            >
+              <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
                 <div>
-                  <p className="pl-kicker">{area.name}</p>
-                  <h3 className="pl-h3 mt-4">{area.title}</h3>
+                  <p className="mono-label text-ink-soft">{area.name}</p>
+                  <h3 className="mt-3 text-(length:--text-title) font-extrabold">
+                    {area.title}
+                  </h3>
                   <Link
                     href={`/usluge/${area.slug}`}
-                    className="pl-link mt-7 inline-block"
+                    className="mt-6 inline-block font-semibold text-accent-ink underline underline-offset-4"
                   >
                     {area.cta}
                   </Link>
                 </div>
 
                 <div>
-                  <div className="space-y-4">
+                  <div className="measure-wide space-y-3.5 text-ink-soft">
                     {area.body.map((paragraph) => (
-                      <p key={paragraph} className="pl-body">
-                        {paragraph}
-                      </p>
+                      <p key={paragraph}>{paragraph}</p>
                     ))}
                   </div>
-                  <ul className="mt-8 grid gap-x-10 gap-y-3 sm:grid-cols-2">
+                  <ul className="mt-7 grid gap-x-10 gap-y-2.5 sm:grid-cols-2">
                     {area.items.map((item) => (
                       <li
                         key={item}
-                        className="pl-rule pt-3 text-[0.9375rem] font-medium"
+                        className="border-t border-rule pt-2.5 text-sm font-semibold"
                       >
                         {item}
                       </li>
                     ))}
                   </ul>
                 </div>
-              </article>
-            ))}
-          </div>
+              </div>
+            </article>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* 05 */}
-      <section className="pl-section">
-        <div className="pl-wrap">
-          <p className="pl-kicker">{lightAbout.kicker}</p>
-          <div className="mt-6 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
-            <div>
-              <h2 className="pl-h2 max-w-[20ch]">{lightAbout.title}</h2>
-              <div className="mt-8 space-y-4">
-                {lightAbout.body.map((paragraph) => (
-                  <p key={paragraph} className="pl-body">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-              <Link href={lightAbout.cta.href} className="pl-btn mt-10">
-                {lightAbout.cta.label}
-              </Link>
-            </div>
-
-            <ul className="space-y-8 lg:pt-4">
-              {lightAbout.points.map((point) => (
-                <li key={point.title} className="pl-rule pt-5">
-                  <h3 className="pl-h3">{point.title}</h3>
-                  <p className="pl-body mt-3">{point.body}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* 06 */}
-      <section className="pl-section">
-        <div className="pl-wrap">
-          <p className="pl-kicker">{lightProcess.kicker}</p>
-          <h2 className="pl-h2 mt-6 max-w-[20ch]">{lightProcess.title}</h2>
-          <div className="mt-8 space-y-4">
-            {lightProcess.body.map((paragraph) => (
-              <p key={paragraph} className="pl-body">
+      <Section
+        index="04"
+        eyebrow="O meni"
+        marker="O meni"
+        title={lightAbout.title}
+        lead={
+          <>
+            {lightAbout.body.slice(0, 2).map((paragraph, i) => (
+              <p key={paragraph} className={i > 0 ? "mt-4" : undefined}>
                 {paragraph}
               </p>
             ))}
+          </>
+        }
+      >
+        <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
+          <div className="measure-wide space-y-4 text-ink-soft">
+            {lightAbout.body.slice(2).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            <div className="pt-4">
+              <ButtonLink href={lightAbout.cta.href} variant="secondary">
+                {lightAbout.cta.label}
+              </ButtonLink>
+            </div>
           </div>
 
-          <ol className="mt-16">
-            {lightProcess.steps.map((step) => (
-              <li
-                key={step.index}
-                data-reveal
-                className="pl-rule grid gap-4 py-9 lg:grid-cols-[5rem_1fr_1.4fr] lg:gap-14"
-              >
-                <p className="pl-kicker lg:pt-2">{step.index}</p>
-                <h3 className="pl-h3">{step.title}</h3>
-                <p className="pl-body lg:pt-1">{step.body}</p>
+          <ul className="grid gap-px self-start overflow-hidden rounded-(--radius-card) border border-rule bg-rule">
+            {lightAbout.points.map((point) => (
+              <li key={point.title} className="bg-surface p-6">
+                <h3 className="text-lg font-extrabold">{point.title}</h3>
+                <p className="mt-2 text-ink-soft">{point.body}</p>
               </li>
             ))}
-          </ol>
-
-          <Link href={lightProcess.cta.href} className="pl-btn mt-12">
-            {lightProcess.cta.label}
-          </Link>
+          </ul>
         </div>
-      </section>
+      </Section>
 
-      {/* 07 */}
-      <section className="pl-section">
-        <div className="pl-wrap">
-          <p className="pl-kicker">{lightHosting.kicker}</p>
-          <h2 className="pl-h2 mt-6 max-w-[22ch]">{lightHosting.title}</h2>
-
-          <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
-            <div className="space-y-4">
-              {lightHosting.body.map((paragraph) => (
-                <p key={paragraph} className="pl-body">
-                  {paragraph}
-                </p>
-              ))}
-              <div className="pt-4">
-                <Link href={lightHosting.cta.href} className="pl-link">
-                  {lightHosting.cta.label}
-                </Link>
-              </div>
-            </div>
-
-            <ul className="space-y-7">
-              {lightHosting.points.map((point) => (
-                <li key={point.title} className="pl-rule pt-5">
-                  <h3 className="text-lg font-semibold">{point.title}</h3>
-                  <p className="pl-body mt-2">{point.body}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* 08 */}
-      <section className="pl-section">
-        <div className="pl-wrap">
-          <p className="pl-kicker">{lightFaq.kicker}</p>
-          <h2 className="pl-h2 mt-6 max-w-[20ch]">{lightFaq.title}</h2>
-
-          <dl className="mt-14">
-            {lightFaq.items.map((item) => (
-              <div key={item.question} className="pl-rule py-7">
-                <dt className="pl-h3">{item.question}</dt>
-                <dd className="pl-body mt-3">{item.answer}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
-
-      {/* 09 */}
-      <section className="pl-section pl-ink-section">
-        <div className="pl-wrap">
-          <p className="pl-kicker">{lightContact.kicker}</p>
-          <h2 className="pl-h2 mt-6 max-w-[20ch]">{lightContact.title}</h2>
-          <div className="mt-8 space-y-4">
-            {lightContact.body.map((paragraph) => (
-              <p key={paragraph} className="pl-body">
+      {/* 06 */}
+      <Section
+        index="05"
+        eyebrow="Način suradnje"
+        marker="Suradnja"
+        title={lightProcess.title}
+        lead={
+          <>
+            {lightProcess.body.map((paragraph, i) => (
+              <p key={paragraph} className={i > 0 ? "mt-4" : undefined}>
                 {paragraph}
               </p>
             ))}
+          </>
+        }
+        tone="surface"
+      >
+        <ol className="border-t border-rule">
+          {lightProcess.steps.map((step) => (
+            <li
+              key={step.index}
+              data-reveal
+              className="grid gap-4 border-b border-rule py-8 lg:grid-cols-[5rem_1fr_1.3fr] lg:gap-12"
+            >
+              <p className="mono-label font-semibold text-accent lg:pt-2">
+                {step.index}
+              </p>
+              <h3 className="text-(length:--text-title) font-extrabold">
+                {step.title}
+              </h3>
+              <p className="text-ink-soft lg:pt-1">{step.body}</p>
+            </li>
+          ))}
+        </ol>
+
+        <ButtonLink
+          href={lightProcess.cta.href}
+          variant="secondary"
+          className="mt-10"
+        >
+          {lightProcess.cta.label}
+        </ButtonLink>
+      </Section>
+
+      {/* 07 */}
+      <Section
+        eyebrow="Hosting i održavanje"
+        title={lightHosting.title}
+        lead={
+          <>
+            {lightHosting.body.slice(0, 2).map((paragraph, i) => (
+              <p key={paragraph} className={i > 0 ? "mt-4" : undefined}>
+                {paragraph}
+              </p>
+            ))}
+          </>
+        }
+      >
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <div className="measure-wide space-y-4 text-ink-soft">
+            {lightHosting.body.slice(2).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            <div className="pt-4">
+              <ButtonLink href={lightHosting.cta.href} variant="secondary">
+                {lightHosting.cta.label}
+              </ButtonLink>
+            </div>
           </div>
-          <div className="mt-11 flex flex-wrap items-center gap-x-8 gap-y-4">
-            <Link href={lightContact.primary.href} className="pl-btn">
+
+          <ul className="grid gap-px self-start overflow-hidden rounded-(--radius-card) border border-rule bg-rule">
+            {lightHosting.points.map((point) => (
+              <li key={point.title} className="bg-surface p-6">
+                <h3 className="font-extrabold">{point.title}</h3>
+                <p className="mt-2 text-ink-soft">{point.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Section>
+
+      {/* 08 */}
+      <Section eyebrow="Česta pitanja" title={lightFaq.title} tone="surface">
+        <dl className="border-t border-rule">
+          {lightFaq.items.map((item) => (
+            <div key={item.question} className="border-b border-rule py-7">
+              <dt className="text-(length:--text-title) font-extrabold">
+                {item.question}
+              </dt>
+              <dd className="measure-wide mt-3 text-ink-soft">{item.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </Section>
+
+      {/* 09 */}
+      <section className="section border-y border-rule bg-accent-wash">
+        <div className="wrap">
+          <p className="mono-label mb-5 font-semibold text-ink-soft">
+            <span className="text-accent">06</span> Kontakt
+          </p>
+          <h2 className="max-w-[24ch] text-(length:--text-hero) font-extrabold">
+            {lightContact.title}
+          </h2>
+          <div className="measure-wide mt-7 space-y-3.5 text-(length:--text-lead) text-ink-soft">
+            {lightContact.body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <ButtonLink
+              href={lightContact.primary.href}
+              size="lg"
+              className="bg-white text-ink hover:bg-accent-wash"
+            >
               {lightContact.primary.label}
-            </Link>
-            <Link href={lightContact.secondary.href} className="pl-link">
+            </ButtonLink>
+            <Link
+              href={lightContact.secondary.href}
+              className="font-semibold underline underline-offset-4"
+            >
               {lightContact.secondary.label}
             </Link>
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }

@@ -3,8 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { site } from "@/config/site";
 import { Header } from "@/components/layout/Header";
-import { LightNavigation } from "@/components/light/LightNavigation";
-import { LightFooter } from "@/components/light/LightFooter";
 import { getTheme } from "@/lib/theme";
 import { Footer } from "@/components/layout/Footer";
 import { MotionLayer } from "@/components/ui/MotionLayer";
@@ -127,9 +125,9 @@ export default async function RootLayout({
         {/* Decorative rail down the left edge; light mode only. */}
         <div aria-hidden="true" className="side-rail" />
         <div aria-hidden="true" className="rail-dot" />
-        {theme === "light" ? <LightNavigation /> : <Header />}
+        <Header />
         <main id="sadrzaj">{children}</main>
-        {theme === "light" ? <LightFooter /> : <Footer />}
+        <Footer />
       </body>
     </html>
   );
