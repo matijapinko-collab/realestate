@@ -74,8 +74,16 @@ export function PortraitBio() {
           sizes="(min-width: 1024px) 24rem, 80vw"
           className="absolute inset-3 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] rounded-full object-cover transition-transform duration-500 ease-[cubic-bezier(.22,.61,.36,1)] group-hover:scale-[1.02]"
         />
-        <span className="mono-label absolute inset-x-0 -bottom-9 flex items-center justify-center gap-2 text-ink-soft transition-colors group-hover:text-accent">
+        {/* Two captions, one per world. The terminal scheme invites the
+            click; the studio scheme sets a byline under the plate, as the
+            brief asks. Only one is ever rendered, so a screen reader hears
+            one label, not two. */}
+        <span className="portrait-cta mono-label absolute inset-x-0 -bottom-9 flex items-center justify-center gap-2 text-ink-soft transition-colors group-hover:text-accent">
           Otvorite biografiju <span aria-hidden="true">↗</span>
+        </span>
+        <span className="portrait-byline">
+          Matija Pinko <span aria-hidden="true">/</span> čovjek kojeg zovete
+          kad zapne
         </span>
       </button>
 

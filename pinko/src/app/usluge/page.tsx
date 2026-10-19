@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { ClosingContact } from "@/components/sections/ClosingContact";
+import { ProblemPicker } from "@/components/sections/ProblemPicker";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { services } from "@/content/services";
 
@@ -38,15 +39,15 @@ export default function ServicesPage() {
 
       <PageHeader
         eyebrow="Usluge"
-        title="Kaj ćemo danas spašavati?"
+        title="Kaj Vas muči? Osim ponedjeljka."
         lead={
           <>
             <p>
-              Imate web koji ne radi, marketing koji ne prodaje ili poslovanje
-              koje se drži na selotejpu i dobroj volji zaposlenika?
+              Web koji ne prodaje? Marketing koji troši novce? Poslovanje koje
+              se drži na selotejpu?
             </p>
             <p className="mt-4 font-extrabold text-ink">
-              Pa di ste Vi meni bili do sad?!
+              Dobro. Imamo od čega krenuti.
             </p>
             <p className="mt-4">
               Ja sam Matija. Radim webove, webshopove, aplikacije, marketing i
@@ -112,6 +113,14 @@ export default function ServicesPage() {
           </div>
         </Section>
       ))}
+
+      <Section
+        eyebrow="Odakle početi"
+        title="Kaj Vas trenutno najviše koči?"
+        lead="Odaberite ono što vam zvuči najbliže; vodi na područje koje se time bavi."
+      >
+        <ProblemPicker />
+      </Section>
 
       <Section
         eyebrow="Pošteno pitanje"

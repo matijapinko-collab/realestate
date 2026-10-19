@@ -12,13 +12,17 @@ import { ButtonLink } from "@/components/ui/Button";
 export function Infrastructure() {
   return (
     <Section
-      index="07"
       eyebrow="Hosting i održavanje"
-      title="Nakon lansiranja nastavlja se život. I vašeg weba."
+      title="Napravili smo web. Super. A tko ga sad čuva?"
     >
       <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
         <div className="space-y-5 text-(length:--text-lead)">
-          <p>Iza dobrog weba treba stajati dobro posložena infrastruktura.</p>
+          <p>
+            Web ne prestaje trebati pažnju samo zato što je lansiran. Serveri,
+            nadogradnje, sigurnosne kopije i održavanje nisu baš najuzbudljiviji
+            dio digitalnog poslovanja. Ali postanu jako zanimljivi kad nešto
+            prestane raditi.
+          </p>
           <p className="text-ink-soft">
             Uz razvoj mogu preuzeti postavljanje i upravljanje hosting
             okruženjem: od Next.js aplikacija i baza podataka do postojećih

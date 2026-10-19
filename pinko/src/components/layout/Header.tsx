@@ -32,7 +32,7 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <LocalTime />
-          <ThemeToggle className="hidden md:inline-flex" />
+          <ThemeToggle className="hidden sm:inline-flex" />
           <Link
             href={nav.cta.href}
             className="hidden min-h-11 items-center rounded-full bg-accent px-5 text-[0.9375rem] font-semibold text-on-accent transition-colors hover:bg-accent-ink sm:inline-flex"

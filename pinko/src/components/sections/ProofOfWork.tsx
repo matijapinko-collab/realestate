@@ -18,10 +18,22 @@ export function ProofOfWork() {
 
   return (
     <Section
-      index="01"
-      eyebrow="Projekti"
+      index="02"
+      eyebrow="Dokazi da ne pričam bezveze"
       marker="Projekti"
-      title="Konkretne stvari na kojima radim."
+      title="Mogu Vam pričati kaj sve znam. Ali bolje da pokažem."
+      lead={
+        <>
+          <p>
+            Svaki projekt počeo je nekim problemom. Neki su bili jednostavni.
+            Neki su imali toliko slojeva da bi se od njih mogla napraviti
+            pristojna torta.
+          </p>
+          <p className="mt-4">
+            Ovo su stvari na kojima sam radio i moj konkretan doprinos.
+          </p>
+        </>
+      }
       tone="surface"
     >
       {projects.length === 0 ? (

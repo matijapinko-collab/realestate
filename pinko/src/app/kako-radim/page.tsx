@@ -26,13 +26,17 @@ export default function HowIWorkPage() {
 
       <PageHeader
         eyebrow="Kako radim"
-        title="Od prve kave do prve verzije. I dalje."
+        title="Dobar projekt počinje razgovorom. Ne računom."
         lead={
-          <p>
-            Kava je dobrodošla. Prezentacija od 87 slajdova nije obavezna. Ovdje
-            piše što se stvarno događa u svakoj fazi i što iz nje dobivate —
-            bez skrivanja rada iza nejasnog „našeg procesa”.
-          </p>
+          <>
+            <p>
+              Prvo želim razumjeti kaj Vas muči. Onda ćemo dogovoriti kako to
+              riješiti, koliko košta i što ćete dobiti.
+            </p>
+            <p className="mt-4">
+              Bez čitanja misli, nagađanja i misterioznih dodatnih troškova.
+            </p>
+          </>
         }
         cta={{ href: "/kontakt", label: "Krenimo od razgovora" }}
         breadcrumbs={crumbs}

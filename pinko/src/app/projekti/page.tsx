@@ -32,9 +32,10 @@ export default function ProjectsPage() {
         lead={
           <>
             <p>
-              Iza svakog projekta stoji neki problem, nekoliko dobrih ideja i
-              barem jedan trenutak kad sam se zapitao zašto nisam otvorio
-              pekaru. Ali na kraju je trebalo raditi. I to je cijela poanta.
+              Od webova i webshopova do milijunskih content projekata, ERP
+              sustava i međunarodnih prodajnih kanala. Ovo su projekti na
+              kojima sam radio, problemi koje smo rješavali i moj stvarni
+              doprinos.
             </p>
             <p className="mt-4">
               Uz svaki projekt piše kakav je bio odnos, što sam točno radio i u
