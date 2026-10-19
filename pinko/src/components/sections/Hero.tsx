@@ -100,7 +100,7 @@ export function Hero() {
               /* Placeholder while the photograph is not in the repository. */
               <div
                 data-reveal
-                className="spotlight w-full max-w-sm rounded-(--radius-card) border border-rule bg-surface p-7"
+                className="hero-fallback spotlight w-full max-w-sm rounded-(--radius-card) border border-rule bg-surface p-7"
               >
                 <p className="mono-label text-accent">~/pinko</p>
                 <TypedDisciplines />

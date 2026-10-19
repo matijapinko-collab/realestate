@@ -417,8 +417,25 @@
     justify-content: center;
   }
 
-  /* The terminal card belongs to the dark scheme only. */
+  /* Light mode keeps the centred composition but is still a personal site,
+     so the portrait moves above the headline rather than disappearing. */
+  :root[data-theme="light"] .hero-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   :root[data-theme="light"] .hero-aside {
+    order: -1;
+    width: 100%;
+    max-width: 13rem;
+    margin-bottom: 2.5rem;
+    justify-content: center;
+  }
+
+  /* Without a photograph the aside is the terminal card, which belongs to
+     the dark scheme alone — it would look out of place here. */
+  :root[data-theme="light"] .hero-aside:has(> .hero-fallback) {
     display: none;
   }
 
@@ -590,6 +607,120 @@
     font-size: 1.375rem;
     line-height: 1;
     color: var(--color-on-accent);
+  }
+
+  /* ---------------------------------------------------------------- *
+   * The pill choice
+   *
+   * The picture keeps its own aspect ratio and the targets are placed as
+   * percentages of it, so a hotspot sits on its pill at every width — on a
+   * phone just as on a desktop. The targets are always at least a 44px
+   * touch area, however small the picture gets.
+   * ---------------------------------------------------------------- */
+
+  .pill-choice-intro {
+    font-family: var(--font-mono);
+    font-size: clamp(0.75rem, 0.6rem + 0.6vw, 0.95rem);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #8a8f99;
+    margin-bottom: 1rem;
+    padding-inline: 1rem;
+    text-align: center;
+  }
+
+  /* The box must match the rendered picture exactly, or the percentage
+     hotspots drift. Clamping the height separately letterboxes the image
+     inside a wider box and the rings end up beside the pills — so the
+     height limit is folded into the width instead. */
+  .pill-choice-stage {
+    position: relative;
+    width: min(60rem, 94vw, calc(72vh * 1409 / 1116));
+    aspect-ratio: 1409 / 1116;
+  }
+
+  /* The button IS the ring, placed exactly on its pill; the label floats
+     above it. Centring the whole button on the pill instead would push the
+     ring below the pill by half the label's height. */
+  .pill-choice-target {
+    position: absolute;
+    translate: -50% -50%;
+    width: max(3rem, 4.5vw);
+    height: max(3rem, 4.5vw);
+    padding: 0;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    color: #fff;
+  }
+
+  .pill-choice-label {
+    position: absolute;
+    /* Clear of the fingertips, so the second line stays legible. */
+    bottom: calc(100% + 1.5rem);
+    left: 50%;
+    translate: -50% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    white-space: nowrap;
+    line-height: 1.15;
+    text-shadow:
+      0 2px 14px rgb(0 0 0 / 0.95),
+      0 0 4px rgb(0 0 0 / 0.9);
+  }
+
+  .pill-choice-title {
+    font-family: var(--font-mono);
+    font-size: clamp(0.8rem, 0.6rem + 0.9vw, 1.125rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pill-choice-sub {
+    font-size: clamp(0.7rem, 0.6rem + 0.5vw, 0.9rem);
+    color: #c9ccd3;
+  }
+
+  .pill-choice-ring {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: 999px;
+    border-width: 2px;
+    border-style: solid;
+    opacity: 0.5;
+    transition:
+      opacity 220ms var(--ease-out-soft),
+      transform 220ms var(--ease-out-soft),
+      box-shadow 220ms var(--ease-out-soft);
+  }
+
+  .pill-choice-target:hover .pill-choice-ring,
+  .pill-choice-target:focus-visible .pill-choice-ring {
+    opacity: 1;
+    transform: scale(1.15);
+    box-shadow: 0 0 30px currentColor;
+  }
+
+  .pill-choice-target:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 8px;
+    border-radius: 999px;
+  }
+
+  /* On a phone the picture is small, so the ring keeps a full touch target
+     even when 4.5vw would be tiny. */
+  @media (max-width: 40rem) {
+    .pill-choice-target {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+
+    .pill-choice-label {
+      bottom: calc(100% + 0.9rem);
+    }
   }
 
   /* ---------------------------------------------------------------- *
@@ -902,6 +1033,11 @@
   .caret::after,
   .project-carousel-track {
     animation: none;
+  }
+
+  .pill-choice,
+  .pill-choice-ring {
+    transition: none;
   }
 
   .project-carousel {

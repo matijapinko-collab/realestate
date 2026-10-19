@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MotionLayer } from "@/components/ui/MotionLayer";
 import { Intro } from "@/components/ui/Intro";
+import { PillChoice } from "@/components/ui/PillChoice";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { Wormhole } from "@/components/ui/Wormhole";
 
@@ -98,6 +99,7 @@ export default function RootLayout({
         >
           Preskoči na sadržaj
         </a>
+        <PillChoice />
         <Intro />
         <Wormhole />
         <MotionLayer />

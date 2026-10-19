@@ -304,3 +304,26 @@ bila u staroj svijetloj shemi s plavim naglaskom — nitko je nije osvježio kad
 je web postao taman. Sada je u tamnoj shemi, sa zelenom točkom i rozim „o".
 Te su vrijednosti ispisane ručno jer `ImageResponse` ne vidi stylesheet, pa
 ih treba držati u koraku s `globals.css`.
+
+## Vrata: crvena ili plava pilula (19. 10. 2026.)
+
+Prvi posjet više ne otvara web u zadanom načinu nego **pita**: crvena pilula
+→ Fun web (tamni), plava → Pro web (svijetli). Tko je već birao, ide ravno u
+svoj svijet — pitanje se ne ponavlja.
+
+**Natpis je iznad pilule, a klik radi i na natpis i na pilulu**, jer je cijeli
+element jedan `<button>`. To su stvarni gumbi s punim nazivima za čitače
+ekrana („Crvena pilula — Fun web, tamni način"), pa izbor radi i tipkovnicom.
+
+Hotspotovi su postavljeni u postotcima slike, izmjereno iz same datoteke:
+crvena 24,0 % / 76,7 %, plava 75,6 % / 78,0 %.
+
+**Zamka koja je stajala jednog kruga:** okvir je imao `max-height`, pa je
+slika unutar njega bila u letterboxu — postotci su se računali prema okviru,
+a slika je bila uža, i prstenovi su završili ~35 px pokraj pilula. Rješenje
+je da ograničenje visine uđe u širinu: `width: min(60rem, 94vw, 72vh *
+1409/1116)` uz `aspect-ratio`. Tada je okvir uvijek točno slika. Izmjereno
+nakon popravka: odstupanje 0–2 px na desktopu i mobitelu.
+
+Zavjesa s brojačem se **ne pokreće** kad su pilule prikazane — jedan ulaz je
+dovoljan. Bez JavaScripta izbornika nema i web se otvara u tamnom načinu.

@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/o-meni", priority: 0.7 },
     { path: "/kako-radim", priority: 0.6 },
     { path: "/kontakt", priority: 0.8 },
+    { path: "/cv", priority: 0.6 },
   ];
 
   const projectRoutes = getPublishedProjects().map((project) => ({
