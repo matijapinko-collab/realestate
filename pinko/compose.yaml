@@ -1,0 +1,41 @@
+# One Next.js instance behind Caddy, which terminates TLS and gets the
+# certificate from Let's Encrypt on its own. Enough for a presentation site.
+#
+#   docker compose up -d --build
+#
+# Secrets live in `.env` on the server (never in git): SMTP_PASSWORD and the
+# rest of the mailbox settings. The public values are build arguments because
+# `next build` inlines them.
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:?set it in .env}
+        NEXT_PUBLIC_ALLOW_INDEXING: ${NEXT_PUBLIC_ALLOW_INDEXING:-false}
+        NEXT_PUBLIC_CONTACT_EMAIL: ${NEXT_PUBLIC_CONTACT_EMAIL:-}
+    restart: unless-stopped
+    env_file: .env
+    expose:
+      - "3000"
+    # No ports published: only Caddy reaches the app, over the compose network.
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:?set it in .env, e.g. pinko.hr}
+    depends_on:
+      - web
+
+volumes:
+  caddy_data:
+  caddy_config:
