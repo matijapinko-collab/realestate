@@ -70,7 +70,7 @@ export default function ProjectsPage() {
           <ul className="grid gap-5 md:grid-cols-2">
             {projects.map((project, index) => (
               <li key={project.slug} data-reveal data-reveal-delay={index}>
-                <ProjectCard project={project} tone="surface" />
+                <ProjectCard project={project} tone="surface" headingLevel="h2" />
               </li>
             ))}
           </ul>

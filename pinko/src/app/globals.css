@@ -1301,6 +1301,12 @@
     --lx-rule: #dcd8e7;
     --lx-accent: #6d4bd6;
     --lx-display: #9254ff;
+    /* The same purple, a shade deeper, for the one place white 18px text sits
+       on it: the big call to action. #9254ff measures 4.26:1 against white,
+       just under the 4.5:1 WCAG AA needs for text that size; this measures
+       4.80:1. The display colour itself is unchanged, since it only ever
+       carries large type. */
+    --lx-cta: #8a49f7;
     --lx-wash: #e5d9ff;
     color: var(--lx-ink);
     background: var(--lx-ground);
@@ -1551,7 +1557,13 @@
               1
             )
         ),
-      color-mix(in srgb, var(--lx-ink) 22%, transparent)
+      /* Resting floor for a word not yet revealed. At 22% this measured
+         1.59:1 on the light paper, which fails WCAG 1.4.3 even at the large
+         text threshold of 3:1 — the statement was unreadable until a visitor
+         scrolled it into view. 50% measures 3.34:1 and keeps the reveal: the
+         words still travel from dimmed to full ink, just from a legible
+         start. */
+      color-mix(in srgb, var(--lx-ink) 50%, transparent)
     );
     transition: color 220ms linear;
   }
@@ -1637,7 +1649,7 @@
     min-height: 4.25rem;
     padding-inline: 2.5rem;
     font-size: 1.125rem;
-    background: var(--lx-display);
+    background: var(--lx-cta);
   }
   .lx-btn-big:hover {
     background: var(--lx-accent);

@@ -154,7 +154,7 @@ zamijenite Caddy nginxom ili Traefikom, isto pravilo vrijedi.
 
 ### Healthcheck
 
-`GET /` vraća 200 i statički je prerenderiran. Dovoljno za healthcheck:
+`GET /` vraća 200. Dovoljno za healthcheck:
 
 ```
 curl -fsS http://127.0.0.1:3000/ > /dev/null
@@ -162,11 +162,24 @@ curl -fsS http://127.0.0.1:3000/ > /dev/null
 
 ### Restart i cache
 
-Sve stranice su statički prerenderirane pri buildu. Nema ISR-a ni
-persistentnih podataka na disku koje treba čuvati između deploya. Ako se web
-kasnije skalira na više instanci, treba riješiti koordinaciju cachea prema
-aktualnoj Next.js dokumentaciji, a ograničenje učestalosti forme premjestiti u
-dijeljenu pohranu (vidi `src/lib/rate-limit.ts`).
+Nema baze, ISR-a ni persistentnih podataka na disku koje treba čuvati između
+deploya. Ako se web skalira na više instanci, ograničenje učestalosti forme
+treba premjestiti u dijeljenu pohranu (vidi `src/lib/rate-limit.ts`).
+
+#### ⚠️ Keširanje i kolačić teme
+
+Rute **nisu statične**. Svijet (tamni ili svijetli) čita se iz kolačića
+`pinko-theme` pri renderiranju, pa isti URL vraća **različit HTML** ovisno o
+posjetitelju.
+
+Ako ispred Next.js-a stoji CDN ili reverse proxy koji kešira odgovore, mora
+keširati **po tom kolačiću** (`Vary: Cookie` ili ekvivalentno pravilo). Inače
+će prvi odgovor koji uđe u cache biti posluživan svima — polovica posjetitelja
+dobit će svijet koji nije odabrala.
+
+Najsigurnije za ovakav web: **ne keširati HTML na rubu** i pustiti Next.js da
+renderira. Statička imovina (`/_next/static`, slike u `public/`) kešira se
+normalno i dugo.
 
 ## Rollback
 

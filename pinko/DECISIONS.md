@@ -29,8 +29,12 @@ završio u roditeljskom repozitoriju (i povukao njegov `src/proxy.ts`), pa je
 - **Bez baze.** Sadržaj je u tipiziranim TS datotekama. Nije uveden ni CMS ni
   admin; brief ih ostavlja kao kasniju opciju, a nedovršen admin bio bi gori od
   nikakvog.
-- **Sve stranice statički prerenderirane** (17 ruta). Ništa ne traži dinamičko
-  renderiranje.
+- **Renderiranje:** izvorno su sve stranice bile statički prerenderirane (17
+  ruta). To je prestalo vrijediti kad su uvedena dva svijeta: izbor se čita iz
+  kolačića `pinko-theme` pri renderiranju, pa su rute sada **dinamične** (`ƒ`).
+  Build i dalje generira 33 stranice, ali se poslužuju na zahtjev. Zamjena je
+  bila svjesna — alternativa (renderirati oba svijeta i jedan skriti) stavila bi
+  svaku rečenicu u stranicu dvaput, što šteti čitaču ekrana i tražilici.
 - **Manrope posluženi lokalno.** Dvije varijabilne woff2 datoteke (latin i
   latin-ext, ~40 kB ukupno) leže u repozitoriju i poslužuju se s našeg origina.
   Odabran `localFont` umjesto `next/font/google` da build ne ovisi o mreži i da

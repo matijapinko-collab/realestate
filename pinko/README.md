@@ -3,6 +3,10 @@
 Osobni studio Matije Pinka: razvoj, marketing i poslovni razvoj.
 Next.js 16 (App Router), TypeScript, Tailwind v4. Jezik: hrvatski.
 
+Web ima **dva svijeta** — tamni (zadani) i svijetli. Nisu ista stranica u dvije
+sheme: razlikuju se sekcije, njihov redoslijed i copy. Izbor se pamti u
+kolačiću `pinko-theme`, koji server čita i renderira samo odabrani svijet.
+
 Ovaj projekt je samostalna aplikacija u `pinko/` poddirektoriju repozitorija.
 Repozitorij sadrži i odvojeni projekt za nekretnine u korijenu; ta dva projekta
 nemaju zajedničke ovisnosti ni build.
@@ -33,16 +37,30 @@ src/
   app/            rute (App Router), sitemap, robots, OG slika, ikona
   components/
     layout/       header, footer, mobilni meni
-    sections/     autorske sekcije stranica
+    light/        sekcije svijetlog svijeta (vlastito stablo, ne skin)
+    sections/     autorske sekcije tamnog svijeta
     seo/          JSON-LD
-    ui/           osnovni elementi (Button, Section, Price, PageHeader)
+    ui/           osnovni elementi, prekidač teme, intro, animacije
   config/
-    site.ts       poslovni podaci, navigacija, discipline
+    site.ts       poslovni podaci, navigacija, portret, analitika
     pricing.ts    SVE cijene na jednom mjestu
-  content/        copy, projekti, usluge, biografija
-  lib/            novac i rate, procjenitelj, validacija, slanje, rate limit
+  content/        copy, projekti, usluge, biografija, CV, copy svijetlog svijeta
+  lib/
+    theme.ts      koji se svijet renderira (čita kolačić)
+    money.ts      novac i rate
+    estimate.ts   procjenitelj
+    mailer.ts     SMTP slanje
+    ...           validacija, rate limit
 tests/            testovi za stvarni rizik
 ```
+
+### Rute
+
+`/`, `/usluge`, `/usluge/[slug]`, `/projekti`, `/projekti/[slug]`, `/o-meni`,
+`/cv`, `/cjenik`, `/kako-radim`, `/kontakt`, `/privatnost`.
+
+Rute su **dinamične** (`ƒ`), jer se svijet čita iz kolačića pri renderiranju.
+Build generira 33 stranice, ali se poslužuju na zahtjev.
 
 ### Gdje se mijenja što
 
@@ -50,7 +68,9 @@ tests/            testovi za stvarni rizik
 | --- | --- |
 | Cijenu, paket, opseg, uvjete | `src/config/pricing.ts` |
 | Kontakt, domenu, navigaciju | `src/config/site.ts` |
-| Tekst na naslovnici i FAQ | `src/content/copy.ts` |
+| Tekst tamnog svijeta i FAQ | `src/content/copy.ts` |
+| Tekst svijetlog svijeta | `src/content/light-copy.ts` |
+| CV i biografiju | `src/content/cv.ts`, `src/content/career.ts` |
 | Projekte i njihov status | `src/content/projects.ts` |
 | Boje, tipografiju, razmake | `src/app/globals.css` (`@theme`) |
 
@@ -61,9 +81,10 @@ ne mogu odstupati jedna od druge. Interna tablica pregovaračkih cijena iz brief
 ## Objava projekta
 
 Projekt se prikazuje javno samo ako ima `approvedForPublication: true` u
-`src/content/projects.ts`. Svi su trenutačno `false` jer status, opseg doprinosa
-i prava objave još nisu potvrđeni. Stranica `/projekti` i blok na naslovnici u
-tom slučaju to pošteno kažu umjesto da prikažu prazne kartice.
+`src/content/projects.ts`. Trenutačno je **16 od 17 zapisa odobreno**; preostali
+čekaju potvrdu statusa, opsega doprinosa i prava objave (vidi
+`LAUNCH-CHECKLIST.md`). Ako nijedan ne bi bio odobren, `/projekti` to pošteno
+kaže umjesto da prikaže prazne kartice.
 
 Za lokalni pregled izgleda s podacima:
 
@@ -93,9 +114,17 @@ Robots i `<meta robots>` blokiraju indeksiranje dok
 `NEXT_PUBLIC_ALLOW_INDEXING` nije točno `"true"`. Postavite ga tek na
 potvrđenoj produkcijskoj domeni, zajedno s `NEXT_PUBLIC_SITE_URL`.
 
+## Analitika
+
+Plausible, i samo Plausible: bez kolačića, bez identifikatora među stranicama,
+sve agregirano. Zato `/privatnost` ne treba banner za pristanak. Skripta se
+izostavlja dok `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` nije postavljen, pa razvojni i
+preview buildovi ne prljaju brojke.
+
 ## Dokumentacija
 
 - `HANDOVER.md` — **počni ovdje**: stanje, što je ostalo, na što paziti
+- `BRIEF.md` — pozicioniranje, glas i granice; **pročitaj prije pisanja copyja**
 - `DEPLOYMENT.md` — objava, infrastruktura, rollback
 - `LAUNCH-CHECKLIST.md` — što Matija treba potvrditi prije javne objave
 - `DECISIONS.md` — odluke i pretpostavke pri izradi

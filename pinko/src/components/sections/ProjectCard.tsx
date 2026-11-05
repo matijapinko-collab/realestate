@@ -13,11 +13,20 @@ import { ProjectCardMedia } from "./ProjectCardMedia";
 export function ProjectCard({
   project,
   tone = "paper",
+  headingLevel = "h3",
 }: {
   project: Project;
   /** Which surface the card sits on, so it stays distinguishable from it. */
   tone?: "paper" | "surface";
+  /**
+   * The card's own heading level, so the document outline stays correct
+   * wherever it is used. Inside a section that already has its own `h2` the
+   * default `h3` is right; on `/projekti` the grid sits directly under the
+   * page `h1`, so the cards are the `h2` level there.
+   */
+  headingLevel?: "h2" | "h3";
 }) {
+  const Heading = headingLevel;
   return (
     <Link
       href={`/projekti/${project.slug}`}
@@ -36,9 +45,9 @@ export function ProjectCard({
         </span>
       </div>
 
-      <h3 className="mt-5 text-(length:--text-title) font-extrabold group-hover:text-accent-ink">
+      <Heading className="mt-5 text-(length:--text-title) font-extrabold group-hover:text-accent-ink">
         {project.projectName}
-      </h3>
+      </Heading>
       <p className="mt-2 text-sm font-semibold text-ink-soft">
         {project.contributionLabel}
       </p>
